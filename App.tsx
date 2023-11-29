@@ -1,10 +1,11 @@
-import * as React from 'react';
-import {Text, View} from 'react-native';
+import React from 'react';
+import {MainNavigation} from '@navigation/main';
+import {AuthContextProvider} from '@context/auth';
 
 export function App() {
   return (
-    <View>
-      <Text>Flex Ways</Text>
-    </View>
+    <AuthContextProvider>
+      <MainNavigation />
+    </AuthContextProvider>
   );
 }
