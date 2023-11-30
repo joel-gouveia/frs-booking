@@ -1,5 +1,5 @@
 import React from "react";
-import {AuthContextProvider} from "@context/auth";
+import { AuthContextProvider } from "@context/auth";
 import MainNavigation from "@navigation/main";
 
 export function App() {

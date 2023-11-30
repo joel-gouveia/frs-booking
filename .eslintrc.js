@@ -1,6 +1,13 @@
 module.exports = {
   root: true,
-  extends: ["airbnb", "airbnb-typescript", "airbnb/hooks", "@react-native"],
+  extends: [
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "@react-native",
+    "plugin:prettier/recommended",
+    "prettier",
+  ],
   ignorePatterns: [".eslintrc.js"],
   rules: {
     quotes: ["error", "double"],

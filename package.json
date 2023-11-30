@@ -6,8 +6,10 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@jest/globals": "^29.7.0",
@@ -41,7 +43,8 @@
     "metro-react-native-babel-preset": "0.76.8",
     "prettier": "^2.4.1",
     "react-test-renderer": "18.2.0",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "husky": "^8.0.0"
   },
   "engines": {
     "node": ">=18"
