@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
-  extends: ["airbnb", "@react-native"],
+  extends: ["airbnb", "airbnb-typescript", "airbnb/hooks", "@react-native"],
+  ignorePatterns: [".eslintrc.js"],
   rules: {
     quotes: ["error", "double"],
     "import/extensions": "off",
@@ -21,5 +22,9 @@ module.exports = {
         project: "tsconfig.json",
       },
     },
+  },
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: "tsconfig.json",
   },
 };

@@ -6,36 +6,16 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@screens/*": [
-        "src/screens/*"
-      ],
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@constants/*": [
-        "src/constants/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@layout/*": [
-        "src/layout/*"
-      ],
-      "@navigation/*": [
-        "src/navigation/*"
-      ],
-      "@hooks/*": [
-        "src/hooks/*"
-      ],
-      "@api/*": [
-        "src/api/*"
-      ],
-      "@types/*": [
-        "src/types/*"
-      ],
-      "@context/*": [
-        "src/context/*"
-      ],
-    },
-  },
+      "@screens/*": ["src/screens/*"],
+      "@components/*": ["src/components/*"],
+      "@constants/*": ["src/constants/*"],
+      "@utils/*": ["src/utils/*"],
+      "@layout/*": ["src/layout/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@api/*": ["src/api/*"],
+      "@types/*": ["src/types/*"],
+      "@context/*": ["src/context/*"]
+    }
+  }
 }
