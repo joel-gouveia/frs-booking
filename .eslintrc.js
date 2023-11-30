@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ["airbnb", "@react-native", "plugin:import/typescript"],
+  extends: ["airbnb", "@react-native"],
   rules: {
     quotes: ["error", "double"],
     "import/extensions": "off",
