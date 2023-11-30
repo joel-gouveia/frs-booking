@@ -4,6 +4,7 @@ module.exports = {
   rules: {
     quotes: ["error", "double"],
     "import/extensions": "off",
+    "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
