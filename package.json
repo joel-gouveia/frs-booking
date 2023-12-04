@@ -9,8 +9,8 @@
     "lint:fix": "eslint --fix .",
     "start": "react-native start",
     "test": "jest",
-    "prepare": "husky install",
-    "bundle-visualizer": "react-native-bundle-visualizer --platform android"
+    "bundle-visualizer": "react-native-bundle-visualizer --platform android",
+    "i18n:types": "i18next-resources-for-ts interface -i ./src/config/i18n/translations -o ./src/types/i18n/resources.d.ts"
   },
   "dependencies": {
     "@jest/globals": "^29.7.0",
