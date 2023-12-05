@@ -5,6 +5,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "baseUrl": ".",
+    "resolveJsonModule": true,
+    "strict": true,
     "paths": {
       "@screens/*": ["src/screens/*"],
       "@components/*": ["src/components/*"],
