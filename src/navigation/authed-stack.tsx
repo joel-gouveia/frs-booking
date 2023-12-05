@@ -6,6 +6,7 @@ import FlexWaysLogo from "@assets/images/logo.svg";
 import Icon from "react-native-vector-icons/Ionicons";
 
 import { VStack } from "@components/index";
+import { RouteSelectionScreen } from "@screens/RouteSelection";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,6 +22,7 @@ export function AuthedStack() {
         },
       }}>
       <Stack.Screen name={NavigationSreens.HOME} component={VStack} />
+      <Stack.Screen name={NavigationSreens.ROUTES} component={RouteSelectionScreen} />
     </Stack.Navigator>
   );
 }

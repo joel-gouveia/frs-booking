@@ -4,6 +4,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export enum NavigationSreens {
   LOGIN = "login",
   HOME = "home",
+  ROUTES = "routes",
 }
 
 /**
@@ -12,11 +13,13 @@ export enum NavigationSreens {
 export type ScreenOptions = {
   [NavigationSreens.LOGIN]?: {};
   [NavigationSreens.HOME]?: {};
+  [NavigationSreens.ROUTES]?: {};
 };
 
 export type RootStackParamList = {
   [NavigationSreens.LOGIN]: ScreenOptions[NavigationSreens.LOGIN];
   [NavigationSreens.HOME]: ScreenOptions[NavigationSreens.HOME];
+  [NavigationSreens.ROUTES]: ScreenOptions[NavigationSreens.ROUTES];
 };
 
 export type NavigationProps = NativeStackNavigationProp<

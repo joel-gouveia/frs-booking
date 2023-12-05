@@ -5,15 +5,19 @@ import { Button, Divider, HStack, Input, Typography, VStack } from "@components/
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { PasswordInput } from "@components/Input/PasswordInput";
 import useAuth from "@hooks/useAuth";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationProps, NavigationSreens } from "@types/navigation";
 
 export function LoginScreen() {
   const { login } = useAuth();
+  const navigation = useNavigation<NavigationProps>();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLoginPressed = async () => {
-    login(username, password);
+    await login(username, password);
+    navigation.navigate(NavigationSreens.ROUTES);
   };
 
   return (
