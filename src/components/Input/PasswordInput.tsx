@@ -1,14 +1,14 @@
-import {Input} from './Input';
-import React, {PropsWithChildren} from 'react';
-import {TextInputProps, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import React, { PropsWithChildren } from "react";
+import { TextInputProps, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
+import { Input } from "./Input";
 
 interface Props extends PropsWithChildren, TextInputProps {
   isDisabled?: boolean;
   isInvalid?: boolean;
 }
 
-export const PasswordInput = (props: Props) => {
+export function PasswordInput(props: Props) {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const onPress = () => setShowPassword(prev => !prev);
@@ -19,9 +19,9 @@ export const PasswordInput = (props: Props) => {
       secureTextEntry={!showPassword}
       inputRightElement={
         <TouchableOpacity onPress={onPress}>
-          <Icon name={showPassword ? 'eye' : 'eye-off'} size={26} />
+          <Icon name={showPassword ? "eye" : "eye-off"} size={26} />
         </TouchableOpacity>
       }
     />
   );
-};
+}

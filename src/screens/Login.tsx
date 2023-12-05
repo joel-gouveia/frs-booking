@@ -1,18 +1,11 @@
-import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import React from "react";
+import { TouchableOpacity } from "react-native";
 
-import {
-  Button,
-  Divider,
-  HStack,
-  Input,
-  Typography,
-  VStack,
-} from '@components/index';
-import {ScreenLayout} from 'src/layouts/ScreenLayout';
-import {PasswordInput} from '@components/Input/PasswordInput';
+import { Button, Divider, HStack, Input, Typography, VStack } from "@components/index";
+import { ScreenLayout } from "src/layouts/ScreenLayout";
+import { PasswordInput } from "@components/Input/PasswordInput";
 
-export const LoginScreen = () => {
+export function LoginScreen() {
   return (
     <ScreenLayout>
       <VStack gap={20} alignItems="flex-end">
@@ -30,4 +23,4 @@ export const LoginScreen = () => {
       </VStack>
     </ScreenLayout>
   );
-};
+}

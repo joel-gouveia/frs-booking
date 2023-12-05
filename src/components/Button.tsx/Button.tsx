@@ -1,24 +1,18 @@
-import React, {PropsWithChildren} from 'react';
-import {
-  ActivityIndicator,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  ViewProps,
-} from 'react-native';
-import {defaults, variants} from './styles';
+import React, { PropsWithChildren } from "react";
+import { ActivityIndicator, Text, TextStyle, TouchableOpacity, ViewProps } from "react-native";
+import { defaults, variants } from "./styles";
 
 interface Props extends PropsWithChildren, ViewProps, TextStyle {
   onPress?: () => void;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   fontSize?: number;
-  variant: 'solid' | 'outline' | 'ghost';
+  variant: "solid" | "outline" | "ghost";
   disabled?: boolean;
   isLoading?: boolean;
 }
 
-export const Button = (props: Props) => {
+export function Button(props: Props) {
   const {
     startIcon,
     endIcon,
@@ -38,9 +32,7 @@ export const Button = (props: Props) => {
       style={[defaults.button, variants[variant].button, style]}
       disabled={disabled}
       {...restProps}>
-      {isLoading && (
-        <ActivityIndicator animating color={variants[variant].loader.color} />
-      )}
+      {isLoading && <ActivityIndicator animating color={variants[variant].loader.color} />}
       {startIcon && !isLoading && startIcon}
       <Text
         style={{
@@ -52,10 +44,10 @@ export const Button = (props: Props) => {
       {endIcon && !isLoading && endIcon}
     </TouchableOpacity>
   );
-};
+}
 
 Button.defaultProps = {
-  variant: 'solid',
+  variant: "solid",
   disabled: false,
   isLoading: false,
 };

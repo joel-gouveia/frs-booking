@@ -12,9 +12,9 @@ export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthContextProvider({ children }: { children: ReactNode }) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const value = {
     isAuthenticated,
