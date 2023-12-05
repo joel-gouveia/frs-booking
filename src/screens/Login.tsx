@@ -4,13 +4,15 @@ import { TouchableOpacity } from "react-native";
 import { Button, Divider, HStack, Input, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { PasswordInput } from "@components/Input/PasswordInput";
-import { login } from "@api/user";
+import useAuth from "@hooks/useAuth";
 
 export function LoginScreen() {
+  const { login } = useAuth();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLoginPressed = () => {
+  const handleLoginPressed = async () => {
     login(username, password);
   };
 
