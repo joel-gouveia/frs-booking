@@ -1,10 +1,19 @@
 import { Typography, Button } from "@components/index";
 import { View } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
+import { getRoutes } from "@api/route";
 
 export function RouteSelectionScreen() {
+  const [routes, setRoutes] = useState<string[]>([]);
+
+  useEffect(() => {
+    getRoutes().then(res => {
+      setRoutes(res.map(route => route.name));
+    });
+  }, []);
+
   return (
     <ScreenLayout>
       <View
@@ -19,11 +28,12 @@ export function RouteSelectionScreen() {
         }}>
         <Typography fontSize={24}>Choose Route</Typography>
       </View>
-      <View>
-        <Button variant="outline" fontSize={38}>
-          Route
+      {routes.map(routeName => (
+        // TODO: Dynamically change text size depending on name len to fit on btn?
+        <Button variant="outline" fontSize={30}>
+          {routeName}
         </Button>
-      </View>
+      ))}
     </ScreenLayout>
   );
 }
