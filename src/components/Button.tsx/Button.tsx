@@ -21,6 +21,7 @@ export function Button(props: Props) {
     isLoading,
     onPress,
     children,
+    fontSize,
     style,
     ...restProps
   } = props;
@@ -34,11 +35,7 @@ export function Button(props: Props) {
       {...restProps}>
       {isLoading && <ActivityIndicator animating color={variants[variant].loader.color} />}
       {startIcon && !isLoading && startIcon}
-      <Text
-        style={{
-          ...defaults.buttonText,
-          ...variants[variant].buttonText,
-        }}>
+      <Text style={[defaults.buttonText, variants[variant].buttonText, { fontSize }]}>
         {children}
       </Text>
       {endIcon && !isLoading && endIcon}

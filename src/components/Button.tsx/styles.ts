@@ -32,8 +32,14 @@ export const variants = {
   }),
   outline: StyleSheet.create({
     button: {
-      borderColor: "black",
-      backgroundColor: "transparent",
+      borderWidth: 1,
+      borderColor: "#dcdcdc",
+      backgroundColor: "#f5f5f5",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 1,
+      shadowRadius: 8,
+      elevation: 5,
     },
     buttonText: {
       color: "black",
