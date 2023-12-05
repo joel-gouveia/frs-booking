@@ -8,7 +8,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "prettier",
   ],
-  ignorePatterns: [".eslintrc.js"],
+  ignorePatterns: [".eslintrc.js", "yarn.lock"],
   rules: {
     quotes: ["error", "double"],
     "import/extensions": "off",
