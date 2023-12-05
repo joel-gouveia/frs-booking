@@ -22,7 +22,7 @@ export function RouteSelectionScreen() {
           <Typography fontSize={24}>Choose Route</Typography>
         </View>
         {routes.map(routeName => (
-          <Button variant="outline" fontSize={30}>
+          <Button key={routeName} variant="outline" fontSize={30}>
             {routeName}
           </Button>
         ))}

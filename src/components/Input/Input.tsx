@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from "react";
 import { TextInput, TextInputProps } from "react-native";
 
 import { ShortcutProps, defaultShortcuts } from "@styles/shortcuts";
-import { HStack } from "..";
+import { HStack } from "../HStack/HStack";
 import { defaults, variants } from "./styles";
 import { InputLeftElement, InputRightElement } from "./components";
 

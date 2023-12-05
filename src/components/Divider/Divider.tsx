@@ -5,7 +5,7 @@ import { ShortcutProps, defaultShortcuts } from "@styles/shortcuts";
 interface DividerProps extends ViewProps, ShortcutProps {}
 
 export function Divider(props: DividerProps) {
-  const { style, ...restProps } = props;
+  const { style, children, ...restProps } = props;
 
   return (
     <View
@@ -18,7 +18,7 @@ export function Divider(props: DividerProps) {
         style,
       ]}
       {...restProps}>
-      {props.children}
+      {children}
     </View>
   );
 }
