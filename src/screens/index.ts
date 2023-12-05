@@ -1,2 +1,3 @@
-import {LoginScreen} from './Login';
-export {LoginScreen};
+import { LoginScreen } from "./Login";
+
+export { LoginScreen };

@@ -11,6 +11,9 @@ module.exports = {
   ignorePatterns: [".eslintrc.js", "yarn.lock"],
   rules: {
     quotes: ["error", "double"],
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/destructuring-assignment": "off",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": [

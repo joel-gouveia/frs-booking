@@ -12,7 +12,7 @@ export function UnauthedStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerLeft: () => <FlexWaysLogo width={100} height={40} fill={"white"} />,
+        headerLeft: () => <FlexWaysLogo width={100} height={40} fill="white" />,
         headerTitle: "",
         headerStyle: {
           backgroundColor: "#1d2362", // TODO: This will come from the theme

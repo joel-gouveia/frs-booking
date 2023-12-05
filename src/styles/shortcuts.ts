@@ -1,13 +1,13 @@
-import {DimensionValue} from 'react-native';
+import { DimensionValue } from "react-native";
 
 export interface ShortcutProps {
-  m?: number | 'auto';
-  ml?: number | 'auto';
-  mr?: number | 'auto';
-  mt?: number | 'auto';
-  mb?: number | 'auto';
-  mx?: number | 'auto';
-  my?: number | 'auto';
+  m?: number | "auto";
+  ml?: number | "auto";
+  mr?: number | "auto";
+  mt?: number | "auto";
+  mb?: number | "auto";
+  mx?: number | "auto";
+  my?: number | "auto";
 
   p?: number;
   pl?: number;

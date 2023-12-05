@@ -1,9 +1,9 @@
-import {Route} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { Route } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export enum NavigationSreens {
-  LOGIN = 'login',
-  HOME = 'home',
+  LOGIN = "login",
+  HOME = "home",
 }
 
 /**
