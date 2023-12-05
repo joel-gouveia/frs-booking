@@ -1,10 +1,10 @@
-import React from 'react';
-import {SafeAreaView, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import React from "react";
+import { SafeAreaView, TouchableWithoutFeedback, Keyboard } from "react-native";
 
-import {MainNavigation} from '@navigation/main';
-import {AuthContextProvider} from '@context/auth';
+import MainNavigation from "@navigation/main";
+import { AuthContextProvider } from "@context/auth";
 
-import {globals} from '@styles/globals';
+import { globals } from "@styles/globals";
 
 export function App() {
   return (
