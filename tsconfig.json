@@ -4,9 +4,6 @@
     "jsx": "react",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "typeRoots": [
-      "./src/types"
-    ],
     "baseUrl": ".",
     "resolveJsonModule": true,
     "strict": true,
@@ -22,7 +19,7 @@
       "@types/*": ["src/types/*"],
       "@context/*": ["src/context/*"],
       "@styles/*": ["src/styles/*"],
-      "@assets/*": ["src/assets/*"],
+      "@assets/*": ["src/assets/*"]
     }
   }
 }
