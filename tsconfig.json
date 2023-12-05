@@ -4,6 +4,9 @@
     "jsx": "react",
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "typeRoots": [
+      "./src/types"
+    ],
     "baseUrl": ".",
     "paths": {
       "@screens/*": [
@@ -35,6 +38,12 @@
       ],
       "@context/*": [
         "src/context/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
       ],
     },
   },
