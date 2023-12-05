@@ -68,7 +68,7 @@ You've successfully run and modified your React Native App. :partying_face:
 
 ## Translation (i18n)
 
-To generate a .d.ts file from the .json translations (e.g: en.json), in order to make it type-safe, run:
+To make the i18n translations type-sage, by generating a .d.ts file from the .json translations (e.g: en.json), run:
 
 ```
 yarn i18n:types
