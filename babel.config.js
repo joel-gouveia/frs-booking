@@ -23,7 +23,7 @@ module.exports = function (api) {
             "@components": "./src/components",
             "@constants": "./src/constants",
             "@utils": "./src/utils",
-            "@layout": "./src/layout",
+            "@layouts": "./src/layouts",
             "@navigation": "./src/navigation",
             "@hooks": "./src/hooks",
             "@api": "./src/api",

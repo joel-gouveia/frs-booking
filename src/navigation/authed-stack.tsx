@@ -2,27 +2,28 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationSreens, RootStackParamList } from "src/types/navigation";
 
-import FlexWaysLogo from "@assets/images/logo.svg";
 import Icon from "react-native-vector-icons/Ionicons";
 
-import { VStack } from "@components/index";
 import { RouteSelectionScreen } from "@screens/RouteSelection";
+import { HeaderLogo } from "@components/index";
+import { MainMenuScreen } from "@screens/MainMenu";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function AuthedStack() {
   return (
     <Stack.Navigator
+      initialRouteName={NavigationSreens.MAIN_MENU}
       screenOptions={{
-        headerLeft: () => <FlexWaysLogo width={100} height={40} fill="white" />,
+        headerLeft: HeaderLogo,
         headerRight: () => <Icon name="menu" size={30} color="white" />, // TODO: Just as a placeholder. When functionality is added, this will be extracted to a component
         headerTitle: "",
         headerStyle: {
           backgroundColor: "#1d2362", // TODO: This will come from the theme
         },
       }}>
-      <Stack.Screen name={NavigationSreens.HOME} component={VStack} />
       <Stack.Screen name={NavigationSreens.ROUTES} component={RouteSelectionScreen} />
+      <Stack.Screen name={NavigationSreens.MAIN_MENU} component={MainMenuScreen} />
     </Stack.Navigator>
   );
 }
