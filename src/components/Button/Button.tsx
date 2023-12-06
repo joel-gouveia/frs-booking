@@ -7,22 +7,16 @@ interface Props extends PropsWithChildren, ViewProps, TextStyle {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   fontSize?: number;
-  variant: "solid" | "outline" | "ghost";
+  variant?: "solid" | "outline" | "ghost";
   disabled?: boolean;
   isLoading?: boolean;
 }
 
-const defaultProps = {
-  variant: "solid",
-  disabled: false,
-  isLoading: false,
-} as const;
-
-export function Button(props: Props = defaultProps) {
+export function Button(props: Props) {
   const {
     startIcon,
     endIcon,
-    variant,
+    variant = "solid",
     disabled,
     isLoading,
     onPress,
@@ -48,3 +42,9 @@ export function Button(props: Props = defaultProps) {
     </TouchableOpacity>
   );
 }
+
+Button.defaultProps = {
+  variant: "solid",
+  disabled: false,
+  isLoading: false,
+};

@@ -11,7 +11,7 @@ export function Footer({ buttons = [] }: IFooter) {
     <View style={styles.container}>
       {buttons.map(({ label, onPress }) => (
         <View key={label} style={styles.btnContainer}>
-          <Button onPress={onPress} variant="outline" style={styles.button}>
+          <Button onPress={onPress} variant="outline" style={styles.button} testID="footer-btn ">
             {label}
           </Button>
         </View>

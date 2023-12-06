@@ -17,11 +17,11 @@ export function RouteSelectionScreen() {
 
   return (
     <ScreenLayout>
-      <View style={styles.title}>
+      <View style={styles.title} testID="title">
         <Typography fontSize={24}>Choose Route</Typography>
       </View>
       {routes.map(routeName => (
-        <Button key={routeName} variant="outline" fontSize={30}>
+        <Button key={routeName} variant="outline" fontSize={30} testID="route-btn">
           {routeName}
         </Button>
       ))}
