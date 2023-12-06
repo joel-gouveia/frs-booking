@@ -1,16 +1,12 @@
 import { Button } from "@components/index";
 import { View, Dimensions, StyleSheet } from "react-native";
-import React, { useMemo } from "react";
+import React from "react";
 
 interface IFooter {
   buttons?: { label: string; onPress: () => void }[];
 }
 
 export function Footer({ buttons = [] }: IFooter) {
-  const screenWidth = Dimensions.get("window").width;
-
-  const styles = useMemo(() => getStyles(screenWidth), [screenWidth]);
-
   return (
     <View style={styles.container}>
       {buttons.map(({ label, onPress }) => (
@@ -24,22 +20,21 @@ export function Footer({ buttons = [] }: IFooter) {
   );
 }
 
-const getStyles = (screenWidth: number) =>
-  StyleSheet.create({
-    container: {
-      backgroundColor: "#d9d9d9",
-      height: 70,
-      position: "absolute",
-      bottom: 0,
-      width: screenWidth,
-      display: "flex",
-      flexDirection: "row",
-      paddingVertical: 12,
-    },
-    button: {
-      paddingVertical: 0,
-      paddingHorizontal: 0,
-      height: "100%",
-      backgroundColor: "#e3e3e3",
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#d9d9d9",
+    height: 70,
+    position: "absolute",
+    bottom: 0,
+    width: Dimensions.get("window").width,
+    display: "flex",
+    flexDirection: "row",
+    paddingVertical: 12,
+  },
+  button: {
+    paddingVertical: 0,
+    paddingHorizontal: 0,
+    height: "100%",
+    backgroundColor: "#e3e3e3",
+  },
+});
