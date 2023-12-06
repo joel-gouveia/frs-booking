@@ -16,19 +16,17 @@ export function RouteSelectionScreen() {
   }, []);
 
   return (
-    <>
-      <ScreenLayout>
-        <View style={styles.title}>
-          <Typography fontSize={24}>Choose Route</Typography>
-        </View>
-        {routes.map(routeName => (
-          <Button key={routeName} variant="outline" fontSize={30}>
-            {routeName}
-          </Button>
-        ))}
-        <Footer buttons={[{ label: "Main Menu", onPress: () => {} }]} />
-      </ScreenLayout>
-    </>
+    <ScreenLayout>
+      <View style={styles.title}>
+        <Typography fontSize={24}>Choose Route</Typography>
+      </View>
+      {routes.map(routeName => (
+        <Button key={routeName} variant="outline" fontSize={30}>
+          {routeName}
+        </Button>
+      ))}
+      <Footer buttons={[{ label: "Main Menu", onPress: () => {} }]} />
+    </ScreenLayout>
   );
 }
 

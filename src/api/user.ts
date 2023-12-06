@@ -1,4 +1,4 @@
-import { ILoginRes } from "@types/user";
+import { ILoginRes } from "src/types/user";
 import api from "@api/index";
 
 export const login = async (username: string, password: string): Promise<ILoginRes> => {

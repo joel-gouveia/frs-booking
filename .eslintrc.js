@@ -14,6 +14,7 @@ module.exports = {
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
     "react/destructuring-assignment": "off",
+    "@typescript-eslint/no-use-before-define": "off",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": [

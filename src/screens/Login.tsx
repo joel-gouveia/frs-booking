@@ -6,7 +6,7 @@ import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { PasswordInput } from "@components/Input/PasswordInput";
 import useAuth from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationProps, NavigationSreens } from "@types/navigation";
+import { NavigationProps, NavigationSreens } from "src/types/navigation";
 
 export function LoginScreen() {
   const { login } = useAuth();

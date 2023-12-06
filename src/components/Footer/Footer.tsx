@@ -10,7 +10,7 @@ export function Footer({ buttons = [] }: IFooter) {
   return (
     <View style={styles.container}>
       {buttons.map(({ label, onPress }) => (
-        <View key={label} style={{ width: "33%", paddingHorizontal: 16 }}>
+        <View key={label} style={styles.btnContainer}>
           <Button onPress={onPress} variant="outline" style={styles.button}>
             {label}
           </Button>
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 12,
   },
+  btnContainer: { width: "33.33%", paddingHorizontal: 16 },
   button: {
     paddingVertical: 0,
     paddingHorizontal: 0,

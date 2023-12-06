@@ -12,7 +12,13 @@ interface Props extends PropsWithChildren, ViewProps, TextStyle {
   isLoading?: boolean;
 }
 
-export function Button(props: Props) {
+const defaultProps = {
+  variant: "solid",
+  disabled: false,
+  isLoading: false,
+} as const;
+
+export function Button(props: Props = defaultProps) {
   const {
     startIcon,
     endIcon,
@@ -42,9 +48,3 @@ export function Button(props: Props) {
     </TouchableOpacity>
   );
 }
-
-Button.defaultProps = {
-  variant: "solid",
-  disabled: false,
-  isLoading: false,
-};
