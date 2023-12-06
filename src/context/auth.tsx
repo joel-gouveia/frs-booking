@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode, useEffect, useCallback } from "react";
+import React, { createContext, useState, ReactNode, useCallback } from "react";
 
 import { login as loginApi, getMe } from "@api/user";
 import { ILoginRes, UserInfo } from "src/types/user";
