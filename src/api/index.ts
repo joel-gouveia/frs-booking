@@ -1,23 +1,26 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import Config from "react-native-config";
 import { storageUtils } from "@utils/storage";
 import { Languages } from "src/types/i18n/languages";
 
-const ApiInstance = async (options?: { isAuthRequest: boolean }): Promise<AxiosInstance> => {
-  const { tokenInfo, userInfo } = await storageUtils.getAuthCredentials();
+const Api: AxiosInstance = axios.create({
+  baseURL: Config.API_URL,
+});
 
-  const apiInstance: AxiosInstance = axios.create({});
+Api.interceptors.request.use(
+  async config => {
+    const { tokenInfo, userInfo } = await storageUtils.getAuthCredentials();
 
-  apiInstance.defaults.baseURL = Config.API_URL;
+    if (tokenInfo) config.headers.set("Authorization", `Bearer ${tokenInfo?.bearerToken}`);
+    if (userInfo) config.headers.set("Accept-Language", userInfo?.language || Languages.EN);
 
-  if (!options?.isAuthRequest) {
-    apiInstance.defaults.headers.common.Authorization = `Bearer ${tokenInfo?.bearerToken}`;
-    apiInstance.defaults.headers.common.Accepted_Language = userInfo?.language || Languages.EN;
-  }
+    return config;
+  },
+  (error: AxiosError) => {
+    return Promise.reject(error);
+  },
+);
 
-  apiInstance.interceptors.response.use((res: AxiosResponse) => res.data);
+Api.interceptors.response.use((res: AxiosResponse) => res.data);
 
-  return apiInstance;
-};
-
-export default ApiInstance;
+export default Api;
