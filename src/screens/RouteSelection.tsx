@@ -1,5 +1,5 @@
 import { Typography, Button } from "@components/index";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
@@ -23,15 +23,27 @@ export function RouteSelectionScreen() {
       <View style={styles.title} testID="title">
         <Typography fontSize={24}>{t("routes.choose-route")}</Typography>
       </View>
-      {routes.map(routeName => (
-        <Button key={routeName} variant="outline" fontSize={30} testID="route-btn">
-          {routeName}
-        </Button>
-      ))}
+      <FlatList
+        data={routes}
+        renderItem={({ item }) => (
+          <Button
+            key={item}
+            variant="outline"
+            fontSize={30}
+            style={styles.routeBtn}
+            testID="route-btn">
+            {item}
+          </Button>
+        )}
+        keyExtractor={item => item}
+        contentContainerStyle={styles.routesList}
+      />
       <Footer buttons={[{ label: t("footer.main-menu"), onPress: () => {} }]} />
     </ScreenLayout>
   );
 }
+
+const BTN_BORDER_RADIUS = 8;
 
 const styles = StyleSheet.create({
   title: {
@@ -43,4 +55,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginBottom: 46,
   },
+  routesList: { borderRadius: BTN_BORDER_RADIUS, overflow: "hidden" },
+  routeBtn: { borderRadius: BTN_BORDER_RADIUS },
 });
