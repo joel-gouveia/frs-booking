@@ -24,6 +24,7 @@ interface Resources {
     };
     footer: {
       "main-menu": "Main Menu";
+      logout: "Logout";
     };
   };
 }

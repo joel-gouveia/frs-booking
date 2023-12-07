@@ -16,6 +16,7 @@
     "cancel": "Cancel"
   },
   "footer": {
-    "main-menu": "Main Menu"
+    "main-menu": "Main Menu",
+    "logout": "Logout"
   }
 }
