@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
+import useAuth from "@hooks/useAuth";
 
 import { Button, Divider, HStack, Input, Typography, VStack } from "@components/index";
-import { ScreenLayout } from "src/layouts/ScreenLayout";
+import { ScreenLayout } from "@layouts/index";
 import { PasswordInput } from "@components/Input/PasswordInput";
-import useAuth from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useTranslation } from "react-i18next";
 
 export function LoginScreen() {
   const { t } = useTranslation();
-  const { login } = useAuth();
+  const { login, isLoading, loadStorageData } = useAuth();
   const navigation = useNavigation<NavigationProps>();
 
+  const [isLoadingStorage, setIsLoadingStorage] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +23,13 @@ export function LoginScreen() {
     navigation.navigate(NavigationScreens.ROUTES);
   };
 
+  useEffect(() => {
+    setIsLoadingStorage(true);
+    loadStorageData().finally(() => setIsLoadingStorage(false));
+  }, [loadStorageData]);
+
+  if (isLoadingStorage) return null; // Can be a splash screen in the future.
+
   return (
     <ScreenLayout>
       <VStack gap={20} alignItems="flex-end">
@@ -29,13 +37,21 @@ export function LoginScreen() {
           <Typography>{t("login.log-in-to")} </Typography>
           <Typography bold>{t("login.frs-account")}</Typography>
         </HStack>
-        <Input value={username} onChangeText={setUsername} placeholder={t("login.username")} />
+        <Input
+          isDisabled={isLoading}
+          value={username}
+          onChangeText={setUsername}
+          placeholder={t("login.username")}
+        />
         <PasswordInput
+          isDisabled={isLoading}
           value={password}
           onChangeText={setPassword}
           placeholder={t("login.password")}
         />
-        <Button onPress={handleLoginPressed}>{t("login.login")}</Button>
+        <Button onPress={handleLoginPressed} isLoading={isLoading}>
+          {t("login.login")}
+        </Button>
         <Divider />
         <TouchableOpacity>
           <Typography>{t("login.forgot-password?")}</Typography>

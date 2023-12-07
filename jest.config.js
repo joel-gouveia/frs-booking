@@ -10,7 +10,7 @@ module.exports = {
     "^@components/(.*)$": "<rootDir>/src/components/$1",
     "^@constants/(.*)$": "<rootDir>/src/constants/$1",
     "^@utils/(.*)$": "<rootDir>/src/utils/$1",
-    "^@layout/(.*)$": "<rootDir>/src/layout/$1",
+    "^@layouts/(.*)$": "<rootDir>/src/layouts/$1",
     "^@navigation/(.*)$": "<rootDir>/src/navigation/$1",
     "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
     "^@api/(.*)$": "<rootDir>/src/api/$1",
@@ -18,9 +18,13 @@ module.exports = {
     "^@context/(.*)$": "<rootDir>/src/context/$1",
     "^@styles/(.*)$": "<rootDir>/src/styles/$1",
     "^@assets/(.*)$": "<rootDir>/src/assets/$1",
+    "^@mocks/(.*)$": "<rootDir>/src/mocks/$1",
+    "^@config/(.*)$": "<rootDir>/src/config/$1",
   },
   transformIgnorePatterns: [
     "node_modules/(?!(react-native-config|react-native|@react-native|@react-navigation|react-navigation|react-native-vector-icons)/)",
   ],
+  setupFiles: ["<rootDir>/setupTests.ts"],
+  testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
   setupFilesAfterEnv: ["<rootDir>/jestSetup.ts"],
 };

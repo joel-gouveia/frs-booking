@@ -3,7 +3,6 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export enum NavigationScreens {
   LOGIN = "login",
-  HOME = "home",
   ROUTES = "routes",
   MAIN_MENU = "main-menu",
 }
@@ -13,14 +12,12 @@ export enum NavigationScreens {
  */
 export type ScreenOptions = {
   [NavigationScreens.LOGIN]?: {};
-  [NavigationScreens.HOME]?: {};
   [NavigationScreens.ROUTES]?: {};
   [NavigationScreens.MAIN_MENU]?: {};
 };
 
 export type RootStackParamList = {
   [NavigationScreens.LOGIN]: ScreenOptions[NavigationScreens.LOGIN];
-  [NavigationScreens.HOME]: ScreenOptions[NavigationScreens.HOME];
   [NavigationScreens.ROUTES]: ScreenOptions[NavigationScreens.ROUTES];
   [NavigationScreens.MAIN_MENU]: ScreenOptions[NavigationScreens.MAIN_MENU];
 };
