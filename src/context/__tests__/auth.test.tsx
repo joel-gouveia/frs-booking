@@ -21,18 +21,16 @@ describe("context/auth", () => {
     expect(result.current.token).toBeNull();
     expect(result.current.user).toBeNull();
     expect(result.current.isAuthenticated).toBe(false);
-    expect(result.current.isAuthenticating).toBe(false);
+    expect(result.current.isLoadingAuth).toBe(false);
 
     await act(async () =>
-      result.current
-        .loadStorageData()
-        .then(() => expect(result.current.isAuthenticating).toBe(true)),
+      result.current.loadStorageData().then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
     expect(result.current.token).toEqual(tokenInfo);
     expect(result.current.user).toEqual(userInfo);
     expect(result.current.isAuthenticated).toBe(true);
-    expect(result.current.isAuthenticating).toBe(false);
+    expect(result.current.isLoadingAuth).toBe(false);
   });
 
   it("should handle logout and erase storage data", async () => {
@@ -41,22 +39,20 @@ describe("context/auth", () => {
     const { result } = renderHook(() => useAuth(), { wrapper: AuthContextProvider });
 
     await act(async () =>
-      result.current
-        .loadStorageData()
-        .then(() => expect(result.current.isAuthenticating).toBe(true)),
+      result.current.loadStorageData().then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
     expect(result.current.token).toEqual(tokenInfo);
     expect(result.current.user).toEqual(userInfo);
     expect(result.current.isAuthenticated).toBe(true);
-    expect(result.current.isAuthenticating).toBe(false);
+    expect(result.current.isLoadingAuth).toBe(false);
 
     await act(async () => result.current.logout());
 
     expect(result.current.token).toBeNull();
     expect(result.current.user).toBeNull();
     expect(result.current.isAuthenticated).toBe(false);
-    expect(result.current.isAuthenticating).toBe(false);
+    expect(result.current.isLoadingAuth).toBe(false);
 
     const { tokenInfo: tokenInfoAfterLogout, userInfo: userInfoAfterLogout } =
       await storageUtils.getAuthCredentials();
@@ -78,13 +74,13 @@ describe("context/auth", () => {
     await act(async () =>
       result.current
         .authenticate(loginInfo.username, loginInfo.password)
-        .then(() => expect(result.current.isAuthenticating).toBe(true)),
+        .then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
     expect(result.current.token).toEqual(tokenInfo);
     expect(result.current.user).toEqual(userInfo);
     expect(result.current.isAuthenticated).toBe(true);
-    expect(result.current.isAuthenticating).toBe(false);
+    expect(result.current.isLoadingAuth).toBe(false);
   });
 
   it("should not set token neither user if login fails", async () => {
@@ -100,13 +96,13 @@ describe("context/auth", () => {
     await act(async () =>
       result.current
         .authenticate(loginInfo.username, loginInfo.password)
-        .then(() => expect(result.current.isAuthenticating).toBe(true)),
+        .then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
     expect(result.current.token).toBeNull();
     expect(result.current.user).toBeNull();
     expect(result.current.isAuthenticated).toBe(false);
-    expect(result.current.isAuthenticating).toBe(false);
+    expect(result.current.isLoadingAuth).toBe(false);
   });
 
   it("should not set token neither user if getMe fails", async () => {
@@ -122,13 +118,13 @@ describe("context/auth", () => {
     await act(async () =>
       result.current
         .authenticate(loginInfo.username, loginInfo.password)
-        .then(() => expect(result.current.isAuthenticating).toBe(true)),
+        .then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
     expect(result.current.token).toBeNull();
     expect(result.current.user).toBeNull();
     expect(result.current.isAuthenticated).toBe(false);
-    expect(result.current.isAuthenticating).toBe(false);
+    expect(result.current.isLoadingAuth).toBe(false);
   });
 
   it("should not set token neither user if authentication fails", async () => {
@@ -144,13 +140,13 @@ describe("context/auth", () => {
     await act(async () =>
       result.current
         .authenticate(loginInfo.username, loginInfo.password)
-        .then(() => expect(result.current.isAuthenticating).toBe(true)),
+        .then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
     expect(result.current.token).toBeNull();
     expect(result.current.user).toBeNull();
     expect(result.current.isAuthenticated).toBe(false);
-    expect(result.current.isAuthenticating).toBe(false);
+    expect(result.current.isLoadingAuth).toBe(false);
   });
 
   // WARN: This test might not be necessary. But if we use the authenticate method to re-login the user
@@ -161,15 +157,13 @@ describe("context/auth", () => {
     const { result } = renderHook(() => useAuth(), { wrapper: AuthContextProvider });
 
     await act(async () =>
-      result.current
-        .loadStorageData()
-        .then(() => expect(result.current.isAuthenticating).toBe(true)),
+      result.current.loadStorageData().then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
     expect(result.current.token).toEqual(tokenInfo);
     expect(result.current.user).toEqual(userInfo);
     expect(result.current.isAuthenticated).toBe(true);
-    expect(result.current.isAuthenticating).toBe(false);
+    expect(result.current.isLoadingAuth).toBe(false);
 
     jest.spyOn(API, "login").mockRejectedValue(new Error());
     jest.spyOn(API, "getMe").mockRejectedValue(new Error());
@@ -177,7 +171,7 @@ describe("context/auth", () => {
     await act(async () =>
       result.current
         .authenticate(loginInfo.username, loginInfo.password)
-        .then(() => expect(result.current.isAuthenticating).toBe(true)),
+        .then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
     const { tokenInfo: tokenInfoAfterLogout, userInfo: userInfoAfterLogout } =

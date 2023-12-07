@@ -11,8 +11,8 @@ import { useTranslation } from "react-i18next";
 
 export function LoginScreen() {
   const { t } = useTranslation();
-  const { authenticate, isLoading, loadStorageData } = useAuth();
   const navigation = useNavigation<NavigationProps>();
+  const { authenticate, isLoadingAuth, loadStorageData } = useAuth();
 
   const [isLoadingStorage, setIsLoadingStorage] = useState(false);
   const [username, setUsername] = useState("");
@@ -38,18 +38,20 @@ export function LoginScreen() {
           <Typography bold>{t("login.frs-account")}</Typography>
         </HStack>
         <Input
-          isDisabled={isLoading}
+          testID="username-input"
+          isDisabled={isLoadingAuth}
           value={username}
           onChangeText={setUsername}
           placeholder={t("login.username")}
         />
         <PasswordInput
-          isDisabled={isLoading}
+          testID="password-input"
+          isDisabled={isLoadingAuth}
           value={password}
           onChangeText={setPassword}
           placeholder={t("login.password")}
         />
-        <Button onPress={handleLoginPressed} isLoading={isLoading}>
+        <Button onPress={handleLoginPressed} isLoading={isLoadingAuth} testID="login-btn">
           {t("login.login")}
         </Button>
         <Divider />

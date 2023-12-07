@@ -7,7 +7,7 @@ import { storageUtils } from "@utils/storage";
 interface AuthContextProps {
   loadStorageData: () => Promise<void>;
   isAuthenticated: boolean;
-  isLoading: boolean;
+  isLoadingAuth: boolean;
   authenticate: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   token: ILoginRes | null;
@@ -17,7 +17,7 @@ interface AuthContextProps {
 export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthContextProvider({ children }: { children: ReactNode }) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingAuth, setIsLoadingAuth] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const [token, setToken] = useState<ILoginRes | null>(null);
@@ -28,7 +28,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
    */
   const loadStorageData = useCallback(async () => {
     try {
-      setIsLoading(true);
+      setIsLoadingAuth(true);
 
       const { tokenInfo, userInfo } = await storageUtils.getAuthCredentials();
 
@@ -40,13 +40,13 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
         setIsAuthenticated(false);
       }
     } finally {
-      setIsLoading(false);
+      setIsLoadingAuth(false);
     }
   }, []);
 
   const authenticate = async (username: string, password: string) => {
     try {
-      setIsLoading(true);
+      setIsLoadingAuth(true);
 
       const tokenInfo = await login(username, password);
       await storageUtils.setAuthCredentials({ tokenInfo });
@@ -64,7 +64,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
       await storageUtils.clearAuthCredentials();
       setIsAuthenticated(false);
     } finally {
-      setIsLoading(false);
+      setIsLoadingAuth(false);
     }
   };
 
@@ -78,7 +78,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
   const value = {
     loadStorageData,
     isAuthenticated,
-    isLoading,
+    isLoadingAuth,
     authenticate,
     logout,
     token,
