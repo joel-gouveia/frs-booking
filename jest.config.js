@@ -14,7 +14,6 @@ module.exports = {
     "^@navigation/(.*)$": "<rootDir>/src/navigation/$1",
     "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
     "^@api/(.*)$": "<rootDir>/src/api/$1",
-    "^@types/(.*)$": "<rootDir>/src/types/$1",
     "^@context/(.*)$": "<rootDir>/src/context/$1",
     "^@styles/(.*)$": "<rootDir>/src/styles/$1",
     "^@assets/(.*)$": "<rootDir>/src/assets/$1",
