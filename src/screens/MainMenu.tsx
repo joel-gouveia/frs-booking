@@ -17,13 +17,13 @@ export function MainMenuScreen() {
   return (
     <ScreenLayout>
       <VStack gap={20} style={styles.container}>
-        <Button variant="outline" fontSize={30} testID="route-btn">
+        <Button variant="outline" fontSize={30}>
           {t("main-menu.sales")}
         </Button>
-        <Button variant="outline" fontSize={30} testID="route-btn">
+        <Button variant="outline" fontSize={30}>
           {t("main-menu.boarding")}
         </Button>
-        <Button variant="outline" fontSize={30} testID="route-btn">
+        <Button variant="outline" fontSize={30}>
           {t("main-menu.cancel")}
         </Button>
       </VStack>
