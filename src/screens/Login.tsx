@@ -41,16 +41,16 @@ export function LoginScreen() {
           isDisabled={isLoading}
           value={username}
           onChangeText={setUsername}
-          placeholder="Username*"
+          placeholder={t("login.username")}
         />
         <PasswordInput
           isDisabled={isLoading}
           value={password}
           onChangeText={setPassword}
-          placeholder="Password*"
+          placeholder={t("login.password")}
         />
         <Button onPress={handleLoginPressed} isLoading={isLoading}>
-          Login
+          {t("login.login")}
         </Button>
         <Divider />
         <TouchableOpacity>

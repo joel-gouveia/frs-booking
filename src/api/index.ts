@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import Config from "react-native-config";
 import { storageUtils } from "@utils/storage";
-import { Languages } from "src/types/i18n/languages";
+import { Languages } from "@config/i18n/i18n";
 
 const Api: AxiosInstance = axios.create({ baseURL: Config.API_URL });
 

@@ -32,6 +32,7 @@ module.exports = function (api) {
             "@styles": "./src/styles",
             "@assets": "./src/assets",
             "@mocks": "./src/mocks",
+            "@config": "./src/config",
           },
         },
       ],

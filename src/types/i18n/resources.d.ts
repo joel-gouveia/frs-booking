@@ -1,13 +1,11 @@
-import { Languages } from "./languages";
-
 interface Resources {
-  [Languages.DE]: {
+  de: {
     login: {
       username: "Nutzername";
       password: "Passwort";
     };
   };
-  [Languages.EN]: {
+  en: {
     login: {
       login: "Login";
       "log-in-to": "Log in to";

@@ -1,4 +1,4 @@
-import { Languages } from "./i18n/languages";
+import { Languages } from "@config/i18n/i18n";
 
 export enum Operations {
   // TODO: Add more operations types
