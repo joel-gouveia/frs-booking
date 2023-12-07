@@ -6,30 +6,30 @@ export const STORAGE_KEY_USER = "@auth_user";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
-  isAuthenticating: boolean;
+  isLoading: boolean;
   login: (username: string, password: string) => Promise<void>;
 }
 
 export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthContextProvider({ children }: { children: ReactNode }) {
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const login = async (username: string, password: string) => {
     // TODO: Set the access token
     try {
-      setIsAuthenticating(true);
+      setIsLoading(true);
       await loginApi(username, password);
       setIsAuthenticated(true);
     } finally {
-      setIsAuthenticating(false);
+      setIsLoading(false);
     }
   };
 
   const value = {
     isAuthenticated,
-    isAuthenticating,
+    isLoading,
     login,
   };
 
