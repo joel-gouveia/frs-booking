@@ -9,6 +9,7 @@
     "lint:fix": "eslint --fix .",
     "start": "react-native start",
     "test": "jest",
+    "test:watch": "jest --watch",
     "bundle-visualizer": "react-native-bundle-visualizer --platform android",
     "i18n:types": "i18next-resources-for-ts interface -i ./src/config/i18n/translations -o ./src/types/i18n/resources.d.ts"
   },
@@ -35,6 +36,7 @@
     "@babel/runtime": "^7.20.0",
     "@react-native/eslint-config": "^0.72.2",
     "@react-native/metro-config": "^0.72.11",
+    "@testing-library/react-native": "^12.4.1",
     "@tsconfig/react-native": "^3.0.0",
     "@types/react": "^18.0.24",
     "@types/react-native-vector-icons": "^6.4.18",

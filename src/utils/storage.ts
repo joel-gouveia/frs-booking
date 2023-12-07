@@ -38,8 +38,7 @@ const setAuthCredentials = async ({
  * Clear token and user info from the "local" storage
  */
 const clearAuthCredentials = async (): Promise<void> => {
-  await AsyncStorage.removeItem(storageKeys.TOKEN_INFO);
-  await AsyncStorage.removeItem(storageKeys.USER_INFO);
+  await AsyncStorage.multiRemove([storageKeys.TOKEN_INFO, storageKeys.USER_INFO]);
 };
 
 export const storageUtils = {
