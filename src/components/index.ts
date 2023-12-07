@@ -4,8 +4,9 @@ import { Input } from "./Input/Input";
 import { Stack } from "./Stack/Stack";
 import { Divider } from "./Divider/Divider";
 import { Typography } from "./Typography/Typography";
-import { Button } from "./Button.tsx/Button";
+import { Button } from "./Button/Button";
 
 import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
+import { HeaderRight } from "./HeaderRight/HeaderRight";
 
-export { VStack, HStack, Input, Stack, Divider, Typography, Button, HeaderLogo };
+export { VStack, HStack, Input, Stack, Divider, Typography, Button, HeaderLogo, HeaderRight };

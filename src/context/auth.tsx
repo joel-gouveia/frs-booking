@@ -7,7 +7,7 @@ import { storageUtils } from "@utils/storage";
 interface AuthContextProps {
   loadStorageData: () => Promise<void>;
   isAuthenticated: boolean;
-  isAuthenticating: boolean;
+  isLoading: boolean;
   authenticate: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   token: ILoginRes | null;
@@ -17,7 +17,7 @@ interface AuthContextProps {
 export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthContextProvider({ children }: { children: ReactNode }) {
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const [token, setToken] = useState<ILoginRes | null>(null);
@@ -27,24 +27,26 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
    * Load token and user info from the storage
    */
   const loadStorageData = useCallback(async () => {
-    setIsAuthenticating(true);
+    try {
+      setIsLoading(true);
 
-    const { tokenInfo, userInfo } = await storageUtils.getAuthCredentials();
+      const { tokenInfo, userInfo } = await storageUtils.getAuthCredentials();
 
-    if (tokenInfo && userInfo) {
-      setToken(tokenInfo);
-      setUser(userInfo);
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
+      if (tokenInfo && userInfo) {
+        setToken(tokenInfo);
+        setUser(userInfo);
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsAuthenticating(false);
   }, []);
 
   const authenticate = async (username: string, password: string) => {
     try {
-      setIsAuthenticating(true);
+      setIsLoading(true);
 
       const tokenInfo = await login(username, password);
       await storageUtils.setAuthCredentials({ tokenInfo });
@@ -62,7 +64,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
       await storageUtils.clearAuthCredentials();
       setIsAuthenticated(false);
     } finally {
-      setIsAuthenticating(false);
+      setIsLoading(false);
     }
   };
 
@@ -76,7 +78,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
   const value = {
     loadStorageData,
     isAuthenticated,
-    isAuthenticating,
+    isLoading,
     authenticate,
     logout,
     token,

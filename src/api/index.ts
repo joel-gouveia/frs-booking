@@ -3,9 +3,7 @@ import Config from "react-native-config";
 import { storageUtils } from "@utils/storage";
 import { Languages } from "src/types/i18n/languages";
 
-const Api: AxiosInstance = axios.create({
-  baseURL: Config.API_URL,
-});
+const Api: AxiosInstance = axios.create({ baseURL: Config.API_URL });
 
 Api.interceptors.request.use(
   async config => {

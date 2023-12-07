@@ -7,9 +7,11 @@ import { ScreenLayout } from "@layouts/index";
 import { PasswordInput } from "@components/Input/PasswordInput";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationSreens } from "src/types/navigation";
+import { useTranslation } from "react-i18next";
 
 export function LoginScreen() {
-  const { authenticate, isAuthenticating, loadStorageData } = useAuth();
+  const { t } = useTranslation();
+  const { authenticate, isLoading, loadStorageData } = useAuth();
   const navigation = useNavigation<NavigationProps>();
 
   const [isLoadingStorage, setIsLoadingStorage] = useState(false);
@@ -32,27 +34,27 @@ export function LoginScreen() {
     <ScreenLayout>
       <VStack gap={20} alignItems="flex-end">
         <HStack my={10}>
-          <Typography>Log in to </Typography>
-          <Typography bold>FRS Account</Typography>
+          <Typography>{t("login.log-in-to")} </Typography>
+          <Typography bold>{t("login.frs-account")}</Typography>
         </HStack>
         <Input
-          isDisabled={isAuthenticating}
+          isDisabled={isLoading}
           value={username}
           onChangeText={setUsername}
           placeholder="Username*"
         />
         <PasswordInput
-          isDisabled={isAuthenticating}
+          isDisabled={isLoading}
           value={password}
           onChangeText={setPassword}
           placeholder="Password*"
         />
-        <Button onPress={handleLoginPressed} isLoading={isAuthenticating}>
+        <Button onPress={handleLoginPressed} isLoading={isLoading}>
           Login
         </Button>
         <Divider />
         <TouchableOpacity>
-          <Typography>Forgot your Password?</Typography>
+          <Typography>{t("login.forgot-password?")}</Typography>
         </TouchableOpacity>
       </VStack>
     </ScreenLayout>
