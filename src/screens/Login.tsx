@@ -7,8 +7,10 @@ import { PasswordInput } from "@components/Input/PasswordInput";
 import useAuth from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationSreens } from "src/types/navigation";
+import { useTranslation } from "react-i18next";
 
 export function LoginScreen() {
+  const { t } = useTranslation();
   const { login } = useAuth();
   const navigation = useNavigation<NavigationProps>();
 
@@ -24,15 +26,19 @@ export function LoginScreen() {
     <ScreenLayout>
       <VStack gap={20} alignItems="flex-end">
         <HStack my={10}>
-          <Typography>Log in to </Typography>
-          <Typography bold>FRS Account</Typography>
+          <Typography>{t("login.log-in-to")} </Typography>
+          <Typography bold>{t("login.frs-account")}</Typography>
         </HStack>
-        <Input value={username} onChangeText={setUsername} placeholder="Username*" />
-        <PasswordInput value={password} onChangeText={setPassword} placeholder="Password*" />
-        <Button onPress={handleLoginPressed}>Login</Button>
+        <Input value={username} onChangeText={setUsername} placeholder={t("login.username")} />
+        <PasswordInput
+          value={password}
+          onChangeText={setPassword}
+          placeholder={t("login.password")}
+        />
+        <Button onPress={handleLoginPressed}>{t("login.login")}</Button>
         <Divider />
         <TouchableOpacity>
-          <Typography>Forgot your Password?</Typography>
+          <Typography>{t("login.forgot-password?")}</Typography>
         </TouchableOpacity>
       </VStack>
     </ScreenLayout>

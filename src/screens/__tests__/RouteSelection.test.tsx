@@ -9,10 +9,10 @@ jest.mock("src/api/route.ts", () => ({
 }));
 
 describe("Route Selection Screen", () => {
-  it("renders the screen with title and main button", () => {
+  it("renders the screen with title and main button", async () => {
     const { getAllByTestId, getByText, getByTestId } = render(<RouteSelectionScreen />);
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(getByTestId("title")).toBeTruthy();
       expect(getByText("Main Menu")).toBeTruthy();
       expect(getAllByTestId("footer-btn")).toHaveLength(1);

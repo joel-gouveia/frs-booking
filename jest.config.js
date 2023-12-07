@@ -22,4 +22,5 @@ module.exports = {
   transformIgnorePatterns: [
     "node_modules/(?!(react-native-config|react-native|@react-native|@react-navigation|react-navigation|react-native-vector-icons)/)",
   ],
+  setupFilesAfterEnv: ["<rootDir>/jestSetup.ts"],
 };

@@ -5,8 +5,11 @@ import React, { useState, useEffect } from "react";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { getRoutes } from "@api/route";
 import { Footer } from "@components/Footer/Footer";
+import { useTranslation } from "react-i18next";
 
 export function RouteSelectionScreen() {
+  const { t } = useTranslation();
+
   const [routes, setRoutes] = useState<string[]>([]);
 
   useEffect(() => {
@@ -18,14 +21,14 @@ export function RouteSelectionScreen() {
   return (
     <ScreenLayout>
       <View style={styles.title} testID="title">
-        <Typography fontSize={24}>Choose Route</Typography>
+        <Typography fontSize={24}>{t("routes.choose-route")}</Typography>
       </View>
       {routes.map(routeName => (
         <Button key={routeName} variant="outline" fontSize={30} testID="route-btn">
           {routeName}
         </Button>
       ))}
-      <Footer buttons={[{ label: "Main Menu", onPress: () => {} }]} />
+      <Footer buttons={[{ label: t("footer.main-menu"), onPress: () => {} }]} />
     </ScreenLayout>
   );
 }
