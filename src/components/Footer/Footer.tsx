@@ -2,19 +2,30 @@ import { Button } from "@components/index";
 import { View, Dimensions, StyleSheet } from "react-native";
 import React from "react";
 
+interface IFooterButton {
+  label: string;
+  onPress: () => void;
+}
+
 interface IFooter {
-  buttons?: { label: string; onPress: () => void }[];
+  buttons?: IFooterButton[];
+}
+
+function FooterButton({ label, onPress }: IFooterButton) {
+  return (
+    <View style={styles.btnContainer}>
+      <Button onPress={onPress} variant="outline" style={styles.button} testID="footer-btn ">
+        {label}
+      </Button>
+    </View>
+  );
 }
 
 export function Footer({ buttons = [] }: IFooter) {
   return (
     <View style={styles.container}>
       {buttons.map(({ label, onPress }) => (
-        <View key={label} style={styles.btnContainer}>
-          <Button onPress={onPress} variant="outline" style={styles.button} testID="footer-btn ">
-            {label}
-          </Button>
-        </View>
+        <FooterButton key={label} label={label} onPress={onPress} />
       ))}
     </View>
   );
