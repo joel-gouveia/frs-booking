@@ -1,9 +1,9 @@
-import { Button } from "@components/index";
+import { Button, VStack } from "@components/index";
 import React from "react";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { Footer } from "@components/Footer/Footer";
 import useAuth from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
@@ -16,7 +16,7 @@ export function MainMenuScreen() {
 
   return (
     <ScreenLayout>
-      <View style={styles.container}>
+      <VStack gap={20} style={styles.container}>
         <Button variant="outline" fontSize={30} testID="route-btn">
           {t("main-menu.sales")}
         </Button>
@@ -26,7 +26,7 @@ export function MainMenuScreen() {
         <Button variant="outline" fontSize={30} testID="route-btn">
           {t("main-menu.cancel")}
         </Button>
-      </View>
+      </VStack>
       <Footer
         buttons={[
           {
@@ -44,8 +44,6 @@ export function MainMenuScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
-    gap: 20,
     paddingTop: 50,
   },
 });
