@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@jest/globals";
-import { userMocks } from "__mocks__";
+import { userMocks } from "@mocks/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { storageKeys } from "@constants/storageKeys";

@@ -31,6 +31,7 @@ module.exports = function (api) {
             "@context": "./src/context",
             "@styles": "./src/styles",
             "@assets": "./src/assets",
+            "@mocks": "./src/mocks",
           },
         },
       ],

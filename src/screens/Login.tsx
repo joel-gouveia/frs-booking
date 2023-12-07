@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
+import useAuth from "@hooks/useAuth";
 
 import { Button, Divider, HStack, Input, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "@layouts/index";
 import { PasswordInput } from "@components/Input/PasswordInput";
-import useAuth from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationSreens } from "src/types/navigation";
 
 export function LoginScreen() {
-  const { login, isAuthenticating, loadStorageData } = useAuth();
+  const { authenticate, isAuthenticating, loadStorageData } = useAuth();
   const navigation = useNavigation<NavigationProps>();
 
   const [isLoadingStorage, setIsLoadingStorage] = useState(false);
@@ -17,7 +17,7 @@ export function LoginScreen() {
   const [password, setPassword] = useState("");
 
   const handleLoginPressed = async () => {
-    await login(username, password);
+    await authenticate(username, password);
     navigation.navigate(NavigationSreens.ROUTES);
   };
 

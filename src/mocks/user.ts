@@ -1,6 +1,11 @@
 import { Languages } from "src/types/i18n/languages";
 import { ILoginRes, Operations, UserInfo } from "src/types/user";
 
+const loginInfo = {
+  username: "john.doe",
+  password: "password",
+};
+
 const userInfo: UserInfo = {
   name: "John Doe",
   email: "john.doe@frs.de",
@@ -25,4 +30,4 @@ const tokenInfo: ILoginRes = {
   expires_in: 2591999,
 };
 
-export const userMocks = { userInfo, tokenInfo };
+export const userMocks = { userInfo, tokenInfo, loginInfo };
