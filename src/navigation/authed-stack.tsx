@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 import { VStack } from "@components/index";
 import { RouteSelectionScreen } from "@screens/RouteSelection";
+import { MainMenuScreen } from "@screens/MainMenu";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -32,6 +33,7 @@ export function AuthedStack() {
       }}>
       <Stack.Screen name={NavigationSreens.HOME} component={VStack} />
       <Stack.Screen name={NavigationSreens.ROUTES} component={RouteSelectionScreen} />
+      <Stack.Screen name={NavigationSreens.MAIN_MENU} component={MainMenuScreen} />
     </Stack.Navigator>
   );
 }
