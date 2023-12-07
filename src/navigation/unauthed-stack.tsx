@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationSreens, RootStackParamList } from "src/types/navigation";
+import { NavigationScreens, RootStackParamList } from "src/types/navigation";
 
 import FlexWaysLogo from "@assets/images/logo.svg";
 
@@ -22,7 +22,7 @@ export function UnauthedStack() {
           backgroundColor: "#1d2362", // TODO: This will come from the theme
         },
       }}>
-      <Stack.Screen name={NavigationSreens.LOGIN} component={LoginScreen} />
+      <Stack.Screen name={NavigationScreens.LOGIN} component={LoginScreen} />
     </Stack.Navigator>
   );
 }

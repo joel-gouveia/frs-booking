@@ -6,9 +6,12 @@ import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { getRoutes } from "@api/route";
 import { Footer } from "@components/Footer/Footer";
 import { useTranslation } from "react-i18next";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationProps, NavigationScreens } from "src/types/navigation";
 
 export function RouteSelectionScreen() {
   const { t } = useTranslation();
+  const { navigate } = useNavigation<NavigationProps>();
 
   const [routes, setRoutes] = useState<string[]>([]);
 
@@ -29,6 +32,7 @@ export function RouteSelectionScreen() {
           renderItem={({ item }) => (
             <Button
               key={item}
+              onPress={() => navigate(NavigationScreens.MAIN_MENU)}
               variant="outline"
               fontSize={30}
               style={styles.routeBtn}
@@ -39,7 +43,14 @@ export function RouteSelectionScreen() {
           keyExtractor={item => item}
         />
       </View>
-      <Footer buttons={[{ label: t("footer.main-menu"), onPress: () => {} }]} />
+      <Footer
+        buttons={[
+          {
+            label: t("footer.main-menu"),
+            onPress: () => navigate(NavigationScreens.MAIN_MENU),
+          },
+        ]}
+      />
     </ScreenLayout>
   );
 }

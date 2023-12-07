@@ -6,7 +6,7 @@ import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { PasswordInput } from "@components/Input/PasswordInput";
 import useAuth from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationProps, NavigationSreens } from "src/types/navigation";
+import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useTranslation } from "react-i18next";
 
 export function LoginScreen() {
@@ -19,7 +19,7 @@ export function LoginScreen() {
 
   const handleLoginPressed = async () => {
     await login(username, password);
-    navigation.navigate(NavigationSreens.ROUTES);
+    navigation.navigate(NavigationScreens.ROUTES);
   };
 
   return (
