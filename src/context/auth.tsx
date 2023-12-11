@@ -1,6 +1,6 @@
 import React, { createContext, useState, ReactNode, useCallback, useEffect } from "react";
 
-import { login, getMe } from "@api/user";
+import { login, getMe } from "@api/user.service";
 import { ILoginRes, UserInfo } from "src/types/user";
 import { storageUtils } from "@utils/storage";
 

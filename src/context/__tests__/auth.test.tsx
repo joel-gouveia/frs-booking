@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react-native";
 import { storageUtils } from "@utils/storage";
 import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { userMocks } from "@mocks/index";
-import * as API from "@api/user";
+import * as API from "@api/user.service";
 import { useAuth } from "@hooks/useAuth";
 import { AuthContextProvider } from "../auth";
 
