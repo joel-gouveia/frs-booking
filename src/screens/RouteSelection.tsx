@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
-import { getRoutes } from "@api/route";
+import { getRoutes } from "@api/route.service";
 import { Footer } from "@components/Footer/Footer";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
