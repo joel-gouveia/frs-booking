@@ -8,18 +8,26 @@ import { Footer } from "@components/Footer/Footer";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
+import useBooking from "@hooks/useBooking";
+import { IRoute } from "src/types/route";
 
 export function RouteSelectionScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
+  const { setRoute: setContextRoute } = useBooking();
 
-  const [routes, setRoutes] = useState<string[]>([]);
+  const [routes, setRoutes] = useState<IRoute[]>([]);
 
   useEffect(() => {
     getRoutes().then(res => {
-      setRoutes(res.map(route => route.name));
+      setRoutes(res);
     });
   }, []);
+
+  const handleRoutePress = (route: IRoute) => () => {
+    setContextRoute(route.origin.code, route.destination.code);
+    navigate(NavigationScreens.MAIN_MENU);
+  };
 
   return (
     <ScreenLayout>
@@ -29,18 +37,18 @@ export function RouteSelectionScreen() {
       <View style={styles.routesContainer}>
         <FlatList
           data={routes}
-          renderItem={({ item }) => (
+          renderItem={({ item: route }) => (
             <Button
-              key={item}
-              onPress={() => navigate(NavigationScreens.MAIN_MENU)}
+              key={route.name}
+              onPress={handleRoutePress(route)}
               variant="outline"
               fontSize={30}
               style={styles.routeBtn}
               testID="route-btn">
-              {item}
+              {route.name}
             </Button>
           )}
-          keyExtractor={item => item}
+          keyExtractor={route => route.name}
         />
       </View>
       <Footer
