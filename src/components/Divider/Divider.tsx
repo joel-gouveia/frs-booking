@@ -1,29 +1,29 @@
-import React from 'react';
-import {View, ViewProps} from 'react-native';
-import {ShortcutProps, defaultShortcuts} from '@styles/shortcuts';
+import React from "react";
+import { View, ViewProps } from "react-native";
+import { ShortcutProps, defaultShortcuts } from "@styles/shortcuts";
 
 interface DividerProps extends ViewProps, ShortcutProps {}
 
-export const Divider = (props: DividerProps) => {
-  const {style, ...restProps} = props;
+export function Divider(props: DividerProps) {
+  const { style, children, ...restProps } = props;
 
   return (
     <View
       style={[
         {
           // TODO: Will come from design system once there is one
-          backgroundColor: 'lightgray',
+          backgroundColor: "lightgray",
         },
         defaultShortcuts(props),
         style,
       ]}
       {...restProps}>
-      {props.children}
+      {children}
     </View>
   );
-};
+}
 
 Divider.defaultProps = {
-  w: '100%',
+  w: "100%",
   h: 1,
 };
