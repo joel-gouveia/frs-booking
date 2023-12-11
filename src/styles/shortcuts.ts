@@ -23,6 +23,10 @@ export interface ShortcutProps {
 
 export const defaultShortcuts = (props: ShortcutProps) => ({
   padding: props.p,
+  paddingLeft: props.pl,
+  paddingRight: props.pr,
+  paddingTop: props.pt,
+  paddingBottom: props.pb,
   paddingVertical: props.py,
   paddingHorizontal: props.px,
 
