@@ -47,7 +47,12 @@ export function DepartureTimeScreen() {
         <FlatList
           data={departures}
           renderItem={({ item: departure }) => (
-            <Button variant="outline" fontSize={30} style={styles.routeBtn} testID="departure-btn">
+            <Button
+              onPress={() => navigate(NavigationScreens.BOOKING)}
+              variant="outline"
+              fontSize={30}
+              style={styles.routeBtn}
+              testID="departure-btn">
               {departure.departureTime}
             </Button>
           )}
