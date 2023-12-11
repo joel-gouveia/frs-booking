@@ -10,13 +10,14 @@ import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useBooking } from "@hooks/useBooking";
 import { getDepartures } from "@api/departure.service";
 import { extractTimeFromDateTime } from "@utils/date";
+import { DepartureResponse } from "src/types/departure";
 
 export function DepartureTimeScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
   const { originCode, destinationCode } = useBooking();
 
-  const [departureTimes, setDepartureTimes] = useState<string[]>([]);
+  const [departures, setDepartures] = useState<DepartureResponse[]>([]);
 
   useEffect(() => {
     if (!originCode || !destinationCode) {
@@ -24,11 +25,14 @@ export function DepartureTimeScreen() {
     }
 
     getDepartures({ originCode, destinationCode }).then(res => {
-      const times = res
-        .map(departure => extractTimeFromDateTime(departure.departureTime))
-        .filter(time => time !== "");
+      const transformedDepartures = res
+        .map(departure => ({
+          ...departure,
+          departureTime: extractTimeFromDateTime(departure.departureTime),
+        }))
+        .filter(departure => departure.departureTime !== "");
 
-      setDepartureTimes(times);
+      setDepartures(transformedDepartures);
     });
   }, [originCode, destinationCode]);
 
@@ -36,24 +40,18 @@ export function DepartureTimeScreen() {
   // TODO: Maybe call getDepartures before this screen, so there is no need to go to it when there is only 1(since when there is only 1, we are supposed to skip it)
   return (
     <ScreenLayout>
-      <View style={styles.title} testID="title">
+      <View style={styles.title}>
         <Typography fontSize={24}>{t("departure-times.choose-departure")}</Typography>
       </View>
       <View style={styles.routesContainer}>
         <FlatList
-          data={departureTimes}
-          renderItem={({ item: departureTime }) => (
-            <Button
-              key={departureTime}
-              onPress={() => {}}
-              variant="outline"
-              fontSize={30}
-              style={styles.routeBtn}
-              testID="route-btn">
-              {departureTime}
+          data={departures}
+          renderItem={({ item: departure }) => (
+            <Button variant="outline" fontSize={30} style={styles.routeBtn} testID="departure-btn">
+              {departure.departureTime}
             </Button>
           )}
-          keyExtractor={departureTime => departureTime}
+          keyExtractor={departure => departure.uuid}
         />
       </View>
       <Footer

@@ -23,7 +23,7 @@ jest.mock("@hooks/useBooking", () => {
   };
 });
 
-jest.mock("src/api/route.ts", () => ({
+jest.mock("src/api/route.service.ts", () => ({
   getRoutes: jest.fn<typeof getRoutes>().mockResolvedValue([]),
 }));
 

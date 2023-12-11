@@ -2,6 +2,7 @@ import React from "react";
 import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import { describe, expect, it, jest } from "@jest/globals";
 import { NavigationScreens } from "src/types/navigation";
+import i18n from "@config/i18n/i18n";
 import { MainMenuScreen } from "..";
 
 const mockNavigate = jest.fn();
@@ -28,9 +29,9 @@ describe("Main Menu Screen", () => {
 
     await waitFor(() => {
       // Main Buttons
-      expect(getByText("Sales")).toBeTruthy();
-      expect(getByText("Boarding")).toBeTruthy();
-      expect(getByText("Cancel")).toBeTruthy();
+      expect(getByText(i18n.t("main-menu.sales"))).toBeTruthy();
+      expect(getByText(i18n.t("main-menu.boarding"))).toBeTruthy();
+      expect(getByText(i18n.t("main-menu.cancel"))).toBeTruthy();
 
       expect(getAllByTestId("footer-btn")).toHaveLength(1);
       expect(getByText("Logout")).toBeTruthy();
@@ -44,6 +45,15 @@ describe("Main Menu Screen", () => {
     await waitFor(() => {
       expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.LOGIN);
       expect(mockLogout).toHaveBeenCalled();
+    });
+  });
+
+  it("navigates to departure times screen, when clicking on sales button", async () => {
+    const { getByText } = render(<MainMenuScreen />);
+    fireEvent.press(getByText(i18n.t("main-menu.sales")));
+
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.DEPARTURE_TIME);
     });
   });
 });
