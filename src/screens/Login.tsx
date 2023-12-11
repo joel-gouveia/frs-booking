@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import useAuth from "@hooks/useAuth";
+import { useAuth } from "@hooks/useAuth";
 
 import { Button, Divider, HStack, Input, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "@layouts/index";
@@ -11,10 +11,9 @@ import { useTranslation } from "react-i18next";
 
 export function LoginScreen() {
   const { t } = useTranslation();
-  const { login, isLoading, loadStorageData } = useAuth();
   const navigation = useNavigation<NavigationProps>();
+  const { login, isLoadingAuth, isLoadingStorage } = useAuth();
 
-  const [isLoadingStorage, setIsLoadingStorage] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,11 +21,6 @@ export function LoginScreen() {
     await login(username, password);
     navigation.navigate(NavigationScreens.ROUTES);
   };
-
-  useEffect(() => {
-    setIsLoadingStorage(true);
-    loadStorageData().finally(() => setIsLoadingStorage(false));
-  }, [loadStorageData]);
 
   if (isLoadingStorage) return null; // Can be a splash screen in the future.
 
@@ -38,22 +32,24 @@ export function LoginScreen() {
           <Typography bold>{t("login.frs-account")}</Typography>
         </HStack>
         <Input
-          isDisabled={isLoading}
+          testID="username-input"
+          isDisabled={isLoadingAuth}
           value={username}
           onChangeText={setUsername}
           placeholder={t("login.username")}
         />
         <PasswordInput
-          isDisabled={isLoading}
+          testID="password-input"
+          isDisabled={isLoadingAuth}
           value={password}
           onChangeText={setPassword}
           placeholder={t("login.password")}
         />
-        <Button onPress={handleLoginPressed} isLoading={isLoading}>
+        <Button onPress={handleLoginPressed} isLoading={isLoadingAuth} testID="login-btn">
           {t("login.login")}
         </Button>
         <Divider />
-        <TouchableOpacity>
+        <TouchableOpacity testID="forgot-password-btn">
           <Typography>{t("login.forgot-password?")}</Typography>
         </TouchableOpacity>
       </VStack>

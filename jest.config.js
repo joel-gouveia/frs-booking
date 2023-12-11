@@ -23,7 +23,6 @@ module.exports = {
   transformIgnorePatterns: [
     "node_modules/(?!(react-native-config|react-native|@react-native|@react-navigation|react-navigation|react-native-vector-icons)/)",
   ],
-  setupFiles: ["<rootDir>/setupTests.ts"],
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
-  setupFilesAfterEnv: ["<rootDir>/jestSetup.ts"],
+  setupFilesAfterEnv: ["<rootDir>/setupTests.ts"],
 };

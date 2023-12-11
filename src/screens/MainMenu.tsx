@@ -5,7 +5,7 @@ import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { Footer } from "@components/Footer/Footer";
-import useAuth from "@hooks/useAuth";
+import { useAuth } from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 
