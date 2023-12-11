@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import useAuth from "@hooks/useAuth";
+import { useAuth } from "@hooks/useAuth";
 
 import { Button, Divider, HStack, Input, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "@layouts/index";
@@ -12,9 +12,8 @@ import { useTranslation } from "react-i18next";
 export function LoginScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation<NavigationProps>();
-  const { authenticate, isLoadingAuth, loadStorageData } = useAuth();
+  const { authenticate, isLoadingAuth, isLoadingStorage } = useAuth();
 
-  const [isLoadingStorage, setIsLoadingStorage] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,11 +21,6 @@ export function LoginScreen() {
     await authenticate(username, password);
     navigation.navigate(NavigationSreens.ROUTES);
   };
-
-  useEffect(() => {
-    setIsLoadingStorage(true);
-    loadStorageData().finally(() => setIsLoadingStorage(false));
-  }, [loadStorageData]);
 
   if (isLoadingStorage) return null; // Can be a splash screen in the future.
 
@@ -55,7 +49,7 @@ export function LoginScreen() {
           {t("login.login")}
         </Button>
         <Divider />
-        <TouchableOpacity>
+        <TouchableOpacity testID="forgot-password-btn">
           <Typography>{t("login.forgot-password?")}</Typography>
         </TouchableOpacity>
       </VStack>

@@ -3,7 +3,7 @@ import { storageUtils } from "@utils/storage";
 import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { userMocks } from "@mocks/index";
 import * as API from "@api/user";
-import useAuth from "@hooks/useAuth";
+import { useAuth } from "@hooks/useAuth";
 import { AuthContextProvider } from "../auth";
 
 describe("context/auth", () => {
@@ -23,9 +23,7 @@ describe("context/auth", () => {
     expect(result.current.isAuthenticated).toBe(false);
     expect(result.current.isLoadingAuth).toBe(false);
 
-    await act(async () =>
-      result.current.loadStorageData().then(() => expect(result.current.isLoadingAuth).toBe(true)),
-    );
+    await act(async () => result.current.loadStorageData());
 
     expect(result.current.token).toEqual(tokenInfo);
     expect(result.current.user).toEqual(userInfo);
@@ -38,9 +36,7 @@ describe("context/auth", () => {
 
     const { result } = renderHook(() => useAuth(), { wrapper: AuthContextProvider });
 
-    await act(async () =>
-      result.current.loadStorageData().then(() => expect(result.current.isLoadingAuth).toBe(true)),
-    );
+    await act(async () => result.current.loadStorageData());
 
     expect(result.current.token).toEqual(tokenInfo);
     expect(result.current.user).toEqual(userInfo);
@@ -156,9 +152,7 @@ describe("context/auth", () => {
 
     const { result } = renderHook(() => useAuth(), { wrapper: AuthContextProvider });
 
-    await act(async () =>
-      result.current.loadStorageData().then(() => expect(result.current.isLoadingAuth).toBe(true)),
-    );
+    await act(async () => result.current.loadStorageData());
 
     expect(result.current.token).toEqual(tokenInfo);
     expect(result.current.user).toEqual(userInfo);

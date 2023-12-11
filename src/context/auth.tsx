@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode, useCallback } from "react";
+import React, { createContext, useState, ReactNode, useCallback, useEffect } from "react";
 
 import { login, getMe } from "@api/user";
 import { ILoginRes, UserInfo } from "src/types/user";
@@ -8,6 +8,7 @@ interface AuthContextProps {
   loadStorageData: () => Promise<void>;
   isAuthenticated: boolean;
   isLoadingAuth: boolean;
+  isLoadingStorage: boolean;
   authenticate: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   token: ILoginRes | null;
@@ -17,6 +18,7 @@ interface AuthContextProps {
 export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthContextProvider({ children }: { children: ReactNode }) {
+  const [isLoadingStorage, setIsLoadingStorage] = useState(false);
   const [isLoadingAuth, setIsLoadingAuth] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -28,7 +30,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
    */
   const loadStorageData = useCallback(async () => {
     try {
-      setIsLoadingAuth(true);
+      setIsLoadingStorage(true);
 
       const { tokenInfo, userInfo } = await storageUtils.getAuthCredentials();
 
@@ -40,7 +42,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
         setIsAuthenticated(false);
       }
     } finally {
-      setIsLoadingAuth(false);
+      setIsLoadingStorage(false);
     }
   }, []);
 
@@ -75,9 +77,14 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
     setIsAuthenticated(false);
   }
 
+  useEffect(() => {
+    loadStorageData();
+  }, [loadStorageData]);
+
   const value = {
     loadStorageData,
     isAuthenticated,
+    isLoadingStorage,
     isLoadingAuth,
     authenticate,
     logout,

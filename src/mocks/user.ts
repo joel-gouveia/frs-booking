@@ -3,7 +3,7 @@ import { ILoginRes, Operations, UserInfo } from "src/types/user";
 
 const loginInfo = {
   username: "john.doe",
-  password: "password",
+  password: "changeme",
 };
 
 const userInfo: UserInfo = {
