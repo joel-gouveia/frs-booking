@@ -8,7 +8,7 @@ import { Footer } from "@components/Footer/Footer";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
-import useBooking from "@hooks/useBooking";
+import { useBooking } from "@hooks/useBooking";
 import { IRoute } from "src/types/route";
 
 export function RouteSelectionScreen() {

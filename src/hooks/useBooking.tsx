@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { BookingContext } from "@context/booking";
 
-export default function useBooking() {
+export function useBooking() {
   return useContext(BookingContext);
 }

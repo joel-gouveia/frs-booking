@@ -16,8 +16,7 @@ jest.mock("@react-navigation/native", () => {
 const mockLogout = jest.fn();
 jest.mock("@hooks/useAuth", () => {
   return {
-    __esModule: true,
-    default: () => ({
+    useAuth: () => ({
       logout: mockLogout,
     }),
   };

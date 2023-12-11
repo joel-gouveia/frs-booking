@@ -14,6 +14,15 @@ jest.mock("@react-navigation/native", () => {
   };
 });
 
+const mockSetRoute = jest.fn();
+jest.mock("@hooks/useBooking", () => {
+  return {
+    useBooking: () => ({
+      setRoute: mockSetRoute,
+    }),
+  };
+});
+
 jest.mock("src/api/route.ts", () => ({
   getRoutes: jest.fn<typeof getRoutes>().mockResolvedValue([]),
 }));
@@ -55,9 +64,13 @@ describe("Route Selection Screen", () => {
     });
   });
 
-  it("goes to Main Menu when clicking a route button", async () => {
+  it("goes to Main Menu when clicking a route button, and sets route info", async () => {
     (getRoutes as jest.Mock<typeof getRoutes>).mockResolvedValue([
-      { name: "route 1", destination: { code: "", name: "" }, origin: { code: "", name: "" } },
+      {
+        name: "route 1",
+        destination: { code: "codeDestination", name: "" },
+        origin: { code: "codeOrigin", name: "" },
+      },
     ]);
 
     const { getByText } = render(<RouteSelectionScreen />);
@@ -65,6 +78,7 @@ describe("Route Selection Screen", () => {
     await waitFor(() => {
       fireEvent.press(getByText("route 1"));
       expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.MAIN_MENU);
+      expect(mockSetRoute).toHaveBeenCalledWith("codeOrigin", "codeDestination");
     });
   });
 });
