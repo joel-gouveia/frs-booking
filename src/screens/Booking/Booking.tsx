@@ -13,7 +13,7 @@ import { BookingItem } from "./BookingItem";
 
 export function BookingScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode } = useBooking();
+  const { originCode, destinationCode, setPassengers } = useBooking();
   const { navigate } = useNavigation<NavigationProps>();
 
   const [numAdults, setNumAdults] = useState(0);
@@ -39,6 +39,11 @@ export function BookingScreen() {
   };
 
   const handlePressBook = () => {
+    if (numAdults === 0 && numKids === 0 && numBikes === 0 && numCars === 0) {
+      return;
+    }
+
+    setPassengers(numAdults, numKids, numBikes, numCars);
     navigate(NavigationScreens.PAYMENT);
   };
 
@@ -119,6 +124,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     paddingHorizontal: 4,
     paddingVertical: 2,
+    borderRadius: 6,
   },
   invisibleSeparator: {
     width: 50,

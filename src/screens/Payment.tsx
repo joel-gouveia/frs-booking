@@ -9,13 +9,42 @@ import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import Icon from "react-native-vector-icons/Feather";
+import EnterKey from "@assets/images/enter-key.svg";
 
 export function PaymentScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode } = useBooking();
+  const { originCode, destinationCode, numAdults, numKids, numBikes, numCars } = useBooking();
   const { navigate } = useNavigation<NavigationProps>();
 
   const today = useMemo(() => getTodayDateString(), []);
+
+  const passengersText = useMemo(() => {
+    const passengers = [];
+
+    if (numAdults > 0) {
+      passengers.push(`(adults: ${numAdults})`);
+    }
+
+    if (numKids > 0) {
+      passengers.push(`(children: ${numKids})`);
+    }
+
+    return passengers.join(" ");
+  }, [numAdults, numKids]);
+
+  const vehiclesText = useMemo(() => {
+    const vehicles = [];
+
+    if (numCars > 0) {
+      vehicles.push(`(cars: ${numCars})`);
+    }
+
+    if (numBikes > 0) {
+      vehicles.push(`(bycicles: ${numBikes})`);
+    }
+
+    return vehicles.join(" ");
+  }, [numCars, numBikes]);
 
   return (
     <ScreenLayout>
@@ -25,7 +54,7 @@ export function PaymentScreen() {
         </Typography>
       </View>
       <VStack gap={24}>
-        <Typography size="small">Payment Method</Typography>
+        <Typography>Payment Method</Typography>
         <HStack gap={20}>
           <Button variant="outline" style={{ flex: 1, paddingVertical: 40, marginLeft: 10 }}>
             <Typography fontSize={11} style={{ position: "absolute", right: 4, top: 4 }}>
@@ -46,6 +75,27 @@ export function PaymentScreen() {
             </Typography>
           </Button>
         </HStack>
+        <Typography>Payment summary</Typography>
+        <View
+          style={{
+            backgroundColor: "#d9d9d9",
+            padding: 8,
+            borderRadius: 6,
+          }}>
+          <Typography size="small" mb={50}>
+            Passengers: {passengersText}
+          </Typography>
+          <Typography size="small" mb={50}>
+            Vehicles: {vehiclesText}
+          </Typography>
+        </View>
+        <Typography fontSize={30} style={{ textAlign: "center", paddingVertical: 8 }}>
+          Total: 12,40 €
+        </Typography>
+        <Button variant="outline" style={styles.bookButton}>
+          <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
+          <Typography fontSize={20}>BOOK</Typography>
+        </Button>
       </VStack>
       <Footer
         buttons={[
@@ -76,6 +126,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     paddingHorizontal: 4,
     paddingVertical: 2,
+    borderRadius: 6,
   },
   invisibleSeparator: {
     width: 50,
