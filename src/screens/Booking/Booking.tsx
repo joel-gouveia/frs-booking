@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import { HStack, Typography, VStack } from "@components/index";
+import { Button, HStack, Typography, VStack } from "@components/index";
 import { useBooking } from "@hooks/useBooking";
 import { getTodayDateString } from "@utils/date";
 import React, { useState, useMemo } from "react";
@@ -8,6 +8,7 @@ import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
+import EnterKey from "@assets/images/enter-key.svg";
 import { BookingItem } from "./BookingItem";
 
 export function BookingScreen() {
@@ -45,7 +46,7 @@ export function BookingScreen() {
           Voyageleg: {today} {originCode} - {destinationCode}
         </Typography>
       </View>
-      <VStack gap={50}>
+      <VStack gap={50} mb={75}>
         <HStack alignItems="center" justifyContent="center">
           <BookingItem
             hotkey="1"
@@ -81,6 +82,10 @@ export function BookingScreen() {
           />
         </HStack>
       </VStack>
+      <Button variant="outline" style={styles.bookButton}>
+        <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
+        <Typography fontSize={20}>BOOK</Typography>
+      </Button>
       <Footer
         buttons={[
           {
@@ -113,5 +118,15 @@ const styles = StyleSheet.create({
   },
   invisibleSeparator: {
     width: 50,
+  },
+  bookButton: {
+    marginHorizontal: 40,
+    position: "relative",
+    paddingVertical: 24,
+  },
+  enterKeyIcon: {
+    position: "absolute",
+    right: 4,
+    top: 4,
   },
 });
