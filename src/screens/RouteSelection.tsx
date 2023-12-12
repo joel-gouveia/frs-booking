@@ -39,7 +39,6 @@ export function RouteSelectionScreen() {
           data={routes}
           renderItem={({ item: route }) => (
             <Button
-              key={route.name}
               onPress={handleRoutePress(route)}
               variant="outline"
               fontSize={30}
