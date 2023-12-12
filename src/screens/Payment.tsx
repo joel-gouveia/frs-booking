@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { Button, HStack, Typography, VStack } from "@components/index";
 import { useBooking } from "@hooks/useBooking";
-import { getTodayDateString } from "@utils/date";
 import React, { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
@@ -13,10 +12,9 @@ import EnterKey from "@assets/images/enter-key.svg";
 
 export function PaymentScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode, numAdults, numKids, numBikes, numCars } = useBooking();
+  const { originCode, destinationCode, departureDate, numAdults, numKids, numBikes, numCars } =
+    useBooking();
   const { navigate } = useNavigation<NavigationProps>();
-
-  const today = useMemo(() => getTodayDateString(), []);
 
   const passengersText = useMemo(() => {
     const passengers = [];
@@ -50,7 +48,7 @@ export function PaymentScreen() {
     <ScreenLayout>
       <View style={styles.header}>
         <Typography size="small" style={styles.headerText}>
-          Voyageleg: {today} {originCode} - {destinationCode}
+          Voyageleg: {departureDate} {originCode} - {destinationCode}
         </Typography>
       </View>
       <VStack gap={24}>

@@ -9,13 +9,13 @@ import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useBooking } from "@hooks/useBooking";
 import { getDepartures } from "@api/departure.service";
-import { extractTimeFromDateTime } from "@utils/date";
+import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
 import { DepartureResponse } from "src/types/departure";
 
 export function DepartureTimeScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode } = useBooking();
+  const { originCode, destinationCode, setDepartureDate } = useBooking();
 
   const [departures, setDepartures] = useState<DepartureResponse[]>([]);
 
@@ -25,6 +25,10 @@ export function DepartureTimeScreen() {
     }
 
     getDepartures({ originCode, destinationCode }).then(res => {
+      if (res.length > 0) {
+        setDepartureDate(extractDateFromDateTime(res[0].departureTime));
+      }
+
       const transformedDepartures = res
         .map(departure => ({
           ...departure,
@@ -34,7 +38,7 @@ export function DepartureTimeScreen() {
 
       setDepartures(transformedDepartures);
     });
-  }, [originCode, destinationCode]);
+  }, [originCode, destinationCode, setDepartureDate]);
 
   // TODO: Add loader in place of the departure times, while waiting for a getDepartures response
   // TODO: Maybe call getDepartures before this screen, so there is no need to go to it when there is only 1(since when there is only 1, we are supposed to skip it)

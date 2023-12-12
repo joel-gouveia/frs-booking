@@ -2,8 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { Button, HStack, Typography, VStack } from "@components/index";
 import { useBooking } from "@hooks/useBooking";
-import { getTodayDateString } from "@utils/date";
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
@@ -13,15 +12,13 @@ import { BookingItem } from "./BookingItem";
 
 export function BookingScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode, setPassengers } = useBooking();
+  const { originCode, destinationCode, departureDate, setPassengers } = useBooking();
   const { navigate } = useNavigation<NavigationProps>();
 
   const [numAdults, setNumAdults] = useState(0);
   const [numKids, setNumKids] = useState(0);
   const [numBikes, setNumBikes] = useState(0);
   const [numCars, setNumCars] = useState(0);
-
-  const today = useMemo(() => getTodayDateString(), []);
 
   const decrement = (dispatcher: React.Dispatch<React.SetStateAction<number>>) => () => {
     dispatcher(val => Math.max(val - 1, 0));
@@ -60,7 +57,7 @@ export function BookingScreen() {
       <View style={styles.header}>
         {/* What is Voyageleg? Is it a typo? In german Voyagebeleg is travel receipt. */}
         <Typography size="small" style={styles.headerText}>
-          Voyageleg: {today} {originCode} - {destinationCode}
+          Voyageleg: {departureDate} {originCode} - {destinationCode}
         </Typography>
       </View>
       <VStack gap={50} mb={75}>
