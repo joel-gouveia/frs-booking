@@ -7,11 +7,11 @@ interface IBookingItem {
   hotkey: string;
   text: string;
   value: number;
-  onPressMinus: () => void;
-  onPressPlus: () => void;
+  onMinusPress: () => void;
+  onPlusPress: () => void;
 }
 
-export function BookingItem({ hotkey, text, value, onPressMinus, onPressPlus }: IBookingItem) {
+export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: IBookingItem) {
   return (
     <View style={styles.container}>
       <Button style={styles.mainButton} variant="outline">
@@ -24,10 +24,10 @@ export function BookingItem({ hotkey, text, value, onPressMinus, onPressPlus }: 
         </VStack>
       </Button>
       <HStack justifyContent="space-around">
-        <Button onPress={onPressMinus} style={styles.counterButton} variant="outline">
+        <Button onPress={onMinusPress} style={styles.counterButton} variant="outline">
           <Icon name="minus-circle" size={30} color="#71b96c" />
         </Button>
-        <Button onPress={onPressPlus} style={styles.counterButton} variant="outline">
+        <Button onPress={onPlusPress} style={styles.counterButton} variant="outline">
           <Icon name="plus-circle" size={30} color="#71b96c" />
         </Button>
       </HStack>
