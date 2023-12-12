@@ -30,10 +30,10 @@ export function Button(props: Props) {
     <TouchableOpacity
       activeOpacity={0.6}
       onPress={onPress}
-      style={[defaults.button, variants[variant].button, style]}
+      style={[defaults.button, variants[variant!].button, style]}
       disabled={disabled}
       {...restProps}>
-      {isLoading && <ActivityIndicator animating color={variants[variant].loader.color} />}
+      {isLoading && <ActivityIndicator animating color={variants[variant!].loader.color} />}
       {startIcon && !isLoading && startIcon}
       <Text style={[defaults.buttonText, variants[variant].buttonText, { fontSize }]}>
         {children}

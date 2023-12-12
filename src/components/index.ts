@@ -6,4 +6,7 @@ import { Divider } from "./Divider/Divider";
 import { Typography } from "./Typography/Typography";
 import { Button } from "./Button/Button";
 
-export { VStack, HStack, Input, Stack, Divider, Typography, Button };
+import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
+import { HeaderRight } from "./HeaderRight/HeaderRight";
+
+export { VStack, HStack, Input, Stack, Divider, Typography, Button, HeaderLogo, HeaderRight };
