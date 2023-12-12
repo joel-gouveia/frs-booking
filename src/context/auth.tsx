@@ -1,6 +1,6 @@
 import React, { createContext, useState, ReactNode, useCallback, useEffect } from "react";
 
-import { login as loginApi, getMe } from "@api/user.service";
+import { login, getMe } from "@api/user.service";
 import { ILoginRes, UserInfo } from "src/types/user";
 import { storageUtils } from "@utils/storage";
 
@@ -9,7 +9,7 @@ interface AuthContextProps {
   isAuthenticated: boolean;
   isLoadingAuth: boolean;
   isLoadingStorage: boolean;
-  login: (username: string, password: string) => Promise<void>;
+  authenticate: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   token: ILoginRes | null;
   user: UserInfo | null;
@@ -46,11 +46,11 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = async (username: string, password: string) => {
+  const authenticate = async (username: string, password: string) => {
     try {
       setIsLoadingAuth(true);
 
-      const tokenInfo = await loginApi(username, password);
+      const tokenInfo = await login(username, password);
       await storageUtils.setAuthCredentials({ tokenInfo });
 
       const userInfo = await getMe();
@@ -86,7 +86,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
     isAuthenticated,
     isLoadingStorage,
     isLoadingAuth,
-    login,
+    authenticate,
     logout,
     token,
     user,
