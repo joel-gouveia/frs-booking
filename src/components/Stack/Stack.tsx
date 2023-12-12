@@ -31,7 +31,7 @@ export function Stack(props: StackProps) {
   };
 
   return (
-    <View style={[style, stackStyles]} {...restProps}>
+    <View style={[stackStyles, style]} {...restProps}>
       {props.children}
     </View>
   );
