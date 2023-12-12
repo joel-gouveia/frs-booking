@@ -1,13 +1,19 @@
+import { useTranslation } from "react-i18next";
+import { useNavigation } from "@react-navigation/native";
 import { HStack, Typography, VStack } from "@components/index";
 import { useBooking } from "@hooks/useBooking";
 import { getTodayDateString } from "@utils/date";
 import React, { useState, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
+import { Footer } from "@components/Footer/Footer";
+import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { BookingItem } from "./BookingItem";
 
 export function BookingScreen() {
+  const { t } = useTranslation();
   const { originCode, destinationCode } = useBooking();
+  const { navigate } = useNavigation<NavigationProps>();
 
   const [numAdults, setNumAdults] = useState(0);
   const [numKids, setNumKids] = useState(0);
@@ -22,6 +28,13 @@ export function BookingScreen() {
 
   const increment = (dispatcher: React.Dispatch<React.SetStateAction<number>>) => () => {
     dispatcher(val => Math.max(val + 1, 0));
+  };
+
+  const reset = () => {
+    setNumAdults(0);
+    setNumKids(0);
+    setNumBikes(0);
+    setNumCars(0);
   };
 
   return (
@@ -68,6 +81,22 @@ export function BookingScreen() {
           />
         </HStack>
       </VStack>
+      <Footer
+        buttons={[
+          {
+            label: t("footer.main-menu"),
+            onPress: () => navigate(NavigationScreens.MAIN_MENU),
+          },
+          {
+            label: "Summary",
+            onPress: () => {},
+          },
+          {
+            label: "Reset",
+            onPress: reset,
+          },
+        ]}
+      />
     </ScreenLayout>
   );
 }
