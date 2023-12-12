@@ -7,6 +7,7 @@ export enum NavigationScreens {
   MAIN_MENU = "main-menu",
   DEPARTURE_TIME = "departure-time",
   BOOKING = "booking",
+  PAYMENT = "payment",
 }
 
 /**
@@ -18,6 +19,7 @@ export type ScreenOptions = {
   [NavigationScreens.MAIN_MENU]?: {};
   [NavigationScreens.DEPARTURE_TIME]?: {};
   [NavigationScreens.BOOKING]?: {};
+  [NavigationScreens.PAYMENT]?: {};
 };
 
 export type RootStackParamList = {
@@ -26,6 +28,7 @@ export type RootStackParamList = {
   [NavigationScreens.MAIN_MENU]: ScreenOptions[NavigationScreens.MAIN_MENU];
   [NavigationScreens.DEPARTURE_TIME]: ScreenOptions[NavigationScreens.DEPARTURE_TIME];
   [NavigationScreens.BOOKING]: ScreenOptions[NavigationScreens.BOOKING];
+  [NavigationScreens.PAYMENT]: ScreenOptions[NavigationScreens.PAYMENT];
 };
 
 export type NavigationProps = NativeStackNavigationProp<

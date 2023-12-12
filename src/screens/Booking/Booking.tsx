@@ -38,6 +38,10 @@ export function BookingScreen() {
     setNumCars(0);
   };
 
+  const handlePressBook = () => {
+    navigate(NavigationScreens.PAYMENT);
+  };
+
   return (
     <ScreenLayout>
       <View style={styles.header}>
@@ -82,7 +86,7 @@ export function BookingScreen() {
           />
         </HStack>
       </VStack>
-      <Button variant="outline" style={styles.bookButton}>
+      <Button onPress={handlePressBook} variant="outline" style={styles.bookButton}>
         <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
         <Typography fontSize={20}>BOOK</Typography>
       </Button>
