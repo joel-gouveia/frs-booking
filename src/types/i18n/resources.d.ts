@@ -17,8 +17,14 @@ interface Resources {
     routes: {
       "choose-route": "Choose Route";
     };
+    "main-menu": {
+      sales: "Sales";
+      boarding: "Boarding";
+      cancel: "Cancel";
+    };
     footer: {
       "main-menu": "Main Menu";
+      logout: "Logout";
     };
   };
 }

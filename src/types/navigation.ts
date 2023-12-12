@@ -1,25 +1,25 @@
 import { Route } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-export enum NavigationSreens {
+export enum NavigationScreens {
   LOGIN = "login",
   ROUTES = "routes",
-  MAIN_MENU = "mainMenu",
+  MAIN_MENU = "main-menu",
 }
 
 /**
  * Screen options for type checking.
  */
 export type ScreenOptions = {
-  [NavigationSreens.LOGIN]?: {};
-  [NavigationSreens.ROUTES]?: {};
-  [NavigationSreens.MAIN_MENU]?: {};
+  [NavigationScreens.LOGIN]?: {};
+  [NavigationScreens.ROUTES]?: {};
+  [NavigationScreens.MAIN_MENU]?: {};
 };
 
 export type RootStackParamList = {
-  [NavigationSreens.LOGIN]: ScreenOptions[NavigationSreens.LOGIN];
-  [NavigationSreens.ROUTES]: ScreenOptions[NavigationSreens.ROUTES];
-  [NavigationSreens.MAIN_MENU]: ScreenOptions[NavigationSreens.MAIN_MENU];
+  [NavigationScreens.LOGIN]: ScreenOptions[NavigationScreens.LOGIN];
+  [NavigationScreens.ROUTES]: ScreenOptions[NavigationScreens.ROUTES];
+  [NavigationScreens.MAIN_MENU]: ScreenOptions[NavigationScreens.MAIN_MENU];
 };
 
 export type NavigationProps = NativeStackNavigationProp<

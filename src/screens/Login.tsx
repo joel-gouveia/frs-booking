@@ -6,20 +6,20 @@ import { Button, Divider, HStack, Input, Typography, VStack } from "@components/
 import { ScreenLayout } from "@layouts/index";
 import { PasswordInput } from "@components/Input/PasswordInput";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationProps, NavigationSreens } from "src/types/navigation";
+import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useTranslation } from "react-i18next";
 
 export function LoginScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation<NavigationProps>();
-  const { authenticate, isLoadingAuth, isLoadingStorage } = useAuth();
+  const { login, isLoadingAuth, isLoadingStorage } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLoginPressed = async () => {
-    await authenticate(username, password);
-    navigation.navigate(NavigationSreens.ROUTES);
+    await login(username, password);
+    navigation.navigate(NavigationScreens.ROUTES);
   };
 
   if (isLoadingStorage) return null; // Can be a splash screen in the future.

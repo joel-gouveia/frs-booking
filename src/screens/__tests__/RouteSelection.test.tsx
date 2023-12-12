@@ -1,8 +1,27 @@
 import React from "react";
-import { render, waitFor } from "@testing-library/react-native";
+import { render, waitFor, fireEvent } from "@testing-library/react-native";
 import { describe, expect, it, jest } from "@jest/globals";
 import { RouteSelectionScreen } from "@screens/RouteSelection";
 import { getRoutes } from "@api/route";
+import { NavigationScreens } from "src/types/navigation";
+
+const mockNavigate = jest.fn();
+jest.mock("@react-navigation/native", () => {
+  return {
+    useNavigation: () => ({
+      navigate: mockNavigate,
+    }),
+  };
+});
+
+const mockSetRoute = jest.fn();
+jest.mock("@hooks/useBooking", () => {
+  return {
+    useBooking: () => ({
+      setRoute: mockSetRoute,
+    }),
+  };
+});
 
 jest.mock("src/api/route.ts", () => ({
   getRoutes: jest.fn<typeof getRoutes>().mockResolvedValue([]),
@@ -19,7 +38,7 @@ describe("Route Selection Screen", () => {
     });
   });
 
-  it("makes an API call and displays buttons using their name", async () => {
+  it("makes /routes API call and displays buttons using the routes name", async () => {
     (getRoutes as jest.Mock<typeof getRoutes>).mockResolvedValue([
       { name: "route 1", destination: { code: "", name: "" }, origin: { code: "", name: "" } },
       { name: "route 2", destination: { code: "", name: "" }, origin: { code: "", name: "" } },
@@ -33,6 +52,33 @@ describe("Route Selection Screen", () => {
       expect(getByText("route 1")).toBeTruthy();
       expect(getByText("route 2")).toBeTruthy();
       expect(getAllByTestId("route-btn")).toHaveLength(2);
+    });
+  });
+
+  it("goes to Main Menu when clicking on the footer button", async () => {
+    const { getByText } = render(<RouteSelectionScreen />);
+    fireEvent.press(getByText("Main Menu"));
+
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.MAIN_MENU);
+    });
+  });
+
+  it("goes to Main Menu when clicking a route button, and sets route info", async () => {
+    (getRoutes as jest.Mock<typeof getRoutes>).mockResolvedValue([
+      {
+        name: "route 1",
+        destination: { code: "codeDestination", name: "" },
+        origin: { code: "codeOrigin", name: "" },
+      },
+    ]);
+
+    const { getByText } = render(<RouteSelectionScreen />);
+
+    await waitFor(() => {
+      fireEvent.press(getByText("route 1"));
+      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.MAIN_MENU);
+      expect(mockSetRoute).toHaveBeenCalledWith("codeOrigin", "codeDestination");
     });
   });
 });

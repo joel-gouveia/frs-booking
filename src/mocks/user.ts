@@ -1,4 +1,4 @@
-import { Languages } from "@config/i18n/i18n";
+import { Languages } from "src/config/i18n/i18n";
 import { ILoginRes, Operations, UserInfo } from "src/types/user";
 
 const loginInfo = {

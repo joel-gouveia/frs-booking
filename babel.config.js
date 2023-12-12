@@ -27,7 +27,6 @@ module.exports = function (api) {
             "@navigation": "./src/navigation",
             "@hooks": "./src/hooks",
             "@api": "./src/api",
-            "@types": "./src/types",
             "@context": "./src/context",
             "@styles": "./src/styles",
             "@assets": "./src/assets",
