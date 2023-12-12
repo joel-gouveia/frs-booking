@@ -75,26 +75,29 @@ export function PaymentScreen() {
             </Typography>
           </Button>
         </HStack>
-        <Typography>Payment summary</Typography>
-        <View
-          style={{
-            backgroundColor: "#d9d9d9",
-            padding: 8,
-            borderRadius: 6,
-          }}>
-          <Typography size="small" mb={50}>
-            Passengers: {passengersText}
-          </Typography>
-          <Typography size="small" mb={50}>
-            Vehicles: {vehiclesText}
-          </Typography>
+        <View>
+          <Typography>Payment summary</Typography>
+          <View
+            style={{
+              backgroundColor: "#d9d9d9",
+              padding: 8,
+              borderRadius: 6,
+              marginTop: 8,
+            }}>
+            <Typography size="small" mb={50}>
+              Passengers: {passengersText}
+            </Typography>
+            <Typography size="small" mb={50}>
+              Vehicles: {vehiclesText}
+            </Typography>
+          </View>
         </View>
-        <Typography fontSize={30} style={{ textAlign: "center", paddingVertical: 8 }}>
+        <Typography fontSize={30} style={{ textAlign: "center", paddingVertical: 4 }}>
           Total: 12,40 €
         </Typography>
         <Button variant="outline" style={styles.bookButton}>
           <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
-          <Typography fontSize={20}>BOOK</Typography>
+          <Typography fontSize={24}>Confirm Purchase</Typography>
         </Button>
       </VStack>
       <Footer
@@ -104,8 +107,7 @@ export function PaymentScreen() {
             onPress: () => navigate(NavigationScreens.MAIN_MENU),
           },
           {
-            label: "Summary",
-            onPress: () => {},
+            label: "empty",
           },
           {
             label: "Reset",
@@ -134,11 +136,10 @@ const styles = StyleSheet.create({
   bookButton: {
     marginHorizontal: 40,
     position: "relative",
-    paddingVertical: 24,
+    paddingVertical: 10,
   },
   enterKeyIcon: {
     position: "absolute",
     right: 4,
-    top: 4,
   },
 });

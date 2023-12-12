@@ -27,9 +27,17 @@ export function BookingScreen() {
     dispatcher(val => Math.max(val - 1, 0));
   };
 
-  const increment = (dispatcher: React.Dispatch<React.SetStateAction<number>>) => () => {
-    dispatcher(val => Math.max(val + 1, 0));
-  };
+  const increment =
+    (dispatcher: React.Dispatch<React.SetStateAction<number>>, { max }: { max?: number } = {}) =>
+    () => {
+      dispatcher(val => {
+        if (max !== undefined && val >= max) {
+          return val;
+        }
+
+        return val + 1;
+      });
+    };
 
   const reset = () => {
     setNumAdults(0);
@@ -87,7 +95,7 @@ export function BookingScreen() {
             text="Car up to 3 to"
             value={numCars}
             onMinusPress={decrement(setNumCars)}
-            onPlusPress={increment(setNumCars)}
+            onPlusPress={increment(setNumCars, { max: 3 })}
           />
         </HStack>
       </VStack>

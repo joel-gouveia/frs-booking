@@ -4,7 +4,7 @@ import React from "react";
 
 interface IFooterButton {
   label: string;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 interface IFooter {
@@ -12,13 +12,19 @@ interface IFooter {
 }
 
 function FooterButton({ label, onPress }: IFooterButton) {
-  return (
-    <View style={styles.btnContainer}>
+  let Box: React.JSX.Element;
+
+  if (label === "empty") {
+    Box = <View></View>;
+  } else {
+    Box = (
       <Button onPress={onPress} variant="outline" style={styles.button} testID="footer-btn ">
         {label}
       </Button>
-    </View>
-  );
+    );
+  }
+
+  return <View style={styles.btnContainer}>{Box}</View>;
 }
 
 export function Footer({ buttons = [] }: IFooter) {
