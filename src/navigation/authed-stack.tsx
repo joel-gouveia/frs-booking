@@ -7,7 +7,7 @@ import { HeaderLogo, HeaderRight } from "@components/index";
 import { MainMenuScreen } from "@screens/MainMenu";
 import { BookingContextProvider } from "@context/booking";
 import { DepartureTimeScreen } from "@screens/DepartureTime";
-import { BookingScreen } from "@screens/Booking";
+import { BookingScreen } from "@screens/Booking/Booking";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

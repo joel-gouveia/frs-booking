@@ -22,7 +22,7 @@ export function Typography(props: Props) {
 
   return (
     <Text
-      style={[defaultStyles, defaultShortcuts(props), sizes[size], style, { fontSize }]}
+      style={[defaultStyles, defaultShortcuts(props), sizes[size], { fontSize }, style]}
       {...restProps}>
       {props.children}
     </Text>
