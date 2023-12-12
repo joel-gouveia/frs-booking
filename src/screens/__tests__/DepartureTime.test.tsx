@@ -2,7 +2,7 @@ import React from "react";
 import { render, waitFor, fireEvent } from "@testing-library/react-native";
 import { describe, expect, it, jest } from "@jest/globals";
 import { getDepartures } from "@api/departure.service";
-import i18n from "@config/i18n/i18n";
+import i18n from "src/configi18n/i18n";
 import { DepartureTimeScreen } from "@screens/DepartureTime";
 import { NavigationScreens } from "src/types/navigation";
 

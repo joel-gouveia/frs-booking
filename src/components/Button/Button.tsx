@@ -1,5 +1,12 @@
 import React, { PropsWithChildren } from "react";
-import { ActivityIndicator, Text, TextStyle, TouchableOpacity, ViewProps } from "react-native";
+import {
+  ActivityIndicator,
+  StyleProp,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  ViewProps,
+} from "react-native";
 import { defaults, variants } from "./styles";
 
 interface Props extends PropsWithChildren, ViewProps, TextStyle {
@@ -10,6 +17,7 @@ interface Props extends PropsWithChildren, ViewProps, TextStyle {
   variant?: "solid" | "outline" | "ghost";
   disabled?: boolean;
   isLoading?: boolean;
+  textStyle?: StyleProp<TextStyle>;
 }
 
 export function Button(props: Props) {
@@ -23,6 +31,7 @@ export function Button(props: Props) {
     children,
     fontSize,
     style,
+    textStyle,
     ...restProps
   } = props;
 
@@ -33,11 +42,14 @@ export function Button(props: Props) {
       style={[defaults.button, variants[variant!].button, style]}
       disabled={disabled}
       {...restProps}>
-      {isLoading && <ActivityIndicator animating color={variants[variant!].loader.color} />}
+      {isLoading && <ActivityIndicator animating color={variants[variant].loader.color} />}
       {startIcon && !isLoading && startIcon}
-      <Text style={[defaults.buttonText, variants[variant].buttonText, { fontSize }]}>
-        {children}
-      </Text>
+      {typeof children !== "string" && children}
+      {typeof children === "string" && (
+        <Text style={[defaults.buttonText, variants[variant].buttonText, textStyle, { fontSize }]}>
+          {children}
+        </Text>
+      )}
       {endIcon && !isLoading && endIcon}
     </TouchableOpacity>
   );
