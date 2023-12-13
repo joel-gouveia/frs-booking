@@ -69,7 +69,7 @@ describe("context/auth", () => {
 
     await act(async () =>
       result.current
-        .login(loginInfo.username, loginInfo.password)
+        .authenticate(loginInfo.username, loginInfo.password)
         .then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
@@ -91,7 +91,7 @@ describe("context/auth", () => {
 
     await act(async () =>
       result.current
-        .login(loginInfo.username, loginInfo.password)
+        .authenticate(loginInfo.username, loginInfo.password)
         .then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
@@ -113,7 +113,7 @@ describe("context/auth", () => {
 
     await act(async () =>
       result.current
-        .login(loginInfo.username, loginInfo.password)
+        .authenticate(loginInfo.username, loginInfo.password)
         .then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
@@ -135,7 +135,7 @@ describe("context/auth", () => {
 
     await act(async () =>
       result.current
-        .login(loginInfo.username, loginInfo.password)
+        .authenticate(loginInfo.username, loginInfo.password)
         .then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
@@ -164,7 +164,7 @@ describe("context/auth", () => {
 
     await act(async () =>
       result.current
-        .login(loginInfo.username, loginInfo.password)
+        .authenticate(loginInfo.username, loginInfo.password)
         .then(() => expect(result.current.isLoadingAuth).toBe(true)),
     );
 
