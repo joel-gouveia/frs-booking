@@ -14,7 +14,7 @@ import { ItemsRow } from "./ItemsRow";
 
 export function BookingScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode } = useBooking();
+  const { originCode, destinationCode, departureTime } = useBooking();
   const { navigate } = useNavigation<NavigationProps>();
 
   const [numAdults, setNumAdults] = useState(0);
@@ -68,7 +68,7 @@ export function BookingScreen() {
     <ScreenLayout>
       <View style={styles.header}>
         <Typography size="small" style={styles.headerText}>
-          {t("booking.voyageleg")}: {today} {originCode} - {destinationCode}
+          {t("booking.voyageleg")}: {today} {departureTime} {originCode} - {destinationCode}
         </Typography>
       </View>
       <VStack gap={50} mb={75}>
