@@ -16,7 +16,10 @@ export function MainMenuScreen() {
   return (
     <ScreenLayout>
       <VStack gap={20} pt={50}>
-        <Button variant="outline" fontSize={30}>
+        <Button
+          onPress={() => navigate(NavigationScreens.DEPARTURE_TIME)}
+          variant="outline"
+          fontSize={30}>
           {t("main-menu.sales")}
         </Button>
         <Button variant="outline" fontSize={30}>

@@ -22,6 +22,9 @@ interface Resources {
       boarding: "Boarding";
       cancel: "Cancel";
     };
+    "departure-times": {
+      "choose-departure": "Choose Departure";
+    };
     footer: {
       "main-menu": "Main Menu";
       logout: "Logout";

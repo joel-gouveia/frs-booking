@@ -2,7 +2,7 @@ import React from "react";
 import { render, waitFor, fireEvent } from "@testing-library/react-native";
 import { describe, expect, it, jest } from "@jest/globals";
 import { RouteSelectionScreen } from "@screens/RouteSelection";
-import { getRoutes } from "@api/route";
+import { getRoutes } from "@api/route.service";
 import { NavigationScreens } from "src/types/navigation";
 
 const mockNavigate = jest.fn();
@@ -23,7 +23,7 @@ jest.mock("@hooks/useBooking", () => {
   };
 });
 
-jest.mock("src/api/route.ts", () => ({
+jest.mock("src/api/route.service.ts", () => ({
   getRoutes: jest.fn<typeof getRoutes>().mockResolvedValue([]),
 }));
 
