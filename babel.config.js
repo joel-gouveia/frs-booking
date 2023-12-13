@@ -33,6 +33,7 @@ module.exports = function (api) {
             "@assets": "./src/assets",
             "@mocks": "./src/mocks",
             "@config": "./src/config",
+            "@modules": "./src/modules",
           },
         },
       ],

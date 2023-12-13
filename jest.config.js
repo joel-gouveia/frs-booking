@@ -20,6 +20,7 @@ module.exports = {
     "^@assets/(.*)$": "<rootDir>/src/assets/$1",
     "^@mocks/(.*)$": "<rootDir>/src/mocks/$1",
     "^@config/(.*)$": "<rootDir>/src/config/$1",
+    "^@modules/(.*)$": "<rootDir>/src/modules/$1",
   },
   transformIgnorePatterns: [
     "node_modules/(?!(react-native-config|react-native|@react-native|@react-navigation|react-navigation|react-native-vector-icons)/)",

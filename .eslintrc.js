@@ -25,6 +25,7 @@ module.exports = {
     ],
     "react/jsx-no-constructed-context-values": "off",
     "react/jsx-filename-extension": "off",
+    "class-methods-use-this": "off",
   },
   settings: {
     "import/resolver": {
