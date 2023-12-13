@@ -9,7 +9,6 @@ export const defaults = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     borderRadius: 8,
-    gap: 8,
   },
   buttonText: {
     color: "black",

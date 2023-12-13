@@ -1,5 +1,12 @@
 import React, { PropsWithChildren } from "react";
-import { ActivityIndicator, Text, TextStyle, TouchableOpacity, ViewProps } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  ViewProps,
+  StyleSheet,
+} from "react-native";
 import { defaults, variants } from "./styles";
 
 interface Props extends PropsWithChildren, ViewProps, TextStyle {
@@ -33,7 +40,9 @@ export function Button(props: Props) {
       style={[defaults.button, variants[variant!].button, style]}
       disabled={disabled}
       {...restProps}>
-      {isLoading && <ActivityIndicator animating color={variants[variant].loader.color} />}
+      {isLoading && (
+        <ActivityIndicator animating color={variants[variant].loader.color} style={styles.loader} />
+      )}
       {startIcon && !isLoading && startIcon}
       {typeof children !== "string" && children}
       {typeof children === "string" && (
@@ -51,3 +60,9 @@ Button.defaultProps = {
   disabled: false,
   isLoading: false,
 };
+
+const styles = StyleSheet.create({
+  loader: {
+    marginRight: 8,
+  },
+});
