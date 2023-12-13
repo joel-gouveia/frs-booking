@@ -1,6 +1,6 @@
 import React from "react";
 import { render, waitFor, fireEvent } from "@testing-library/react-native";
-import { describe, expect, it, jest } from "@jest/globals";
+import { afterEach, describe, expect, it, jest } from "@jest/globals";
 import { getDepartures } from "@api/departure.service";
 import i18n from "src/config/i18n/i18n";
 import { DepartureTimeScreen } from "@screens/DepartureTime";
@@ -22,16 +22,22 @@ jest.mock("src/api/departure.service.ts", () => ({
 const ORIGIN_CODE = "A";
 const DESTINATION_CODE = "B";
 
+const mockSetDepartureTime = jest.fn();
 jest.mock("@hooks/useBooking", () => {
   return {
     useBooking: () => ({
       originCode: ORIGIN_CODE,
       destinationCode: DESTINATION_CODE,
+      setDepartureTime: mockSetDepartureTime,
     }),
   };
 });
 
 describe("Departure Time Screen", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("renders the screen with title and main menu footer button", async () => {
     const { getAllByTestId, getByText } = render(<DepartureTimeScreen />);
 
@@ -68,6 +74,21 @@ describe("Departure Time Screen", () => {
 
     await waitFor(() => {
       expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.MAIN_MENU);
+    });
+  });
+
+  it("goes to Booking screen and saves it, when pressing button with time", async () => {
+    (getDepartures as jest.Mock<typeof getDepartures>).mockResolvedValue([
+      { uuid: "1", departureTime: "2020-01-01T10:00:00" },
+    ]);
+
+    const { getByText } = render(<DepartureTimeScreen />);
+
+    await waitFor(() => {
+      fireEvent.press(getByText("10:00"));
+
+      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.BOOKING);
+      expect(mockSetDepartureTime).toHaveBeenCalledWith("10:00");
     });
   });
 });
