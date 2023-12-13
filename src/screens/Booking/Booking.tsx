@@ -28,7 +28,7 @@ export function BookingScreen() {
   };
 
   const increment = (dispatcher: React.Dispatch<React.SetStateAction<number>>) => () => {
-    dispatcher(val => Math.max(val + 1, 0));
+    dispatcher(val => val + 1);
   };
 
   const reset = () => {
@@ -41,16 +41,15 @@ export function BookingScreen() {
   return (
     <ScreenLayout>
       <View style={styles.header}>
-        {/* What is Voyageleg? Is it a typo? In german Voyagebeleg is travel receipt. */}
         <Typography size="small" style={styles.headerText}>
-          Voyageleg: {today} {originCode} - {destinationCode}
+          {t("booking.voyageleg")}: {today} {originCode} - {destinationCode}
         </Typography>
       </View>
       <VStack gap={50} mb={75}>
         <HStack alignItems="center" justifyContent="center">
           <BookingItem
             hotkey="1"
-            text="Adult - Standard"
+            text={t("booking.adult-standard")}
             value={numAdults}
             onMinusPress={decrement(setNumAdults)}
             onPlusPress={increment(setNumAdults)}
@@ -58,7 +57,7 @@ export function BookingScreen() {
           <View style={styles.invisibleSeparator} />
           <BookingItem
             hotkey="2"
-            text="Child - Standard"
+            text={t("booking.child-standard")}
             value={numKids}
             onMinusPress={decrement(setNumKids)}
             onPlusPress={increment(setNumKids)}
@@ -67,7 +66,7 @@ export function BookingScreen() {
         <HStack alignItems="center" justifyContent="center">
           <BookingItem
             hotkey="3"
-            text="Bycicle - Standard"
+            text={t("booking.bycicle-standard")}
             value={numBikes}
             onMinusPress={decrement(setNumBikes)}
             onPlusPress={increment(setNumBikes)}
@@ -75,7 +74,7 @@ export function BookingScreen() {
           <View style={styles.invisibleSeparator} />
           <BookingItem
             hotkey="4"
-            text="Car up to 3 to"
+            text={t("booking.car-up-to", { num: 3 })}
             value={numCars}
             onMinusPress={decrement(setNumCars)}
             onPlusPress={increment(setNumCars)}
@@ -84,7 +83,7 @@ export function BookingScreen() {
       </VStack>
       <Button variant="outline" style={styles.bookButton}>
         <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
-        <Typography fontSize={20}>BOOK</Typography>
+        <Typography fontSize={20}>{t("booking.book")}</Typography>
       </Button>
       <Footer
         buttons={[
@@ -93,11 +92,11 @@ export function BookingScreen() {
             onPress: () => navigate(NavigationScreens.MAIN_MENU),
           },
           {
-            label: "Summary",
+            label: t("footer.summary"),
             onPress: () => {},
           },
           {
-            label: "Reset",
+            label: t("footer.reset"),
             onPress: reset,
           },
         ]}
