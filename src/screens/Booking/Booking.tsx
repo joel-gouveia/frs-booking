@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import { Button, HStack, Typography, VStack } from "@components/index";
+import { Button, Typography, VStack } from "@components/index";
 import { useBooking } from "@hooks/useBooking";
 import { getTodayDateString } from "@utils/date";
 import React, { useState, useMemo } from "react";
@@ -9,7 +9,8 @@ import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import EnterKey from "@assets/images/enter-key.svg";
-import { BookingItem } from "./BookingItem";
+import { chunkArray } from "@utils/array";
+import { ItemsRow } from "./ItemsRow";
 
 export function BookingScreen() {
   const { t } = useTranslation();
@@ -23,20 +24,45 @@ export function BookingScreen() {
 
   const today = useMemo(() => getTodayDateString(), []);
 
-  const decrement = (dispatcher: React.Dispatch<React.SetStateAction<number>>) => () => {
-    dispatcher(val => Math.max(val - 1, 0));
-  };
-
-  const increment = (dispatcher: React.Dispatch<React.SetStateAction<number>>) => () => {
-    dispatcher(val => val + 1);
-  };
-
   const reset = () => {
     setNumAdults(0);
     setNumKids(0);
     setNumBikes(0);
     setNumCars(0);
   };
+
+  // TODO: This will not be hardcoded in the future, will depend on the API response
+  const ITEMS = useMemo(
+    () => [
+      {
+        name: t("booking.adult-standard"),
+        value: numAdults,
+        hotkey: "1",
+        dispatcher: setNumAdults,
+      },
+      {
+        name: t("booking.child-standard"),
+        value: numKids,
+        hotkey: "2",
+        dispatcher: setNumKids,
+      },
+      {
+        name: t("booking.bycicle-standard"),
+        value: numBikes,
+        hotkey: "3",
+        dispatcher: setNumBikes,
+      },
+      {
+        name: t("booking.car-up-to", { num: 3 }),
+        value: numCars,
+        hotkey: "4",
+        dispatcher: setNumCars,
+      },
+    ],
+    [numAdults, setNumAdults, numKids, setNumKids, numBikes, setNumBikes, numCars, setNumCars, t],
+  );
+
+  const itemsRows = useMemo(() => chunkArray(ITEMS, 2), [ITEMS]);
 
   return (
     <ScreenLayout>
@@ -46,40 +72,9 @@ export function BookingScreen() {
         </Typography>
       </View>
       <VStack gap={50} mb={75}>
-        <HStack alignItems="center" justifyContent="center">
-          <BookingItem
-            hotkey="1"
-            text={t("booking.adult-standard")}
-            value={numAdults}
-            onMinusPress={decrement(setNumAdults)}
-            onPlusPress={increment(setNumAdults)}
-          />
-          <View style={styles.invisibleSeparator} />
-          <BookingItem
-            hotkey="2"
-            text={t("booking.child-standard")}
-            value={numKids}
-            onMinusPress={decrement(setNumKids)}
-            onPlusPress={increment(setNumKids)}
-          />
-        </HStack>
-        <HStack alignItems="center" justifyContent="center">
-          <BookingItem
-            hotkey="3"
-            text={t("booking.bycicle-standard")}
-            value={numBikes}
-            onMinusPress={decrement(setNumBikes)}
-            onPlusPress={increment(setNumBikes)}
-          />
-          <View style={styles.invisibleSeparator} />
-          <BookingItem
-            hotkey="4"
-            text={t("booking.car-up-to", { num: 3 })}
-            value={numCars}
-            onMinusPress={decrement(setNumCars)}
-            onPlusPress={increment(setNumCars)}
-          />
-        </HStack>
+        {itemsRows.map(row => (
+          <ItemsRow key={row[0].name} row={row} />
+        ))}
       </VStack>
       <Button variant="outline" style={styles.bookButton}>
         <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
