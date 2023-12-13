@@ -54,7 +54,9 @@ export function PaymentScreen() {
       <VStack gap={24}>
         <Typography>Payment Method</Typography>
         <HStack gap={20}>
-          <Button variant="outline" style={{ flex: 1, paddingVertical: 40, marginLeft: 10 }}>
+          <Button
+            variant="outline"
+            style={{ flex: 1, paddingVertical: 40, marginLeft: 10, gap: 0 }}>
             <Typography fontSize={11} style={{ position: "absolute", right: 4, top: 4 }}>
               1
             </Typography>
@@ -63,7 +65,9 @@ export function PaymentScreen() {
               Cash
             </Typography>
           </Button>
-          <Button variant="outline" style={{ flex: 1, paddingVertical: 40, marginRight: 10 }}>
+          <Button
+            variant="outline"
+            style={{ flex: 1, paddingVertical: 40, marginRight: 10, gap: 0 }}>
             <Typography fontSize={11} style={{ position: "absolute", right: 4, top: 4 }}>
               2
             </Typography>
@@ -82,20 +86,20 @@ export function PaymentScreen() {
               borderRadius: 6,
               marginTop: 8,
             }}>
-            <Typography size="small" mb={50}>
+            <Typography size="small" mb={46}>
               Passengers: {passengersText}
             </Typography>
-            <Typography size="small" mb={50}>
+            <Typography size="small" mb={46}>
               Vehicles: {vehiclesText}
             </Typography>
           </View>
         </View>
         <Typography fontSize={30} style={{ textAlign: "center", paddingVertical: 4 }}>
-          Total: 12,40 €
+          Total: 123,45 €
         </Typography>
         <Button variant="outline" style={styles.bookButton}>
           <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
-          <Typography fontSize={24}>Confirm Purchase</Typography>
+          <Typography fontSize={20}>Confirm Purchase</Typography>
         </Button>
       </VStack>
       <Footer
