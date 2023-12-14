@@ -12,57 +12,37 @@ import EnterKey from "@assets/images/enter-key.svg";
 import { chunkArray } from "@utils/array";
 import { ItemsRow } from "./ItemsRow";
 
+// TODO: This will come from the API in the future
+const ITEM_NAMES = ["Adult - Standard", "Child", "Car", "Bycicle"];
+
 export function BookingScreen() {
   const { t } = useTranslation();
   const { originCode, destinationCode, departureTime } = useBooking();
   const { navigate } = useNavigation<NavigationProps>();
 
-  const [numAdults, setNumAdults] = useState(0);
-  const [numKids, setNumKids] = useState(0);
-  const [numBikes, setNumBikes] = useState(0);
-  const [numCars, setNumCars] = useState(0);
+  const [itemCounters, setItemCounters] = useState<Record<string, number>>({});
 
   const today = useMemo(() => getTodayDateString(), []);
 
   const reset = () => {
-    setNumAdults(0);
-    setNumKids(0);
-    setNumBikes(0);
-    setNumCars(0);
+    setItemCounters(obj =>
+      Object.keys(obj).reduce(
+        (prev, curr) => ({ ...prev, [curr]: 0 }),
+        {} as Record<string, number>,
+      ),
+    );
   };
 
-  // TODO: This will not be hardcoded in the future, will depend on the API response
-  const ITEMS = useMemo(
-    () => [
-      {
-        name: t("booking.adult-standard"),
-        value: numAdults,
-        hotkey: "1",
-        dispatcher: setNumAdults,
-      },
-      {
-        name: t("booking.child-standard"),
-        value: numKids,
-        hotkey: "2",
-        dispatcher: setNumKids,
-      },
-      {
-        name: t("booking.bycicle-standard"),
-        value: numBikes,
-        hotkey: "3",
-        dispatcher: setNumBikes,
-      },
-      {
-        name: t("booking.car-up-to", { num: 3 }),
-        value: numCars,
-        hotkey: "4",
-        dispatcher: setNumCars,
-      },
-    ],
-    [numAdults, setNumAdults, numKids, setNumKids, numBikes, setNumBikes, numCars, setNumCars, t],
-  );
+  const itemsRows = useMemo(() => {
+    const items = ITEM_NAMES.map((name, index) => ({
+      name,
+      value: itemCounters[name] ?? 0,
+      hotkey: String(index + 1),
+      setItems: setItemCounters,
+    }));
 
-  const itemsRows = useMemo(() => chunkArray(ITEMS, 2), [ITEMS]);
+    return chunkArray(items, 2);
+  }, [itemCounters, setItemCounters]);
 
   return (
     <ScreenLayout>

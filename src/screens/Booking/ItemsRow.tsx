@@ -8,30 +8,41 @@ interface IItemsRow {
     name: string;
     value: number;
     hotkey: string;
-    dispatcher: React.Dispatch<React.SetStateAction<number>>;
+    setItems: React.Dispatch<React.SetStateAction<Record<string, number>>>;
   }[];
 }
 
 export function ItemsRow({ row }: IItemsRow) {
-  const decrement = (dispatcher: React.Dispatch<React.SetStateAction<number>>) => () => {
-    dispatcher(val => Math.max(val - 1, 0));
-  };
+  const decrementFromKey =
+    (key: string, dispatcher: React.Dispatch<React.SetStateAction<Record<string, number>>>) =>
+    () => {
+      dispatcher(obj => {
+        const count = obj[key] ?? 0;
+        const newCount = Math.max(count - 1, 0);
+        return { ...obj, [key]: newCount };
+      });
+    };
 
-  const increment = (dispatcher: React.Dispatch<React.SetStateAction<number>>) => () => {
-    dispatcher(val => val + 1);
-  };
+  const incrementFromKey =
+    (key: string, dispatcher: React.Dispatch<React.SetStateAction<Record<string, number>>>) =>
+    () => {
+      dispatcher(obj => {
+        const count = obj[key] ?? 0;
+        return { ...obj, [key]: count + 1 };
+      });
+    };
 
   return (
     <HStack alignItems="center" justifyContent="center">
-      {row.map(({ name, hotkey, dispatcher, value }, index) => (
+      {row.map(({ name, hotkey, setItems, value }, index) => (
         <React.Fragment key={name}>
           <BookingItem
             key={name}
             text={name}
             hotkey={hotkey}
             value={value}
-            onMinusPress={decrement(dispatcher)}
-            onPlusPress={increment(dispatcher)}
+            onMinusPress={decrementFromKey(name, setItems)}
+            onPlusPress={incrementFromKey(name, setItems)}
           />
           {index !== row.length - 1 && <View style={styles.separator} />}
         </React.Fragment>
