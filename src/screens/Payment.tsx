@@ -1,19 +1,16 @@
 import { useTranslation } from "react-i18next";
-import { useNavigation } from "@react-navigation/native";
 import { Button, HStack, Typography, VStack } from "@components/index";
 import { useBooking } from "@hooks/useBooking";
 import React, { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
-import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import Icon from "react-native-vector-icons/Feather";
 import EnterKey from "@assets/images/enter-key.svg";
 
 export function PaymentScreen() {
   const { t } = useTranslation();
   const { originCode, destinationCode, departureDate, departureTime, itemCounters } = useBooking();
-  const { navigate } = useNavigation<NavigationProps>();
 
   const passengersText = useMemo(
     () => Object.entries(itemCounters).map(([key, val]) => `(${key}: ${val})`),
@@ -67,13 +64,8 @@ export function PaymentScreen() {
       </VStack>
       <Footer
         buttons={[
-          {
-            label: t("footer.main-menu"),
-            onPress: () => navigate(NavigationScreens.MAIN_MENU),
-          },
-          {
-            label: "empty",
-          },
+          "main-menu",
+          "empty",
           {
             label: t("footer.reset"),
             onPress: () => {},

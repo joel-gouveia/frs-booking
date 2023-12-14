@@ -1,38 +1,24 @@
 import { View, Dimensions, StyleSheet } from "react-native";
 import React from "react";
-import { TextButton } from "@components/index";
-
-interface IFooterButton {
-  label: string;
-  onPress?: () => void;
-}
+import { ICustomButtonLabel, IFooterButton } from "src/types/interfaces/footer";
+import { FooterButton } from "./FooterButton";
 
 interface IFooter {
-  buttons?: IFooterButton[];
-}
-
-function FooterButton({ label, onPress }: IFooterButton) {
-  let Box: React.JSX.Element;
-
-  if (label === "empty") {
-    Box = <View />;
-  } else {
-    Box = (
-      <TextButton onPress={onPress} variant="outline" style={styles.button} testID="footer-btn ">
-        {label}
-      </TextButton>
-    );
-  }
-
-  return <View style={styles.btnContainer}>{Box}</View>;
+  buttons?: (IFooterButton | ICustomButtonLabel)[];
 }
 
 export function Footer({ buttons = [] }: IFooter) {
   return (
     <View style={styles.container}>
-      {buttons.map(({ label, onPress }) => (
-        <FooterButton key={label} label={label} onPress={onPress} />
-      ))}
+      {buttons.map(button => {
+        const key = typeof button === "string" ? button : button.label;
+
+        return (
+          <View key={key} style={styles.btnContainer}>
+            <FooterButton button={button} />
+          </View>
+        );
+      })}
     </View>
   );
 }
@@ -48,11 +34,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 12,
   },
-  btnContainer: { width: "33.33%", paddingHorizontal: 16 },
-  button: {
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-    height: "100%",
-    backgroundColor: "#e3e3e3",
+  btnContainer: {
+    width: "33.33%",
+    paddingHorizontal: 16,
   },
 });

@@ -68,14 +68,7 @@ export function DepartureTimeScreen() {
           keyExtractor={departure => departure.uuid}
         />
       </View>
-      <Footer
-        buttons={[
-          {
-            label: t("footer.main-menu"),
-            onPress: () => navigate(NavigationScreens.MAIN_MENU),
-          },
-        ]}
-      />
+      <Footer buttons={["main-menu"]} />
     </ScreenLayout>
   );
 }
