@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Typography, VStack } from "@components/index";
 import { useBooking } from "@hooks/useBooking";
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
@@ -16,10 +16,15 @@ const ITEM_NAMES = ["Adult - Standard", "Child", "Car", "Bycicle"];
 
 export function BookingScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode, departureDate, departureTime } = useBooking();
+  const {
+    originCode,
+    destinationCode,
+    departureDate,
+    departureTime,
+    itemCounters,
+    setItemCounters,
+  } = useBooking();
   const { navigate } = useNavigation<NavigationProps>();
-
-  const [itemCounters, setItemCounters] = useState<Record<string, number>>({});
 
   const reset = () => {
     setItemCounters(obj =>
@@ -42,11 +47,10 @@ export function BookingScreen() {
   }, [itemCounters, setItemCounters]);
 
   const handlePressBook = () => {
-    /* if (numAdults === 0 && numKids === 0 && numBikes === 0 && numCars === 0) {
+    if (Object.values(itemCounters).every(val => val === 0)) {
       return;
     }
 
-    setPassengers(numAdults, numKids, numBikes, numCars); */
     navigate(NavigationScreens.PAYMENT);
   };
 
