@@ -1,4 +1,7 @@
 export const sizes = {
+  tiny: {
+    fontSize: 11,
+  },
   small: {
     fontSize: 14,
   },

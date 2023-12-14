@@ -4,7 +4,7 @@ import { ShortcutProps, defaultShortcuts } from "@styles/shortcuts";
 import { sizes } from "./styles";
 
 interface TypographyProps {
-  size?: "small" | "medium";
+  size?: "tiny" | "small" | "medium";
   fontSize?: number;
   bold?: boolean;
   color?: string; // TODO: Make this type safe once there's a color palette

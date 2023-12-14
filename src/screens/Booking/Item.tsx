@@ -15,7 +15,7 @@ export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: 
   return (
     <View style={styles.container}>
       <Button style={styles.mainButton} variant="outline">
-        <Typography style={styles.hotkeyText} fontSize={11}>
+        <Typography style={styles.hotkeyText} size="tiny">
           {hotkey}
         </Typography>
         <VStack justifyContent="center" alignItems="center">
