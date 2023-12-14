@@ -24,6 +24,8 @@ export function LoginScreen() {
 
   if (isLoadingStorage) return null; // Can be a splash screen in the future.
 
+  if (false) return;
+
   return (
     <ScreenLayout>
       <VStack gap={20} alignItems="flex-end">
