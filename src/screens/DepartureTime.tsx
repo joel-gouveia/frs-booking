@@ -1,4 +1,4 @@
-import { Button, Typography } from "@components/index";
+import { Typography, TextButton } from "@components/index";
 import React, { useState, useEffect } from "react";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
@@ -51,14 +51,14 @@ export function DepartureTimeScreen() {
         <FlatList
           data={departures}
           renderItem={({ item: departure }) => (
-            <Button
+            <TextButton
               onPress={() => navigate(NavigationScreens.BOOKING)}
               variant="outline"
               fontSize={30}
               style={styles.routeBtn}
               testID="departure-btn">
               {departure.departureTime}
-            </Button>
+            </TextButton>
           )}
           keyExtractor={departure => departure.uuid}
         />

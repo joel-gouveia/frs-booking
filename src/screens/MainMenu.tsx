@@ -1,4 +1,4 @@
-import { Button, VStack } from "@components/index";
+import { TextButton, VStack } from "@components/index";
 import React from "react";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
@@ -17,18 +17,18 @@ export function MainMenuScreen() {
   return (
     <ScreenLayout>
       <VStack gap={20} style={styles.container}>
-        <Button
+        <TextButton
           onPress={() => navigate(NavigationScreens.DEPARTURE_TIME)}
           variant="outline"
           fontSize={30}>
           {t("main-menu.sales")}
-        </Button>
-        <Button variant="outline" fontSize={30}>
+        </TextButton>
+        <TextButton variant="outline" fontSize={30}>
           {t("main-menu.boarding")}
-        </Button>
-        <Button variant="outline" fontSize={30}>
+        </TextButton>
+        <TextButton variant="outline" fontSize={30}>
           {t("main-menu.cancel")}
-        </Button>
+        </TextButton>
       </VStack>
       <Footer
         buttons={[

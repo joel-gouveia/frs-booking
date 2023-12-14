@@ -1,4 +1,4 @@
-import { Typography, Button } from "@components/index";
+import { Typography, TextButton } from "@components/index";
 import { View, StyleSheet, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 
@@ -38,7 +38,7 @@ export function RouteSelectionScreen() {
         <FlatList
           data={routes}
           renderItem={({ item: route }) => (
-            <Button
+            <TextButton
               key={route.name}
               onPress={handleRoutePress(route)}
               variant="outline"
@@ -46,7 +46,7 @@ export function RouteSelectionScreen() {
               style={styles.routeBtn}
               testID="route-btn">
               {route.name}
-            </Button>
+            </TextButton>
           )}
           keyExtractor={route => route.name}
         />

@@ -1,6 +1,6 @@
-import { Button } from "@components/index";
 import { View, Dimensions, StyleSheet } from "react-native";
 import React from "react";
+import { TextButton } from "@components/index";
 
 interface IFooterButton {
   label: string;
@@ -15,12 +15,12 @@ function FooterButton({ label, onPress }: IFooterButton) {
   let Box: React.JSX.Element;
 
   if (label === "empty") {
-    Box = <View></View>;
+    Box = <View />;
   } else {
     Box = (
-      <Button onPress={onPress} variant="outline" style={styles.button} testID="footer-btn ">
+      <TextButton onPress={onPress} variant="outline" style={styles.button} testID="footer-btn ">
         {label}
-      </Button>
+      </TextButton>
     );
   }
 
