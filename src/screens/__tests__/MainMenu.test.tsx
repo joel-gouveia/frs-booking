@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import { describe, expect, it, jest } from "@jest/globals";
 import { NavigationScreens } from "src/types/navigation";
-import i18n from "src/configi18n/i18n";
+import i18n from "src/config/i18n/i18n";
 import { MainMenuScreen } from "..";
 
 const mockNavigate = jest.fn();

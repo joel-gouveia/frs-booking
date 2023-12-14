@@ -3,7 +3,6 @@ import React from "react";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { useTranslation } from "react-i18next";
-import { StyleSheet } from "react-native";
 import { Footer } from "@components/Footer/Footer";
 import { useAuth } from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
@@ -16,7 +15,7 @@ export function MainMenuScreen() {
 
   return (
     <ScreenLayout>
-      <VStack gap={20} style={styles.container}>
+      <VStack gap={20} pt={50}>
         <TextButton
           onPress={() => navigate(NavigationScreens.DEPARTURE_TIME)}
           variant="outline"
@@ -44,9 +43,3 @@ export function MainMenuScreen() {
     </ScreenLayout>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 50,
-  },
-});

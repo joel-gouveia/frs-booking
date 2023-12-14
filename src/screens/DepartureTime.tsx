@@ -1,7 +1,7 @@
 import { Typography, TextButton } from "@components/index";
 import React, { useState, useEffect } from "react";
 
-import { ScreenLayout } from "src/layouts/ScreenLayout";
+import { ScreenLayout } from "@layouts/ScreenLayout";
 import { useTranslation } from "react-i18next";
 import { FlatList, StyleSheet, View } from "react-native";
 import { Footer } from "@components/Footer/Footer";
@@ -15,7 +15,7 @@ import { DepartureResponse } from "src/types/departure";
 export function DepartureTimeScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode, setDepartureDate } = useBooking();
+  const { originCode, destinationCode, setDepartureDate, setDepartureTime } = useBooking();
 
   const [departures, setDepartures] = useState<DepartureResponse[]>([]);
 
@@ -40,6 +40,11 @@ export function DepartureTimeScreen() {
     });
   }, [originCode, destinationCode, setDepartureDate]);
 
+  const onChooseDepartureTime = (time: string) => () => {
+    setDepartureTime(time);
+    navigate(NavigationScreens.BOOKING);
+  };
+
   // TODO: Add loader in place of the departure times, while waiting for a getDepartures response
   // TODO: Maybe call getDepartures before this screen, so there is no need to go to it when there is only 1(since when there is only 1, we are supposed to skip it)
   return (
@@ -52,7 +57,7 @@ export function DepartureTimeScreen() {
           data={departures}
           renderItem={({ item: departure }) => (
             <TextButton
-              onPress={() => navigate(NavigationScreens.BOOKING)}
+              onPress={onChooseDepartureTime(departure.departureTime)}
               variant="outline"
               fontSize={30}
               style={styles.routeBtn}

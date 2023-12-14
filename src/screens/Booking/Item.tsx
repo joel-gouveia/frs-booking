@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     paddingVertical: 8,
     position: "relative",
-    gap: 0,
     marginBottom: 4,
   },
   hotkeyText: {

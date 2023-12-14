@@ -1,104 +1,70 @@
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import { Button, HStack, Typography, VStack } from "@components/index";
+import { Button, Typography, VStack } from "@components/index";
 import { useBooking } from "@hooks/useBooking";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import EnterKey from "@assets/images/enter-key.svg";
-import { BookingItem } from "./BookingItem";
+import { chunkArray } from "@utils/array";
+import { ItemsRow } from "./ItemsRow";
+
+// TODO: This will come from the API in the future
+const ITEM_NAMES = ["Adult - Standard", "Child", "Car", "Bycicle"];
 
 export function BookingScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode, departureDate, setPassengers } = useBooking();
+  const { originCode, destinationCode, departureDate, departureTime } = useBooking();
   const { navigate } = useNavigation<NavigationProps>();
 
-  const [numAdults, setNumAdults] = useState(0);
-  const [numKids, setNumKids] = useState(0);
-  const [numBikes, setNumBikes] = useState(0);
-  const [numCars, setNumCars] = useState(0);
-
-  const decrement = (dispatcher: React.Dispatch<React.SetStateAction<number>>) => () => {
-    dispatcher(val => Math.max(val - 1, 0));
-  };
-
-  const increment =
-    (dispatcher: React.Dispatch<React.SetStateAction<number>>, { max }: { max?: number } = {}) =>
-    () => {
-      dispatcher(val => {
-        if (max !== undefined && val >= max) {
-          return val;
-        }
-
-        return val + 1;
-      });
-    };
+  const [itemCounters, setItemCounters] = useState<Record<string, number>>({});
 
   const reset = () => {
-    setNumAdults(0);
-    setNumKids(0);
-    setNumBikes(0);
-    setNumCars(0);
+    setItemCounters(obj =>
+      Object.keys(obj).reduce(
+        (prev, curr) => ({ ...prev, [curr]: 0 }),
+        {} as Record<string, number>,
+      ),
+    );
   };
 
+  const itemsRows = useMemo(() => {
+    const items = ITEM_NAMES.map((name, index) => ({
+      name,
+      value: itemCounters[name] ?? 0,
+      hotkey: String(index + 1),
+      setItems: setItemCounters,
+    }));
+
+    return chunkArray(items, 2);
+  }, [itemCounters, setItemCounters]);
+
   const handlePressBook = () => {
-    if (numAdults === 0 && numKids === 0 && numBikes === 0 && numCars === 0) {
+    /* if (numAdults === 0 && numKids === 0 && numBikes === 0 && numCars === 0) {
       return;
     }
 
-    setPassengers(numAdults, numKids, numBikes, numCars);
+    setPassengers(numAdults, numKids, numBikes, numCars); */
     navigate(NavigationScreens.PAYMENT);
   };
 
   return (
     <ScreenLayout>
       <View style={styles.header}>
-        {/* What is Voyageleg? Is it a typo? In german Voyagebeleg is travel receipt. */}
         <Typography size="small" style={styles.headerText}>
-          Voyageleg: {departureDate} {originCode} - {destinationCode}
+          {t("booking.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
         </Typography>
       </View>
       <VStack gap={50} mb={75}>
-        <HStack alignItems="center" justifyContent="center">
-          <BookingItem
-            hotkey="1"
-            text="Adult - Standard"
-            value={numAdults}
-            onMinusPress={decrement(setNumAdults)}
-            onPlusPress={increment(setNumAdults)}
-          />
-          <View style={styles.invisibleSeparator} />
-          <BookingItem
-            hotkey="2"
-            text="Child - Standard"
-            value={numKids}
-            onMinusPress={decrement(setNumKids)}
-            onPlusPress={increment(setNumKids)}
-          />
-        </HStack>
-        <HStack alignItems="center" justifyContent="center">
-          <BookingItem
-            hotkey="3"
-            text="Bycicle - Standard"
-            value={numBikes}
-            onMinusPress={decrement(setNumBikes)}
-            onPlusPress={increment(setNumBikes)}
-          />
-          <View style={styles.invisibleSeparator} />
-          <BookingItem
-            hotkey="4"
-            text="Car up to 3 to"
-            value={numCars}
-            onMinusPress={decrement(setNumCars)}
-            onPlusPress={increment(setNumCars, { max: 3 })}
-          />
-        </HStack>
+        {itemsRows.map(row => (
+          <ItemsRow key={row[0].name} row={row} />
+        ))}
       </VStack>
       <Button onPress={handlePressBook} variant="outline" style={styles.bookButton}>
         <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
-        <Typography fontSize={20}>BOOK</Typography>
+        <Typography fontSize={20}>{t("booking.book")}</Typography>
       </Button>
       <Footer
         buttons={[
@@ -107,11 +73,11 @@ export function BookingScreen() {
             onPress: () => navigate(NavigationScreens.MAIN_MENU),
           },
           {
-            label: "Summary",
+            label: t("footer.summary"),
             onPress: () => {},
           },
           {
-            label: "Reset",
+            label: t("footer.reset"),
             onPress: reset,
           },
         ]}

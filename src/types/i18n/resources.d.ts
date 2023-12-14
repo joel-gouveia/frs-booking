@@ -25,9 +25,19 @@ interface Resources {
     "departure-times": {
       "choose-departure": "Choose Departure";
     };
+    booking: {
+      voyageleg: "Voyageleg";
+      "adult-standard": "Adult - Standard";
+      "child-standard": "Child - Standard";
+      "bycicle-standard": "Bycicle - Standard";
+      "car-up-to": "Car up to {{num}}";
+      book: "BOOK";
+    };
     footer: {
       "main-menu": "Main Menu";
       logout: "Logout";
+      summary: "Summary";
+      reset: "Reset";
     };
   };
 }

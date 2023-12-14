@@ -3,6 +3,8 @@ import React, { createContext, useState, ReactNode } from "react";
 interface BookingContextProps {
   originCode: string;
   destinationCode: string;
+  departureTime: string;
+  setDepartureTime: React.Dispatch<React.SetStateAction<string>>;
   setRoute: (originCode: string, destinationCode: string) => void;
   setPassengers: (adults: number, kids: number, bikes: number, cars: number) => void;
   departureDate: string;
@@ -23,6 +25,7 @@ export function BookingContextProvider({ children }: { children: ReactNode }) {
   const [numKids, setNumKids] = useState(0);
   const [numBikes, setNumBikes] = useState(0);
   const [numCars, setNumCars] = useState(0);
+  const [departureTime, setDepartureTime] = useState("");
 
   const setRoute = (originCodeVal: string, destinationCodeVal: string) => {
     setOriginCode(originCodeVal);
@@ -47,6 +50,8 @@ export function BookingContextProvider({ children }: { children: ReactNode }) {
     numKids,
     numBikes,
     numCars,
+    departureTime,
+    setDepartureTime,
   };
 
   return <BookingContext.Provider value={value}>{children}</BookingContext.Provider>;
