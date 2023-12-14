@@ -24,11 +24,11 @@ export function PaymentScreen() {
     <ScreenLayout>
       <View style={styles.header}>
         <Typography size="small" style={styles.headerText}>
-          Voyageleg: {departureDate} {departureTime} {originCode} - {destinationCode}
+          {t("common.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
         </Typography>
       </View>
       <VStack gap={24}>
-        <Typography>Payment Method</Typography>
+        <Typography>{t("payment.payment-method")}</Typography>
         <HStack gap={20}>
           <Button variant="outline" style={styles.paymentButton}>
             <Typography size="tiny" style={styles.paymentButtonHotkey}>
@@ -36,7 +36,7 @@ export function PaymentScreen() {
             </Typography>
             <Icon name="dollar-sign" size={60} color="black" />
             <Typography fontSize={26} style={styles.paymentButtonLabel}>
-              Cash
+              {t("payment.cash")}
             </Typography>
           </Button>
           <Button variant="outline" style={styles.paymentButton}>
@@ -45,24 +45,24 @@ export function PaymentScreen() {
             </Typography>
             <Icon name="credit-card" size={60} color="black" />
             <Typography fontSize={26} style={styles.paymentButtonLabel}>
-              Card
+              {t("payment.card")}
             </Typography>
           </Button>
         </HStack>
         <View>
-          <Typography>Payment summary</Typography>
+          <Typography>{t("payment.payment-summary")}</Typography>
           <View style={styles.paymentSummaryContainer}>
             <Typography size="small" mb={46}>
-              Passengers: {passengersText}
+              {t("payment.passengers")}: {passengersText}
             </Typography>
           </View>
         </View>
         <Typography fontSize={30} py={4} style={styles.price}>
-          Total: 123,45 €
+          {t("payment.total")}: 123,45 €
         </Typography>
         <Button variant="outline" style={styles.confirmPaymentButton}>
           <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
-          <Typography fontSize={20}>Confirm Purchase</Typography>
+          <Typography fontSize={20}>{t("payment.confirm-purchase")}</Typography>
         </Button>
       </VStack>
       <Footer
@@ -75,7 +75,7 @@ export function PaymentScreen() {
             label: "empty",
           },
           {
-            label: "Reset",
+            label: t("footer.reset"),
             onPress: () => {},
           },
         ]}

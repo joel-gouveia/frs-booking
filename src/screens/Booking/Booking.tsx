@@ -58,7 +58,7 @@ export function BookingScreen() {
     <ScreenLayout>
       <View style={styles.header}>
         <Typography size="small" style={styles.headerText}>
-          {t("booking.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
+          {t("common.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
         </Typography>
       </View>
       <VStack gap={50} mb={75}>
