@@ -1,7 +1,7 @@
 import { Button, Typography } from "@components/index";
 import React, { useState, useEffect } from "react";
 
-import { ScreenLayout } from "src/layouts/ScreenLayout";
+import { ScreenLayout } from "@layouts/ScreenLayout";
 import { useTranslation } from "react-i18next";
 import { FlatList, StyleSheet, View } from "react-native";
 import { Footer } from "@components/Footer/Footer";

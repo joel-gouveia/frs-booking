@@ -24,7 +24,7 @@ export function ItemsRow({ row }: IItemsRow) {
   return (
     <HStack alignItems="center" justifyContent="center">
       {row.map(({ name, hotkey, dispatcher, value }, index) => (
-        <>
+        <React.Fragment key={name}>
           <BookingItem
             key={name}
             text={name}
@@ -34,7 +34,7 @@ export function ItemsRow({ row }: IItemsRow) {
             onPlusPress={increment(dispatcher)}
           />
           {index !== row.length - 1 && <View style={styles.separator} />}
-        </>
+        </React.Fragment>
       ))}
     </HStack>
   );
