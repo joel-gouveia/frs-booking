@@ -39,4 +39,7 @@ describe("Booking Screen", () => {
       expect(getAllByTestId("footer-btn")).toHaveLength(3);
     });
   });
+
+  // TODO: Since we will later use an enpoint, it does not make sense to make these tests now
+  it.todo("tests related to the items (adult, bycicle, etc.)");
 });
