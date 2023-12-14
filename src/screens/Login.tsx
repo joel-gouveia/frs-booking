@@ -12,19 +12,17 @@ import { useTranslation } from "react-i18next";
 export function LoginScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation<NavigationProps>();
-  const { login, isLoadingAuth, isLoadingStorage } = useAuth();
+  const { authenticate, isLoadingAuth, isLoadingStorage } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLoginPressed = async () => {
-    await login(username, password);
+    await authenticate(username, password);
     navigation.navigate(NavigationScreens.ROUTES);
   };
 
   if (isLoadingStorage) return null; // Can be a splash screen in the future.
-
-  if (false) return;
 
   return (
     <ScreenLayout>
