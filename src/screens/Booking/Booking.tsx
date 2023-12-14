@@ -72,10 +72,7 @@ export function BookingScreen() {
       </Button>
       <Footer
         buttons={[
-          {
-            label: t("footer.main-menu"),
-            onPress: () => navigate(NavigationScreens.MAIN_MENU),
-          },
+          "main-menu",
           {
             label: t("footer.summary"),
             onPress: () => {},

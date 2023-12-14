@@ -30,9 +30,6 @@ export function Button(props: IButton) {
     style,
     ...restProps
   } = props;
-
-  console.log(defaultShortcuts(props));
-
   return (
     <TouchableOpacity
       activeOpacity={0.6}
