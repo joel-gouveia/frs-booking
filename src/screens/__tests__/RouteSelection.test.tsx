@@ -15,11 +15,9 @@ jest.mock("@react-navigation/native", () => {
 });
 
 const mockSetRoute = jest.fn();
-jest.mock("@hooks/useBooking", () => {
+jest.mock("@hooks/useBookingStore", () => {
   return {
-    useBooking: () => ({
-      setRoute: mockSetRoute,
-    }),
+    useBookingStore: () => mockSetRoute,
   };
 });
 

@@ -18,9 +18,9 @@ const DESTINATION_CODE = "B";
 const TIME = "10:00";
 const DATE = "2020-01-01";
 
-jest.mock("@hooks/useBooking", () => {
+jest.mock("@hooks/useBookingStore", () => {
   return {
-    useBooking: () => ({
+    useBookingStore: () => ({
       originCode: ORIGIN_CODE,
       destinationCode: DESTINATION_CODE,
       departureDate: DATE,

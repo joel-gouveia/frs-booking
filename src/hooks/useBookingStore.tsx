@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface BookingContextProps {
+interface BookingState {
   originCode: string;
   destinationCode: string;
   setRoute: (originCode: string, destinationCode: string) => void;
@@ -15,7 +15,7 @@ interface BookingContextProps {
   decrementItemCountersKey: (key: string) => void;
 }
 
-export const useBookingStore = create<BookingContextProps>()(set => ({
+export const useBookingStore = create<BookingState>()(set => ({
   originCode: "",
   destinationCode: "",
   departureDate: "",
