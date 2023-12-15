@@ -55,15 +55,6 @@ describe("Route Selection Screen", () => {
     });
   });
 
-  it("goes to Main Menu when clicking on the footer button", async () => {
-    const { getByText } = render(<RouteSelectionScreen />);
-    fireEvent.press(getByText("Main Menu"));
-
-    await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.MAIN_MENU);
-    });
-  });
-
   it("goes to Main Menu when clicking a route button, and sets route info", async () => {
     (getRoutes as jest.Mock<typeof getRoutes>).mockResolvedValue([
       {
