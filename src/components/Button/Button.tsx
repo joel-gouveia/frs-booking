@@ -1,18 +1,23 @@
 import React, { PropsWithChildren } from "react";
-import { ActivityIndicator, Text, TextStyle, TouchableOpacity, ViewProps } from "react-native";
+import {
+  ActivityIndicator,
+  TextStyle,
+  TouchableOpacity,
+  ViewProps,
+  StyleSheet,
+} from "react-native";
 import { defaults, variants } from "./styles";
 
-interface Props extends PropsWithChildren, ViewProps, TextStyle {
+export interface IButton extends PropsWithChildren, ViewProps, TextStyle {
   onPress?: () => void;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
-  fontSize?: number;
   variant?: "solid" | "outline" | "ghost";
   disabled?: boolean;
   isLoading?: boolean;
 }
 
-export function Button(props: Props) {
+export function Button(props: IButton) {
   const {
     startIcon,
     endIcon,
@@ -21,7 +26,6 @@ export function Button(props: Props) {
     isLoading,
     onPress,
     children,
-    fontSize,
     style,
     ...restProps
   } = props;
@@ -33,11 +37,11 @@ export function Button(props: Props) {
       style={[defaults.button, variants[variant!].button, style]}
       disabled={disabled}
       {...restProps}>
-      {isLoading && <ActivityIndicator animating color={variants[variant!].loader.color} />}
+      {isLoading && (
+        <ActivityIndicator animating color={variants[variant].loader.color} style={styles.loader} />
+      )}
       {startIcon && !isLoading && startIcon}
-      <Text style={[defaults.buttonText, variants[variant].buttonText, { fontSize }]}>
-        {children}
-      </Text>
+      {children}
       {endIcon && !isLoading && endIcon}
     </TouchableOpacity>
   );
@@ -48,3 +52,9 @@ Button.defaultProps = {
   disabled: false,
   isLoading: false,
 };
+
+const styles = StyleSheet.create({
+  loader: {
+    marginRight: 8,
+  },
+});

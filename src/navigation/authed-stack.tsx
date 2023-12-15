@@ -7,6 +7,7 @@ import { HeaderLogo, HeaderRight } from "@components/index";
 import { MainMenuScreen } from "@screens/MainMenu";
 import { BookingContextProvider } from "@context/booking";
 import { DepartureTimeScreen } from "@screens/DepartureTime";
+import { BookingScreen } from "@screens/Booking/Booking";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -26,6 +27,7 @@ export function AuthedStack() {
         <Stack.Screen name={NavigationScreens.ROUTES} component={RouteSelectionScreen} />
         <Stack.Screen name={NavigationScreens.MAIN_MENU} component={MainMenuScreen} />
         <Stack.Screen name={NavigationScreens.DEPARTURE_TIME} component={DepartureTimeScreen} />
+        <Stack.Screen name={NavigationScreens.BOOKING} component={BookingScreen} />
       </Stack.Navigator>
     </BookingContextProvider>
   );

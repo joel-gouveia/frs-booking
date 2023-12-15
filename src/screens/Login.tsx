@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { useAuth } from "@hooks/useAuth";
 
-import { Button, Divider, HStack, Input, Typography, VStack } from "@components/index";
+import { TextButton, Divider, HStack, Input, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "@layouts/index";
 import { PasswordInput } from "@components/Input/PasswordInput";
 import { useNavigation } from "@react-navigation/native";
@@ -45,9 +45,9 @@ export function LoginScreen() {
           onChangeText={setPassword}
           placeholder={t("login.password")}
         />
-        <Button onPress={handleLoginPressed} isLoading={isLoadingAuth} testID="login-btn">
+        <TextButton onPress={handleLoginPressed} isLoading={isLoadingAuth} testID="login-btn">
           {t("login.login")}
-        </Button>
+        </TextButton>
         <Divider />
         <TouchableOpacity testID="forgot-password-btn">
           <Typography>{t("login.forgot-password?")}</Typography>
