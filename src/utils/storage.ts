@@ -1,6 +1,6 @@
 import { storageKeys } from "@constants/storageKeys";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ILoginRes, UserInfo } from "src/types/user";
+import { ILoginRes, UserInfo } from "src/types/interfaces/user";
 
 /**
  * Get token and user info from the "local" storage

@@ -1,4 +1,4 @@
-import { ILoginRes, UserInfo } from "src/types/user";
+import { ILoginRes, UserInfo } from "src/types/interfaces/user";
 import Api from "@api/index";
 
 const USERS_BASE_URL = "/users";

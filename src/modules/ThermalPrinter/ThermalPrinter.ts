@@ -69,7 +69,7 @@ class ThermalPrinter {
     mmFeedPaper: 20,
     printerDpi: 203,
     printerWidthMM: 80,
-    printerNbrCharactersPerLine: 42,
+    printerNbrCharactersPerLine: 48,
   };
 
   constructor(config?: Partial<ConfigOptions>) {
@@ -138,31 +138,32 @@ class ThermalPrinter {
    *   payload: 'Hello, Bluetooth!',
    * });
    */
-  async printBluetooth(
-    options: Partial<PrintBluetoothInterface> & Pick<PrinterInterface, "payload">,
-  ): Promise<void> {
-    const {
-      macAddress,
-      payload,
-      autoCut,
-      openCashbox,
-      mmFeedPaper,
-      printerDpi,
-      printerWidthMM,
-      printerNbrCharactersPerLine,
-    } = this.getConfig(options);
+  // Not being used but defined just in case...
+  // async printBluetooth(
+  //   options: Partial<PrintBluetoothInterface> & Pick<PrinterInterface, "payload">,
+  // ): Promise<void> {
+  //   const {
+  //     macAddress,
+  //     payload,
+  //     autoCut,
+  //     openCashbox,
+  //     mmFeedPaper,
+  //     printerDpi,
+  //     printerWidthMM,
+  //     printerNbrCharactersPerLine,
+  //   } = this.getConfig(options);
 
-    return ThermalPrinterModule.printBluetooth(
-      macAddress,
-      payload,
-      autoCut,
-      openCashbox,
-      mmFeedPaper,
-      printerDpi,
-      printerWidthMM,
-      printerNbrCharactersPerLine,
-    );
-  }
+  //   return ThermalPrinterModule.printBluetooth(
+  //     macAddress,
+  //     payload,
+  //     autoCut,
+  //     openCashbox,
+  //     mmFeedPaper,
+  //     printerDpi,
+  //     printerWidthMM,
+  //     printerNbrCharactersPerLine,
+  //   );
+  // }
 
   /**
    * Retrieves a list of available Bluetooth devices.
@@ -171,9 +172,10 @@ class ThermalPrinter {
    * const bluetoothDevices = await ThermalPrinter.getBluetoothDeviceList();
    * console.log(bluetoothDevices);
    */
-  static getBluetoothDeviceList(): Promise<BluetoothPrinter[]> {
-    return ThermalPrinterModule.getBluetoothDeviceList();
-  }
+  // Not being used but defined just in case...
+  // static getBluetoothDeviceList(): Promise<BluetoothPrinter[]> {
+  //   return ThermalPrinterModule.getBluetoothDeviceList();
+  // }
 }
 
 export default ThermalPrinter;
