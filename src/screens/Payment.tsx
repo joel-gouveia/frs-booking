@@ -39,7 +39,7 @@ export function PaymentScreen() {
               {t("payment.cash")}
             </Typography>
           </Button>
-          <View style={{ flex: 1 }} />
+          <View style={styles.emptyContainer} />
         </HStack>
         <View>
           <Typography>{t("payment.payment-summary")}</Typography>
@@ -86,6 +86,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 40,
     marginRight: 10,
+  },
+  emptyContainer: {
+    flex: 1,
   },
   paymentButtonHotkey: {
     position: "absolute",
