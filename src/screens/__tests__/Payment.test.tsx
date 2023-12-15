@@ -51,7 +51,7 @@ describe("Payment Screen", () => {
 
   it("Displays the items counter, but does not show when it is zero", async () => {
     mockUseBooking.mockReturnValue({
-      itemCounters: { adult: 2, child: 1, car: 1 },
+      itemCounters: { adult: 2, child: 1, car: 1, bike: 0 },
     });
 
     const { getByText } = render(<PaymentScreen />);
@@ -60,6 +60,7 @@ describe("Payment Screen", () => {
       expect(getByText(/adult: 2/)).toBeTruthy();
       expect(getByText(/child: 1/)).toBeTruthy();
       expect(getByText(/car: 1/)).toBeTruthy();
+      expect(() => getByText(/bike/)).toThrow();
     });
   });
 });

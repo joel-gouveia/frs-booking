@@ -13,7 +13,10 @@ export function PaymentScreen() {
   const { originCode, destinationCode, departureDate, departureTime, itemCounters } = useBooking();
 
   const passengersText = useMemo(
-    () => Object.entries(itemCounters).map(([key, val]) => `(${key}: ${val})`),
+    () =>
+      Object.entries(itemCounters)
+        .filter(([_, val]) => val > 0)
+        .map(([key, val]) => `(${key}: ${val})`),
     [itemCounters],
   );
 
