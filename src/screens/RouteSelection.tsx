@@ -8,13 +8,13 @@ import { Footer } from "@components/Footer/Footer";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
-import { useBooking } from "@hooks/useBooking";
 import { IRoute } from "src/types/route";
+import { useBookingStore } from "@hooks/useBookingStore";
 
 export function RouteSelectionScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { setRoute: setContextRoute } = useBooking();
+  const setRouteStore = useBookingStore(state => state.setRoute);
 
   const [routes, setRoutes] = useState<IRoute[]>([]);
 
@@ -25,7 +25,7 @@ export function RouteSelectionScreen() {
   }, []);
 
   const handleRoutePress = (route: IRoute) => () => {
-    setContextRoute(route.origin.code, route.destination.code);
+    setRouteStore(route.origin.code, route.destination.code);
     navigate(NavigationScreens.MAIN_MENU);
   };
 

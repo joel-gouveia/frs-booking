@@ -1,16 +1,23 @@
 import { useTranslation } from "react-i18next";
 import { Button, HStack, Typography, VStack } from "@components/index";
-import { useBooking } from "@hooks/useBooking";
 import React, { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
 import Icon from "react-native-vector-icons/Feather";
 import EnterKey from "@assets/images/enter-key.svg";
+import { useBookingStore } from "@hooks/useBookingStore";
 
 export function PaymentScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode, departureDate, departureTime, itemCounters } = useBooking();
+  const { originCode, destinationCode, departureDate, departureTime, itemCounters } =
+    useBookingStore(state => ({
+      originCode: state.originCode,
+      destinationCode: state.destinationCode,
+      departureDate: state.departureDate,
+      departureTime: state.departureTime,
+      itemCounters: state.itemCounters,
+    }));
 
   const passengersText = useMemo(
     () =>
