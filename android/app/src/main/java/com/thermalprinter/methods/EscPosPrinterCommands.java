@@ -301,7 +301,7 @@ public class EscPosPrinterCommands {
      */
     public EscPosPrinterCommands(DeviceConnection printerConnection, EscPosCharsetEncoding charsetEncoding) {
         this.printerConnection = printerConnection;
-        this.charsetEncoding = charsetEncoding != null ? charsetEncoding : new EscPosCharsetEncoding("windows-1252", 6);
+        this.charsetEncoding = charsetEncoding != null ? charsetEncoding : new EscPosCharsetEncoding("windows-1252", 16);
     }
 
     /**
