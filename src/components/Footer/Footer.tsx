@@ -1,6 +1,6 @@
-import { Button } from "@components/index";
 import { View, Dimensions, StyleSheet } from "react-native";
 import React from "react";
+import { TextButton } from "@components/index";
 
 interface IFooterButton {
   label: string;
@@ -14,9 +14,9 @@ interface IFooter {
 function FooterButton({ label, onPress }: IFooterButton) {
   return (
     <View style={styles.btnContainer}>
-      <Button onPress={onPress} variant="outline" style={styles.button} testID="footer-btn ">
+      <TextButton onPress={onPress} variant="outline" style={styles.button} testID="footer-btn ">
         {label}
-      </Button>
+      </TextButton>
     </View>
   );
 }

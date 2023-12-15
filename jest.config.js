@@ -3,6 +3,7 @@ module.exports = {
   transform: {
     "^.+\\.(ts|tsx)?$": "ts-jest",
     "^.+\\.(js|jsx)$": "babel-jest",
+    "^.+\\.svg$": "<rootDir>/testUtils/svgTransformer.js",
   },
   moduleNameMapper: {
     "^src/(.*)$": "<rootDir>/src/$1",
@@ -14,7 +15,6 @@ module.exports = {
     "^@navigation/(.*)$": "<rootDir>/src/navigation/$1",
     "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",
     "^@api/(.*)$": "<rootDir>/src/api/$1",
-    "^@types/(.*)$": "<rootDir>/src/types/$1",
     "^@context/(.*)$": "<rootDir>/src/context/$1",
     "^@styles/(.*)$": "<rootDir>/src/styles/$1",
     "^@assets/(.*)$": "<rootDir>/src/assets/$1",
@@ -26,5 +26,5 @@ module.exports = {
     "node_modules/(?!(react-native-config|react-native|@react-native|@react-navigation|react-navigation|react-native-vector-icons)/)",
   ],
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
-  setupFilesAfterEnv: ["<rootDir>/setupTests.ts"],
+  setupFilesAfterEnv: ["<rootDir>/testUtils/setupTests.ts"],
 };

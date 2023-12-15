@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { useAuth } from "@hooks/useAuth";
 
-import { Button, Divider, HStack, Input, Typography, VStack } from "@components/index";
+import { TextButton, Divider, HStack, Input, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "@layouts/index";
 import { PasswordInput } from "@components/Input/PasswordInput";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationProps, NavigationSreens } from "src/types/navigation";
+import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useTranslation } from "react-i18next";
 
 export function LoginScreen() {
@@ -19,7 +19,7 @@ export function LoginScreen() {
 
   const handleLoginPressed = async () => {
     await authenticate(username, password);
-    navigation.navigate(NavigationSreens.ROUTES);
+    navigation.navigate(NavigationScreens.ROUTES);
   };
 
   if (isLoadingStorage) return null; // Can be a splash screen in the future.
@@ -45,9 +45,9 @@ export function LoginScreen() {
           onChangeText={setPassword}
           placeholder={t("login.password")}
         />
-        <Button onPress={handleLoginPressed} isLoading={isLoadingAuth} testID="login-btn">
+        <TextButton onPress={handleLoginPressed} isLoading={isLoadingAuth} testID="login-btn">
           {t("login.login")}
-        </Button>
+        </TextButton>
         <Divider />
         <TouchableOpacity testID="forgot-password-btn">
           <Typography>{t("login.forgot-password?")}</Typography>
