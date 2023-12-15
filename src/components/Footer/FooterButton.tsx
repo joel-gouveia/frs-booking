@@ -1,8 +1,14 @@
 import React from "react";
-import { ICustomButtonLabel, IFooterButton } from "src/types/interfaces/footer";
 import { EmptyButton } from "./CustomButtons/EmptyButton";
 import { GenericFooterButton } from "./GenericFooterButton";
 import { MainMenuButton } from "./CustomButtons/MainMenuButton";
+
+export type ICustomButtonLabel = "empty" | "main-menu";
+
+export interface IFooterButton {
+  label: string;
+  onPress: () => void;
+}
 
 const customButtonConfig: Record<ICustomButtonLabel, () => JSX.Element> = {
   empty: EmptyButton,

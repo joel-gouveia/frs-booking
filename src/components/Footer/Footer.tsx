@@ -1,6 +1,5 @@
 import { View, Dimensions, StyleSheet } from "react-native";
 import React from "react";
-import { ICustomButtonLabel, IFooterButton } from "src/types/interfaces/footer";
 import { FooterButton } from "./FooterButton";
 
 interface IFooter {

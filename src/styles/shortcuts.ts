@@ -1,4 +1,3 @@
-import { removeUndefinedKeys } from "@utils/object";
 import { DimensionValue } from "react-native";
 
 export interface ShortcutProps {
@@ -22,24 +21,22 @@ export interface ShortcutProps {
   h?: DimensionValue;
 }
 
-export const defaultShortcuts = (props: ShortcutProps) => {
-  return removeUndefinedKeys({
-    padding: props.p,
-    paddingLeft: props.pl,
-    paddingRight: props.pr,
-    paddingTop: props.pt,
-    paddingBottom: props.pb,
-    paddingVertical: props.py,
-    paddingHorizontal: props.px,
+export const defaultShortcuts = (props: ShortcutProps) => ({
+  padding: props.p,
+  paddingLeft: props.pl,
+  paddingRight: props.pr,
+  paddingTop: props.pt,
+  paddingBottom: props.pb,
+  paddingVertical: props.py,
+  paddingHorizontal: props.px,
 
-    margin: props.m,
-    marginVertical: props.my,
-    marginLeft: props.ml,
-    marginHorizontal: props.mx,
-    marginBottom: props.mb,
-    marginTop: props.mt,
+  margin: props.m,
+  marginVertical: props.my,
+  marginLeft: props.ml,
+  marginHorizontal: props.mx,
+  marginBottom: props.mb,
+  marginTop: props.mt,
 
-    width: props.w,
-    height: props.h,
-  });
-};
+  width: props.w,
+  height: props.h,
+});

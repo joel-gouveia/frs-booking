@@ -6,10 +6,9 @@ import {
   ViewProps,
   StyleSheet,
 } from "react-native";
-import { ShortcutProps, defaultShortcuts } from "@styles/shortcuts";
 import { defaults, variants } from "./styles";
 
-export interface IButton extends PropsWithChildren, ViewProps, TextStyle, ShortcutProps {
+export interface IButton extends PropsWithChildren, ViewProps, TextStyle {
   onPress?: () => void;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
@@ -34,7 +33,7 @@ export function Button(props: IButton) {
     <TouchableOpacity
       activeOpacity={0.6}
       onPress={onPress}
-      style={[defaults.button, variants[variant].button, defaultShortcuts(props), style]}
+      style={[defaults.button, variants[variant].button, style]}
       disabled={disabled}
       {...restProps}>
       {isLoading && (

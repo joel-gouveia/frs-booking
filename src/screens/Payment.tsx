@@ -23,15 +23,15 @@ export function PaymentScreen() {
   return (
     <ScreenLayout>
       <View style={styles.header}>
-        <Typography size="small" style={styles.headerText}>
+        <Typography size="sm" style={styles.headerText}>
           {t("common.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
         </Typography>
       </View>
       <VStack gap={24}>
         <Typography>{t("payment.payment-method")}</Typography>
-        <HStack gap={20}>
+        <HStack gap={40}>
           <Button variant="outline" style={styles.paymentButton}>
-            <Typography size="tiny" style={styles.paymentButtonHotkey}>
+            <Typography size="xs" style={styles.paymentButtonHotkey}>
               1
             </Typography>
             <Icon name="dollar-sign" size={60} color="black" />
@@ -39,20 +39,12 @@ export function PaymentScreen() {
               {t("payment.cash")}
             </Typography>
           </Button>
-          <Button variant="outline" style={styles.paymentButton}>
-            <Typography size="tiny" style={styles.paymentButtonHotkey}>
-              2
-            </Typography>
-            <Icon name="credit-card" size={60} color="black" />
-            <Typography fontSize={26} style={styles.paymentButtonLabel}>
-              {t("payment.card")}
-            </Typography>
-          </Button>
+          <View style={{ flex: 1 }} />
         </HStack>
         <View>
           <Typography>{t("payment.payment-summary")}</Typography>
           <View style={styles.paymentSummaryContainer}>
-            <Typography size="small" mb={46}>
+            <Typography size="sm" mb={46}>
               {t("payment.passengers")}: {passengersText}
             </Typography>
           </View>
