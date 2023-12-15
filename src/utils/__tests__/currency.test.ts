@@ -17,7 +17,6 @@ jest.mock("@config/i18n/i18n", () => {
 
 describe("utils/currency", () => {
   it("Should format price with currency for EUR(DE)", () => {
-    // @ts-ignore
     const expected = normalizeWhitespace("10,00 €");
     const received = normalizeWhitespace(formatPrice("EUR", 10));
     expect(received).toEqual(expected);
