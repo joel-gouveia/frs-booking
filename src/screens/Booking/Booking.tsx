@@ -47,7 +47,7 @@ export function BookingScreen() {
   return (
     <ScreenLayout>
       <View style={styles.header}>
-        <Typography size="small" style={styles.headerText}>
+        <Typography size="sm" style={styles.headerText}>
           {t("common.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
         </Typography>
       </View>
