@@ -1,5 +1,5 @@
 import { Languages } from "@config/i18n/i18n";
-import { ILoginRes, Operations, UserInfo } from "src/types/interfaces/user";
+import { ILoginRes, Operations, UserInfo } from "src/types/models/user";
 
 const loginInfo = {
   username: "john.doe",

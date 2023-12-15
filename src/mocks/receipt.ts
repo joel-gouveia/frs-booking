@@ -1,4 +1,4 @@
-import { Receipt } from "src/types/interfaces/receipt";
+import { Receipt } from "src/types/models/receipt";
 
 const receipt: Receipt = {
   bookingNumber: "RDFR2A",

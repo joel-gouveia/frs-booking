@@ -1,5 +1,5 @@
 import i18n from "@config/i18n/i18n";
-import { Receipt } from "src/types/interfaces/receipt";
+import { Receipt } from "src/types/models/receipt";
 import { currencyUtils } from "./currency";
 
 i18n.init();
