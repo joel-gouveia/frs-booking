@@ -34,7 +34,6 @@ interface Resources {
     payment: {
       "payment-method": "Payment Method";
       cash: "Cash";
-      card: "Card";
       "payment-summary": "Payment Summary";
       passengers: "Passengers";
       total: "Total";
