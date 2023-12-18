@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "@hooks/useAuth";
 
-import { TextButton, Divider, HStack, Input, Typography, VStack } from "@components/index";
+import { TextButton, Divider, Input, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "@layouts/index";
 import { PasswordInput } from "@components/Input/PasswordInput";
 import { useTranslation } from "react-i18next";
@@ -18,27 +18,20 @@ export function PasswordResetScreen() {
   return (
     <ScreenLayout>
       <VStack gap={20} alignItems="flex-end">
-        <HStack my={10}>
-          <Typography>{t("login.log-in-to")} </Typography>
-          <Typography bold>{t("login.frs-account")}</Typography>
-        </HStack>
+        <Typography>{t("password-reset.reset-password")} </Typography>
         <Input
-          testID="username-input"
           isDisabled={isLoadingAuth}
           value={username}
           onChangeText={setUsername}
           placeholder={t("login.username")}
         />
         <PasswordInput
-          testID="email-input"
           isDisabled={isLoadingAuth}
           value={email}
           onChangeText={setEmail}
-          placeholder={t("login.password")}
+          placeholder={t("password-reset.email")}
         />
-        <TextButton isLoading={isLoadingAuth} testID="login-btn">
-          {t("login.login")}
-        </TextButton>
+        <TextButton isLoading={isLoadingAuth}>{t("password-reset.send-email")}</TextButton>
         <Divider />
       </VStack>
     </ScreenLayout>

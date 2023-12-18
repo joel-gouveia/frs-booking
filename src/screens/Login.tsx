@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 export function LoginScreen() {
   const { t } = useTranslation();
-  const navigation = useNavigation<NavigationProps>();
+  const { navigate } = useNavigation<NavigationProps>();
   const { authenticate, isLoadingAuth, isLoadingStorage } = useAuth();
 
   const [username, setUsername] = useState("");
@@ -19,7 +19,7 @@ export function LoginScreen() {
 
   const handleLoginPressed = async () => {
     await authenticate(username, password);
-    navigation.navigate(NavigationScreens.ROUTES);
+    navigate(NavigationScreens.ROUTES);
   };
 
   if (isLoadingStorage) return null; // Can be a splash screen in the future.
@@ -49,7 +49,9 @@ export function LoginScreen() {
           {t("login.login")}
         </TextButton>
         <Divider />
-        <TouchableOpacity testID="forgot-password-btn">
+        <TouchableOpacity
+          onPress={() => navigate(NavigationScreens.PASSWORD_RESET)}
+          testID="forgot-password-btn">
           <Typography>{t("login.forgot-password?")}</Typography>
         </TouchableOpacity>
       </VStack>
