@@ -57,6 +57,9 @@ export function PaymentScreen() {
             <Typography size="sm" mb={46}>
               {t("payment.passengers")}: {passengersText}
             </Typography>
+            <Typography size="sm" mb={46}>
+              {t("payment.vehicles")}:
+            </Typography>
           </View>
         </View>
         <Typography fontSize={30} py={4} style={styles.price}>
