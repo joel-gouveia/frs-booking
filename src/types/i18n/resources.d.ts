@@ -6,6 +6,9 @@ interface Resources {
     };
   };
   en: {
+    common: {
+      voyageleg: "Voyageleg";
+    };
     login: {
       login: "Login";
       "log-in-to": "Log in to";
@@ -26,12 +29,15 @@ interface Resources {
       "choose-departure": "Choose Departure";
     };
     booking: {
-      voyageleg: "Voyageleg";
-      "adult-standard": "Adult - Standard";
-      "child-standard": "Child - Standard";
-      "bycicle-standard": "Bycicle - Standard";
-      "car-up-to": "Car up to {{num}}";
       book: "BOOK";
+    };
+    payment: {
+      "payment-method": "Payment Method";
+      cash: "Cash";
+      "payment-summary": "Payment Summary";
+      passengers: "Passengers";
+      total: "Total";
+      "confirm-purchase": "Confirm Purchase";
     };
     footer: {
       "main-menu": "Main Menu";

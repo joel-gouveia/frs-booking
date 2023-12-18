@@ -29,12 +29,11 @@ export function Button(props: IButton) {
     style,
     ...restProps
   } = props;
-
   return (
     <TouchableOpacity
       activeOpacity={0.6}
       onPress={onPress}
-      style={[defaults.button, variants[variant!].button, style]}
+      style={[defaults.button, variants[variant].button, style]}
       disabled={disabled}
       {...restProps}>
       {isLoading && (

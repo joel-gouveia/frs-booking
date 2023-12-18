@@ -2,14 +2,15 @@ import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Typography, VStack } from "@components/index";
 import { useBooking } from "@hooks/useBooking";
-import { getTodayDateString } from "@utils/date";
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import EnterKey from "@assets/images/enter-key.svg";
 import { chunkArray } from "@utils/array";
+import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
+import { FooterButton } from "@components/Footer/FooterButton";
 import { ItemsRow } from "./ItemsRow";
 
 // TODO: This will come from the API in the future
@@ -17,12 +18,15 @@ const ITEM_NAMES = ["Adult - Standard", "Child", "Car", "Bycicle"];
 
 export function BookingScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode, departureTime } = useBooking();
+  const {
+    originCode,
+    destinationCode,
+    departureDate,
+    departureTime,
+    itemCounters,
+    setItemCounters,
+  } = useBooking();
   const { navigate } = useNavigation<NavigationProps>();
-
-  const [itemCounters, setItemCounters] = useState<Record<string, number>>({});
-
-  const today = useMemo(() => getTodayDateString(), []);
 
   const reset = () => {
     setItemCounters(obj =>
@@ -44,11 +48,19 @@ export function BookingScreen() {
     return chunkArray(items, 2);
   }, [itemCounters, setItemCounters]);
 
+  const handlePressBook = () => {
+    if (Object.values(itemCounters).every(val => val === 0)) {
+      return;
+    }
+
+    navigate(NavigationScreens.PAYMENT);
+  };
+
   return (
     <ScreenLayout>
       <View style={styles.header}>
-        <Typography size="small" style={styles.headerText}>
-          {t("booking.voyageleg")}: {today} {departureTime} {originCode} - {destinationCode}
+        <Typography size="sm" style={styles.headerText}>
+          {t("common.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
         </Typography>
       </View>
       <VStack gap={50} mb={75}>
@@ -56,26 +68,15 @@ export function BookingScreen() {
           <ItemsRow key={row[0].name} row={row} />
         ))}
       </VStack>
-      <Button variant="outline" style={styles.bookButton}>
+      <Button onPress={handlePressBook} variant="outline" style={styles.bookButton}>
         <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
         <Typography fontSize={20}>{t("booking.book")}</Typography>
       </Button>
-      <Footer
-        buttons={[
-          {
-            label: t("footer.main-menu"),
-            onPress: () => navigate(NavigationScreens.MAIN_MENU),
-          },
-          {
-            label: t("footer.summary"),
-            onPress: () => {},
-          },
-          {
-            label: t("footer.reset"),
-            onPress: reset,
-          },
-        ]}
-      />
+      <Footer>
+        <MainMenuButton />
+        <FooterButton label={t("footer.summary")} />
+        <FooterButton label={t("footer.reset")} onPress={reset} />
+      </Footer>
     </ScreenLayout>
   );
 }
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     paddingHorizontal: 4,
     paddingVertical: 2,
+    borderRadius: 6,
   },
   invisibleSeparator: {
     width: 50,

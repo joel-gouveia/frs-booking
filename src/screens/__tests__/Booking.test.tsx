@@ -16,13 +16,16 @@ jest.mock("@react-navigation/native", () => {
 const ORIGIN_CODE = "A";
 const DESTINATION_CODE = "B";
 const TIME = "10:00";
+const DATE = "2020-01-01";
 
 jest.mock("@hooks/useBooking", () => {
   return {
     useBooking: () => ({
       originCode: ORIGIN_CODE,
       destinationCode: DESTINATION_CODE,
+      departureDate: DATE,
       departureTime: TIME,
+      itemCounters: {},
     }),
   };
 });
@@ -32,7 +35,9 @@ describe("Booking Screen", () => {
     const { getByText, getAllByTestId } = render(<BookingScreen />);
 
     await waitFor(() => {
-      expect(getByText(RegExp(`${TIME} ${ORIGIN_CODE} - ${DESTINATION_CODE}`))).toBeTruthy();
+      expect(
+        getByText(RegExp(`${DATE} ${TIME} ${ORIGIN_CODE} - ${DESTINATION_CODE}`)),
+      ).toBeTruthy();
       expect(getByText(i18n.t("footer.main-menu"))).toBeTruthy();
       expect(getByText(i18n.t("footer.summary"))).toBeTruthy();
       expect(getByText(i18n.t("footer.reset"))).toBeTruthy();

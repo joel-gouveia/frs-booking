@@ -9,13 +9,14 @@ import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useBooking } from "@hooks/useBooking";
 import { getDepartures } from "@api/departure.service";
-import { extractTimeFromDateTime } from "@utils/date";
+import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
 import { DepartureResponse } from "src/types/departure";
+import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
 
 export function DepartureTimeScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode, setDepartureTime } = useBooking();
+  const { originCode, destinationCode, setDepartureDate, setDepartureTime } = useBooking();
 
   const [departures, setDepartures] = useState<DepartureResponse[]>([]);
 
@@ -25,6 +26,10 @@ export function DepartureTimeScreen() {
     }
 
     getDepartures({ originCode, destinationCode }).then(res => {
+      if (res.length > 0) {
+        setDepartureDate(extractDateFromDateTime(res[0].departureTime));
+      }
+
       const transformedDepartures = res
         .map(departure => ({
           ...departure,
@@ -34,7 +39,7 @@ export function DepartureTimeScreen() {
 
       setDepartures(transformedDepartures);
     });
-  }, [originCode, destinationCode]);
+  }, [originCode, destinationCode, setDepartureDate]);
 
   const onChooseDepartureTime = (time: string) => () => {
     setDepartureTime(time);
@@ -64,14 +69,9 @@ export function DepartureTimeScreen() {
           keyExtractor={departure => departure.uuid}
         />
       </View>
-      <Footer
-        buttons={[
-          {
-            label: t("footer.main-menu"),
-            onPress: () => navigate(NavigationScreens.MAIN_MENU),
-          },
-        ]}
-      />
+      <Footer>
+        <MainMenuButton />
+      </Footer>
     </ScreenLayout>
   );
 }
