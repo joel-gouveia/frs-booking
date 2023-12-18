@@ -42,15 +42,6 @@ export function PaymentScreen() {
               {t("payment.cash")}
             </Typography>
           </Button>
-          {/* <Button variant="outline" style={styles.paymentButton}>
-            <Typography size="xs" style={styles.paymentButtonHotkey}>
-              1
-            </Typography>
-            <Icon name="dollar-sign" size={60} color="black" />
-            <Typography fontSize={26} style={styles.paymentButtonLabel}>
-              {t("payment.cash")}
-            </Typography>
-          </Button> */}
           <View style={styles.emptyContainer} />
         </HStack>
         <View>
