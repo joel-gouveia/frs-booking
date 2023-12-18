@@ -31,6 +31,9 @@ interface Resources {
     booking: {
       book: "BOOK";
     };
+    "booking-summary": {
+      "booking-summary": "Booking summary";
+    };
     payment: {
       "payment-method": "Payment Method";
       cash: "Cash";
