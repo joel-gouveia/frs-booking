@@ -24,9 +24,9 @@ const DESTINATION_CODE = "B";
 
 const mockSetDepartureTime = jest.fn();
 const mockSetDepartureDate = jest.fn();
-jest.mock("@hooks/useBooking", () => {
+jest.mock("@hooks/useBookingStore", () => {
   return {
-    useBooking: () => ({
+    useBookingStore: () => ({
       originCode: ORIGIN_CODE,
       destinationCode: DESTINATION_CODE,
       setDepartureTime: mockSetDepartureTime,

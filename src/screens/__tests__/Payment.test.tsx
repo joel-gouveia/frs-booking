@@ -16,9 +16,9 @@ const mockUseBooking = jest.fn().mockReturnValue({
   departureTime: TIME,
   itemCounters: {},
 });
-jest.mock("@hooks/useBooking", () => {
+jest.mock("@hooks/useBookingStore", () => {
   return {
-    useBooking: () => mockUseBooking(),
+    useBookingStore: () => mockUseBooking(),
   };
 });
 

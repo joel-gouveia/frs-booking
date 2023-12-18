@@ -29,6 +29,7 @@ export function Button(props: IButton) {
     style,
     ...restProps
   } = props;
+
   return (
     <TouchableOpacity
       activeOpacity={0.6}
