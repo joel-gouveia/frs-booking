@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useBookingStore } from "@hooks/useBookingStore";
-import { GenericFooterButton } from "../GenericFooterButton";
+import { FooterButton } from "../FooterButton";
 
 export function MainMenuButton() {
   const { t } = useTranslation();
@@ -15,5 +15,5 @@ export function MainMenuButton() {
     navigate(NavigationScreens.MAIN_MENU);
   };
 
-  return <GenericFooterButton label={t("footer.main-menu")} onPress={onPress} />;
+  return <FooterButton label={t("footer.main-menu")} onPress={onPress} />;
 }

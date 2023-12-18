@@ -20,7 +20,8 @@
       "@styles/*": ["src/styles/*"],
       "@assets/*": ["src/assets/*"],
       "@mocks/*": ["src/mocks/*"],
-      "@config/*": ["src/config/*"]
+      "@config/*": ["src/config/*"],
+      "@modules/*": ["src/modules/*"],
     }
   }
 }

@@ -9,6 +9,8 @@ import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import EnterKey from "@assets/images/enter-key.svg";
 import { chunkArray } from "@utils/array";
 import { useBookingStore } from "@hooks/useBookingStore";
+import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
+import { FooterButton } from "@components/Footer/FooterButton";
 import { ItemsRow } from "./ItemsRow";
 
 // TODO: This will come from the API in the future
@@ -60,19 +62,11 @@ export function BookingScreen() {
         <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
         <Typography fontSize={20}>{t("booking.book")}</Typography>
       </Button>
-      <Footer
-        buttons={[
-          "main-menu",
-          {
-            label: t("footer.summary"),
-            onPress: () => {},
-          },
-          {
-            label: t("footer.reset"),
-            onPress: resetCounters,
-          },
-        ]}
-      />
+      <Footer>
+        <MainMenuButton />
+        <FooterButton label={t("footer.summary")} />
+        <FooterButton label={t("footer.reset")} onPress={resetCounters} />
+      </Footer>
     </ScreenLayout>
   );
 }

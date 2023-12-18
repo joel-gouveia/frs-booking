@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { IRoute } from "src/types/route";
 import { useBookingStore } from "@hooks/useBookingStore";
+import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
 
 export function RouteSelectionScreen() {
   const { t } = useTranslation();
@@ -50,7 +51,9 @@ export function RouteSelectionScreen() {
           keyExtractor={route => route.name}
         />
       </View>
-      <Footer buttons={["main-menu"]} />
+      <Footer>
+        <MainMenuButton />
+      </Footer>
     </ScreenLayout>
   );
 }
