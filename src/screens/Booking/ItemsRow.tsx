@@ -20,19 +20,23 @@ export function ItemsRow({ row }: IItemsRow) {
 
   return (
     <HStack alignItems="center" justifyContent="center">
-      {row.map(({ name, hotkey }, index) => (
-        <React.Fragment key={name}>
-          <BookingItem
-            key={name}
-            text={name}
-            hotkey={hotkey}
-            value={itemCounters[name] ?? 0}
-            onMinusPress={() => decrementItem(name)}
-            onPlusPress={() => incrementItem(name)}
-          />
-          {index !== row.length - 1 && <View style={styles.separator} />}
-        </React.Fragment>
-      ))}
+      {row.map(({ name, hotkey }, index) => {
+        const counterValue = itemCounters[name] ?? 0;
+
+        return (
+          <React.Fragment key={name}>
+            <BookingItem
+              key={name}
+              text={name}
+              hotkey={hotkey}
+              value={counterValue}
+              onMinusPress={() => decrementItem(name)}
+              onPlusPress={() => incrementItem(name)}
+            />
+            {index !== row.length - 1 && <View style={styles.separator} />}
+          </React.Fragment>
+        );
+      })}
     </HStack>
   );
 }
