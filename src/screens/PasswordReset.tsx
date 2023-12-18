@@ -26,14 +26,19 @@ export function PasswordResetScreen() {
           value={username}
           onChangeText={setUsername}
           placeholder={t("login.username")}
+          testID="username-input"
         />
         <Input
           isDisabled={isLoadingAuth}
           value={email}
           onChangeText={setEmail}
           placeholder={t("password-reset.email")}
+          testID="email-input"
         />
-        <TextButton onPress={() => navigate(NavigationScreens.LOGIN)} isLoading={isLoadingAuth}>
+        <TextButton
+          onPress={() => navigate(NavigationScreens.LOGIN)}
+          isLoading={isLoadingAuth}
+          testID="send-email-btn">
           {t("password-reset.send-email")}
         </TextButton>
         <Divider />
