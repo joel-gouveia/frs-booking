@@ -45,7 +45,13 @@ export function BookingSummaryScreen() {
           <Typography size="sm" mb={46}>
             {t("payment.passengers")}: {passengersText}
           </Typography>
+          <Typography size="sm" mb={46}>
+            {t("payment.vehicles")}:
+          </Typography>
         </View>
+        <Typography fontSize={30} mt={50} style={styles.price}>
+          {t("payment.total")}: 123,45 €
+        </Typography>
       </View>
     </ScreenLayout>
   );
@@ -82,5 +88,8 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 6,
     marginTop: 8,
+  },
+  price: {
+    textAlign: "center",
   },
 });

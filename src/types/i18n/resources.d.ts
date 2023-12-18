@@ -40,6 +40,7 @@ interface Resources {
       cash: "Cash";
       "payment-summary": "Payment Summary";
       passengers: "Passengers";
+      vehicles: "Vehicles";
       total: "Total";
       "confirm-purchase": "Confirm Purchase";
     };
