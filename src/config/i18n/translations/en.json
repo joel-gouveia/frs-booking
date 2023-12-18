@@ -1,6 +1,7 @@
 {
   "common": {
-    "voyageleg": "Voyageleg"
+    "voyageleg": "Voyageleg",
+    "back": "Back"
   },
   "login": {
     "login": "Login",

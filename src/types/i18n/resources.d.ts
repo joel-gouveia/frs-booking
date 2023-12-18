@@ -8,6 +8,7 @@ interface Resources {
   en: {
     common: {
       voyageleg: "Voyageleg";
+      back: "Back";
     };
     login: {
       login: "Login";
