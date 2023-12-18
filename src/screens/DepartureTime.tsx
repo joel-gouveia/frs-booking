@@ -11,6 +11,7 @@ import { useBooking } from "@hooks/useBooking";
 import { getDepartures } from "@api/departure.service";
 import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
 import { DepartureResponse } from "src/types/departure";
+import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
 
 export function DepartureTimeScreen() {
   const { t } = useTranslation();
@@ -68,7 +69,9 @@ export function DepartureTimeScreen() {
           keyExtractor={departure => departure.uuid}
         />
       </View>
-      <Footer buttons={["main-menu"]} />
+      <Footer>
+        <MainMenuButton />
+      </Footer>
     </ScreenLayout>
   );
 }

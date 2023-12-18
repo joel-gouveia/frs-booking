@@ -7,11 +7,17 @@ import { Footer } from "@components/Footer/Footer";
 import { useAuth } from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
+import { FooterButton } from "@components/Footer/FooterButton";
 
 export function MainMenuScreen() {
   const { t } = useTranslation();
   const { logout } = useAuth();
   const { navigate } = useNavigation<NavigationProps>();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate(NavigationScreens.LOGIN);
+  };
 
   return (
     <ScreenLayout>
@@ -29,17 +35,9 @@ export function MainMenuScreen() {
           {t("main-menu.cancel")}
         </TextButton>
       </VStack>
-      <Footer
-        buttons={[
-          {
-            label: t("footer.logout"),
-            onPress: async () => {
-              await logout();
-              navigate(NavigationScreens.LOGIN);
-            },
-          },
-        ]}
-      />
+      <Footer>
+        <FooterButton label={t("footer.logout")} onPress={handleLogout} />
+      </Footer>
     </ScreenLayout>
   );
 }

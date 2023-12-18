@@ -7,6 +7,9 @@ import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
 import Icon from "react-native-vector-icons/Feather";
 import EnterKey from "@assets/images/enter-key.svg";
+import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
+import { FooterButton } from "@components/Footer/FooterButton";
+import { Empty } from "@components/Footer/CustomButtons/Empty";
 
 export function PaymentScreen() {
   const { t } = useTranslation();
@@ -29,7 +32,7 @@ export function PaymentScreen() {
       </View>
       <VStack gap={24}>
         <Typography>{t("payment.payment-method")}</Typography>
-        <HStack gap={40}>
+        <HStack gap={20}>
           <Button variant="outline" style={styles.paymentButton}>
             <Typography size="xs" style={styles.paymentButtonHotkey}>
               1
@@ -39,6 +42,15 @@ export function PaymentScreen() {
               {t("payment.cash")}
             </Typography>
           </Button>
+          {/* <Button variant="outline" style={styles.paymentButton}>
+            <Typography size="xs" style={styles.paymentButtonHotkey}>
+              1
+            </Typography>
+            <Icon name="dollar-sign" size={60} color="black" />
+            <Typography fontSize={26} style={styles.paymentButtonLabel}>
+              {t("payment.cash")}
+            </Typography>
+          </Button> */}
           <View style={styles.emptyContainer} />
         </HStack>
         <View>
@@ -57,16 +69,11 @@ export function PaymentScreen() {
           <Typography fontSize={20}>{t("payment.confirm-purchase")}</Typography>
         </Button>
       </VStack>
-      <Footer
-        buttons={[
-          "main-menu",
-          "empty",
-          {
-            label: t("footer.reset"),
-            onPress: () => {},
-          },
-        ]}
-      />
+      <Footer>
+        <MainMenuButton />
+        <Empty />
+        <FooterButton label={t("footer.reset")} />
+      </Footer>
     </ScreenLayout>
   );
 }
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
   paymentButton: {
     flex: 1,
     paddingVertical: 40,
-    marginRight: 10,
+    paddingHorizontal: 0,
   },
   emptyContainer: {
     flex: 1,
