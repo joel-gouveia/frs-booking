@@ -24,6 +24,7 @@ export const variants = {
       borderRadius: 0,
       paddingHorizontal: 4,
       paddingVertical: 4,
+      color: "white",
     },
   }),
 };

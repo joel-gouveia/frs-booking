@@ -42,7 +42,7 @@ export function RouteSelectionScreen() {
             <TextButton
               onPress={handleRoutePress(route)}
               variant="outline"
-              fontSize={30}
+              textStyle={styles.routeBtnText}
               style={styles.routeBtn}
               testID="route-btn">
               {route.name}
@@ -76,5 +76,8 @@ const styles = StyleSheet.create({
   },
   routeBtn: {
     margin: 10,
+  },
+  routeBtnText: {
+    fontSize: 30,
   },
 });

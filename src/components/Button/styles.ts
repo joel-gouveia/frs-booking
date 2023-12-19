@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const defaults = StyleSheet.create({
   button: {
     paddingHorizontal: 30,
-    paddingVertical: 15,
+    paddingVertical: 16,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -20,13 +20,15 @@ export const variants = {
   solid: StyleSheet.create({
     button: {
       borderColor: "transparent",
-      backgroundColor: "gray",
+      backgroundColor: "white",
     },
     buttonText: {
-      color: "white",
+      color: "#191955",
+      fontWeight: "bold",
+      fontSize: 20,
     },
     loader: {
-      color: "white",
+      color: "#191955",
     },
   }),
   outline: StyleSheet.create({

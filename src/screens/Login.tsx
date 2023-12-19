@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView, ScrollView, TouchableOpacity } from "react-native";
 import { useAuth } from "@hooks/useAuth";
 
-import { TextButton, Divider, Typography } from "@components/index";
+import { TextButton, Typography } from "@components/index";
 import { Input } from "@components/Input.v2/Input";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
@@ -28,40 +28,56 @@ export function LoginScreen() {
 
   return (
     <UnauthLayout>
-      <FlexWaysLogo width={265} height={80} style={{ alignSelf: "center" }} fill="white" />
-      <Typography bold style={{ alignSelf: "center", color: "white", fontSize: 20 }}>
-        {t("login.frs-account")}
-      </Typography>
-      <Input
-        testID="username-input"
-        isDisabled={isLoadingAuth}
-        value={username}
-        onChangeText={setUsername}
-        placeholder={`${t("login.username")}*`}
-        style={{ marginBottom: 32 }}
-      />
-      <PasswordInput
-        testID="password-input"
-        isDisabled={isLoadingAuth}
-        value={password}
-        onChangeText={setPassword}
-        placeholder={`${t("login.password")}*`}
-        style={{ marginBottom: 8 }}
-      />
-      <TouchableOpacity
-        onPress={() => navigate(NavigationScreens.PASSWORD_RESET)}
-        testID="forgot-password-btn">
-        <Typography color="white" style={{ fontSize: 12 }}>
-          {t("login.forgot-password?")} Click{" "}
-          <Typography bold color="white" style={{ fontSize: 12 }}>
-            here
-          </Typography>
+      <ScrollView>
+        <FlexWaysLogo
+          width={265}
+          height={80}
+          style={{ alignSelf: "center", marginTop: 50 }}
+          fill="white"
+        />
+        <Typography
+          bold
+          style={{ alignSelf: "center", color: "white", fontSize: 20, marginBottom: 140 }}>
+          {t("login.frs-account")}
         </Typography>
-      </TouchableOpacity>
-      <TextButton onPress={handleLoginPressed} isLoading={isLoadingAuth} testID="login-btn">
-        {t("login.login")}
-      </TextButton>
-      <Divider />
+        <KeyboardAvoidingView keyboardVerticalOffset={50}>
+          <Input
+            testID="username-input"
+            isDisabled={isLoadingAuth}
+            value={username}
+            onChangeText={setUsername}
+            placeholder={`${t("login.username")}*`}
+            style={{ marginBottom: 32 }}
+          />
+        </KeyboardAvoidingView>
+        <KeyboardAvoidingView keyboardVerticalOffset={50}>
+          <PasswordInput
+            testID="password-input"
+            isDisabled={isLoadingAuth}
+            value={password}
+            onChangeText={setPassword}
+            placeholder={`${t("login.password")}*`}
+            style={{ marginBottom: 8 }}
+          />
+        </KeyboardAvoidingView>
+        <TouchableOpacity
+          onPress={() => navigate(NavigationScreens.PASSWORD_RESET)}
+          testID="forgot-password-btn">
+          <Typography color="white" style={{ fontSize: 12 }}>
+            {t("login.forgot-password?")} Click{" "}
+            <Typography bold color="white" style={{ fontSize: 12 }}>
+              here
+            </Typography>
+          </Typography>
+        </TouchableOpacity>
+        <TextButton
+          style={{ marginTop: 60, paddingVertical: 10 }}
+          onPress={handleLoginPressed}
+          isLoading={isLoadingAuth}
+          testID="login-btn">
+          {t("login.login")}
+        </TextButton>
+      </ScrollView>
     </UnauthLayout>
   );
 }

@@ -67,8 +67,8 @@ export function DepartureTimeScreen() {
             <TextButton
               onPress={onChooseDepartureTime(departure.departureTime)}
               variant="outline"
-              fontSize={30}
               style={styles.routeBtn}
+              textStyle={styles.routeBtnText}
               testID="departure-btn">
               {departure.departureTime}
             </TextButton>
@@ -101,5 +101,8 @@ const styles = StyleSheet.create({
   },
   routeBtn: {
     margin: 10,
+  },
+  routeBtnText: {
+    fontSize: 30,
   },
 });
