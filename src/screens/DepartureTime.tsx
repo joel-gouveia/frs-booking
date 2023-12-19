@@ -7,15 +7,23 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { Footer } from "@components/Footer/Footer";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
-import { useBooking } from "@hooks/useBooking";
 import { getDepartures } from "@api/departure.service";
 import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
 import { DepartureResponse } from "src/types/departure";
+import { useBookingStore } from "@hooks/useBookingStore";
+import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
 
 export function DepartureTimeScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode, setDepartureDate, setDepartureTime } = useBooking();
+  const { originCode, destinationCode, setDepartureDate, setDepartureTime } = useBookingStore(
+    state => ({
+      originCode: state.originCode,
+      destinationCode: state.destinationCode,
+      setDepartureDate: state.setDepartureDate,
+      setDepartureTime: state.setDepartureTime,
+    }),
+  );
 
   const [departures, setDepartures] = useState<DepartureResponse[]>([]);
 
@@ -68,7 +76,9 @@ export function DepartureTimeScreen() {
           keyExtractor={departure => departure.uuid}
         />
       </View>
-      <Footer buttons={["main-menu"]} />
+      <Footer>
+        <MainMenuButton />
+      </Footer>
     </ScreenLayout>
   );
 }

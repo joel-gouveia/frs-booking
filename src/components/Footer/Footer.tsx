@@ -1,25 +1,12 @@
 import { View, Dimensions, StyleSheet } from "react-native";
 import React from "react";
-import { FooterButton, ICustomButtonLabel, IFooterButton } from "./FooterButton";
 
 interface IFooter {
-  buttons?: (IFooterButton | ICustomButtonLabel)[];
+  children?: React.ReactNode;
 }
 
-export function Footer({ buttons = [] }: IFooter) {
-  return (
-    <View style={styles.container}>
-      {buttons.map(button => {
-        const key = typeof button === "string" ? button : button.label;
-
-        return (
-          <View key={key} style={styles.btnContainer}>
-            <FooterButton button={button} />
-          </View>
-        );
-      })}
-    </View>
-  );
+export function Footer({ children }: IFooter) {
+  return <View style={styles.container}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -32,9 +19,5 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     paddingVertical: 12,
-  },
-  btnContainer: {
-    width: "33.33%",
-    paddingHorizontal: 16,
   },
 });

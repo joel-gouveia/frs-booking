@@ -1,26 +1,31 @@
+import { View, StyleSheet } from "react-native";
 import React from "react";
-import { EmptyButton } from "./CustomButtons/EmptyButton";
-import { GenericFooterButton } from "./GenericFooterButton";
-import { MainMenuButton } from "./CustomButtons/MainMenuButton";
+import { TextButton } from "@components/index";
 
-export type ICustomButtonLabel = "empty" | "main-menu";
-
-export interface IFooterButton {
+interface IFooterButton {
   label: string;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
-const customButtonConfig: Record<ICustomButtonLabel, () => JSX.Element> = {
-  empty: EmptyButton,
-  "main-menu": MainMenuButton,
-};
-
-export function FooterButton({ button }: { button: IFooterButton | ICustomButtonLabel }) {
-  const isCustom = typeof button === "string";
-  if (isCustom) {
-    const CustomButton = customButtonConfig[button];
-    return <CustomButton />;
-  }
-
-  return <GenericFooterButton label={button.label} onPress={button.onPress} />;
+export function FooterButton({ label, onPress }: IFooterButton) {
+  return (
+    <View style={styles.btnContainer}>
+      <TextButton onPress={onPress} variant="outline" style={styles.button} testID="footer-btn ">
+        {label}
+      </TextButton>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    paddingVertical: 0,
+    paddingHorizontal: 0,
+    height: "100%",
+    backgroundColor: "#e3e3e3",
+  },
+  btnContainer: {
+    width: "33.33%",
+    paddingHorizontal: 16,
+  },
+});
