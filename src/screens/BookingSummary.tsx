@@ -1,11 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { Button, Typography } from "@components/index";
-import React, { useMemo } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { useBookingStore } from "@hooks/useBookingStore";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useNavigation } from "@react-navigation/native";
+import useItemsText from "@hooks/useItemsText";
 
 export function BookingSummaryScreen() {
   const { t } = useTranslation();
@@ -19,13 +20,7 @@ export function BookingSummaryScreen() {
       itemCounters: state.itemCounters,
     }));
 
-  const passengersText = useMemo(
-    () =>
-      Object.entries(itemCounters)
-        .filter(([_, val]) => val > 0)
-        .map(([key, val]) => `(${key}: ${val})`),
-    [itemCounters],
-  );
+  const passengersText = useItemsText({ itemCounters });
 
   return (
     <ScreenLayout>
