@@ -17,6 +17,11 @@ interface Resources {
       username: "Username";
       password: "Password";
     };
+    "password-reset": {
+      "reset-password": "Reset your password";
+      email: "Email";
+      "send-email": "Send Email";
+    };
     routes: {
       "choose-route": "Choose Route";
     };

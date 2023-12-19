@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export enum NavigationScreens {
   LOGIN = "login",
+  PASSWORD_RESET = "password-reset",
   ROUTES = "routes",
   MAIN_MENU = "main-menu",
   DEPARTURE_TIME = "departure-time",
@@ -15,6 +16,7 @@ export enum NavigationScreens {
  */
 export type ScreenOptions = {
   [NavigationScreens.LOGIN]?: {};
+  [NavigationScreens.PASSWORD_RESET]?: {};
   [NavigationScreens.ROUTES]?: {};
   [NavigationScreens.MAIN_MENU]?: {};
   [NavigationScreens.DEPARTURE_TIME]?: {};
@@ -24,6 +26,7 @@ export type ScreenOptions = {
 
 export type RootStackParamList = {
   [NavigationScreens.LOGIN]: ScreenOptions[NavigationScreens.LOGIN];
+  [NavigationScreens.PASSWORD_RESET]: ScreenOptions[NavigationScreens.PASSWORD_RESET];
   [NavigationScreens.ROUTES]: ScreenOptions[NavigationScreens.ROUTES];
   [NavigationScreens.MAIN_MENU]: ScreenOptions[NavigationScreens.MAIN_MENU];
   [NavigationScreens.DEPARTURE_TIME]: ScreenOptions[NavigationScreens.DEPARTURE_TIME];
