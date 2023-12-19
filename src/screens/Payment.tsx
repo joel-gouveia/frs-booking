@@ -36,7 +36,7 @@ export function PaymentScreen() {
 
   const onConfirmBooking = async () => {
     try {
-      // TODO: Refactor this.
+      // TODO: Refactor this on the ticket #29
       const tickets = Object.entries(itemCounters)
         .filter(([_, val]) => val > 0)
         .map(([key, val]) => ({ code: key, quantity: val }));
@@ -83,7 +83,11 @@ export function PaymentScreen() {
         <Typography fontSize={30} py={4} style={styles.price}>
           {t("payment.total")}: 123,45 €
         </Typography>
-        <Button variant="outline" style={styles.confirmPaymentButton} onPress={onConfirmBooking}>
+        <Button
+          variant="outline"
+          style={styles.confirmPaymentButton}
+          onPress={onConfirmBooking}
+          testID="confirm-payment-button">
           <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
           <Typography fontSize={20}>{t("payment.confirm-purchase")}</Typography>
         </Button>

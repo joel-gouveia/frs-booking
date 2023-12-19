@@ -1,13 +1,8 @@
+import { Price } from "./price";
+import { Ticket } from "./ticket";
+
 export interface Booking {
   number: string;
-  tickets: [
-    {
-      code: string;
-      quantity: number;
-    },
-  ];
-  totalPrice: {
-    value: number;
-    currency: string;
-  };
+  tickets: Ticket[];
+  totalPrice: Price;
 }
