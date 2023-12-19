@@ -10,15 +10,19 @@ import { useBookingStore } from "@hooks/useBookingStore";
 import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
 import { FooterButton } from "@components/Footer/FooterButton";
 import { Empty } from "@components/Footer/CustomButtons/Empty";
+import { createBooking, getReceipt } from "@api/booking.service";
+import { Printer } from "@modules/ThermalPrinter/ThermalPrinter";
+import { receiptUtils } from "@utils/receipt";
 
 export function PaymentScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode, departureDate, departureTime, itemCounters } =
+  const { originCode, destinationCode, departureDate, departureTime, itemCounters, uuid } =
     useBookingStore(state => ({
       originCode: state.originCode,
       destinationCode: state.destinationCode,
       departureDate: state.departureDate,
       departureTime: state.departureTime,
+      uuid: state.uuid,
       itemCounters: state.itemCounters,
     }));
 
@@ -29,6 +33,23 @@ export function PaymentScreen() {
         .map(([key, val]) => `(${key}: ${val})`),
     [itemCounters],
   );
+
+  const onConfirmBooking = async () => {
+    try {
+      // TODO: Refactor this.
+      const tickets = Object.entries(itemCounters)
+        .filter(([_, val]) => val > 0)
+        .map(([key, val]) => ({ code: key, quantity: val }));
+
+      const booking = await createBooking(uuid, tickets);
+      const receipt = await getReceipt(booking.number);
+
+      const printableReceipt = receiptUtils.generatePrintableReceipt(receipt);
+      await Printer.printTcp({ payload: printableReceipt });
+    } catch (error) {
+      // TODO: Handle errors properly with toasters.
+    }
+  };
 
   return (
     <ScreenLayout>
@@ -62,7 +83,7 @@ export function PaymentScreen() {
         <Typography fontSize={30} py={4} style={styles.price}>
           {t("payment.total")}: 123,45 €
         </Typography>
-        <Button variant="outline" style={styles.confirmPaymentButton}>
+        <Button variant="outline" style={styles.confirmPaymentButton} onPress={onConfirmBooking}>
           <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
           <Typography fontSize={20}>{t("payment.confirm-purchase")}</Typography>
         </Button>
