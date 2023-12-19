@@ -15,23 +15,25 @@ interface Props extends PropsWithChildren, TextInputProps, ShortcutProps {
 }
 
 export function Input(props: Props) {
-  const { onChangeText, isDisabled, inputLeftElement, inputRightElement, style, ...restProps } =
-    props;
-
-  console.log(
-    defaults({ hasLeftElement: Boolean(inputLeftElement) }).input,
-    variants[props.variant!].input,
+  const {
+    onChangeText,
+    isDisabled,
+    inputLeftElement,
+    inputRightElement,
     style,
-  );
+    variant = "standard",
+    ...restProps
+  } = props;
 
   return (
     <HStack style={[defaults().wrapper, defaultShortcuts(props)]} alignItems="center">
       <InputLeftElement shown={Boolean(inputLeftElement)}>{inputLeftElement}</InputLeftElement>
       <TextInput
+        placeholderTextColor="white"
         onChangeText={text => !isDisabled && onChangeText?.(text)}
         style={[
           defaults({ hasLeftElement: Boolean(inputLeftElement) }).input,
-          variants[props.variant!].input,
+          variants[variant].input,
           style,
         ]}
         {...restProps}
@@ -44,5 +46,5 @@ export function Input(props: Props) {
 Input.defaultProps = {
   isDisabled: false,
   isInvalid: false,
-  variant: "filled",
+  variant: "standard",
 };

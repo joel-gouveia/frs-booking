@@ -60,7 +60,7 @@ export function BookingScreen() {
       </VStack>
       <Button onPress={handlePressBook} variant="outline" style={styles.bookButton}>
         <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
-        <Typography fontSize={20}>{t("booking.book")}</Typography>
+        <Typography style={styles.bookButtonText}>{t("booking.book")}</Typography>
       </Button>
       <Footer>
         <MainMenuButton />
@@ -92,6 +92,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
     position: "relative",
     paddingVertical: 24,
+  },
+  bookButtonText: {
+    fontSize: 20,
   },
   enterKeyIcon: {
     position: "absolute",

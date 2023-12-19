@@ -15,15 +15,15 @@ export const defaults = (props?: { hasLeftElement: boolean }) =>
   });
 
 export const variants = {
-  filled: StyleSheet.create({
+  standard: StyleSheet.create({
     input: {
-      borderColor: "transparent",
-    },
-  }),
-  outline: StyleSheet.create({
-    input: {
-      borderColor: "black",
+      borderColor: "white",
       backgroundColor: "transparent",
+      borderWidth: 0,
+      borderBottomWidth: 1,
+      borderRadius: 0,
+      paddingHorizontal: 4,
+      paddingVertical: 4,
     },
   }),
 };

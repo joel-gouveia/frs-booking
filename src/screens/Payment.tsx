@@ -40,9 +40,7 @@ export function PaymentScreen() {
               1
             </Typography>
             <Icon name="dollar-sign" size={60} color="black" />
-            <Typography fontSize={26} style={styles.paymentButtonLabel}>
-              {t("payment.cash")}
-            </Typography>
+            <Typography style={styles.paymentButtonLabel}>{t("payment.cash")}</Typography>
           </Button>
           <View style={styles.emptyContainer} />
         </HStack>
@@ -57,12 +55,14 @@ export function PaymentScreen() {
             </Typography>
           </View>
         </View>
-        <Typography fontSize={30} py={4} style={styles.price}>
+        <Typography py={4} style={styles.price}>
           {t("payment.total")}: 123,45 €
         </Typography>
         <Button variant="outline" style={styles.confirmPaymentButton}>
           <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
-          <Typography fontSize={20}>{t("payment.confirm-purchase")}</Typography>
+          <Typography style={styles.confirmPaymentButtonText}>
+            {t("payment.confirm-purchase")}
+          </Typography>
         </Button>
       </VStack>
       <Footer>
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   paymentButtonLabel: {
     position: "absolute",
     bottom: 6,
+    fontSize: 26,
   },
   paymentSummaryContainer: {
     backgroundColor: "#d9d9d9",
@@ -110,11 +111,15 @@ const styles = StyleSheet.create({
   },
   price: {
     textAlign: "center",
+    fontSize: 30,
   },
   confirmPaymentButton: {
     marginHorizontal: 40,
     position: "relative",
     paddingVertical: 10,
+  },
+  confirmPaymentButtonText: {
+    fontSize: 20,
   },
   enterKeyIcon: {
     position: "absolute",

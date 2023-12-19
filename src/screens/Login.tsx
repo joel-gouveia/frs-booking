@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { useAuth } from "@hooks/useAuth";
 
-import { TextButton, Divider, Typography, VStack } from "@components/index";
+import { TextButton, Divider, Typography } from "@components/index";
 import { Input } from "@components/Input.v2/Input";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
@@ -29,53 +29,39 @@ export function LoginScreen() {
   return (
     <UnauthLayout>
       <FlexWaysLogo width={265} height={80} style={{ alignSelf: "center" }} fill="white" />
-      <Typography fontSize={20} bold style={{ alignSelf: "center", color: "white" }}>
+      <Typography bold style={{ alignSelf: "center", color: "white", fontSize: 20 }}>
         {t("login.frs-account")}
       </Typography>
-      <VStack gap={20} alignItems="flex-end">
-        <Input
-          testID="username-input"
-          isDisabled={isLoadingAuth}
-          value={username}
-          onChangeText={setUsername}
-          placeholder={`${t("login.username")}*`}
-          placeholderTextColor="white"
-          style={{
-            borderBottomWidth: 1,
-            borderColor: "white",
-            borderWidth: 0,
-            borderRadius: 0,
-            paddingHorizontal: 4,
-            paddingVertical: 4,
-          }}
-        />
-        <PasswordInput
-          testID="password-input"
-          isDisabled={isLoadingAuth}
-          value={password}
-          onChangeText={setPassword}
-          placeholder={`${t("login.password")}*`}
-          placeholderTextColor="white"
-          style={{
-            borderBottomWidth: 1,
-            borderColor: "white",
-            borderWidth: 0,
-            borderRadius: 0,
-            paddingHorizontal: 4,
-            paddingVertical: 4,
-            color: "white",
-          }}
-        />
-        <TextButton onPress={handleLoginPressed} isLoading={isLoadingAuth} testID="login-btn">
-          {t("login.login")}
-        </TextButton>
-        <Divider />
-        <TouchableOpacity
-          onPress={() => navigate(NavigationScreens.PASSWORD_RESET)}
-          testID="forgot-password-btn">
-          <Typography>{t("login.forgot-password?")}</Typography>
-        </TouchableOpacity>
-      </VStack>
+      <Input
+        testID="username-input"
+        isDisabled={isLoadingAuth}
+        value={username}
+        onChangeText={setUsername}
+        placeholder={`${t("login.username")}*`}
+        style={{ marginBottom: 32 }}
+      />
+      <PasswordInput
+        testID="password-input"
+        isDisabled={isLoadingAuth}
+        value={password}
+        onChangeText={setPassword}
+        placeholder={`${t("login.password")}*`}
+        style={{ marginBottom: 8 }}
+      />
+      <TouchableOpacity
+        onPress={() => navigate(NavigationScreens.PASSWORD_RESET)}
+        testID="forgot-password-btn">
+        <Typography color="white" style={{ fontSize: 12 }}>
+          {t("login.forgot-password?")} Click{" "}
+          <Typography bold color="white" style={{ fontSize: 12 }}>
+            here
+          </Typography>
+        </Typography>
+      </TouchableOpacity>
+      <TextButton onPress={handleLoginPressed} isLoading={isLoadingAuth} testID="login-btn">
+        {t("login.login")}
+      </TextButton>
+      <Divider />
     </UnauthLayout>
   );
 }
