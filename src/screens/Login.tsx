@@ -3,11 +3,11 @@ import { TouchableOpacity } from "react-native";
 import { useAuth } from "@hooks/useAuth";
 
 import { TextButton, Divider, HStack, Input, Typography, VStack } from "@components/index";
-import { ScreenLayout } from "@layouts/index";
 import { PasswordInput } from "@components/Input/PasswordInput";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useTranslation } from "react-i18next";
+import { UnauthLayout } from "@layouts/UnauthLayout";
 
 export function LoginScreen() {
   const { t } = useTranslation();
@@ -25,7 +25,7 @@ export function LoginScreen() {
   if (isLoadingStorage) return null; // Can be a splash screen in the future.
 
   return (
-    <ScreenLayout>
+    <UnauthLayout>
       <VStack gap={20} alignItems="flex-end">
         <HStack my={10}>
           <Typography>{t("login.log-in-to")} </Typography>
@@ -53,6 +53,6 @@ export function LoginScreen() {
           <Typography>{t("login.forgot-password?")}</Typography>
         </TouchableOpacity>
       </VStack>
-    </ScreenLayout>
+    </UnauthLayout>
   );
 }
