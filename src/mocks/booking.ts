@@ -16,8 +16,8 @@ const booking: Booking = {
 };
 
 const tickets: Ticket[] = [
-  { code: "AD", quantity: 2 },
-  { code: "CH", quantity: 1 },
+  { code: "adult", quantity: 2 },
+  { code: "child", quantity: 1 },
   { code: "car", quantity: 1 },
 ];
 
