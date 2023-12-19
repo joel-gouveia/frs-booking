@@ -64,7 +64,10 @@ export function BookingScreen() {
       </Button>
       <Footer>
         <MainMenuButton />
-        <FooterButton label={t("footer.summary")} />
+        <FooterButton
+          label={t("footer.summary")}
+          onPress={() => navigate(NavigationScreens.BOOKING_SUMMARY)}
+        />
         <FooterButton label={t("footer.reset")} onPress={resetCounters} />
       </Footer>
     </ScreenLayout>
