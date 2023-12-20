@@ -28,7 +28,7 @@ export function Input(props: Props) {
   } = props;
 
   const [isFocused, setIsFocused] = useState(false);
-  const mustFloadLabel = useMemo(() => Boolean(isFocused || value), [isFocused, value]);
+  const mustFloatLabel = useMemo(() => Boolean(isFocused || value), [isFocused, value]);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -40,7 +40,7 @@ export function Input(props: Props) {
 
   return (
     <HStack style={[defaults().wrapper, defaultShortcuts(props)]} alignItems="center">
-      {label && <FloatingLabel label={label} isFloat={mustFloadLabel} />}
+      {label && <FloatingLabel label={label} isFloat={mustFloatLabel} />}
       <InputLeftElement shown={Boolean(inputLeftElement)}>{inputLeftElement}</InputLeftElement>
       <TextInput
         placeholderTextColor="white"
