@@ -8,6 +8,7 @@ interface Resources {
   en: {
     common: {
       voyageleg: "Voyageleg";
+      back: "Back";
     };
     login: {
       login: "Login";
@@ -16,6 +17,11 @@ interface Resources {
       "forgot-password?": "Forgot your Password?";
       username: "Username";
       password: "Password";
+    };
+    "password-reset": {
+      "reset-password": "Reset your password";
+      email: "Email";
+      "send-email": "Send Email";
     };
     routes: {
       "choose-route": "Choose Route";
@@ -31,11 +37,15 @@ interface Resources {
     booking: {
       book: "BOOK";
     };
+    "booking-summary": {
+      "booking-summary": "Booking summary";
+    };
     payment: {
       "payment-method": "Payment Method";
       cash: "Cash";
       "payment-summary": "Payment Summary";
       passengers: "Passengers";
+      vehicles: "Vehicles";
       total: "Total";
       "confirm-purchase": "Confirm Purchase";
     };

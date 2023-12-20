@@ -3,10 +3,12 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export enum NavigationScreens {
   LOGIN = "login",
+  PASSWORD_RESET = "password-reset",
   ROUTES = "routes",
   MAIN_MENU = "main-menu",
   DEPARTURE_TIME = "departure-time",
   BOOKING = "booking",
+  BOOKING_SUMMARY = "booking-summary",
   PAYMENT = "payment",
 }
 
@@ -15,19 +17,23 @@ export enum NavigationScreens {
  */
 export type ScreenOptions = {
   [NavigationScreens.LOGIN]?: {};
+  [NavigationScreens.PASSWORD_RESET]?: {};
   [NavigationScreens.ROUTES]?: {};
   [NavigationScreens.MAIN_MENU]?: {};
   [NavigationScreens.DEPARTURE_TIME]?: {};
   [NavigationScreens.BOOKING]?: {};
+  [NavigationScreens.BOOKING_SUMMARY]?: {};
   [NavigationScreens.PAYMENT]?: {};
 };
 
 export type RootStackParamList = {
   [NavigationScreens.LOGIN]: ScreenOptions[NavigationScreens.LOGIN];
+  [NavigationScreens.PASSWORD_RESET]: ScreenOptions[NavigationScreens.PASSWORD_RESET];
   [NavigationScreens.ROUTES]: ScreenOptions[NavigationScreens.ROUTES];
   [NavigationScreens.MAIN_MENU]: ScreenOptions[NavigationScreens.MAIN_MENU];
   [NavigationScreens.DEPARTURE_TIME]: ScreenOptions[NavigationScreens.DEPARTURE_TIME];
   [NavigationScreens.BOOKING]: ScreenOptions[NavigationScreens.BOOKING];
+  [NavigationScreens.BOOKING_SUMMARY]: ScreenOptions[NavigationScreens.BOOKING_SUMMARY];
   [NavigationScreens.PAYMENT]: ScreenOptions[NavigationScreens.PAYMENT];
 };
 
