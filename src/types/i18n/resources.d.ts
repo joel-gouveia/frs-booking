@@ -8,6 +8,7 @@ interface Resources {
   en: {
     common: {
       voyageleg: "Voyageleg";
+      back: "Back";
     };
     login: {
       login: "Login";
@@ -31,11 +32,15 @@ interface Resources {
     booking: {
       book: "BOOK";
     };
+    "booking-summary": {
+      "booking-summary": "Booking summary";
+    };
     payment: {
       "payment-method": "Payment Method";
       cash: "Cash";
       "payment-summary": "Payment Summary";
       passengers: "Passengers";
+      vehicles: "Vehicles";
       total: "Total";
       "confirm-purchase": "Confirm Purchase";
     };

@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import { describe, expect, it, jest } from "@jest/globals";
 import i18n from "src/config/i18n/i18n";
-import { BookingScreen } from "@screens/Booking/Booking";
+import { BookingSummaryScreen } from "@screens/BookingSummary";
 import { NavigationScreens } from "src/types/navigation";
 
 const mockNavigate = jest.fn();
@@ -26,36 +26,40 @@ jest.mock("@hooks/useBookingStore", () => {
       destinationCode: DESTINATION_CODE,
       departureDate: DATE,
       departureTime: TIME,
-      itemCounters: {},
+      itemCounters: { adult: 2, child: 1, baby: 0 },
     }),
   };
 });
 
-describe("Booking Screen", () => {
-  it("renders the screen with header and footer buttons", async () => {
-    const { getByText, getAllByTestId } = render(<BookingScreen />);
+describe("Booking Summary Screen", () => {
+  it("renders the screen with header and back buttons", async () => {
+    const { getByText } = render(<BookingSummaryScreen />);
 
     await waitFor(() => {
       expect(
         getByText(RegExp(`${DATE} ${TIME} ${ORIGIN_CODE} - ${DESTINATION_CODE}`)),
       ).toBeTruthy();
-      expect(getByText(i18n.t("footer.main-menu"))).toBeTruthy();
-      expect(getByText(i18n.t("footer.summary"))).toBeTruthy();
-      expect(getByText(i18n.t("footer.reset"))).toBeTruthy();
-      expect(getAllByTestId("footer-btn")).toHaveLength(3);
+      expect(getByText(i18n.t("common.back"))).toBeTruthy();
     });
   });
 
-  it("navigates to booking summary screen, when pressing the summary button", async () => {
-    const { getByText } = render(<BookingScreen />);
-
-    fireEvent.press(getByText(i18n.t("footer.summary")));
+  it("Displays the items counter, but does not show when it is zero", async () => {
+    const { getByText } = render(<BookingSummaryScreen />);
 
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.BOOKING_SUMMARY);
+      expect(getByText(/adult: 2/)).toBeTruthy();
+      expect(getByText(/child: 1/)).toBeTruthy();
+      expect(() => getByText(/bike/)).toThrow();
     });
   });
 
-  // TODO: Since we will later use an enpoint, it does not make sense to make these tests now
-  it.todo("tests related to the items (adult, bycicle, etc.)");
+  it("navigates to booking screen, when pressing the back button", async () => {
+    const { getByText } = render(<BookingSummaryScreen />);
+
+    fireEvent.press(getByText(i18n.t("common.back")));
+
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.BOOKING);
+    });
+  });
 });
