@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { KeyboardAvoidingView, ScrollView, TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView, TouchableOpacity } from "react-native";
 import { useAuth } from "@hooks/useAuth";
 
 import { TextButton, Typography } from "@components/index";
@@ -27,57 +27,55 @@ export function LoginScreen() {
   if (isLoadingStorage) return null; // Can be a splash screen in the future.
 
   return (
-    <UnauthLayout>
-      <ScrollView>
-        <FlexWaysLogo
-          width={265}
-          height={80}
-          style={{ alignSelf: "center", marginTop: 50 }}
-          fill="white"
+    <UnauthLayout isScrollable>
+      <FlexWaysLogo
+        width={265}
+        height={80}
+        style={{ alignSelf: "center", marginTop: 50 }}
+        fill="white"
+      />
+      <Typography
+        bold
+        style={{ alignSelf: "center", color: "white", fontSize: 20, marginBottom: 140 }}>
+        {t("login.frs-account")}
+      </Typography>
+      <KeyboardAvoidingView>
+        <Input
+          testID="username-input"
+          isDisabled={isLoadingAuth}
+          value={username}
+          onChangeText={setUsername}
+          placeholder={`${t("login.username")}*`}
+          style={{ marginBottom: 32 }}
         />
-        <Typography
-          bold
-          style={{ alignSelf: "center", color: "white", fontSize: 20, marginBottom: 140 }}>
-          {t("login.frs-account")}
-        </Typography>
-        <KeyboardAvoidingView keyboardVerticalOffset={50}>
-          <Input
-            testID="username-input"
-            isDisabled={isLoadingAuth}
-            value={username}
-            onChangeText={setUsername}
-            placeholder={`${t("login.username")}*`}
-            style={{ marginBottom: 32 }}
-          />
-        </KeyboardAvoidingView>
-        <KeyboardAvoidingView keyboardVerticalOffset={50}>
-          <PasswordInput
-            testID="password-input"
-            isDisabled={isLoadingAuth}
-            value={password}
-            onChangeText={setPassword}
-            placeholder={`${t("login.password")}*`}
-            style={{ marginBottom: 8 }}
-          />
-        </KeyboardAvoidingView>
-        <TouchableOpacity
-          onPress={() => navigate(NavigationScreens.PASSWORD_RESET)}
-          testID="forgot-password-btn">
-          <Typography color="white" style={{ fontSize: 12 }}>
-            {t("login.forgot-password?")} Click{" "}
-            <Typography bold color="white" style={{ fontSize: 12 }}>
-              here
-            </Typography>
+      </KeyboardAvoidingView>
+      <KeyboardAvoidingView>
+        <PasswordInput
+          testID="password-input"
+          isDisabled={isLoadingAuth}
+          value={password}
+          onChangeText={setPassword}
+          placeholder={`${t("login.password")}*`}
+          style={{ marginBottom: 8 }}
+        />
+      </KeyboardAvoidingView>
+      <TouchableOpacity
+        onPress={() => navigate(NavigationScreens.PASSWORD_RESET)}
+        testID="forgot-password-btn">
+        <Typography color="white" size="xs">
+          {t("login.forgot-password?")} Click{" "}
+          <Typography bold color="white" size="xs">
+            here
           </Typography>
-        </TouchableOpacity>
-        <TextButton
-          style={{ marginTop: 60, paddingVertical: 10 }}
-          onPress={handleLoginPressed}
-          isLoading={isLoadingAuth}
-          testID="login-btn">
-          {t("login.login")}
-        </TextButton>
-      </ScrollView>
+        </Typography>
+      </TouchableOpacity>
+      <TextButton
+        style={{ marginTop: 60, paddingVertical: 10 }}
+        onPress={handleLoginPressed}
+        isLoading={isLoadingAuth}
+        testID="login-btn">
+        {t("login.login")}
+      </TextButton>
     </UnauthLayout>
   );
 }
