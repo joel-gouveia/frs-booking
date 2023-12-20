@@ -1,5 +1,7 @@
+import { Booking } from "./booking";
+
 export interface Receipt {
-  bookingNumber?: string;
+  bookingNumber?: Booking["number"];
   number: number;
   company: Company;
   routeName: string;

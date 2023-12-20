@@ -16,14 +16,14 @@ import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton"
 export function DepartureTimeScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode, setDepartureDate, setDepartureTime } = useBookingStore(
-    state => ({
+  const { originCode, destinationCode, setDepartureDate, setDepartureTime, setDepartureUUID } =
+    useBookingStore(state => ({
       originCode: state.originCode,
       destinationCode: state.destinationCode,
       setDepartureDate: state.setDepartureDate,
       setDepartureTime: state.setDepartureTime,
-    }),
-  );
+      setDepartureUUID: state.setDepartureUUID,
+    }));
 
   const [departures, setDepartures] = useState<DepartureResponse[]>([]);
 
@@ -48,8 +48,9 @@ export function DepartureTimeScreen() {
     });
   }, [originCode, destinationCode, setDepartureDate]);
 
-  const onChooseDepartureTime = (time: string) => () => {
-    setDepartureTime(time);
+  const onChooseDeparture = (departure: DepartureResponse) => () => {
+    setDepartureTime(departure.departureTime);
+    setDepartureUUID(departure.uuid);
     navigate(NavigationScreens.BOOKING);
   };
 
@@ -65,7 +66,7 @@ export function DepartureTimeScreen() {
           data={departures}
           renderItem={({ item: departure }) => (
             <TextButton
-              onPress={onChooseDepartureTime(departure.departureTime)}
+              onPress={onChooseDeparture(departure)}
               variant="outline"
               fontSize={30}
               style={styles.routeBtn}
