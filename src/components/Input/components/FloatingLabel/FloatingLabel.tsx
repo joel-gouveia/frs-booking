@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { Animated, StyleSheet } from "react-native";
+import { theme } from "src/theme/theme";
 
 interface IFloatingLabel {
   label: string;
@@ -35,6 +36,6 @@ const styles = StyleSheet.create({
   label: {
     position: "absolute",
     left: 4,
-    color: "white",
+    color: theme.colors.primary.contrast,
   },
 });

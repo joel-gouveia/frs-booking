@@ -21,15 +21,15 @@ export const variants = {
   solid: StyleSheet.create({
     button: {
       borderColor: "transparent",
-      backgroundColor: "white",
+      backgroundColor: theme.colors.primary.contrast,
     },
     buttonText: {
-      color: theme.colors.primary,
+      color: theme.colors.primary.main,
       fontWeight: "bold",
       fontSize: 20,
     },
     loader: {
-      color: theme.colors.primary,
+      color: theme.colors.primary.main,
     },
   }),
   outline: StyleSheet.create({

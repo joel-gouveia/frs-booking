@@ -7,18 +7,4 @@ import { Typography } from "./Typography/Typography";
 import { Button } from "./Button/Button";
 import { TextButton } from "./Button/TextButton";
 
-import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
-import { HeaderRight } from "./HeaderRight/HeaderRight";
-
-export {
-  VStack,
-  HStack,
-  Input,
-  Stack,
-  Divider,
-  Typography,
-  Button,
-  TextButton,
-  HeaderLogo,
-  HeaderRight,
-};
+export { VStack, HStack, Input, Stack, Divider, Typography, Button, TextButton };

@@ -8,7 +8,7 @@ import { DepartureTimeScreen } from "@screens/DepartureTime";
 import { BookingScreen } from "@screens/Booking/Booking";
 import { PaymentScreen } from "@screens/Payment";
 import { BookingSummaryScreen } from "@screens/BookingSummary";
-import { Header } from "@components/Header/Header";
+import { Header } from "@components/index";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

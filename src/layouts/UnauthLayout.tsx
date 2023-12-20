@@ -27,9 +27,9 @@ export function UnauthLayout({ isScrollable, ...restProps }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.primary.main,
   },
   scrollView: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.primary.main,
   },
 });

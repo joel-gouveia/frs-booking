@@ -3,6 +3,7 @@ import { TextInput, TextInputProps } from "react-native";
 
 import { ShortcutProps, defaultShortcuts } from "@styles/shortcuts";
 import { HStack } from "@components/HStack/HStack";
+import { theme } from "src/theme/theme";
 import { defaults, variants } from "./styles.v2";
 import { InputLeftElement, InputRightElement, FloatingLabel } from "./components";
 
@@ -43,7 +44,7 @@ export function Input(props: Props) {
       {label && <FloatingLabel label={label} isFloat={mustFloatLabel} />}
       <InputLeftElement shown={Boolean(inputLeftElement)}>{inputLeftElement}</InputLeftElement>
       <TextInput
-        placeholderTextColor="white"
+        placeholderTextColor={theme.colors.primary.contrast}
         onChangeText={text => !isDisabled && onChangeText?.(text)}
         style={[
           defaults({ hasLeftElement: Boolean(inputLeftElement) }).input,

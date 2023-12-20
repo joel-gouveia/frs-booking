@@ -10,6 +10,7 @@ import { UnauthLayout } from "@layouts/UnauthLayout";
 import FlexWaysLogo from "@assets/images/logo.svg";
 import { Input } from "@components/Input/Input.v2";
 import { PasswordInput } from "@components/Input/PasswordInput";
+import { theme } from "src/theme/theme";
 
 export function LoginScreen() {
   const { t } = useTranslation();
@@ -28,7 +29,12 @@ export function LoginScreen() {
 
   return (
     <UnauthLayout isScrollable>
-      <FlexWaysLogo width={265} height={80} style={styles.logo} color="white" />
+      <FlexWaysLogo
+        width={265}
+        height={80}
+        style={styles.logo}
+        color={theme.colors.primary.contrast}
+      />
       <Typography bold style={styles.subLogo}>
         {t("login.frs-account")}
       </Typography>
@@ -55,9 +61,9 @@ export function LoginScreen() {
       <TouchableOpacity
         onPress={() => navigate(NavigationScreens.PASSWORD_RESET)}
         testID="forgot-password-btn">
-        <Typography color="white" size="xs">
+        <Typography color={theme.colors.primary.contrast} size="xs">
           {t("login.forgot-password?")} {t("login.click")}{" "}
-          <Typography bold color="white" size="xs">
+          <Typography bold color={theme.colors.primary.contrast} size="xs">
             {t("login.here")}
           </Typography>
         </Typography>
@@ -80,7 +86,7 @@ const styles = StyleSheet.create({
   },
   subLogo: {
     alignSelf: "center",
-    color: "white",
+    color: theme.colors.primary.contrast,
     fontSize: 20,
     marginBottom: 140,
   },
