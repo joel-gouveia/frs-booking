@@ -28,7 +28,7 @@ export function LoginScreen() {
 
   return (
     <UnauthLayout isScrollable>
-      <FlexWaysLogo width={265} height={80} style={styles.logo} fill="white" />
+      <FlexWaysLogo width={265} height={80} style={styles.logo} color="white" />
       <Typography bold style={styles.subLogo}>
         {t("login.frs-account")}
       </Typography>

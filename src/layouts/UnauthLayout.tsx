@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { VStack } from "@components/index";
 import { ScrollView, StyleSheet } from "react-native";
+import { theme } from "src/theme/theme";
 
 interface Props extends PropsWithChildren {
   isScrollable?: boolean;
@@ -26,9 +27,9 @@ export function UnauthLayout({ isScrollable, ...restProps }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#191955",
+    backgroundColor: theme.colors.primary,
   },
   scrollView: {
-    backgroundColor: "#191955",
+    backgroundColor: theme.colors.primary,
   },
 });

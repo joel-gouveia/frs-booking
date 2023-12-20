@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from "src/theme/theme";
 
 export const defaults = StyleSheet.create({
   button: {
@@ -23,12 +24,12 @@ export const variants = {
       backgroundColor: "white",
     },
     buttonText: {
-      color: "#191955",
+      color: theme.colors.primary,
       fontWeight: "bold",
       fontSize: 20,
     },
     loader: {
-      color: "#191955",
+      color: theme.colors.primary,
     },
   }),
   outline: StyleSheet.create({
