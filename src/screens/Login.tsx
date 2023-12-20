@@ -3,13 +3,13 @@ import { KeyboardAvoidingView, StyleSheet, TouchableOpacity } from "react-native
 import { useAuth } from "@hooks/useAuth";
 
 import { TextButton, Typography } from "@components/index";
-import { Input } from "@components/Input.v2/Input";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useTranslation } from "react-i18next";
 import { UnauthLayout } from "@layouts/UnauthLayout";
 import FlexWaysLogo from "@assets/images/logo.svg";
-import { PasswordInput } from "@components/Input.v2/PasswordInput";
+import { Input } from "@components/Input/Input.v2";
+import { PasswordInput } from "@components/Input/PasswordInput";
 
 export function LoginScreen() {
   const { t } = useTranslation();
