@@ -17,6 +17,8 @@ interface Resources {
       "forgot-password?": "Forgot your Password?";
       username: "Username";
       password: "Password";
+      click: "Click";
+      here: "here";
     };
     "password-reset": {
       "reset-password": "Reset your password";

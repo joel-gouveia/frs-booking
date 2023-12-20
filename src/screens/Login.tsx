@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, TouchableOpacity } from "react-native";
 import { useAuth } from "@hooks/useAuth";
 
 import { TextButton, Typography } from "@components/index";
@@ -28,15 +28,8 @@ export function LoginScreen() {
 
   return (
     <UnauthLayout isScrollable>
-      <FlexWaysLogo
-        width={265}
-        height={80}
-        style={{ alignSelf: "center", marginTop: 50 }}
-        fill="white"
-      />
-      <Typography
-        bold
-        style={{ alignSelf: "center", color: "white", fontSize: 20, marginBottom: 140 }}>
+      <FlexWaysLogo width={265} height={80} style={styles.logo} fill="white" />
+      <Typography bold style={styles.subLogo}>
         {t("login.frs-account")}
       </Typography>
       <KeyboardAvoidingView>
@@ -46,7 +39,7 @@ export function LoginScreen() {
           value={username}
           onChangeText={setUsername}
           placeholder={`${t("login.username")}*`}
-          style={{ marginBottom: 32 }}
+          style={styles.usernameInput}
         />
       </KeyboardAvoidingView>
       <KeyboardAvoidingView>
@@ -56,21 +49,21 @@ export function LoginScreen() {
           value={password}
           onChangeText={setPassword}
           placeholder={`${t("login.password")}*`}
-          style={{ marginBottom: 8 }}
+          style={styles.passwordInput}
         />
       </KeyboardAvoidingView>
       <TouchableOpacity
         onPress={() => navigate(NavigationScreens.PASSWORD_RESET)}
         testID="forgot-password-btn">
         <Typography color="white" size="xs">
-          {t("login.forgot-password?")} Click{" "}
+          {t("login.forgot-password?")} {t("login.click")}{" "}
           <Typography bold color="white" size="xs">
-            here
+            {t("login.here")}
           </Typography>
         </Typography>
       </TouchableOpacity>
       <TextButton
-        style={{ marginTop: 60, paddingVertical: 10 }}
+        style={styles.loginButton}
         onPress={handleLoginPressed}
         isLoading={isLoadingAuth}
         testID="login-btn">
@@ -79,3 +72,26 @@ export function LoginScreen() {
     </UnauthLayout>
   );
 }
+
+const styles = StyleSheet.create({
+  logo: {
+    alignSelf: "center",
+    marginTop: 50,
+  },
+  subLogo: {
+    alignSelf: "center",
+    color: "white",
+    fontSize: 20,
+    marginBottom: 140,
+  },
+  usernameInput: {
+    marginBottom: 32,
+  },
+  passwordInput: {
+    marginBottom: 8,
+  },
+  loginButton: {
+    marginTop: 60,
+    paddingVertical: 10,
+  },
+});
