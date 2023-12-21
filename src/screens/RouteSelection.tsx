@@ -1,16 +1,17 @@
-import { Typography, TextButton } from "@components/index";
-import { View, StyleSheet, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
+import { Typography, TextButton, FlatListCustomScrollbar } from "@components/index";
+import { View, StyleSheet } from "react-native";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { getRoutes } from "@api/route.service";
-import { Footer } from "@components/Footer/Footer";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { IRoute } from "src/types/route";
 import { useBookingStore } from "@hooks/useBookingStore";
-import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
+
+import PaperAirplane from "@assets/images/paper-airplane.svg";
+import PaperAirplaneTrack from "@assets/images/paper-airplane-track.svg";
 
 export function RouteSelectionScreen() {
   const { t } = useTranslation();
@@ -31,47 +32,57 @@ export function RouteSelectionScreen() {
   };
 
   return (
-    <ScreenLayout>
-      <View style={styles.title} testID="title">
-        <Typography fontSize={24}>{t("routes.choose-route")}</Typography>
-      </View>
-      <View style={styles.routesContainer}>
-        <FlatList
+    <>
+      <PaperAirplane width={190} style={[styles.svg, styles.airplaneSvg]} />
+      <ScreenLayout>
+        <Typography fontSize={24} bold style={styles.title}>
+          {t("routes.choose-route")}
+        </Typography>
+        <FlatListCustomScrollbar
           data={routes}
+          keyExtractor={(route, index) => `${route.name}-${index}`}
+          flatListStyle={styles.flatList}
+          wrapperViewContainerStyle={styles.flatListWrapperStyle}
+          ItemSeparatorComponent={() => <View style={styles.spacing} />}
           renderItem={({ item: route }) => (
             <TextButton
               onPress={handleRoutePress(route)}
               variant="outline"
-              fontSize={30}
-              style={styles.routeBtn}
+              fontSize={24}
               testID="route-btn">
               {route.name}
             </TextButton>
           )}
-          keyExtractor={route => route.name}
         />
-      </View>
-      <Footer>
-        <MainMenuButton />
-      </Footer>
-    </ScreenLayout>
+      </ScreenLayout>
+      <PaperAirplaneTrack width={100} style={[styles.svg, styles.airplaneTrackSvg]} />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   title: {
-    backgroundColor: "#d9d9d9",
-    paddingVertical: 12,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 6,
-    marginBottom: 46,
+    textAlign: "center",
   },
-  routesContainer: {
-    margin: -10,
+  flatListWrapperStyle: {
+    height: 340,
+    marginTop: 60,
   },
-  routeBtn: {
-    margin: 10,
+  flatList: {
+    height: 340,
+    paddingHorizontal: 5,
+  },
+  spacing: {
+    height: 20,
+  },
+  svg: {
+    position: "absolute",
+  },
+  airplaneSvg: {
+    top: 50,
+  },
+  airplaneTrackSvg: {
+    bottom: -10,
+    right: -8,
   },
 });
