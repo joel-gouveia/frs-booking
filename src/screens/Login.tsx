@@ -27,12 +27,12 @@ export function LoginScreen() {
   if (isLoadingStorage) return null; // Can be a splash screen in the future.
 
   return (
-    <UnauthLayout isScrollable>
+    <UnauthLayout>
       <FlexWaysLogo width={265} height={80} style={styles.logo} fill="white" />
       <Typography bold style={styles.subLogo}>
         {t("login.frs-account")}
       </Typography>
-      <KeyboardAvoidingView>
+      <KeyboardAvoidingView keyboardVerticalOffset={20} behavior="position">
         <Input
           testID="username-input"
           isDisabled={isLoadingAuth}
@@ -41,8 +41,6 @@ export function LoginScreen() {
           placeholder={`${t("login.username")}*`}
           style={styles.usernameInput}
         />
-      </KeyboardAvoidingView>
-      <KeyboardAvoidingView>
         <PasswordInput
           testID="password-input"
           isDisabled={isLoadingAuth}
