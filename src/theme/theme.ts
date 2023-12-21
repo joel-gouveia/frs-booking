@@ -2,12 +2,18 @@ export const theme = {
   colors: {
     primary: {
       main: "#191955",
-      contrast: "#FFFFFF",
+      contrastText: "#FFFFFF",
+      light: "DEDEFF",
+      border: "FFFFFF",
     },
-    secondary: "#F7FAFC",
+    secondary: {
+      main: "#DEDEFF",
+      contrastText: "#191955",
+      border: "CACAFF",
+    },
+    border: "CACAFF",
     background: "#FFFFFF",
-    text: "#32325D",
-    error: "#F5365C",
+    text: "#191955",
   },
   typography: {
     fontSizes: {
