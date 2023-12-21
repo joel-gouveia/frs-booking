@@ -7,7 +7,7 @@ import { getRoutes } from "@api/route.service";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
-import { IRoute } from "src/types/route";
+import { IRoute } from "src/types/models/route";
 import { useBookingStore } from "@hooks/useBookingStore";
 
 import PaperAirplane from "@assets/images/paper-airplane.svg";
