@@ -8,7 +8,7 @@ import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useTranslation } from "react-i18next";
 import { UnauthLayout } from "@layouts/UnauthLayout";
 import FlexWaysLogo from "@assets/images/logo.svg";
-import { Input } from "@components/Input/Input.v2";
+import { Input } from "@components/Input/Input";
 import { PasswordInput } from "@components/Input/PasswordInput";
 
 export function LoginScreen() {
