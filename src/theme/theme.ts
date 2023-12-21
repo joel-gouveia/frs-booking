@@ -3,14 +3,14 @@ export const theme = {
     primary: {
       main: "#191955",
       contrastText: "#FFFFFF",
-      border: "FFFFFF",
+      border: "#FFFFFF",
     },
     secondary: {
       main: "#DEDEFF",
       contrastText: "#191955",
-      border: "CACAFF",
+      border: "#CACAFF",
     },
-    border: "CACAFF",
+    border: "#CACAFF",
     background: "#FFFFFF",
     text: "#191955",
   },
