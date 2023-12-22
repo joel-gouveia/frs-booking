@@ -58,8 +58,8 @@ export function DepartureTimeScreen() {
   // TODO: Maybe call getDepartures before this screen, so there is no need to go to it when there is only 1(since when there is only 1, we are supposed to skip it)
   return (
     <ScreenLayout>
-      <View style={styles.title}>
-        <Typography fontSize={24}>{t("departure-times.choose-departure")}</Typography>
+      <View style={styles.titleContainer}>
+        <Typography style={styles.title}>{t("departure-times.choose-departure")}</Typography>
       </View>
       <View style={styles.routesContainer}>
         <FlatList
@@ -68,8 +68,8 @@ export function DepartureTimeScreen() {
             <TextButton
               onPress={onChooseDeparture(departure)}
               variant="outline"
-              fontSize={30}
               style={styles.routeBtn}
+              textStyle={styles.routeBtnText}
               testID="departure-btn">
               {departure.departureTime}
             </TextButton>
@@ -85,7 +85,7 @@ export function DepartureTimeScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: {
+  titleContainer: {
     backgroundColor: "#d9d9d9",
     paddingVertical: 12,
     display: "flex",
@@ -94,10 +94,16 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginBottom: 46,
   },
+  title: {
+    fontSize: 30,
+  },
   routesContainer: {
     margin: -10,
   },
   routeBtn: {
     margin: 10,
+  },
+  routeBtnText: {
+    fontSize: 30,
   },
 });

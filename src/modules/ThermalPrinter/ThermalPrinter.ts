@@ -94,7 +94,7 @@ class ThermalPrinter {
    *   ip: '192.168.1.1',
    *   port: 9100,
    *   payload: 'Hello, world!',
-   *   timeout: 30000,
+   *   timeout: 30000, // milliseconds
    * });
    */
   async printTcp(

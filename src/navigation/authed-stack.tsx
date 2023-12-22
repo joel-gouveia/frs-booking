@@ -21,7 +21,7 @@ export function AuthedStack() {
         headerRight: HeaderRight,
         headerTitle: "",
         headerStyle: {
-          backgroundColor: "#1d2362", // TODO: This will come from the theme
+          backgroundColor: "#191955", // TODO: This will come from the theme
         },
       }}>
       <Stack.Screen name={NavigationScreens.ROUTES} component={RouteSelectionScreen} />

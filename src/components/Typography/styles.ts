@@ -4,7 +4,7 @@ export type ISizes = "xs" | "sm" | "md";
 
 export const sizes: Record<ISizes, StyleProp<TextStyle>> = {
   xs: {
-    fontSize: 11,
+    fontSize: 12,
   },
   sm: {
     fontSize: 14,

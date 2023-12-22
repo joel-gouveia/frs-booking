@@ -35,7 +35,7 @@ export function RouteSelectionScreen() {
     <>
       <PaperAirplane width={190} style={[styles.svg, styles.airplaneSvg]} />
       <ScreenLayout>
-        <Typography fontSize={24} bold style={styles.title} testID="title">
+        <Typography size="md" bold style={styles.title} testID="title">
           {t("routes.choose-route")}
         </Typography>
         <FlatListCustomScrollbar
@@ -84,5 +84,8 @@ const styles = StyleSheet.create({
   airplaneTrackSvg: {
     bottom: -10,
     right: -8,
+  },
+  routeBtnText: {
+    fontSize: 30,
   },
 });
