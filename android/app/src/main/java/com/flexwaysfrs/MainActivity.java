@@ -6,6 +6,9 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
 import android.os.Bundle;
 
+import android.view.KeyEvent;
+import com.keyevent.KeyEventModule;
+
 public class MainActivity extends ReactActivity {
 
   /**
@@ -37,5 +40,22 @@ public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
+  }
+
+  /*
+    * Hardware's physical KeyEvent Handlers
+  */
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    KeyEventModule.getInstance().onKeyDownEvent(keyCode, event);
+    super.onKeyDown(keyCode, event);
+    return true;
+  }
+
+  @Override
+  public boolean onKeyUp(int keyCode, KeyEvent event) {
+    KeyEventModule.getInstance().onKeyUpEvent(keyCode, event);
+    super.onKeyUp(keyCode, event);
+    return true;
   }
 }

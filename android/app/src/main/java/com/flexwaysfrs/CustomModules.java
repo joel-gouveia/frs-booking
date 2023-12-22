@@ -5,6 +5,7 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.thermalprinter.ThermalPrinterModule;
+import com.keyevent.KeyEventModule;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +23,7 @@ public class CustomModules implements ReactPackage {
        List<NativeModule> modules = new ArrayList<>();
 
        modules.add(new ThermalPrinterModule(reactContext));
+       modules.add(KeyEventModule.initKeyEventModule(reactContext));
 
        return modules;
    }
