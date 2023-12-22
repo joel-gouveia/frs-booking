@@ -7,7 +7,7 @@ interface Props extends PropsWithChildren {}
 
 export function ScreenLayout(props: Props) {
   return (
-    <VStack flex={1} p={20} style={styles.container}>
+    <VStack flex={1} p={22} style={styles.container}>
       {props.children}
     </VStack>
   );

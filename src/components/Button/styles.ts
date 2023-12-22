@@ -9,10 +9,10 @@ export const defaults = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    borderRadius: 8,
+    borderRadius: 10,
   },
   buttonText: {
-    color: "black",
+    color: theme.colors.primary.main,
     fontSize: 16,
   },
 });
@@ -20,16 +20,15 @@ export const defaults = StyleSheet.create({
 export const variants = {
   solid: StyleSheet.create({
     button: {
-      borderColor: "transparent",
-      backgroundColor: theme.colors.primary.contrastText,
+      backgroundColor: theme.colors.primary.main,
     },
     buttonText: {
-      color: theme.colors.primary.main,
-      fontWeight: "bold",
-      fontSize: 20,
+      color: theme.colors.primary.contrastText,
+      fontWeight: "600",
+      fontSize: 18,
     },
     loader: {
-      color: theme.colors.primary.main,
+      color: theme.colors.primary.contrastText,
     },
   }),
   outline: StyleSheet.create({

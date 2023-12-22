@@ -1,4 +1,4 @@
-import { Typography } from "@components/index";
+import { TextButton, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "@layouts/ScreenLayout";
 import React from "react";
 import TicketLogo from "@assets/images/ticket.svg";
@@ -11,17 +11,24 @@ export function TicketTypesScreen() {
       <Typography variant="title">What do you want to book?</Typography>
       <TicketLogo
         width={40}
-        height={26}
+        height={23}
         color={theme.colors.primary.main}
         style={styles.ticketLogo}
       />
+      <VStack gap={12}>
+        <TextButton>Passengers</TextButton>
+        <TextButton>Vehicles</TextButton>
+        <TextButton>Multitickets</TextButton>
+        <TextButton>Others</TextButton>
+      </VStack>
     </ScreenLayout>
   );
 }
 
 const styles = StyleSheet.create({
   ticketLogo: {
-    marginVertical: 16,
+    marginTop: 16,
+    marginBottom: 24,
     alignSelf: "center",
   },
 });

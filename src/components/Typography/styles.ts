@@ -18,9 +18,9 @@ export type ITextVariants = "title";
 
 export const variants: Record<ITextVariants, StyleProp<TextStyle>> = {
   title: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "bold",
     alignSelf: "center",
-    marginTop: 8,
+    marginTop: 6,
   },
 };

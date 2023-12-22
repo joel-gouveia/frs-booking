@@ -11,7 +11,7 @@ export function UnauthLayout({ isScrollable, ...restProps }: Props) {
   if (isScrollable) {
     return (
       <ScrollView keyboardShouldPersistTaps="handled" style={styles.scrollView}>
-        <VStack flex={1} p={20} style={styles.container}>
+        <VStack flex={1} p={22} style={styles.container}>
           {restProps.children}
         </VStack>
       </ScrollView>
@@ -19,7 +19,7 @@ export function UnauthLayout({ isScrollable, ...restProps }: Props) {
   }
 
   return (
-    <VStack flex={1} p={20} style={styles.container}>
+    <VStack flex={1} p={22} style={styles.container}>
       {restProps.children}
     </VStack>
   );
