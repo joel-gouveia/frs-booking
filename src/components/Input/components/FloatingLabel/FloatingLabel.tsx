@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
   label: {
     position: "absolute",
     left: 4,
-    color: theme.colors.primary.contrast,
+    color: theme.colors.primary.contrastText,
   },
 });

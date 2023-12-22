@@ -21,7 +21,7 @@ export const variants = {
   solid: StyleSheet.create({
     button: {
       borderColor: "transparent",
-      backgroundColor: theme.colors.primary.contrast,
+      backgroundColor: theme.colors.primary.contrastText,
     },
     buttonText: {
       color: theme.colors.primary.main,

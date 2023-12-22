@@ -18,14 +18,14 @@ export const defaults = (props?: { hasLeftElement: boolean }) =>
 export const variants = {
   standard: StyleSheet.create({
     input: {
-      borderColor: theme.colors.primary.contrast,
+      borderColor: theme.colors.primary.border,
       backgroundColor: "transparent",
       borderWidth: 0,
       borderBottomWidth: 1,
       borderRadius: 0,
       paddingHorizontal: 4,
       paddingVertical: 4,
-      color: theme.colors.primary.contrast,
+      color: theme.colors.primary.contrastText,
     },
   }),
 };
