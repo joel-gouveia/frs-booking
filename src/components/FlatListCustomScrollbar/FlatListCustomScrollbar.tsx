@@ -11,6 +11,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from "react-native";
+import { theme } from "src/theme/theme";
 
 interface Props<T> extends Omit<FlatListProps<T>, "style"> {
   /**
@@ -175,7 +176,7 @@ const defaultStyles = StyleSheet.create({
     overflow: "hidden",
     width: 5,
     borderRadius: 100,
-    backgroundColor: "#7D7DEF4D", // TODO: refactor to use theme
+    backgroundColor: theme.colors.border,
   },
   scrollIndicator: {
     position: "absolute",
@@ -183,6 +184,6 @@ const defaultStyles = StyleSheet.create({
     width: 5,
     borderRadius: 100,
     opacity: 1,
-    backgroundColor: "#191955", // TODO: refactor to use theme
+    backgroundColor: theme.colors.primary.main,
   },
 });

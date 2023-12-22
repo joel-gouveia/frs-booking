@@ -12,6 +12,7 @@ import { useBookingStore } from "@hooks/useBookingStore";
 
 import PaperAirplane from "@assets/images/paper-airplane.svg";
 import PaperAirplaneTrack from "@assets/images/paper-airplane-track.svg";
+import { theme } from "src/theme/theme";
 
 export function RouteSelectionScreen() {
   const { t } = useTranslation();
@@ -35,7 +36,12 @@ export function RouteSelectionScreen() {
     <>
       <PaperAirplane width={190} style={[styles.svg, styles.airplaneSvg]} />
       <ScreenLayout>
-        <Typography size="md" bold style={styles.title} testID="title">
+        <Typography
+          variant="title"
+          bold
+          style={styles.title}
+          testID="title"
+          color={theme.colors.text}>
           {t("routes.choose-route")}
         </Typography>
         <FlatListCustomScrollbar
@@ -47,7 +53,7 @@ export function RouteSelectionScreen() {
           renderItem={({ item: route }) => (
             <TextButton
               onPress={handleRoutePress(route)}
-              variant="outline"
+              variant="solid"
               fontSize={24}
               testID="route-btn">
               {route.name}
@@ -84,8 +90,5 @@ const styles = StyleSheet.create({
   airplaneTrackSvg: {
     bottom: -10,
     right: -8,
-  },
-  routeBtnText: {
-    fontSize: 30,
   },
 });
