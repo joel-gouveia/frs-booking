@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
   },
   containerInner: {
-    paddingHorizontal: 4,
     borderTopWidth: 1,
     borderColor: theme.colors.border,
     height: 54,

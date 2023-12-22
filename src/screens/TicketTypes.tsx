@@ -6,6 +6,7 @@ import { theme } from "src/theme/theme";
 import { StyleSheet } from "react-native";
 import { Footer } from "@components/Footer/Footer";
 import { FooterButton } from "@components/Footer/FooterButton";
+import { ResetButton } from "@components/Footer/CustomButtons/ResetButton";
 
 export function TicketTypesScreen() {
   return (
@@ -25,6 +26,8 @@ export function TicketTypesScreen() {
       </VStack>
       <Footer>
         <FooterButton label="Main Menu" symbolColor="blue" />
+        <FooterButton label="Summary" symbolColor="green" />
+        <ResetButton />
       </Footer>
     </ScreenLayout>
   );

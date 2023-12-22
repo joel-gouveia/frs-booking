@@ -97,6 +97,6 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     marginTop: 60,
-    paddingVertical: 8,
+    paddingVertical: 10,
   },
 });
