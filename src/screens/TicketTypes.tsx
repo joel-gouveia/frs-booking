@@ -1,6 +1,11 @@
+import { Typography } from "@components/index";
+import { ScreenLayout } from "@layouts/ScreenLayout";
 import React from "react";
-import { ScreenContainer } from "react-native-screens";
 
 export function TicketTypesScreen() {
-  return <ScreenContainer />;
+  return (
+    <ScreenLayout>
+      <Typography>What do you want to book</Typography>
+    </ScreenLayout>
+  );
 }

@@ -19,6 +19,7 @@ export function Header() {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: "5%",
+    backgroundColor: theme.colors.background,
   },
   containerInner: {
     paddingHorizontal: 4,

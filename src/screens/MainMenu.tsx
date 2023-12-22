@@ -24,7 +24,7 @@ export function MainMenuScreen() {
     <ScreenLayout>
       <VStack gap={20} pt={50}>
         <TextButton
-          onPress={() => navigate(NavigationScreens.DEPARTURE_TIME)}
+          onPress={() => navigate(NavigationScreens.TICKET_TYPES)}
           variant="outline"
           textStyle={styles.button}>
           {t("main-menu.sales")}
