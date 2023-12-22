@@ -1,4 +1,4 @@
-import { Typography, TextButton } from "@components/index";
+import { Typography } from "@components/index";
 import React, { useState, useEffect } from "react";
 
 import { ScreenLayout } from "@layouts/ScreenLayout";
@@ -12,6 +12,7 @@ import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
 import { DepartureResponse } from "src/types/departure";
 import { useBookingStore } from "@hooks/useBookingStore";
 import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
+import { TextButton } from "@components/Button/TextButton";
 
 export function DepartureTimeScreen() {
   const { t } = useTranslation();

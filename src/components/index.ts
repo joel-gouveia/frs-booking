@@ -5,6 +5,5 @@ import { Stack } from "./Stack/Stack";
 import { Divider } from "./Divider/Divider";
 import { Typography } from "./Typography/Typography";
 import { Button } from "./Button/Button";
-import { TextButton } from "./Button/TextButton";
 
-export { VStack, HStack, Input, Stack, Divider, Typography, Button, TextButton };
+export { VStack, HStack, Input, Stack, Divider, Typography, Button };

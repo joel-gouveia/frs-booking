@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { KeyboardAvoidingView, StyleSheet, TouchableOpacity } from "react-native";
 import { useAuth } from "@hooks/useAuth";
 
-import { TextButton, Typography } from "@components/index";
+import { Typography } from "@components/index";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useTranslation } from "react-i18next";
@@ -11,6 +11,7 @@ import FlexWaysLogo from "@assets/images/logo.svg";
 import { Input } from "@components/Input/Input";
 import { PasswordInput } from "@components/Input/PasswordInput";
 import { theme } from "src/theme/theme";
+import { TextButton } from "@components/Button/TextButton";
 
 export function LoginScreen() {
   const { t } = useTranslation();
