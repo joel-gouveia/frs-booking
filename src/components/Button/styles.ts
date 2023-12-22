@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from "src/theme/theme";
 
 export const defaults = StyleSheet.create({
   button: {
@@ -8,10 +9,10 @@ export const defaults = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    borderRadius: 8,
+    borderRadius: 10,
   },
   buttonText: {
-    color: "black",
+    color: theme.colors.primary.main,
     fontSize: 16,
   },
 });
@@ -19,34 +20,29 @@ export const defaults = StyleSheet.create({
 export const variants = {
   solid: StyleSheet.create({
     button: {
-      borderColor: "transparent",
-      backgroundColor: "white",
+      backgroundColor: theme.colors.primary.main,
     },
     buttonText: {
-      color: "#191955",
-      fontWeight: "bold",
-      fontSize: 20,
+      color: theme.colors.primary.contrastText,
+      fontWeight: "600",
+      fontSize: 18,
     },
     loader: {
-      color: "#191955",
+      color: theme.colors.primary.contrastText,
     },
   }),
   outline: StyleSheet.create({
     button: {
-      borderWidth: 1,
-      borderColor: "#dcdcdc",
-      backgroundColor: "#f5f5f5",
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 1,
-      shadowRadius: 8,
-      elevation: 5,
+      borderColor: theme.colors.primary.main,
+      backgroundColor: theme.colors.white,
     },
     buttonText: {
-      color: "black",
+      color: theme.colors.primary.main,
+      fontWeight: "bold",
+      fontSize: 18,
     },
     loader: {
-      color: "black",
+      color: theme.colors.primary.main,
     },
   }),
   ghost: StyleSheet.create({

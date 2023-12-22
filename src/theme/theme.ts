@@ -12,6 +12,7 @@ export const theme = {
     },
     border: "#CACAFF",
     background: "#FFFFFF",
+    white: "#FFFFFF",
     text: "#191955",
   },
   typography: {
@@ -32,4 +33,4 @@ export const theme = {
     large: 24,
     xlarge: 32,
   },
-};
+} as const;
