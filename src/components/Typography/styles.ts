@@ -13,3 +13,14 @@ export const sizes: Record<ISizes, StyleProp<TextStyle>> = {
     fontSize: 16,
   },
 };
+
+export type ITextVariants = "title";
+
+export const variants: Record<ITextVariants, StyleProp<TextStyle>> = {
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    alignSelf: "center",
+    marginTop: 6,
+  },
+};
