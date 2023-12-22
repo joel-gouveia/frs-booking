@@ -33,20 +33,16 @@ export const variants = {
   }),
   outline: StyleSheet.create({
     button: {
-      borderWidth: 1,
-      borderColor: "#dcdcdc",
-      backgroundColor: "#f5f5f5",
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 1,
-      shadowRadius: 8,
-      elevation: 5,
+      borderColor: theme.colors.primary.main,
+      backgroundColor: theme.colors.white,
     },
     buttonText: {
-      color: "black",
+      color: theme.colors.primary.main,
+      fontWeight: "bold",
+      fontSize: 18,
     },
     loader: {
-      color: "black",
+      color: theme.colors.primary.main,
     },
   }),
   ghost: StyleSheet.create({

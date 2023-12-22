@@ -70,6 +70,7 @@ export function LoginScreen() {
         style={styles.loginButton}
         onPress={handleLoginPressed}
         isLoading={isLoadingAuth}
+        variant="outline"
         testID="login-btn">
         {t("login.login")}
       </TextButton>
@@ -96,6 +97,6 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     marginTop: 60,
-    paddingVertical: 10,
+    paddingVertical: 8,
   },
 });

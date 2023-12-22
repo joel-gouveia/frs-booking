@@ -17,6 +17,7 @@ export const theme = {
     },
     border: "#CACAFF",
     background: "#FFFFFF",
+    white: "#FFFFFF",
     text: "#191955",
   },
   typography: {
