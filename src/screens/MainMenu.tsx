@@ -8,6 +8,7 @@ import { useAuth } from "@hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { FooterButton } from "@components/Footer/FooterButton";
+import { StyleSheet } from "react-native";
 
 export function MainMenuScreen() {
   const { t } = useTranslation();
@@ -25,13 +26,13 @@ export function MainMenuScreen() {
         <TextButton
           onPress={() => navigate(NavigationScreens.DEPARTURE_TIME)}
           variant="outline"
-          fontSize={30}>
+          textStyle={styles.button}>
           {t("main-menu.sales")}
         </TextButton>
-        <TextButton variant="outline" fontSize={30}>
+        <TextButton variant="outline" textStyle={styles.button}>
           {t("main-menu.boarding")}
         </TextButton>
-        <TextButton variant="outline" fontSize={30}>
+        <TextButton variant="outline" textStyle={styles.button}>
           {t("main-menu.cancel")}
         </TextButton>
       </VStack>
@@ -41,3 +42,9 @@ export function MainMenuScreen() {
     </ScreenLayout>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    fontSize: 30,
+  },
+});

@@ -20,7 +20,7 @@ export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: 
         </Typography>
         <VStack justifyContent="center" alignItems="center">
           <Typography size="sm">{text}</Typography>
-          <Typography fontSize={40}>{value}</Typography>
+          <Typography style={styles.itemCount}>{value}</Typography>
         </VStack>
       </Button>
       <HStack justifyContent="space-around">
@@ -53,5 +53,8 @@ const styles = StyleSheet.create({
   counterButton: {
     paddingHorizontal: 6,
     paddingVertical: 6,
+  },
+  itemCount: {
+    fontSize: 40,
   },
 });

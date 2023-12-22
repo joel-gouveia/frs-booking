@@ -19,7 +19,7 @@ export function PasswordInput(props: Props) {
       secureTextEntry={!showPassword}
       inputRightElement={
         <TouchableOpacity onPress={onPress}>
-          <Icon name={showPassword ? "eye" : "eye-off"} size={26} />
+          <Icon name={showPassword ? "eye" : "eye-off"} size={22} color="white" />
         </TouchableOpacity>
       }
     />

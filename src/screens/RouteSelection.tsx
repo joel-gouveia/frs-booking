@@ -32,8 +32,8 @@ export function RouteSelectionScreen() {
 
   return (
     <ScreenLayout>
-      <View style={styles.title} testID="title">
-        <Typography fontSize={24}>{t("routes.choose-route")}</Typography>
+      <View style={styles.titleContainer} testID="title">
+        <Typography style={styles.title}>{t("routes.choose-route")}</Typography>
       </View>
       <View style={styles.routesContainer}>
         <FlatList
@@ -42,7 +42,7 @@ export function RouteSelectionScreen() {
             <TextButton
               onPress={handleRoutePress(route)}
               variant="outline"
-              fontSize={30}
+              textStyle={styles.routeBtnText}
               style={styles.routeBtn}
               testID="route-btn">
               {route.name}
@@ -59,7 +59,7 @@ export function RouteSelectionScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: {
+  titleContainer: {
     backgroundColor: "#d9d9d9",
     paddingVertical: 12,
     display: "flex",
@@ -68,10 +68,16 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginBottom: 46,
   },
+  title: {
+    fontSize: 24,
+  },
   routesContainer: {
     margin: -10,
   },
   routeBtn: {
     margin: 10,
+  },
+  routeBtnText: {
+    fontSize: 30,
   },
 });
