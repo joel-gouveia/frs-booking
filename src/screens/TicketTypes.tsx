@@ -4,6 +4,7 @@ import React from "react";
 import TicketLogo from "@assets/images/ticket.svg";
 import { theme } from "src/theme/theme";
 import { StyleSheet } from "react-native";
+import { Footer } from "@components/Footer/Footer";
 
 export function TicketTypesScreen() {
   return (
@@ -21,6 +22,7 @@ export function TicketTypesScreen() {
         <TextButton>Multitickets</TextButton>
         <TextButton>Others</TextButton>
       </VStack>
+      <Footer></Footer>
     </ScreenLayout>
   );
 }
