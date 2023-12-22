@@ -1,6 +1,8 @@
+import { DepartureResponse } from "src/types/departure";
 import { create } from "zustand";
 
 interface BookingState {
+  uuid: DepartureResponse["uuid"];
   originCode: string;
   destinationCode: string;
   setRoute: (originCode: string, destinationCode: string) => void;
@@ -8,6 +10,7 @@ interface BookingState {
   departureDate: string;
   itemCounters: Record<string, number>;
   setDepartureTime: (time: string) => void;
+  setDepartureUUID: (uuid: DepartureResponse["uuid"]) => void;
   setDepartureDate: (date: string) => void;
   setItemCounters: (val: Record<string, number>) => void;
   resetItemCounters: () => void;
@@ -20,10 +23,12 @@ export const useBookingStore = create<BookingState>()(set => ({
   destinationCode: "",
   departureDate: "",
   departureTime: "",
+  uuid: "",
   itemCounters: {},
   setRoute: (originCode: string, destinationCode: string) =>
     set(state => ({ ...state, originCode, destinationCode })),
   setDepartureTime: time => set(state => ({ ...state, departureTime: time })),
+  setDepartureUUID: uuid => set(state => ({ ...state, uuid })),
   setDepartureDate: date => set(state => ({ ...state, departureDate: date })),
   setItemCounters: val => set(state => ({ ...state, itemCounters: val })),
   resetItemCounters: () =>

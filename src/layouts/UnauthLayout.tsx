@@ -10,7 +10,7 @@ interface Props extends PropsWithChildren {
 export function UnauthLayout({ isScrollable, ...restProps }: Props) {
   if (isScrollable) {
     return (
-      <ScrollView style={styles.scrollView}>
+      <ScrollView keyboardShouldPersistTaps="handled" style={styles.scrollView}>
         <VStack flex={1} p={20} style={styles.container}>
           {restProps.children}
         </VStack>
