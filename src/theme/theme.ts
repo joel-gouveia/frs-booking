@@ -28,6 +28,7 @@ export const theme = {
     },
     fontWeights: {
       normal: "400",
+      semibold: "600",
       bold: "700",
     },
   },
