@@ -10,6 +10,11 @@ export const theme = {
       contrastText: "#191955",
       border: "#CACAFF",
     },
+    symbols: {
+      blue: "#2C64C9",
+      green: "#79E07D",
+      red: "#EA1B59",
+    },
     border: "#CACAFF",
     background: "#FFFFFF",
     text: "#191955",

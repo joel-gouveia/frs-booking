@@ -5,6 +5,7 @@ import TicketLogo from "@assets/images/ticket.svg";
 import { theme } from "src/theme/theme";
 import { StyleSheet } from "react-native";
 import { Footer } from "@components/Footer/Footer";
+import { FooterButton } from "@components/Footer/FooterButton";
 
 export function TicketTypesScreen() {
   return (
@@ -22,7 +23,9 @@ export function TicketTypesScreen() {
         <TextButton>Multitickets</TextButton>
         <TextButton>Others</TextButton>
       </VStack>
-      <Footer></Footer>
+      <Footer>
+        <FooterButton label="Main Menu" symbolColor="blue" />
+      </Footer>
     </ScreenLayout>
   );
 }
