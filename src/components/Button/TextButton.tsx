@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleProp, Text, TextStyle, View } from "react-native";
+import { StyleProp, StyleSheet, Text, TextStyle, View } from "react-native";
 import { theme } from "src/theme/theme";
 import { defaults, variants } from "./styles";
 import { Button, IButton } from "./Button";
@@ -13,43 +13,40 @@ export interface Props extends IButton {
 export function TextButton(props: Props) {
   const { variant = "solid", textStyle, hotkey, children, style } = props;
 
-  if (hotkey !== undefined) {
-    return (
-      <Button variant={variant} style={[style, { position: "relative" }]} {...props}>
-        <View
-          style={{
-            position: "absolute",
-            borderWidth: 1,
-            borderColor: "white",
-            right: 8,
-            top: 8,
-            borderRadius: 3,
-            height: 16,
-            width: 16,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}>
-          <Typography
-            color={theme.colors.primary.contrastText}
-            style={{
-              fontWeight: "600",
-              lineHeight: 14,
-              fontSize: 11,
-            }}>
+  return (
+    <Button variant={variant} style={[styles.container, style]} {...props}>
+      {hotkey && (
+        <View style={styles.hotKey}>
+          <Typography color={theme.colors.primary.contrastText} style={styles.hotKeyText}>
             {hotkey}
           </Typography>
         </View>
-        <Text style={[defaults.buttonText, variants[variant].buttonText, textStyle]}>
-          {children}
-        </Text>
-      </Button>
-    );
-  }
-
-  return (
-    <Button variant={variant} style={style} {...props}>
+      )}
       <Text style={[defaults.buttonText, variants[variant].buttonText, textStyle]}>{children}</Text>
     </Button>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    position: "relative",
+  },
+  hotKey: {
+    position: "absolute",
+    borderWidth: 1,
+    borderColor: "white",
+    right: 8,
+    top: 8,
+    borderRadius: 3,
+    height: 16,
+    width: 16,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  hotKeyText: {
+    fontWeight: "600",
+    lineHeight: 14,
+    fontSize: 11,
+  },
+});
