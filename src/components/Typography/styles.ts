@@ -16,7 +16,7 @@ export const sizes: Record<ISizes, StyleProp<TextStyle>> = {
     fontSize: 20,
   },
   xl: {
-    fontSize: 24,
+    fontSize: 28,
   },
 };
 
