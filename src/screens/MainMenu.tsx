@@ -9,9 +9,11 @@ import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { useTranslation } from "react-i18next";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { theme } from "src/theme/theme";
+import { useBookingStore } from "@hooks/useBookingStore";
 
 export function MainMenuScreen() {
   const { t } = useTranslation();
+  const { destinationCode } = useBookingStore();
   const { navigate } = useNavigation<NavigationProps>();
 
   const optionButtons = [
@@ -39,7 +41,7 @@ export function MainMenuScreen() {
           {t("main-menu.title")}
         </Typography>
         <Typography size="md" color={theme.colors.text}>
-          {t("main-menu.route-number", { routeNumber: "XXXXX" })}
+          {t("main-menu.route-number", { routeNumber: destinationCode })}
         </Typography>
       </VStack>
       <VStack gap={20} pt={30}>
