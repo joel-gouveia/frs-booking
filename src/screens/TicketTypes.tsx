@@ -1,6 +1,6 @@
 import { Button, HStack, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "@layouts/ScreenLayout";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import TicketLogo from "@assets/images/ticket.svg";
 import { theme } from "src/theme/theme";
 import { StyleSheet } from "react-native";
@@ -12,18 +12,25 @@ import { TextButton } from "@components/Button/TextButton";
 import { useTranslation } from "react-i18next";
 import { getTransportables } from "@api/transportables.service";
 import { useBookingStore } from "@hooks/useBookingStore";
-import { TransportableResponse } from "src/types/transportables";
+import { useTicketTypesStore } from "@hooks/useTicketTypesStore";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationProps, NavigationScreens } from "src/types/navigation";
 
 export function TicketTypesScreen() {
   const { t } = useTranslation();
+  const { navigate } = useNavigation<NavigationProps>();
   const { originCode, destinationCode } = useBookingStore();
-
-  const [ticketTypes, setTicketTypes] = useState<TransportableResponse[]>([]);
+  const { isLoaded, setTicketTypes, ticketTypes } = useTicketTypesStore();
 
   useEffect(() => {
-    getTransportables(originCode, destinationCode).then(setTicketTypes);
-  }, [originCode, destinationCode]);
+    if (!isLoaded(originCode, destinationCode)) {
+      getTransportables(originCode, destinationCode).then(res =>
+        setTicketTypes(res, originCode, destinationCode),
+      );
+    }
+  }, [originCode, destinationCode, isLoaded, setTicketTypes]);
 
+  // TODO: Add loading animation
   return (
     <ScreenLayout>
       <Typography variant="title">{t("ticket-types.what-do-you-want-to-book")}</Typography>
@@ -34,11 +41,12 @@ export function TicketTypesScreen() {
         style={styles.ticketLogo}
       />
       <VStack gap={12}>
-        {ticketTypes.map(({ key, name }) => (
-          <TextButton key={key} hotkey={key}>
-            {name}
-          </TextButton>
-        ))}
+        {isLoaded(originCode, destinationCode) &&
+          ticketTypes.map(({ key, name }) => (
+            <TextButton key={key} hotkey={key}>
+              {name}
+            </TextButton>
+          ))}
       </VStack>
       <Button style={styles.bookButton}>
         <HStack gap={14}>
@@ -50,7 +58,11 @@ export function TicketTypesScreen() {
         </HStack>
       </Button>
       <Footer>
-        <FooterButton label={t("footer.main-menu")} symbolColor="blue" />
+        <FooterButton
+          label={t("footer.main-menu")}
+          symbolColor="blue"
+          onPress={() => navigate(NavigationScreens.MAIN_MENU)}
+        />
         <FooterButton label={t("footer.summary")} symbolColor="green" />
         <ResetButton />
       </Footer>
