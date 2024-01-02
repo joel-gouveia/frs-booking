@@ -6,7 +6,8 @@ import { Divider } from "./Divider/Divider";
 import { Typography } from "./Typography/Typography";
 import { Button } from "./Button/Button";
 import { TextButton } from "./Button/TextButton";
-import { FlatListCustomScrollbar } from "./FlatListCustomScrollbar/FlatListCustomScrollbar";
+import { FlatList } from "./CustomScrollable/FlatList";
+import { ScrollView } from "./CustomScrollable/ScrollView";
 
 import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
 import { HeaderRight } from "./HeaderRight/HeaderRight";
@@ -20,7 +21,8 @@ export {
   Typography,
   Button,
   TextButton,
-  FlatListCustomScrollbar,
+  FlatList,
+  ScrollView,
   HeaderLogo,
   HeaderRight,
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, TextButton, FlatListCustomScrollbar } from "@components/index";
+import { Typography, TextButton, FlatList } from "@components/index";
 import { View, StyleSheet } from "react-native";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
@@ -44,7 +44,7 @@ export function RouteSelectionScreen() {
           color={theme.colors.text}>
           {t("routes.choose-route")}
         </Typography>
-        <FlatListCustomScrollbar
+        <FlatList
           data={routes}
           keyExtractor={(route, index) => `${route.name}-${index}`}
           flatListStyle={styles.flatList}
