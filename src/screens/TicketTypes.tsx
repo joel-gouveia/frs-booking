@@ -1,6 +1,6 @@
 import { Button, HStack, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "@layouts/ScreenLayout";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TicketLogo from "@assets/images/ticket.svg";
 import { theme } from "src/theme/theme";
 import { StyleSheet } from "react-native";
@@ -10,9 +10,19 @@ import { ResetButton } from "@components/Footer/CustomButtons/ResetButton";
 import EnterKey from "@assets/images/enter-key.svg";
 import { TextButton } from "@components/Button/TextButton";
 import { useTranslation } from "react-i18next";
+import { getTransportables } from "@api/transportables.service";
+import { useBookingStore } from "@hooks/useBookingStore";
+import { TransportableResponse } from "src/types/transportables";
 
 export function TicketTypesScreen() {
   const { t } = useTranslation();
+  const { originCode, destinationCode } = useBookingStore();
+
+  const [ticketTypes, setTicketTypes] = useState<TransportableResponse[]>([]);
+
+  useEffect(() => {
+    getTransportables(originCode, destinationCode).then(setTicketTypes);
+  }, [originCode, destinationCode]);
 
   return (
     <ScreenLayout>
@@ -24,17 +34,16 @@ export function TicketTypesScreen() {
         style={styles.ticketLogo}
       />
       <VStack gap={12}>
-        <TextButton hotkey="0">{t("ticket-types.passengers")}</TextButton>
-        <TextButton hotkey="1">{t("ticket-types.vehicles")}</TextButton>
-        <TextButton hotkey="2">{t("ticket-types.multitickets")}</TextButton>
-        <TextButton hotkey="3">{t("ticket-types.others")}</TextButton>
+        {ticketTypes.map(({ key, name }) => (
+          <TextButton key={key} hotkey={key}>
+            {name}
+          </TextButton>
+        ))}
       </VStack>
-      <Button style={{ marginTop: 50, paddingVertical: 8 }}>
+      <Button style={styles.bookButton}>
         <HStack gap={14}>
           <EnterKey height={24} width={24} fill="white" />
-          <Typography
-            color={theme.colors.primary.contrastText}
-            style={{ fontWeight: "600", fontSize: 18 }}>
+          <Typography color={theme.colors.primary.contrastText} style={styles.bookButtonText}>
             {t("ticket-types.book")}
           </Typography>
           <EnterKey height={24} width={24} fill="white" />
@@ -54,5 +63,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 24,
     alignSelf: "center",
+  },
+  bookButton: {
+    marginTop: 50,
+    paddingVertical: 8,
+  },
+  bookButtonText: {
+    fontWeight: "600",
+    fontSize: 18,
   },
 });

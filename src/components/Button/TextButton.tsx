@@ -7,14 +7,13 @@ import { Typography } from "..";
 
 export interface Props extends IButton {
   textStyle?: StyleProp<TextStyle>;
-  hotkey?: string;
+  hotkey?: string | number;
 }
 
 export function TextButton(props: Props) {
   const { variant = "solid", textStyle, hotkey, children, style } = props;
 
   if (hotkey !== undefined) {
-    console.log(hotkey);
     return (
       <Button variant={variant} style={[style, { position: "relative" }]} {...props}>
         <View

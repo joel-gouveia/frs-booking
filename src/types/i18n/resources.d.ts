@@ -35,10 +35,6 @@ interface Resources {
     };
     "ticket-types": {
       "what-do-you-want-to-book": "What do you want to book?";
-      passengers: "Passengers";
-      vehicles: "Vehicles";
-      multitickets: "Multitickets";
-      others: "Others";
       book: "Book";
     };
     "departure-times": {
