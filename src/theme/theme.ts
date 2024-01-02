@@ -39,4 +39,7 @@ export const theme = {
     large: 24,
     xlarge: 32,
   },
+  sizes: {
+    footerHeight: 54,
+  },
 } as const;

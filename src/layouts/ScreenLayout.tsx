@@ -16,5 +16,6 @@ export function ScreenLayout(props: Props) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.background,
+    paddingBottom: theme.sizes.footerHeight,
   },
 });

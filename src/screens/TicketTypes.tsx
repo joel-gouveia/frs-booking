@@ -40,7 +40,7 @@ export function TicketTypesScreen() {
         color={theme.colors.primary.main}
         style={styles.ticketLogo}
       />
-      <VStack gap={12}>
+      <VStack gap={12} style={styles.ticketsContainer}>
         {isLoaded(originCode, destinationCode) &&
           ticketTypes.map(({ key, name }) => (
             <TextButton key={key} hotkey={key}>
@@ -76,9 +76,12 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     alignSelf: "center",
   },
+  ticketsContainer: {
+    flex: 1,
+  },
   bookButton: {
-    marginTop: 50,
     paddingVertical: 8,
+    marginBottom: 16,
   },
   bookButtonText: {
     fontWeight: "600",

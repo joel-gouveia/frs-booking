@@ -26,6 +26,6 @@ const styles = StyleSheet.create({
   containerInner: {
     borderTopWidth: 1,
     borderColor: theme.colors.border,
-    height: 54,
+    height: theme.sizes.footerHeight,
   },
 });
