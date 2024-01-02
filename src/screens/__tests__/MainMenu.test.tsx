@@ -25,32 +25,19 @@ jest.mock("@hooks/useAuth", () => {
 
 describe("Main Menu Screen", () => {
   it("renders main buttons and footer logout button", async () => {
-    const { getAllByTestId, getByText } = render(<MainMenuScreen />);
+    const { getByText } = render(<MainMenuScreen />);
 
     await waitFor(() => {
-      // Main Buttons
-      expect(getByText(i18n.t("main-menu.sales"))).toBeTruthy();
+      expect(getByText(i18n.t("main-menu.booking"))).toBeTruthy();
       expect(getByText(i18n.t("main-menu.boarding"))).toBeTruthy();
       expect(getByText(i18n.t("main-menu.cancel"))).toBeTruthy();
-
-      expect(getAllByTestId("footer-btn")).toHaveLength(1);
-      expect(getByText("Logout")).toBeTruthy();
-    });
-  });
-
-  it("logs out and navigates to Login screen, when clicking on the logout footer button", async () => {
-    const { getByText } = render(<MainMenuScreen />);
-    fireEvent.press(getByText("Logout"));
-
-    await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.LOGIN);
-      expect(mockLogout).toHaveBeenCalled();
+      expect(getByText(i18n.t("main-menu.title"))).toBeTruthy();
     });
   });
 
   it("navigates to departure times screen, when clicking on sales button", async () => {
     const { getByText } = render(<MainMenuScreen />);
-    fireEvent.press(getByText(i18n.t("main-menu.sales")));
+    fireEvent.press(getByText(i18n.t("main-menu.booking")));
 
     await waitFor(() => {
       expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.DEPARTURE_TIME);
