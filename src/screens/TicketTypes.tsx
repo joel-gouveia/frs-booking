@@ -9,11 +9,14 @@ import { FooterButton } from "@components/Footer/FooterButton";
 import { ResetButton } from "@components/Footer/CustomButtons/ResetButton";
 import EnterKey from "@assets/images/enter-key.svg";
 import { TextButton } from "@components/Button/TextButton";
+import { useTranslation } from "react-i18next";
 
 export function TicketTypesScreen() {
+  const { t } = useTranslation();
+
   return (
     <ScreenLayout>
-      <Typography variant="title">What do you want to book?</Typography>
+      <Typography variant="title">{t("ticket-types.what-do-you-want-to-book")}</Typography>
       <TicketLogo
         width={40}
         height={23}
@@ -21,10 +24,10 @@ export function TicketTypesScreen() {
         style={styles.ticketLogo}
       />
       <VStack gap={12}>
-        <TextButton hotkey="0">Passengers</TextButton>
-        <TextButton hotkey="1">Vehicles</TextButton>
-        <TextButton hotkey="2">Multitickets</TextButton>
-        <TextButton hotkey="3">Others</TextButton>
+        <TextButton hotkey="0">{t("ticket-types.passengers")}</TextButton>
+        <TextButton hotkey="1">{t("ticket-types.vehicles")}</TextButton>
+        <TextButton hotkey="2">{t("ticket-types.multitickets")}</TextButton>
+        <TextButton hotkey="3">{t("ticket-types.others")}</TextButton>
       </VStack>
       <Button style={{ marginTop: 50, paddingVertical: 8 }}>
         <HStack gap={14}>
@@ -32,14 +35,14 @@ export function TicketTypesScreen() {
           <Typography
             color={theme.colors.primary.contrastText}
             style={{ fontWeight: "600", fontSize: 18 }}>
-            Book
+            {t("ticket-types.book")}
           </Typography>
           <EnterKey height={24} width={24} fill="white" />
         </HStack>
       </Button>
       <Footer>
-        <FooterButton label="Main Menu" symbolColor="blue" />
-        <FooterButton label="Summary" symbolColor="green" />
+        <FooterButton label={t("footer.main-menu")} symbolColor="blue" />
+        <FooterButton label={t("footer.summary")} symbolColor="green" />
         <ResetButton />
       </Footer>
     </ScreenLayout>

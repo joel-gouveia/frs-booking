@@ -2,17 +2,20 @@ import { View, StyleSheet } from "react-native";
 import React from "react";
 import { Button, Typography } from "@components/index";
 import { theme } from "src/theme/theme";
+import { useTranslation } from "react-i18next";
 
 interface IResetButton {
   onPress?: () => void;
 }
 
 export function ResetButton({ onPress }: IResetButton) {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.buttonContainer}>
       <Button onPress={onPress} style={styles.button} testID="footer-btn">
         <Typography color={theme.colors.primary.contrastText} size="xs" style={styles.buttonText}>
-          Reset
+          {t("footer.reset")}
         </Typography>
         <View style={[styles.buttonSymbol, { backgroundColor: theme.colors.symbols.red }]} />
       </Button>

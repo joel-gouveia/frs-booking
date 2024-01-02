@@ -5,7 +5,7 @@ import { theme } from "src/theme/theme";
 
 interface IFooterButton {
   label: string;
-  symbolColor: keyof typeof theme.colors.symbols;
+  symbolColor?: keyof typeof theme.colors.symbols;
   onPress?: () => void;
 }
 
@@ -17,7 +17,10 @@ export function FooterButton({ label, symbolColor, onPress }: IFooterButton) {
           {label}
         </Typography>
         <View
-          style={[styles.buttonSymbol, { backgroundColor: theme.colors.symbols[symbolColor] }]}
+          style={[
+            styles.buttonSymbol,
+            { backgroundColor: symbolColor ? theme.colors.symbols[symbolColor] : undefined },
+          ]}
         />
       </Button>
     </View>
