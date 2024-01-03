@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Typography, TextButton, FlatList } from "@components/index";
+import { Typography, FlatList } from "@components/index";
 import { View, StyleSheet } from "react-native";
-
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { getRoutes } from "@api/route.service";
 import { useTranslation } from "react-i18next";
@@ -13,6 +12,7 @@ import { useBookingStore } from "@hooks/useBookingStore";
 import PaperAirplane from "@assets/images/paper-airplane.svg";
 import PaperAirplaneTrack from "@assets/images/paper-airplane-track.svg";
 import { theme } from "src/theme/theme";
+import { TextButton } from "@components/Button/TextButton";
 
 export function RouteSelectionScreen() {
   const { t } = useTranslation();

@@ -1,25 +1,21 @@
 import React, { PropsWithChildren } from "react";
 import { VStack } from "@components/index";
-import { ScrollView } from "react-native";
+import { StyleSheet } from "react-native";
+import { theme } from "src/theme/theme";
 
-interface Props extends PropsWithChildren {
-  isScrollable?: boolean;
-}
+interface Props extends PropsWithChildren {}
 
-export function ScreenLayout({ isScrollable, ...restProps }: Props) {
-  if (isScrollable) {
-    return (
-      <ScrollView keyboardShouldPersistTaps="handled">
-        <VStack flex={1} p={20}>
-          {restProps.children}
-        </VStack>
-      </ScrollView>
-    );
-  }
-
+export function ScreenLayout(props: Props) {
   return (
-    <VStack flex={1} p={20}>
-      {restProps.children}
+    <VStack flex={1} p={22} style={styles.container}>
+      {props.children}
     </VStack>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: theme.colors.background,
+    paddingBottom: theme.sizes.footerHeight,
+  },
+});
