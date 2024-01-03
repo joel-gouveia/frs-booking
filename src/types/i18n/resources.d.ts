@@ -33,6 +33,10 @@ interface Resources {
       boarding: "Boarding";
       cancel: "Cancel";
     };
+    "ticket-types": {
+      "what-do-you-want-to-book": "What do you want to book?";
+      book: "Book";
+    };
     "departure-times": {
       "choose-departure": "Choose Departure";
     };

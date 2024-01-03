@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from "src/theme/theme";
 
 export const defaults = (props?: { hasLeftElement: boolean }) =>
   StyleSheet.create({
@@ -17,14 +18,14 @@ export const defaults = (props?: { hasLeftElement: boolean }) =>
 export const variants = {
   standard: StyleSheet.create({
     input: {
-      borderColor: "white",
+      borderColor: theme.colors.primary.border,
       backgroundColor: "transparent",
       borderWidth: 0,
       borderBottomWidth: 1,
       borderRadius: 0,
       paddingHorizontal: 4,
       paddingVertical: 4,
-      color: "white",
+      color: theme.colors.primary.contrastText,
     },
   }),
 };

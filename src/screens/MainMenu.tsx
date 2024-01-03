@@ -1,4 +1,4 @@
-import { TextButton, VStack } from "@components/index";
+import { VStack } from "@components/index";
 import React from "react";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
@@ -9,6 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { FooterButton } from "@components/Footer/FooterButton";
 import { StyleSheet } from "react-native";
+import { TextButton } from "@components/Button/TextButton";
 
 export function MainMenuScreen() {
   const { t } = useTranslation();
@@ -24,7 +25,7 @@ export function MainMenuScreen() {
     <ScreenLayout>
       <VStack gap={20} pt={50}>
         <TextButton
-          onPress={() => navigate(NavigationScreens.DEPARTURE_TIME)}
+          onPress={() => navigate(NavigationScreens.TICKET_TYPES)}
           variant="outline"
           textStyle={styles.button}>
           {t("main-menu.sales")}

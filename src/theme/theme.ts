@@ -10,6 +10,11 @@ export const theme = {
       contrastText: "#191955",
       border: "#CACAFF",
     },
+    symbols: {
+      blue: "#2C64C9",
+      green: "#79E07D",
+      red: "#EA1B59",
+    },
     border: "#CACAFF",
     background: "#FFFFFF",
     white: "#FFFFFF",
@@ -23,6 +28,7 @@ export const theme = {
     },
     fontWeights: {
       normal: "400",
+      semibold: "600",
       bold: "700",
     },
   },
@@ -32,5 +38,8 @@ export const theme = {
     medium: 16,
     large: 24,
     xlarge: 32,
+  },
+  sizes: {
+    footerHeight: 54,
   },
 } as const;

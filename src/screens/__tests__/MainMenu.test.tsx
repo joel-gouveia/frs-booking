@@ -48,12 +48,12 @@ describe("Main Menu Screen", () => {
     });
   });
 
-  it("navigates to departure times screen, when clicking on sales button", async () => {
+  it("navigates to ticket types screen, when clicking on sales button", async () => {
     const { getByText } = render(<MainMenuScreen />);
     fireEvent.press(getByText(i18n.t("main-menu.sales")));
 
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.DEPARTURE_TIME);
+      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.TICKET_TYPES);
     });
   });
 });
