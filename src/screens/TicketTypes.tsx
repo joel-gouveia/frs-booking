@@ -1,9 +1,9 @@
-import { Button, HStack, Typography, VStack } from "@components/index";
+import { Button, HStack, Typography } from "@components/index";
 import { ScreenLayout } from "@layouts/ScreenLayout";
 import React, { useEffect } from "react";
 import TicketLogo from "@assets/images/ticket.svg";
 import { theme } from "src/theme/theme";
-import { StyleSheet } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { Footer } from "@components/Footer/Footer";
 import { FooterButton } from "@components/Footer/FooterButton";
 import { ResetButton } from "@components/Footer/CustomButtons/ResetButton";
@@ -30,6 +30,8 @@ export function TicketTypesScreen() {
     }
   }, [originCode, destinationCode, isLoaded, setTicketTypes]);
 
+  const separator = () => <View style={styles.ticketTypeButtonSeparator} />;
+
   // TODO: Add loading animation
   return (
     <ScreenLayout>
@@ -40,14 +42,20 @@ export function TicketTypesScreen() {
         color={theme.colors.primary.main}
         style={styles.ticketLogo}
       />
-      <VStack gap={12} style={styles.ticketsContainer}>
-        {isLoaded(originCode, destinationCode) &&
-          ticketTypes.map(({ key, name }) => (
-            <TextButton key={key} hotkey={key} testID="ticket-type-btn">
-              {name}
-            </TextButton>
-          ))}
-      </VStack>
+      <View style={styles.ticketsContainer}>
+        {isLoaded(originCode, destinationCode) && (
+          <FlatList
+            data={ticketTypes}
+            renderItem={({ item: { key, name } }) => (
+              <TextButton hotkey={key} testID="ticket-type-btn">
+                {name}
+              </TextButton>
+            )}
+            keyExtractor={({ key }) => String(key)}
+            ItemSeparatorComponent={separator}
+          />
+        )}
+      </View>
       <Button style={styles.bookButton}>
         <HStack gap={14}>
           <EnterKey height={24} width={24} fill="white" />
@@ -78,6 +86,9 @@ const styles = StyleSheet.create({
   },
   ticketsContainer: {
     flex: 1,
+  },
+  ticketTypeButtonSeparator: {
+    height: 12,
   },
   bookButton: {
     paddingVertical: 8,
