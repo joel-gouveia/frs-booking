@@ -11,10 +11,10 @@ export interface Props extends IButton {
 }
 
 export function TextButton(props: Props) {
-  const { variant = "solid", textStyle, hotkey, children, style } = props;
+  const { variant = "solid", textStyle, hotkey, children, style, ...restProps } = props;
 
   return (
-    <Button variant={variant} style={[styles.container, style]} {...props}>
+    <Button variant={variant} style={[styles.container, style]} {...restProps}>
       {hotkey && (
         <View style={styles.hotKey}>
           <Typography color={theme.colors.primary.contrastText} style={styles.hotKeyText}>
