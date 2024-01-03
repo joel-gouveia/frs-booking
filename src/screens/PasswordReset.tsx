@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useAuth } from "@hooks/useAuth";
 
-import { TextButton, Divider, Input, Typography, VStack } from "@components/index";
+import { Divider, Input, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "@layouts/index";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
+import { TextButton } from "@components/Button/TextButton";
 
 export function PasswordResetScreen() {
   const { t } = useTranslation();
