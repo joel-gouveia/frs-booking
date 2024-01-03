@@ -33,6 +33,8 @@ export function RouteSelectionScreen() {
     navigate(NavigationScreens.MAIN_MENU);
   };
 
+  const separator = () => <View style={styles.spacing} />;
+
   return (
     <>
       <ScreenLayout>
@@ -44,7 +46,7 @@ export function RouteSelectionScreen() {
           keyExtractor={(route, index) => `${route.name}-${index}`}
           flatListStyle={styles.flatList}
           wrapperViewContainerStyle={styles.flatListWrapperStyle}
-          ItemSeparatorComponent={() => <View style={styles.spacing} />}
+          ItemSeparatorComponent={separator}
           renderItem={({ item: route }) => (
             <TextButton onPress={handleRoutePress(route)} variant="solid" testID="route-btn">
               {route.name}
@@ -59,9 +61,6 @@ export function RouteSelectionScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    textAlign: "center",
-  },
   flatListWrapperStyle: {
     height: 340,
     marginTop: 60,
