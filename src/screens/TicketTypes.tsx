@@ -43,7 +43,7 @@ export function TicketTypesScreen() {
       <VStack gap={12} style={styles.ticketsContainer}>
         {isLoaded(originCode, destinationCode) &&
           ticketTypes.map(({ key, name }) => (
-            <TextButton key={key} hotkey={key}>
+            <TextButton key={key} hotkey={key} testID="ticket-type-btn">
               {name}
             </TextButton>
           ))}
