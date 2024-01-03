@@ -1,7 +1,7 @@
 import { Button, HStack, Typography } from "@components/index";
 import { ScreenLayout } from "@layouts/ScreenLayout";
 import React, { useEffect } from "react";
-import TicketLogo from "@assets/images/ticket.svg";
+import Icon from "react-native-vector-icons/FontAwesome6";
 import { theme } from "src/theme/theme";
 import { FlatList, StyleSheet, View } from "react-native";
 import { Footer } from "@components/Footer/Footer";
@@ -36,12 +36,7 @@ export function TicketTypesScreen() {
   return (
     <ScreenLayout>
       <Typography variant="title">{t("ticket-types.what-do-you-want-to-book")}</Typography>
-      <TicketLogo
-        width={40}
-        height={23}
-        color={theme.colors.primary.main}
-        style={styles.ticketLogo}
-      />
+      <Icon name="ticket" size={30} color={theme.colors.primary.main} style={styles.ticketLogo} />
       <View style={styles.ticketsContainer}>
         {isLoaded(originCode, destinationCode) && (
           <FlatList
