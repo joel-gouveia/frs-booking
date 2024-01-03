@@ -20,26 +20,24 @@ export function MainMenuScreen() {
     {
       title: t("main-menu.booking"),
       onPress: () => navigate(NavigationScreens.DEPARTURE_TIME),
-      icon: <FontAwesome6Icon name="ticket" size={22} color="white" />,
+      icon: <FontAwesome6Icon name="ticket" size={20} color="white" />,
     },
     {
       title: t("main-menu.boarding"),
       onPress: () => {},
-      icon: <FontAwesome6Icon name="sailboat" size={22} color="white" />,
+      icon: <FontAwesome6Icon name="sailboat" size={20} color="white" />,
     },
     {
       title: t("main-menu.cancel"),
       onPress: () => {},
-      icon: <FontAwesomeIcon name="remove" size={22} color="white" />,
+      icon: <FontAwesomeIcon name="remove" size={20} color="white" />,
     },
   ];
 
   return (
     <ScreenLayout>
       <VStack gap={15} alignItems="center" justifyContent="center">
-        <Typography bold style={styles.title} size="xl" color={theme.colors.text}>
-          {t("main-menu.title")}
-        </Typography>
+        <Typography variant="title">{t("main-menu.title")}</Typography>
         <Typography size="md" color={theme.colors.text}>
           {t("main-menu.route-number", { routeNumber: destinationCode })}
         </Typography>
@@ -47,7 +45,7 @@ export function MainMenuScreen() {
       <VStack gap={20} pt={30}>
         {optionButtons.map(({ title, onPress, icon }) => (
           <Button onPress={onPress} variant="solid" key={title} startIcon={icon} endIcon={icon}>
-            <Typography bold size="xl" style={styles.buttonTitle}>
+            <Typography bold style={styles.buttonTitle} size="lg">
               {title}
             </Typography>
           </Button>
@@ -60,7 +58,7 @@ export function MainMenuScreen() {
 const styles = StyleSheet.create({
   title: {
     textAlign: "center",
-    maxWidth: 180,
+    maxWidth: 200,
   },
   button: {
     fontSize: 30,

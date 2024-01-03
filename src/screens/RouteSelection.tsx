@@ -1,4 +1,4 @@
-import { Typography, TextButton } from "@components/index";
+import { Typography } from "@components/index";
 import { View, StyleSheet, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 
@@ -11,6 +11,7 @@ import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { IRoute } from "src/types/route";
 import { useBookingStore } from "@hooks/useBookingStore";
 import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
+import { TextButton } from "@components/Button/TextButton";
 
 export function RouteSelectionScreen() {
   const { t } = useTranslation();
