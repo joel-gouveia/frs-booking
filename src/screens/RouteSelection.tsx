@@ -38,7 +38,7 @@ export function RouteSelectionScreen() {
   return (
     <>
       <ScreenLayout>
-        <Typography variant="title" color={theme.colors.text}>
+        <Typography variant="title" color={theme.colors.text} testID="title">
           {t("routes.choose-route")}
         </Typography>
         <FlatList
