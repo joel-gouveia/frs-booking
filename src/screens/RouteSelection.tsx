@@ -35,14 +35,8 @@ export function RouteSelectionScreen() {
 
   return (
     <>
-      <PaperAirplane width={190} style={[styles.svg, styles.airplaneSvg]} />
       <ScreenLayout>
-        <Typography
-          variant="title"
-          bold
-          style={styles.title}
-          testID="title"
-          color={theme.colors.text}>
+        <Typography variant="title" color={theme.colors.text}>
           {t("routes.choose-route")}
         </Typography>
         <FlatList
@@ -52,16 +46,13 @@ export function RouteSelectionScreen() {
           wrapperViewContainerStyle={styles.flatListWrapperStyle}
           ItemSeparatorComponent={() => <View style={styles.spacing} />}
           renderItem={({ item: route }) => (
-            <TextButton
-              onPress={handleRoutePress(route)}
-              variant="solid"
-              fontSize={24}
-              testID="route-btn">
+            <TextButton onPress={handleRoutePress(route)} variant="solid" testID="route-btn">
               {route.name}
             </TextButton>
           )}
         />
       </ScreenLayout>
+      <PaperAirplane width={190} style={[styles.svg, styles.airplaneSvg]} />
       <PaperAirplaneTrack width={100} style={[styles.svg, styles.airplaneTrackSvg]} />
     </>
   );
@@ -87,6 +78,7 @@ const styles = StyleSheet.create({
   },
   airplaneSvg: {
     top: 50,
+    left: 0,
   },
   airplaneTrackSvg: {
     bottom: -10,
