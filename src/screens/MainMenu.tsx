@@ -37,7 +37,9 @@ export function MainMenuScreen() {
   return (
     <ScreenLayout>
       <VStack gap={15} alignItems="center" justifyContent="center">
-        <Typography variant="title">{t("main-menu.title")}</Typography>
+        <Typography variant="title" style={styles.title}>
+          {t("main-menu.title")}
+        </Typography>
         <Typography size="md" color={theme.colors.text}>
           {t("main-menu.route-number", { routeNumber: destinationCode })}
         </Typography>
@@ -58,7 +60,7 @@ export function MainMenuScreen() {
 const styles = StyleSheet.create({
   title: {
     textAlign: "center",
-    maxWidth: 200,
+    maxWidth: 180,
   },
   button: {
     fontSize: 30,
