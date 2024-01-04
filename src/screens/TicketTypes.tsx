@@ -42,7 +42,10 @@ export function TicketTypesScreen() {
           <FlatList
             data={ticketTypes}
             renderItem={({ item: { key, name } }) => (
-              <TextButton hotkey={key} testID="ticket-type-btn">
+              <TextButton
+                hotkey={key}
+                testID="ticket-type-btn"
+                onPress={() => navigate(NavigationScreens.TICKET_SELECTION, { ticketType: name })}>
                 {name}
               </TextButton>
             )}

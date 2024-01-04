@@ -23,7 +23,7 @@ export type ScreenOptions = {
   [NavigationScreens.ROUTES]?: {};
   [NavigationScreens.MAIN_MENU]?: {};
   [NavigationScreens.TICKET_TYPES]?: {};
-  [NavigationScreens.TICKET_SELECTION]?: {};
+  [NavigationScreens.TICKET_SELECTION]: { ticketType: string };
   [NavigationScreens.DEPARTURE_TIME]?: {};
   [NavigationScreens.BOOKING]?: {};
   [NavigationScreens.BOOKING_SUMMARY]?: {};
