@@ -10,7 +10,7 @@ import { PaymentScreen } from "@screens/Payment";
 import { BookingSummaryScreen } from "@screens/BookingSummary";
 import { Header } from "@components/Header/Header";
 import { TicketTypesScreen } from "@screens/TicketTypes";
-import { TicketSelectionScreen } from "@screens/TicketSelection";
+import { TicketSelectionScreen } from "@screens/TicketSelection/TicketSelection";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

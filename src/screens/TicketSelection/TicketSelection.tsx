@@ -7,8 +7,11 @@ import { ResetButton } from "@components/Footer/CustomButtons/ResetButton";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens, PropsWithTypedRoute } from "src/types/navigation";
-import { Typography } from "@components/index";
+import { Button, HStack, Typography, VStack } from "@components/index";
 import { useBookingStore } from "@hooks/useBookingStore";
+import EnterKey from "@assets/images/enter-key.svg";
+import { theme } from "src/theme/theme";
+import { ItemsRow } from "./ItemsRow";
 
 interface Props extends PropsWithTypedRoute<NavigationScreens.TICKET_SELECTION> {}
 
@@ -31,6 +34,25 @@ export function TicketSelectionScreen({ route }: Props) {
       <Typography size="xs" style={styles.routeText}>
         ({originCode}-{destinationCode})
       </Typography>
+      <VStack gap={50} mb={75}>
+        {[
+          [
+            { name: "lalahhhjddd", hotkey: "1" },
+            { name: "lala", hotkey: "2" },
+          ],
+        ].map(row => (
+          <ItemsRow key={row[0].name} row={row} />
+        ))}
+      </VStack>
+      <Button style={styles.bookButton}>
+        <HStack gap={14}>
+          <EnterKey height={24} width={24} fill="white" />
+          <Typography color={theme.colors.primary.contrastText} style={styles.bookButtonText}>
+            {t("ticket-types.book")}
+          </Typography>
+          <EnterKey height={24} width={24} fill="white" />
+        </HStack>
+      </Button>
       <Footer>
         <FooterButton
           label={t("footer.main-menu")}
@@ -52,5 +74,13 @@ const styles = StyleSheet.create({
   routeText: {
     textAlign: "center",
     lineHeight: 14,
+  },
+  bookButton: {
+    paddingVertical: 8,
+    marginBottom: 16,
+  },
+  bookButtonText: {
+    fontWeight: "600",
+    fontSize: 18,
   },
 });
