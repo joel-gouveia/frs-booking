@@ -7,6 +7,7 @@ export enum NavigationScreens {
   ROUTES = "routes",
   MAIN_MENU = "main-menu",
   TICKET_TYPES = "ticket-types",
+  TICKET_SELECTION = "ticket-selection",
   DEPARTURE_TIME = "departure-time",
   BOOKING = "booking",
   BOOKING_SUMMARY = "booking-summary",
@@ -22,6 +23,7 @@ export type ScreenOptions = {
   [NavigationScreens.ROUTES]?: {};
   [NavigationScreens.MAIN_MENU]?: {};
   [NavigationScreens.TICKET_TYPES]?: {};
+  [NavigationScreens.TICKET_SELECTION]?: {};
   [NavigationScreens.DEPARTURE_TIME]?: {};
   [NavigationScreens.BOOKING]?: {};
   [NavigationScreens.BOOKING_SUMMARY]?: {};
@@ -34,6 +36,7 @@ export type RootStackParamList = {
   [NavigationScreens.ROUTES]: ScreenOptions[NavigationScreens.ROUTES];
   [NavigationScreens.MAIN_MENU]: ScreenOptions[NavigationScreens.MAIN_MENU];
   [NavigationScreens.TICKET_TYPES]: ScreenOptions[NavigationScreens.TICKET_TYPES];
+  [NavigationScreens.TICKET_SELECTION]: ScreenOptions[NavigationScreens.TICKET_SELECTION];
   [NavigationScreens.DEPARTURE_TIME]: ScreenOptions[NavigationScreens.DEPARTURE_TIME];
   [NavigationScreens.BOOKING]: ScreenOptions[NavigationScreens.BOOKING];
   [NavigationScreens.BOOKING_SUMMARY]: ScreenOptions[NavigationScreens.BOOKING_SUMMARY];

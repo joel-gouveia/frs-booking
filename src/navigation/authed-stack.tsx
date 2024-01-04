@@ -10,6 +10,7 @@ import { PaymentScreen } from "@screens/Payment";
 import { BookingSummaryScreen } from "@screens/BookingSummary";
 import { Header } from "@components/Header/Header";
 import { TicketTypesScreen } from "@screens/TicketTypes";
+import { TicketSelectionScreen } from "@screens/TicketSelection";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -23,6 +24,7 @@ export function AuthedStack() {
       <Stack.Screen name={NavigationScreens.ROUTES} component={RouteSelectionScreen} />
       <Stack.Screen name={NavigationScreens.MAIN_MENU} component={MainMenuScreen} />
       <Stack.Screen name={NavigationScreens.TICKET_TYPES} component={TicketTypesScreen} />
+      <Stack.Screen name={NavigationScreens.TICKET_SELECTION} component={TicketSelectionScreen} />
       <Stack.Screen name={NavigationScreens.DEPARTURE_TIME} component={DepartureTimeScreen} />
       <Stack.Screen name={NavigationScreens.BOOKING} component={BookingScreen} />
       <Stack.Screen name={NavigationScreens.BOOKING_SUMMARY} component={BookingSummaryScreen} />
