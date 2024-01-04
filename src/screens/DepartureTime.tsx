@@ -52,7 +52,7 @@ export function DepartureTimeScreen() {
   const onChooseDeparture = (departure: DepartureResponse) => () => {
     setDepartureTime(departure.departureTime);
     setDepartureUUID(departure.uuid);
-    navigate(NavigationScreens.BOOKING);
+    navigate(NavigationScreens.TICKET_TYPES);
   };
 
   // TODO: Add loader in place of the departure times, while waiting for a getDepartures response

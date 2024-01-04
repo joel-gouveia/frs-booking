@@ -19,7 +19,10 @@ import { NavigationProps, NavigationScreens } from "src/types/navigation";
 export function TicketTypesScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode } = useBookingStore();
+  const { originCode, destinationCode } = useBookingStore(state => ({
+    originCode: state.originCode,
+    destinationCode: state.destinationCode,
+  }));
   const { isLoaded, setTicketTypes, ticketTypes } = useTicketTypesStore();
 
   useEffect(() => {
