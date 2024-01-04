@@ -3,7 +3,7 @@ import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import { afterEach, describe, expect, it, jest } from "@jest/globals";
 import i18n from "src/config/i18n/i18n";
 import * as BookingAPI from "@api/booking.service";
-import { PaymentScreen } from "@screens/Payment";
+import { PaymentScreen } from "@screens/Payment/Payment";
 import { bookingMocks, receiptMocks } from "@mocks/index";
 import { generatePrintableReceipt, receiptUtils } from "@utils/receipt";
 import { Printer } from "@modules/ThermalPrinter/ThermalPrinter";

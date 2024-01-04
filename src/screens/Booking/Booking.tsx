@@ -53,7 +53,7 @@ export function BookingScreen() {
           {t("common.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
         </Typography>
       </View>
-      <VStack gap={50} mb={75}>
+      <VStack>
         {itemsRows.map(row => (
           <ItemsRow key={row[0].name} row={row} />
         ))}
@@ -76,7 +76,7 @@ export function BookingScreen() {
 
 const styles = StyleSheet.create({
   header: {
-    marginBottom: 80,
+    // marginBottom: 80,
   },
   headerText: {
     backgroundColor: "#d9d9d9",
