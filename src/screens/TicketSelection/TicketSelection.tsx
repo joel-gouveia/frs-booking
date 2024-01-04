@@ -34,11 +34,15 @@ export function TicketSelectionScreen({ route }: Props) {
       <Typography size="xs" style={styles.routeText}>
         ({originCode}-{destinationCode})
       </Typography>
-      <VStack gap={50} mb={75}>
+      <VStack gap={10} mb={75} style={{ flex: 1 }}>
         {[
           [
             { name: "Adult", hotkey: "1" },
             { name: "Child", hotkey: "2" },
+          ],
+          [
+            { name: "Infant", hotkey: "3" },
+            { name: "Dog", hotkey: "4" },
           ],
         ].map(row => (
           <ItemsRow key={row[0].name} row={row} />
@@ -69,11 +73,12 @@ export function TicketSelectionScreen({ route }: Props) {
 const styles = StyleSheet.create({
   dateTimeText: {
     textAlign: "center",
-    marginTop: 4,
+    marginTop: 2,
   },
   routeText: {
     textAlign: "center",
     lineHeight: 14,
+    marginBottom: 12,
   },
   bookButton: {
     paddingVertical: 8,

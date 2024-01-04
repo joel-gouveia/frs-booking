@@ -16,9 +16,11 @@ export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: 
   return (
     <View style={styles.container}>
       <Button style={styles.mainButton}>
-        <Typography style={styles.hotkeyText} size="xs">
-          {hotkey}
-        </Typography>
+        <View style={styles.hotKey}>
+          <Typography color={theme.colors.primary.contrastText} style={styles.hotKeyText}>
+            {hotkey}
+          </Typography>
+        </View>
         <VStack justifyContent="center" alignItems="center">
           <Typography size="sm" style={styles.title}>
             {text}
@@ -75,5 +77,23 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     fontWeight: "400",
     textAlign: "center",
+  },
+  hotKey: {
+    position: "absolute",
+    borderWidth: 1,
+    borderColor: "white",
+    right: 8,
+    top: 8,
+    borderRadius: 3,
+    height: 16,
+    width: 16,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  hotKeyText: {
+    fontWeight: "600",
+    lineHeight: 14,
+    fontSize: 11,
   },
 });

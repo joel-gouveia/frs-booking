@@ -21,6 +21,6 @@ export const variants: Record<ITextVariants, StyleProp<TextStyle>> = {
     fontSize: 22,
     fontWeight: "bold",
     alignSelf: "center",
-    marginTop: 6,
+    marginTop: 0,
   },
 };
