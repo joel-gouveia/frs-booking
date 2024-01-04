@@ -43,6 +43,6 @@ export function ItemsRow({ row }: IItemsRow) {
 
 const styles = StyleSheet.create({
   separator: {
-    width: 30,
+    width: 34,
   },
 });

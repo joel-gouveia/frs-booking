@@ -37,8 +37,8 @@ export function TicketSelectionScreen({ route }: Props) {
       <VStack gap={50} mb={75}>
         {[
           [
-            { name: "lalahhhjddd", hotkey: "1" },
-            { name: "lala", hotkey: "2" },
+            { name: "Adult", hotkey: "1" },
+            { name: "Child", hotkey: "2" },
           ],
         ].map(row => (
           <ItemsRow key={row[0].name} row={row} />

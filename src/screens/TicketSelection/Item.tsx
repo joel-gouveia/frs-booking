@@ -20,11 +20,11 @@ export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: 
           {hotkey}
         </Typography>
         <VStack justifyContent="center" alignItems="center">
-          <Typography size="sm" style={{ color: theme.colors.primary.contrastText }}>
+          <Typography size="sm" style={styles.title}>
             {text}
           </Typography>
           <Typography style={styles.itemCount}>{value}</Typography>
-          <HStack justifyContent="space-between" style={{ width: "72%" }}>
+          <HStack justifyContent="space-between" style={styles.countersContainer}>
             <Button onPress={onMinusPress} style={styles.counterButton} variant="outline">
               <Icon name="minus" size={24} color={theme.colors.primary.main} />
             </Button>
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
   },
   mainButton: {
     paddingHorizontal: 0,
-    paddingVertical: 8,
+    paddingTop: 8,
+    paddingBottom: 12,
     position: "relative",
     marginBottom: 4,
   },
@@ -53,15 +54,26 @@ const styles = StyleSheet.create({
     right: 6,
     top: 0,
   },
+  title: {
+    color: theme.colors.primary.contrastText,
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  itemCount: {
+    fontSize: 44,
+    fontWeight: "bold",
+    color: theme.colors.primary.contrastText,
+    marginTop: 4,
+    marginBottom: 12,
+  },
+  countersContainer: {
+    width: "74%",
+  },
   counterButton: {
     borderRadius: 5,
-    paddingHorizontal: 6,
+    paddingHorizontal: 7,
     paddingVertical: 3,
     fontWeight: "400",
     textAlign: "center",
-  },
-  itemCount: {
-    fontSize: 40,
-    color: theme.colors.primary.contrastText,
   },
 });
