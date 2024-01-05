@@ -7,26 +7,34 @@ import { ResetButton } from "@components/Footer/CustomButtons/ResetButton";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens, PropsWithTypedRoute } from "src/types/navigation";
-import { Button, HStack, Typography, VStack } from "@components/index";
+import { Button, HStack, Typography } from "@components/index";
 import { useBookingStore } from "@hooks/useBookingStore";
 import EnterKey from "@assets/images/enter-key.svg";
 import { theme } from "src/theme/theme";
 import { useTicketTypesStore } from "@hooks/useTicketTypesStore";
-import { chunkArray } from "@utils/array";
-import { ItemsRow } from "./ItemsRow";
-
-const NUM_COLS = 2;
+import { BookingItem } from "./Item";
 
 interface Props extends PropsWithTypedRoute<NavigationScreens.TICKET_SELECTION> {}
 
 export function TicketSelectionScreen({ route }: Props) {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode, departureDate, departureTime } = useBookingStore(state => ({
+  const {
+    originCode,
+    destinationCode,
+    departureDate,
+    departureTime,
+    itemCounters,
+    decrementItem,
+    incrementItem,
+  } = useBookingStore(state => ({
     originCode: state.originCode,
     destinationCode: state.destinationCode,
     departureDate: state.departureDate,
     departureTime: state.departureTime,
+    itemCounters: state.itemCounters,
+    incrementItem: state.incrementItemCountersKey,
+    decrementItem: state.decrementItemCountersKey,
   }));
   const ticketTypes = useTicketTypesStore(state => state.ticketTypes);
 
@@ -37,7 +45,7 @@ export function TicketSelectionScreen({ route }: Props) {
       return [];
     }
 
-    return chunkArray(ticket.transportables, NUM_COLS);
+    return ticket.transportables;
   }, [route?.params.ticketType, ticketTypes]);
 
   return (
@@ -49,11 +57,22 @@ export function TicketSelectionScreen({ route }: Props) {
       <Typography size="xs" style={styles.routeText}>
         ({originCode}-{destinationCode})
       </Typography>
-      <VStack gap={10} mb={75} style={styles.itemsContainer}>
-        {transportables.map(row => (
-          <ItemsRow key={row[0].name} row={row} numCols={NUM_COLS} />
-        ))}
-      </VStack>
+      <HStack mb={75} style={styles.itemsContainer}>
+        {transportables.map(({ key, name }) => {
+          const counterValue = itemCounters[name] ?? 0;
+
+          return (
+            <BookingItem
+              key={name}
+              hotkey={key}
+              text={name}
+              value={counterValue}
+              onMinusPress={() => decrementItem(name)}
+              onPlusPress={() => incrementItem(name)}
+            />
+          );
+        })}
+      </HStack>
       <Button style={styles.bookButton}>
         <HStack gap={14}>
           <EnterKey height={24} width={24} fill="white" />
@@ -87,6 +106,8 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   itemsContainer: {
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     flex: 1,
   },
   bookButton: {

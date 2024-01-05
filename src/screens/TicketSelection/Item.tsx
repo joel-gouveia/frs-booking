@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { theme } from "src/theme/theme";
 
 interface IBookingItem {
-  hotkey: string;
+  hotkey: string | number;
   text: string;
   value: number;
   onMinusPress: () => void;
@@ -44,14 +44,14 @@ export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: "45%",
   },
   mainButton: {
     paddingHorizontal: 0,
     paddingTop: 8,
     paddingBottom: 12,
+    marginBottom: 12,
     position: "relative",
-    marginBottom: 4,
   },
   hotkeyText: {
     position: "absolute",
