@@ -1,5 +1,5 @@
 import { ScreenLayout } from "@layouts/ScreenLayout";
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { Footer } from "@components/Footer/Footer";
 import { FooterButton } from "@components/Footer/FooterButton";
@@ -11,7 +11,11 @@ import { Button, HStack, Typography, VStack } from "@components/index";
 import { useBookingStore } from "@hooks/useBookingStore";
 import EnterKey from "@assets/images/enter-key.svg";
 import { theme } from "src/theme/theme";
+import { useTicketTypesStore } from "@hooks/useTicketTypesStore";
+import { chunkArray } from "@utils/array";
 import { ItemsRow } from "./ItemsRow";
+
+const NUM_COLS = 2;
 
 interface Props extends PropsWithTypedRoute<NavigationScreens.TICKET_SELECTION> {}
 
@@ -24,6 +28,17 @@ export function TicketSelectionScreen({ route }: Props) {
     departureDate: state.departureDate,
     departureTime: state.departureTime,
   }));
+  const { ticketTypes } = useTicketTypesStore();
+
+  const transportables = useMemo(() => {
+    const ticket = ticketTypes.find(({ name }) => route?.params.ticketType === name);
+
+    if (!ticket) {
+      return [];
+    }
+
+    return chunkArray(ticket.transportables, NUM_COLS);
+  }, [route?.params.ticketType, ticketTypes]);
 
   return (
     <ScreenLayout>
@@ -34,18 +49,9 @@ export function TicketSelectionScreen({ route }: Props) {
       <Typography size="xs" style={styles.routeText}>
         ({originCode}-{destinationCode})
       </Typography>
-      <VStack gap={10} mb={75} style={{ flex: 1 }}>
-        {[
-          [
-            { name: "Adult", hotkey: "1" },
-            { name: "Child", hotkey: "2" },
-          ],
-          [
-            { name: "Infant", hotkey: "3" },
-            { name: "Dog", hotkey: "4" },
-          ],
-        ].map(row => (
-          <ItemsRow key={row[0].name} row={row} />
+      <VStack gap={10} mb={75} style={styles.itemsContainer}>
+        {transportables.map(row => (
+          <ItemsRow key={row[0].name} row={row} numCols={NUM_COLS} />
         ))}
       </VStack>
       <Button style={styles.bookButton}>
@@ -79,6 +85,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 14,
     marginBottom: 12,
+  },
+  itemsContainer: {
+    flex: 1,
   },
   bookButton: {
     paddingVertical: 8,

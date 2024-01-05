@@ -1,5 +1,5 @@
 import { HStack } from "@components/index";
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { useBookingStore } from "@hooks/useBookingStore";
 import { BookingItem } from "./Item";
@@ -7,20 +7,31 @@ import { BookingItem } from "./Item";
 interface IItemsRow {
   row: {
     name: string;
-    hotkey: string;
+    key: string | number;
   }[];
+  numCols: number;
 }
 
-export function ItemsRow({ row }: IItemsRow) {
+export function ItemsRow({ row, numCols }: IItemsRow) {
   const { itemCounters, decrementItem, incrementItem } = useBookingStore(state => ({
     itemCounters: state.itemCounters,
     incrementItem: state.incrementItemCountersKey,
     decrementItem: state.decrementItemCountersKey,
   }));
 
+  const emptyCols = useMemo(() => {
+    let cnt = 0;
+    return new Array(numCols - row.length).fill(undefined).map(() => (
+      <React.Fragment key={`empty-${cnt++}`}>
+        <View style={styles.separator} />
+        <View style={styles.emptyEl} />
+      </React.Fragment>
+    ));
+  }, [numCols, row.length]);
+
   return (
     <HStack alignItems="center" justifyContent="center">
-      {row.map(({ name, hotkey }, index) => {
+      {row.map(({ name, key }, index) => {
         const counterValue = itemCounters[name] ?? 0;
 
         return (
@@ -28,7 +39,7 @@ export function ItemsRow({ row }: IItemsRow) {
             <BookingItem
               key={name}
               text={name}
-              hotkey={hotkey}
+              hotkey={String(key)}
               value={counterValue}
               onMinusPress={() => decrementItem(name)}
               onPlusPress={() => incrementItem(name)}
@@ -37,6 +48,7 @@ export function ItemsRow({ row }: IItemsRow) {
           </React.Fragment>
         );
       })}
+      {emptyCols}
     </HStack>
   );
 }
@@ -44,5 +56,8 @@ export function ItemsRow({ row }: IItemsRow) {
 const styles = StyleSheet.create({
   separator: {
     width: 34,
+  },
+  emptyEl: {
+    flex: 1,
   },
 });
