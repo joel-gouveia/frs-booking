@@ -21,19 +21,25 @@ export function BookingScreen() {
   const { navigate } = useNavigation<NavigationProps>();
 
   const { ticketTypes } = useTicketTypesStore();
-  const { route, departure, itemCounters, increment, decrement } = useBookingStore(state => ({
-    route: state.route,
-    departure: state.departure,
-    itemCounters: state.itemCounters,
-    decrement: state.decrement,
-    increment: state.increment,
-  }));
+  const { route, departure, itemCounters, increment, decrement, resetCounters } = useBookingStore(
+    state => ({
+      route: state.route,
+      departure: state.departure,
+      itemCounters: state.itemCounters,
+      decrement: state.decrement,
+      increment: state.increment,
+      resetCounters: state.resetCounters,
+    }),
+  );
 
   // Let's suppose we are on the Passengers screen selecting its tickets...
   const ticketGroup = ticketTypes[0]; // Passengers ticket group
 
   const onPlusPress = (ticket: TicketToSell) => increment(ticketGroup.name, ticket);
   const onMinusPress = (ticket: TicketToSell) => decrement(ticketGroup.name, ticket);
+
+  // TODO: This is handled in another PR
+  const onPressBook = () => navigate(NavigationScreens.BOOKING_SUMMARY);
 
   return (
     <ScreenLayout>
@@ -56,7 +62,7 @@ export function BookingScreen() {
           />
         ))}
       </HStack>
-      <Button onPress={() => {}} variant="outline" style={styles.bookButton}>
+      <Button onPress={onPressBook} variant="outline" style={styles.bookButton}>
         <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
         <Typography style={styles.bookButtonText}>{t("booking.book")}</Typography>
       </Button>
@@ -66,7 +72,7 @@ export function BookingScreen() {
           label={t("footer.summary")}
           onPress={() => navigate(NavigationScreens.BOOKING_SUMMARY)}
         />
-        <FooterButton label={t("footer.reset")} onPress={() => {}} />
+        <FooterButton label={t("footer.reset")} onPress={resetCounters} />
       </Footer>
     </ScreenLayout>
   );
