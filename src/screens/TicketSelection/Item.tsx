@@ -22,9 +22,11 @@ export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: 
           </Typography>
         </View>
         <VStack justifyContent="center" alignItems="center">
-          <Typography size="sm" style={styles.title}>
-            {text}
-          </Typography>
+          <View style={styles.titleContainer}>
+            <Typography size="sm" style={styles.title}>
+              {text}
+            </Typography>
+          </View>
           <Typography style={styles.itemCount}>{value}</Typography>
           <HStack justifyContent="space-between" style={styles.countersContainer}>
             <Button onPress={onMinusPress} style={styles.counterButton} variant="outline">
@@ -56,16 +58,21 @@ const styles = StyleSheet.create({
     right: 6,
     top: 0,
   },
+  titleContainer: {
+    height: 38,
+  },
   title: {
     color: theme.colors.primary.contrastText,
     fontWeight: "bold",
     fontSize: 15,
+    width: 90,
+    textAlign: "center",
   },
   itemCount: {
     fontSize: 44,
+    lineHeight: 48,
     fontWeight: "bold",
     color: theme.colors.primary.contrastText,
-    marginTop: 4,
     marginBottom: 12,
   },
   countersContainer: {
