@@ -83,7 +83,7 @@ describe("Departure Time Screen", () => {
     await waitFor(() => {
       fireEvent.press(getByText("10:00"));
 
-      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.BOOKING);
+      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.TICKET_TYPES);
       expect(mockSetDepartureTime).toHaveBeenCalledWith("10:00");
       expect(mockSetDepartureDate).toHaveBeenCalledWith("2020-01-01");
     });
