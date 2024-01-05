@@ -40,9 +40,6 @@ interface Resources {
     "departure-times": {
       "choose-departure": "Choose Departure";
     };
-    booking: {
-      book: "BOOK";
-    };
     "booking-summary": {
       "booking-summary": "Booking summary";
     };
