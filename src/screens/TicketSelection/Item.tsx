@@ -15,7 +15,7 @@ interface IBookingItem {
 export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: IBookingItem) {
   return (
     <View style={styles.container} testID="item">
-      <Button style={styles.mainButton}>
+      <Button style={styles.mainButton} disabled={true}>
         <View style={styles.hotKey}>
           <Typography color={theme.colors.primary.contrastText} style={styles.hotKeyText}>
             {hotkey}
