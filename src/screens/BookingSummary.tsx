@@ -4,13 +4,10 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { useBookingStore } from "@hooks/useBookingStore";
-import { NavigationProps, NavigationScreens } from "src/types/navigation";
-import { useNavigation } from "@react-navigation/native";
 import useItemsText from "@hooks/useItemsText";
 
 export function BookingSummaryScreen() {
   const { t } = useTranslation();
-  const { navigate } = useNavigation<NavigationProps>();
   const { originCode, destinationCode, departureDate, departureTime, itemCounters } =
     useBookingStore(state => ({
       originCode: state.originCode,
@@ -24,10 +21,7 @@ export function BookingSummaryScreen() {
 
   return (
     <ScreenLayout>
-      <Button
-        onPress={() => navigate(NavigationScreens.BOOKING)}
-        variant="outline"
-        style={styles.backButton}>
+      <Button variant="outline" style={styles.backButton}>
         <Typography>{t("common.back")}</Typography>
         <View style={styles.backButtonSymbol} />
       </Button>

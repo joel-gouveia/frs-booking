@@ -9,7 +9,6 @@ export enum NavigationScreens {
   TICKET_TYPES = "ticket-types",
   TICKET_SELECTION = "ticket-selection",
   DEPARTURE_TIME = "departure-time",
-  BOOKING = "booking",
   BOOKING_SUMMARY = "booking-summary",
   PAYMENT = "payment",
 }
@@ -25,7 +24,6 @@ export type ScreenOptions = {
   [NavigationScreens.TICKET_TYPES]?: {};
   [NavigationScreens.TICKET_SELECTION]: { ticketType: string };
   [NavigationScreens.DEPARTURE_TIME]?: {};
-  [NavigationScreens.BOOKING]?: {};
   [NavigationScreens.BOOKING_SUMMARY]?: {};
   [NavigationScreens.PAYMENT]?: {};
 };
@@ -38,7 +36,6 @@ export type RootStackParamList = {
   [NavigationScreens.TICKET_TYPES]: ScreenOptions[NavigationScreens.TICKET_TYPES];
   [NavigationScreens.TICKET_SELECTION]: ScreenOptions[NavigationScreens.TICKET_SELECTION];
   [NavigationScreens.DEPARTURE_TIME]: ScreenOptions[NavigationScreens.DEPARTURE_TIME];
-  [NavigationScreens.BOOKING]: ScreenOptions[NavigationScreens.BOOKING];
   [NavigationScreens.BOOKING_SUMMARY]: ScreenOptions[NavigationScreens.BOOKING_SUMMARY];
   [NavigationScreens.PAYMENT]: ScreenOptions[NavigationScreens.PAYMENT];
 };
