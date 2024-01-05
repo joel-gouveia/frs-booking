@@ -4,6 +4,7 @@ import { describe, expect, it, jest } from "@jest/globals";
 import { RouteSelectionScreen } from "@screens/RouteSelection";
 import { getRoutes } from "@api/route.service";
 import { NavigationScreens } from "src/types/navigation";
+import { routeMocks } from "@mocks/index";
 
 const mockNavigate = jest.fn();
 jest.mock("@react-navigation/native", () => {
@@ -37,37 +38,30 @@ describe("Route Selection Screen", () => {
   });
 
   it("makes /routes API call and displays buttons using the routes name", async () => {
-    (getRoutes as jest.Mock<typeof getRoutes>).mockResolvedValue([
-      { name: "route 1", destination: { code: "", name: "" }, origin: { code: "", name: "" } },
-      { name: "route 2", destination: { code: "", name: "" }, origin: { code: "", name: "" } },
-    ]);
+    (getRoutes as jest.Mock<typeof getRoutes>).mockResolvedValue(routeMocks.routes);
 
     const { getAllByTestId, getByText } = render(<RouteSelectionScreen />);
 
     expect(getRoutes).toHaveBeenCalled();
 
     await waitFor(() => {
-      expect(getByText("route 1")).toBeTruthy();
-      expect(getByText("route 2")).toBeTruthy();
+      expect(getByText(routeMocks.routes[0].name)).toBeTruthy();
+      expect(getByText(routeMocks.routes[1].name)).toBeTruthy();
       expect(getAllByTestId("route-btn")).toHaveLength(2);
     });
   });
 
   it("goes to Main Menu when clicking a route button, and sets route info", async () => {
-    (getRoutes as jest.Mock<typeof getRoutes>).mockResolvedValue([
-      {
-        name: "route 1",
-        destination: { code: "codeDestination", name: "" },
-        origin: { code: "codeOrigin", name: "" },
-      },
-    ]);
+    (getRoutes as jest.Mock<typeof getRoutes>).mockResolvedValue(routeMocks.routes);
 
     const { getByText } = render(<RouteSelectionScreen />);
 
+    const choosenRoute = routeMocks.routes[0];
+
     await waitFor(() => {
-      fireEvent.press(getByText("route 1"));
-      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.MAIN_MENU);
-      expect(mockSetRoute).toHaveBeenCalledWith("codeOrigin", "codeDestination");
+      fireEvent.press(getByText(choosenRoute.name));
+      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.DEPARTURE_TIME);
+      expect(mockSetRoute).toHaveBeenCalledWith(choosenRoute);
     });
   });
 });

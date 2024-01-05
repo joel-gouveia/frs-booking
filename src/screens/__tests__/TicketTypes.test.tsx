@@ -4,17 +4,23 @@ import { describe, expect, it, jest } from "@jest/globals";
 import i18n from "src/config/i18n/i18n";
 import { TicketTypesScreen } from "@screens/TicketTypes";
 import { getTransportables } from "@api/transportables.service";
+import { routeMocks, transportablesMock } from "@mocks/index";
 
-const ORIGIN_CODE = "A";
-const DESTINATION_CODE = "B";
+const ROUTE_MOCK = routeMocks.routes[0];
 
-const mockUseBooking = jest.fn().mockReturnValue({
-  originCode: ORIGIN_CODE,
-  destinationCode: DESTINATION_CODE,
-});
 jest.mock("@hooks/useBookingStore", () => {
   return {
-    useBookingStore: () => mockUseBooking(),
+    useBookingStore: () => ({ route: ROUTE_MOCK }),
+  };
+});
+
+jest.mock("@hooks/useTicketTypesStore", () => {
+  return {
+    useTicketTypesStore: () => ({
+      isLoaded: jest.fn().mockReturnValue(true),
+      ticketTypes: transportablesMock.ticketTypes,
+      setTicketTypes: jest.fn(),
+    }),
   };
 });
 
@@ -33,24 +39,27 @@ jest.mock("src/api/transportables.service.ts", () => ({
 
 describe("Ticket Types Screen", () => {
   it("renders ticket buttons and hotkeys according to API response", async () => {
-    (getTransportables as jest.Mock<typeof getTransportables>).mockResolvedValue([
-      { key: 111, name: "ticket type 1", transportables: [] },
-      { key: 222, name: "ticket type 2", transportables: [] },
-    ]);
+    const { ticketTypes } = transportablesMock;
+    (getTransportables as jest.Mock<typeof getTransportables>).mockResolvedValue(ticketTypes);
 
     const { getAllByTestId } = render(<TicketTypesScreen />);
 
     await waitFor(() => {
-      const ticketTypes = getAllByTestId("ticket-type-btn");
-      expect(ticketTypes).toHaveLength(2);
+      const ticketButtons = getAllByTestId("ticket-type-btn");
+      expect(ticketButtons).toHaveLength(ticketTypes.length);
+
       expect(
-        ticketTypes.find(
-          el => within(el).queryByText("111") && within(el).queryByText("ticket type 1"),
+        ticketButtons.find(
+          el =>
+            within(el).queryByText(ticketTypes[0].key.toString()) &&
+            within(el).queryByText(ticketTypes[0].name),
         ),
       ).toBeTruthy();
       expect(
-        ticketTypes.find(
-          el => within(el).queryByText("222") && within(el).queryByText("ticket type 2"),
+        ticketButtons.find(
+          el =>
+            within(el).queryByText(ticketTypes[1].key.toString()) &&
+            within(el).queryByText(ticketTypes[1].name),
         ),
       ).toBeTruthy();
     });
