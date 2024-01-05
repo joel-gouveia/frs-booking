@@ -19,11 +19,13 @@ import { NavigationProps, NavigationScreens } from "src/types/navigation";
 export function TicketTypesScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const route = useBookingStore(state => state.route);
+  const { route } = useBookingStore();
   const { isLoaded, setTicketTypes, ticketTypes } = useTicketTypesStore();
 
   useEffect(() => {
-    if (!route) return;
+    if (!route) {
+      return navigate(NavigationScreens.ROUTES);
+    }
 
     const originCode = route.origin.code;
     const destinationCode = route.destination.code;
@@ -33,7 +35,7 @@ export function TicketTypesScreen() {
         setTicketTypes(res, originCode, destinationCode),
       );
     }
-  }, [route, isLoaded, setTicketTypes]);
+  }, [route, isLoaded, setTicketTypes, navigate]);
 
   const separator = () => <View style={styles.ticketTypeButtonSeparator} />;
 

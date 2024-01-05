@@ -6,21 +6,15 @@ import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { useBookingStore } from "@hooks/useBookingStore";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useNavigation } from "@react-navigation/native";
-import useItemsText from "@hooks/useItemsText";
+import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
 
 export function BookingSummaryScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode, departureDate, departureTime, itemCounters } =
-    useBookingStore(state => ({
-      originCode: state.originCode,
-      destinationCode: state.destinationCode,
-      departureDate: state.departureDate,
-      departureTime: state.departureTime,
-      itemCounters: state.itemCounters,
-    }));
-
-  const passengersText = useItemsText({ itemCounters });
+  const { route, departure } = useBookingStore(state => ({
+    route: state.route,
+    departure: state.departure,
+  }));
 
   return (
     <ScreenLayout>
@@ -33,12 +27,15 @@ export function BookingSummaryScreen() {
       </Button>
       <View style={styles.header}>
         <Typography size="sm" style={styles.headerText}>
-          {t("common.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
+          {/* TODO: Turn this into a custom component */}
+          {t("common.voyageleg")}: :{departure && extractDateFromDateTime(departure.departureTime)}{" "}
+          {departure && extractTimeFromDateTime(departure.departureTime)}
+          {route?.origin.code} - {route?.destination.code}
         </Typography>
         <Typography mt={12}>{t("booking-summary.booking-summary")}</Typography>
         <View style={styles.bookingSummaryContainer}>
           <Typography size="sm" mb={46}>
-            {t("payment.passengers")}: {passengersText}
+            {/* TODO: Will be refactored with a different structure */}
           </Typography>
           <Typography size="sm" mb={46}>
             {t("payment.vehicles")}:

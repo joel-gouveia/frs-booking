@@ -23,27 +23,31 @@ interface BookingState {
   resetCounters: () => void;
   increment: (group: TicketTypeGroup["name"], ticket: TicketToSell) => void;
   decrement: (group: TicketTypeGroup["name"], ticket: TicketToSell) => void;
-  geTickets: (itemCounters: ItemCounters) => Ticket[];
-  getGroupTickets: (
-    itemCounters: ItemCounters,
-  ) => { group: TicketTypeGroup["name"]; tickets: Ticket[] }[];
+  getTickets: () => Ticket[];
+  getGroupTickets: () => {
+    group: TicketTypeGroup["name"];
+    tickets: Array<Ticket & { name: TicketToSell["name"] }>;
+  }[];
 }
 
 export const useBookingStore = create<BookingState>()((set, get) => ({
   setRoute: (route: RouteResponse) => set(() => ({ route })),
   setDeparture: (departure: DepartureResponse) => set(() => ({ departure })),
   itemCounters: {},
-  getGroupTickets: (itemCounters: ItemCounters) =>
-    Object.keys(itemCounters).map(group => ({
+  getGroupTickets: () =>
+    Object.keys(get()?.itemCounters ?? {}).map(group => ({
       group,
-      tickets: Object.entries(itemCounters[group]).map(([code, { quantity }]) => ({
-        code,
-        quantity,
-      })),
+      tickets: Object.entries(get()?.itemCounters[group] ?? {}).map(
+        ([code, { quantity, name }]) => ({
+          code,
+          name,
+          quantity,
+        }),
+      ),
     })),
-  geTickets: (itemCounters: ItemCounters) => {
+  getTickets: () => {
     return get()
-      .getGroupTickets(itemCounters)
+      .getGroupTickets()
       .flatMap(({ tickets }) => tickets);
   },
   resetCounters: () => set(() => ({ groupTickets: [], tickets: [], itemCounters: {} })),

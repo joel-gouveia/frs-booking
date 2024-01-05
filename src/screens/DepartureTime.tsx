@@ -25,7 +25,9 @@ export function DepartureTimeScreen() {
   const [departures, setDepartures] = useState<DepartureResponse[]>([]);
 
   useEffect(() => {
-    if (!route) return;
+    if (!route) {
+      return navigate(NavigationScreens.ROUTES);
+    }
 
     const departureRequest: DepartureRequest = {
       originCode: route.origin.code,

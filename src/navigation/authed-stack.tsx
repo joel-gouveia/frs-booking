@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export function AuthedStack() {
   return (
     <Stack.Navigator
-      initialRouteName={NavigationScreens.DEPARTURE_TIME}
+      initialRouteName={NavigationScreens.ROUTES}
       screenOptions={{
         header: Header,
       }}>

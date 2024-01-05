@@ -40,7 +40,10 @@ export function BookingItem({ ticketToSell, count, onMinusPress, onPlusPress }: 
 
 const styles = StyleSheet.create({
   container: {
-    width: "48%",
+    width: "44%",
+    borderRadius: 15,
+    marginBottom: 15,
+    paddingVertical: 10,
     backgroundColor: theme.colors.primary.main,
   },
   mainButton: {

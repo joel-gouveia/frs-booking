@@ -1,7 +1,7 @@
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Typography, VStack } from "@components/index";
-import React from "react";
+import { Button, HStack, Typography } from "@components/index";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
@@ -20,15 +20,13 @@ export function BookingScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
 
-  const ticketTypes = useTicketTypesStore(state => state.ticketTypes);
+  const { ticketTypes } = useTicketTypesStore();
   const { route, departure, itemCounters, increment, decrement } = useBookingStore(state => ({
     route: state.route,
     departure: state.departure,
     itemCounters: state.itemCounters,
     decrement: state.decrement,
     increment: state.increment,
-    getGroupTickets: state.getGroupTickets,
-    getTickets: state.geTickets,
   }));
 
   // Let's suppose we are on the Passengers screen selecting its tickets...
@@ -41,12 +39,13 @@ export function BookingScreen() {
     <ScreenLayout>
       <View style={styles.header}>
         <Typography size="sm" style={styles.headerText}>
+          {/* TODO: Turn this into a custom component */}
           {t("common.voyageleg")}:{departure && extractDateFromDateTime(departure.departureTime)}{" "}
           {departure && extractTimeFromDateTime(departure.departureTime)}
           {route?.origin.code} - {route?.destination.code}
         </Typography>
       </View>
-      <VStack gap={12} mb={30} style={styles.ticketsWrapper}>
+      <HStack mb={30} style={styles.ticketsWrapper}>
         {ticketGroup.transportables.map((ticket: TicketToSell) => (
           <BookingItem
             count={get(itemCounters, [ticketGroup.name, ticket.code, "quantity"], 0)}
@@ -56,7 +55,7 @@ export function BookingScreen() {
             onPlusPress={() => onPlusPress(ticket)}
           />
         ))}
-      </VStack>
+      </HStack>
       <Button onPress={() => {}} variant="outline" style={styles.bookButton}>
         <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
         <Typography style={styles.bookButtonText}>{t("booking.book")}</Typography>
@@ -79,8 +78,7 @@ const styles = StyleSheet.create({
   },
   ticketsWrapper: {
     flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
   },
   headerText: {
     backgroundColor: "#d9d9d9",
