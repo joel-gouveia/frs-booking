@@ -19,18 +19,26 @@ import { NavigationProps, NavigationScreens } from "src/types/navigation";
 export function TicketTypesScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode } = useBookingStore();
+  const route = useBookingStore(state => state.route);
   const { isLoaded, setTicketTypes, ticketTypes } = useTicketTypesStore();
 
   useEffect(() => {
+    if (!route) return;
+
+    const originCode = route.origin.code;
+    const destinationCode = route.destination.code;
+
     if (!isLoaded(originCode, destinationCode)) {
-      getTransportables(originCode, destinationCode).then(res =>
+      getTransportables({ originCode, destinationCode }).then(res =>
         setTicketTypes(res, originCode, destinationCode),
       );
     }
-  }, [originCode, destinationCode, isLoaded, setTicketTypes]);
+  }, [route, isLoaded, setTicketTypes]);
 
   const separator = () => <View style={styles.ticketTypeButtonSeparator} />;
+
+  // WARN: Remove
+  const onPressBook = () => navigate(NavigationScreens.BOOKING);
 
   // TODO: Add loading animation
   return (
@@ -38,11 +46,12 @@ export function TicketTypesScreen() {
       <Typography variant="title">{t("ticket-types.what-do-you-want-to-book")}</Typography>
       <Icon name="ticket" size={30} color={theme.colors.primary.main} style={styles.ticketLogo} />
       <View style={styles.ticketsContainer}>
-        {isLoaded(originCode, destinationCode) && (
+        {route && isLoaded(route.origin.code, route.destination.code) && (
           <FlatList
             data={ticketTypes}
             renderItem={({ item: { key, name } }) => (
-              <TextButton hotkey={key} testID="ticket-type-btn">
+              // WARN: Remove the onPress
+              <TextButton hotkey={key} testID="ticket-type-btn" onPress={onPressBook}>
                 {name}
               </TextButton>
             )}

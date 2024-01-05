@@ -1,64 +1,63 @@
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Typography, VStack } from "@components/index";
-import React, { useMemo } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import EnterKey from "@assets/images/enter-key.svg";
-import { chunkArray } from "@utils/array";
 import { useBookingStore } from "@hooks/useBookingStore";
 import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
 import { FooterButton } from "@components/Footer/FooterButton";
-import { ItemsRow } from "./ItemsRow";
-
-// TODO: This will come from the API in the future
-const ITEM_NAMES = ["Adult - Standard", "Child", "Car", "Bycicle"];
+import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
+import { useTicketTypesStore } from "@hooks/useTicketTypesStore";
+import { TicketToSell } from "src/types/models/ticket";
+import { get } from "underscore";
+import { BookingItem } from "./Item";
 
 export function BookingScreen() {
   const { t } = useTranslation();
-  const { itemCounters, resetCounters, originCode, destinationCode, departureDate, departureTime } =
-    useBookingStore(state => ({
-      originCode: state.originCode,
-      destinationCode: state.destinationCode,
-      departureDate: state.departureDate,
-      departureTime: state.departureTime,
-      itemCounters: state.itemCounters,
-      resetCounters: state.resetItemCounters,
-    }));
   const { navigate } = useNavigation<NavigationProps>();
 
-  const itemsRows = useMemo(() => {
-    const items = ITEM_NAMES.map((name, index) => ({
-      name,
-      hotkey: String(index + 1),
-    }));
+  const ticketTypes = useTicketTypesStore(state => state.ticketTypes);
+  const { route, departure, itemCounters, increment, decrement } = useBookingStore(state => ({
+    route: state.route,
+    departure: state.departure,
+    itemCounters: state.itemCounters,
+    decrement: state.decrement,
+    increment: state.increment,
+    getGroupTickets: state.getGroupTickets,
+    getTickets: state.geTickets,
+  }));
 
-    return chunkArray(items, 2);
-  }, []);
+  // Let's suppose we are on the Passengers screen selecting its tickets...
+  const ticketGroup = ticketTypes[0]; // Passengers ticket group
 
-  const handlePressBook = () => {
-    if (Object.values(itemCounters).every(val => val === 0)) {
-      return;
-    }
-
-    navigate(NavigationScreens.PAYMENT);
-  };
+  const onPlusPress = (ticket: TicketToSell) => increment(ticketGroup.name, ticket);
+  const onMinusPress = (ticket: TicketToSell) => decrement(ticketGroup.name, ticket);
 
   return (
     <ScreenLayout>
       <View style={styles.header}>
         <Typography size="sm" style={styles.headerText}>
-          {t("common.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
+          {t("common.voyageleg")}:{departure && extractDateFromDateTime(departure.departureTime)}{" "}
+          {departure && extractTimeFromDateTime(departure.departureTime)}
+          {route?.origin.code} - {route?.destination.code}
         </Typography>
       </View>
-      <VStack gap={50} mb={75}>
-        {itemsRows.map(row => (
-          <ItemsRow key={row[0].name} row={row} />
+      <VStack gap={12} mb={30} style={styles.ticketsWrapper}>
+        {ticketGroup.transportables.map((ticket: TicketToSell) => (
+          <BookingItem
+            count={get(itemCounters, [ticketGroup.name, ticket.code, "quantity"], 0)}
+            key={ticket.code}
+            ticketToSell={ticket}
+            onMinusPress={() => onMinusPress(ticket)}
+            onPlusPress={() => onPlusPress(ticket)}
+          />
         ))}
       </VStack>
-      <Button onPress={handlePressBook} variant="outline" style={styles.bookButton}>
+      <Button onPress={() => {}} variant="outline" style={styles.bookButton}>
         <EnterKey height={30} width={30} style={styles.enterKeyIcon} />
         <Typography style={styles.bookButtonText}>{t("booking.book")}</Typography>
       </Button>
@@ -68,7 +67,7 @@ export function BookingScreen() {
           label={t("footer.summary")}
           onPress={() => navigate(NavigationScreens.BOOKING_SUMMARY)}
         />
-        <FooterButton label={t("footer.reset")} onPress={resetCounters} />
+        <FooterButton label={t("footer.reset")} onPress={() => {}} />
       </Footer>
     </ScreenLayout>
   );
@@ -76,7 +75,12 @@ export function BookingScreen() {
 
 const styles = StyleSheet.create({
   header: {
-    marginBottom: 80,
+    marginBottom: 20,
+  },
+  ticketsWrapper: {
+    flexWrap: "wrap",
+    flexDirection: "row",
+    justifyContent: "flex-start",
   },
   headerText: {
     backgroundColor: "#d9d9d9",

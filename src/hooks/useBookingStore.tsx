@@ -1,58 +1,94 @@
-import { DepartureResponse } from "src/types/departure";
 import { create } from "zustand";
+import _ from "underscore";
+
+import { DepartureResponse } from "src/types/models/departure";
+import { RouteResponse } from "src/types/models/route";
+import { Ticket, TicketToSell, TicketTypeGroup } from "src/types/models/ticket";
+
+type ItemCounters = {
+  [group in TicketTypeGroup["name"]]: {
+    [ticketCode in TicketToSell["code"]]: {
+      name: TicketToSell["name"];
+      quantity: Ticket["quantity"];
+    };
+  };
+};
 
 interface BookingState {
-  uuid: DepartureResponse["uuid"];
-  originCode: string;
-  destinationCode: string;
-  setRoute: (originCode: string, destinationCode: string) => void;
-  departureTime: string;
-  departureDate: string;
-  itemCounters: Record<string, number>;
-  setDepartureTime: (time: string) => void;
-  setDepartureUUID: (uuid: DepartureResponse["uuid"]) => void;
-  setDepartureDate: (date: string) => void;
-  setItemCounters: (val: Record<string, number>) => void;
-  resetItemCounters: () => void;
-  incrementItemCountersKey: (key: string) => void;
-  decrementItemCountersKey: (key: string) => void;
+  route?: RouteResponse;
+  departure?: DepartureResponse;
+  setRoute: (route: RouteResponse) => void;
+  setDeparture: (departure: DepartureResponse) => void;
+  itemCounters: ItemCounters;
+  resetCounters: () => void;
+  increment: (group: TicketTypeGroup["name"], ticket: TicketToSell) => void;
+  decrement: (group: TicketTypeGroup["name"], ticket: TicketToSell) => void;
+  geTickets: (itemCounters: ItemCounters) => Ticket[];
+  getGroupTickets: (
+    itemCounters: ItemCounters,
+  ) => { group: TicketTypeGroup["name"]; tickets: Ticket[] }[];
 }
 
-export const useBookingStore = create<BookingState>()(set => ({
-  originCode: "",
-  destinationCode: "",
-  departureDate: "",
-  departureTime: "",
-  uuid: "",
+export const useBookingStore = create<BookingState>()((set, get) => ({
+  setRoute: (route: RouteResponse) => set(() => ({ route })),
+  setDeparture: (departure: DepartureResponse) => set(() => ({ departure })),
   itemCounters: {},
-  setRoute: (originCode: string, destinationCode: string) =>
-    set(state => ({ ...state, originCode, destinationCode })),
-  setDepartureTime: time => set(state => ({ ...state, departureTime: time })),
-  setDepartureUUID: uuid => set(state => ({ ...state, uuid })),
-  setDepartureDate: date => set(state => ({ ...state, departureDate: date })),
-  setItemCounters: val => set(state => ({ ...state, itemCounters: val })),
-  resetItemCounters: () =>
+  getGroupTickets: (itemCounters: ItemCounters) =>
+    Object.keys(itemCounters).map(group => ({
+      group,
+      tickets: Object.entries(itemCounters[group]).map(([code, { quantity }]) => ({
+        code,
+        quantity,
+      })),
+    })),
+  geTickets: (itemCounters: ItemCounters) => {
+    return get()
+      .getGroupTickets(itemCounters)
+      .flatMap(({ tickets }) => tickets);
+  },
+  resetCounters: () => set(() => ({ groupTickets: [], tickets: [], itemCounters: {} })),
+  increment: (group: TicketTypeGroup["name"], ticket: TicketToSell) => {
     set(state => {
-      const resetItemCounter = Object.keys(state.itemCounters).reduce(
-        (prev, curr) => ({ ...prev, [curr]: 0 }),
-        {} as Record<string, number>,
-      );
+      const ticketCount = _.get(state.itemCounters, [group, ticket.code, "quantity"], 0);
 
-      return { ...state, itemCounters: resetItemCounter };
-    }),
-  incrementItemCountersKey: key =>
+      return {
+        itemCounters: {
+          ...state.itemCounters,
+          [group]: {
+            ...state.itemCounters[group],
+            [ticket.code]: {
+              name: ticket.name,
+              quantity: ticketCount + 1,
+            },
+          },
+        },
+      };
+    });
+  },
+  decrement: (group: TicketTypeGroup["name"], ticket: TicketToSell) => {
     set(state => {
-      const count = state.itemCounters[key] ?? 0;
-      const updatedItemCounters = { ...state.itemCounters, [key]: count + 1 };
+      const currentTicket = _.get(state.itemCounters, [group, ticket.code], null);
+      if (!currentTicket) return { itemCounters: state.itemCounters };
 
-      return { ...state, itemCounters: updatedItemCounters };
-    }),
-  decrementItemCountersKey: key =>
-    set(state => {
-      const count = state.itemCounters[key] ?? 0;
-      const newCount = Math.max(count - 1, 0);
-      const updatedItemCounters = { ...state.itemCounters, [key]: newCount };
+      const groupCounters = { ...state.itemCounters[group] };
 
-      return { ...state, itemCounters: updatedItemCounters };
-    }),
+      if (currentTicket.quantity <= 1) {
+        delete groupCounters[ticket.code];
+        return { itemCounters: { ...state.itemCounters, [group]: groupCounters } };
+      }
+
+      return {
+        itemCounters: {
+          ...state.itemCounters,
+          [group]: {
+            ...state.itemCounters[group],
+            [ticket.code]: {
+              ...currentTicket,
+              quantity: currentTicket.quantity - 1,
+            },
+          },
+        },
+      };
+    });
+  },
 }));
