@@ -28,7 +28,7 @@ export function TicketSelectionScreen({ route }: Props) {
     departureDate: state.departureDate,
     departureTime: state.departureTime,
   }));
-  const { ticketTypes } = useTicketTypesStore();
+  const ticketTypes = useTicketTypesStore(state => state.ticketTypes);
 
   const transportables = useMemo(() => {
     const ticket = ticketTypes.find(({ name }) => route?.params.ticketType === name);

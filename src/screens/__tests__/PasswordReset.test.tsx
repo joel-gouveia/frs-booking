@@ -26,7 +26,10 @@ describe("Main Menu Screen", () => {
 
   it("navigates to login screen, when pressing send email button", async () => {
     const { getByTestId } = render(<PasswordResetScreen />);
-    fireEvent.press(getByTestId("send-email-btn"));
+
+    await waitFor(() => {
+      fireEvent.press(getByTestId("send-email-btn"));
+    });
 
     await waitFor(() => {
       expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.LOGIN);
