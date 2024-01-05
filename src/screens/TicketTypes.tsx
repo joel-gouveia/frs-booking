@@ -39,9 +39,6 @@ export function TicketTypesScreen() {
 
   const separator = () => <View style={styles.ticketTypeButtonSeparator} />;
 
-  // WARN: Remove
-  const onPressBook = () => navigate(NavigationScreens.BOOKING);
-
   // TODO: Add loading animation
   return (
     <ScreenLayout>
@@ -53,7 +50,7 @@ export function TicketTypesScreen() {
             data={ticketTypes}
             renderItem={({ item: { key, name } }) => (
               // WARN: Remove the onPress
-              <TextButton hotkey={key} testID="ticket-type-btn" onPress={onPressBook}>
+              <TextButton hotkey={key} testID="ticket-type-btn">
                 {name}
               </TextButton>
             )}
