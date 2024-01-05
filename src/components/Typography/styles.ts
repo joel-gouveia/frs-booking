@@ -1,6 +1,6 @@
 import { StyleProp, TextStyle } from "react-native";
 
-export type ISizes = "xs" | "sm" | "md";
+export type ISizes = "xs" | "sm" | "md" | "lg" | "xl";
 
 export const sizes: Record<ISizes, StyleProp<TextStyle>> = {
   xs: {
@@ -11,6 +11,12 @@ export const sizes: Record<ISizes, StyleProp<TextStyle>> = {
   },
   md: {
     fontSize: 16,
+  },
+  lg: {
+    fontSize: 20,
+  },
+  xl: {
+    fontSize: 28,
   },
 };
 

@@ -26,7 +26,7 @@ interface Resources {
       "send-email": "Send Email";
     };
     routes: {
-      "choose-route": "Choose Route";
+      "choose-route": "Select your route";
     };
     "main-menu": {
       sales: "Sales";
