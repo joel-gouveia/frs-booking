@@ -13,7 +13,7 @@ import { useBookingStore } from "@hooks/useBookingStore";
 
 export function MainMenuScreen() {
   const { t } = useTranslation();
-  const { destinationCode, originCode } = useBookingStore();
+  const { route } = useBookingStore();
   const { navigate } = useNavigation<NavigationProps>();
 
   const optionButtons = [
@@ -38,7 +38,9 @@ export function MainMenuScreen() {
     <ScreenLayout
       headerProps={{
         title: t("main-menu.title"),
-        subtitles: [t("main-menu.route", { route: `${originCode} - ${destinationCode}` })],
+        subtitles: [
+          t("main-menu.route", { route: `${route?.origin.code} - ${route?.destination.code}` }),
+        ],
       }}>
       <VStack gap={20} pt={30}>
         {optionButtons.map(({ title, onPress, icon }) => (
