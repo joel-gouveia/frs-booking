@@ -27,7 +27,7 @@ export function RouteSelectionScreen() {
 
   const handleRoutePress = (route: IRoute) => () => {
     setRouteStore(route.origin.code, route.destination.code);
-    navigate(NavigationScreens.DEPARTURE_TIME);
+    navigate(NavigationScreens.MAIN_MENU);
   };
 
   return (

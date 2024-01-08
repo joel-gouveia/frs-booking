@@ -11,7 +11,9 @@ export function ScreenLayoutHeader(props: Props) {
   return (
     <VStack justifyContent="center" alignItems="center">
       <VStack>
-        <Typography variant="title">{props.title}</Typography>
+        <Typography variant="title" testID="title">
+          {props.title}
+        </Typography>
         <HStack mt={5} />
         {props.subtitles?.map(subtitle => (
           <Typography key={subtitle} variant="subtitle">

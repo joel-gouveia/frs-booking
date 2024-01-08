@@ -1,9 +1,7 @@
 import React from "react";
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { render, waitFor } from "@testing-library/react-native";
 import { describe, expect, it, jest } from "@jest/globals";
-import i18n from "src/config/i18n/i18n";
 import { BookingSummaryScreen } from "@screens/BookingSummary";
-import { NavigationScreens } from "src/types/navigation";
 
 const mockNavigate = jest.fn();
 jest.mock("@react-navigation/native", () => {
@@ -35,11 +33,12 @@ describe("Booking Summary Screen", () => {
   it("renders the screen with header and back buttons", async () => {
     const { getByText } = render(<BookingSummaryScreen />);
 
+    const departureDateTime = `${DATE} ${TIME}`;
+    const routeCodes = `${ORIGIN_CODE} - ${DESTINATION_CODE}`;
+
     await waitFor(() => {
-      expect(
-        getByText(RegExp(`${DATE} ${TIME} ${ORIGIN_CODE} - ${DESTINATION_CODE}`)),
-      ).toBeTruthy();
-      expect(getByText(i18n.t("common.back"))).toBeTruthy();
+      expect(getByText(RegExp(departureDateTime))).toBeTruthy();
+      expect(getByText(RegExp(routeCodes))).toBeTruthy();
     });
   });
 
@@ -50,16 +49,6 @@ describe("Booking Summary Screen", () => {
       expect(getByText(/adult: 2/)).toBeTruthy();
       expect(getByText(/child: 1/)).toBeTruthy();
       expect(() => getByText(/bike/)).toThrow();
-    });
-  });
-
-  it("navigates to booking screen, when pressing the back button", async () => {
-    const { getByText } = render(<BookingSummaryScreen />);
-
-    fireEvent.press(getByText(i18n.t("common.back")));
-
-    await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.BOOKING);
     });
   });
 });

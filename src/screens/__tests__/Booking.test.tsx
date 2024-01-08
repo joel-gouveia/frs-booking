@@ -35,10 +35,12 @@ describe("Booking Screen", () => {
   it("renders the screen with header and footer buttons", async () => {
     const { getByText, getAllByTestId } = render(<BookingScreen />);
 
+    const departureDateTime = `${DATE} ${TIME}`;
+    const routeCodes = `${ORIGIN_CODE} - ${DESTINATION_CODE}`;
+
     await waitFor(() => {
-      expect(
-        getByText(RegExp(`${DATE} ${TIME} ${ORIGIN_CODE} - ${DESTINATION_CODE}`)),
-      ).toBeTruthy();
+      expect(getByText(RegExp(departureDateTime))).toBeTruthy();
+      expect(getByText(RegExp(routeCodes))).toBeTruthy();
       expect(getByText(i18n.t("footer.main-menu"))).toBeTruthy();
       expect(getByText(i18n.t("footer.summary"))).toBeTruthy();
       expect(getByText(i18n.t("footer.reset"))).toBeTruthy();
