@@ -1,4 +1,4 @@
-export interface IRoute {
+export interface RouteResponse {
   name: string;
   origin: Origin;
   destination: Destination;

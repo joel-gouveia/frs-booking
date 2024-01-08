@@ -6,7 +6,7 @@ import { getRoutes } from "@api/route.service";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
-import { IRoute } from "src/types/models/route";
+import { RouteResponse } from "src/types/models/route";
 import { useBookingStore } from "@hooks/useBookingStore";
 
 import PaperAirplane from "@assets/images/paper-airplane.svg";
@@ -19,29 +19,23 @@ export function RouteSelectionScreen() {
   const { navigate } = useNavigation<NavigationProps>();
   const setRouteStore = useBookingStore(state => state.setRoute);
 
-  const [routes, setRoutes] = useState<IRoute[]>([]);
+  const [routes, setRoutes] = useState<RouteResponse[]>([]);
 
   useEffect(() => {
-    getRoutes().then(res => {
-      setRoutes(res);
-    });
+    getRoutes().then(res => setRoutes(res));
   }, []);
 
-  const handleRoutePress = (route: IRoute) => () => {
-    setRouteStore(route.origin.code, route.destination.code);
-    navigate(NavigationScreens.MAIN_MENU);
+  const handleRoutePress = (route: RouteResponse) => () => {
+    setRouteStore(route);
+    navigate(NavigationScreens.DEPARTURE_TIME);
   };
+
+  const separator = () => <View style={styles.spacing} />;
 
   return (
     <>
-      <PaperAirplane width={190} style={[styles.svg, styles.airplaneSvg]} />
       <ScreenLayout>
-        <Typography
-          variant="title"
-          bold
-          style={styles.title}
-          testID="title"
-          color={theme.colors.text}>
+        <Typography variant="title" color={theme.colors.text} testID="title">
           {t("routes.choose-route")}
         </Typography>
         <FlatList
@@ -49,27 +43,21 @@ export function RouteSelectionScreen() {
           keyExtractor={(route, index) => `${route.name}-${index}`}
           flatListStyle={styles.flatList}
           wrapperViewContainerStyle={styles.flatListWrapperStyle}
-          ItemSeparatorComponent={() => <View style={styles.spacing} />}
+          ItemSeparatorComponent={separator}
           renderItem={({ item: route }) => (
-            <TextButton
-              onPress={handleRoutePress(route)}
-              variant="solid"
-              fontSize={24}
-              testID="route-btn">
+            <TextButton onPress={handleRoutePress(route)} variant="solid" testID="route-btn">
               {route.name}
             </TextButton>
           )}
         />
       </ScreenLayout>
+      <PaperAirplane width={190} style={[styles.svg, styles.airplaneSvg]} />
       <PaperAirplaneTrack width={100} style={[styles.svg, styles.airplaneTrackSvg]} />
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  title: {
-    textAlign: "center",
-  },
   flatListWrapperStyle: {
     height: 340,
     marginTop: 60,
@@ -86,6 +74,7 @@ const styles = StyleSheet.create({
   },
   airplaneSvg: {
     top: 50,
+    left: 0,
   },
   airplaneTrackSvg: {
     bottom: -10,

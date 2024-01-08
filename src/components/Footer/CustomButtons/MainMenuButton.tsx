@@ -7,11 +7,11 @@ import { FooterButton } from "../FooterButton";
 
 export function MainMenuButton() {
   const { t } = useTranslation();
-  const setItemCounters = useBookingStore(state => state.setItemCounters);
+  const resetCounters = useBookingStore(state => state.resetCounters);
   const { navigate } = useNavigation<NavigationProps>();
 
   const onPress = () => {
-    setItemCounters({});
+    resetCounters();
     navigate(NavigationScreens.MAIN_MENU);
   };
 

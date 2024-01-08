@@ -1,9 +1,8 @@
 import api from "@api/index";
-import { TransportableResponse } from "src/types/transportables";
+import { TransportableResponse, TransportablesRequest } from "src/types/models/transportables";
 
 export const getTransportables = async (
-  originCode: string,
-  destinationCode: string,
+  body: TransportablesRequest,
 ): Promise<TransportableResponse[]> => {
-  return api.post("/transportables", { originCode, destinationCode });
+  return api.post("/transportables", body);
 };
