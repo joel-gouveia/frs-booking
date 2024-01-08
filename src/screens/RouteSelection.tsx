@@ -59,7 +59,7 @@ export function RouteSelectionScreen() {
 const styles = StyleSheet.create({
   flatListWrapperStyle: {
     height: 340,
-    marginTop: 60,
+    marginTop: 40,
   },
   flatList: {
     height: 340,
