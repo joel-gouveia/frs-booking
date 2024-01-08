@@ -1,95 +1,95 @@
 interface Resources {
-  de: {
-    login: {
-      username: "Nutzername";
-      password: "Passwort";
-    };
-  };
-  en: {
-    common: {
-      voyageleg: "Voyageleg";
-      back: "Back";
-    };
-    login: {
-      login: "Login";
-      "log-in-to": "Log in to";
-      "frs-account": "FRS Account";
-      "forgot-password?": "Forgot your Password?";
-      username: "Username";
-      password: "Password";
-      click: "Click";
-      here: "here";
-    };
+  "de": {
+    "login": {
+      "username": "Nutzername",
+      "password": "Passwort"
+    }
+  },
+  "en": {
+    "common": {
+      "voyageleg": "Voyageleg",
+      "back": "Back"
+    },
+    "login": {
+      "login": "Login",
+      "log-in-to": "Log in to",
+      "frs-account": "FRS Account",
+      "forgot-password?": "Forgot your Password?",
+      "username": "Username",
+      "password": "Password",
+      "click": "Click",
+      "here": "here"
+    },
     "password-reset": {
-      "reset-password": "Reset your password";
-      email: "Email";
-      "send-email": "Send Email";
-    };
-    routes: {
-      "choose-route": "Select your route";
-    };
+      "reset-password": "Reset your password",
+      "email": "Email",
+      "send-email": "Send Email"
+    },
+    "routes": {
+      "choose-route": "Select your route"
+    },
     "main-menu": {
-      title: "What would you like to do?";
-      booking: "Booking";
-      boarding: "Boarding";
-      cancel: "Cancel Booking";
-      "route-number": "Route {{routeNumber}}";
-    };
+      "title": "What would you like to do?",
+      "booking": "Booking",
+      "boarding": "Boarding",
+      "cancel": "Cancel Booking",
+      "route": "Route {{route}}"
+    },
     "ticket-types": {
-      "what-do-you-want-to-book": "What do you want to book?";
-      book: "Book";
-    };
+      "what-do-you-want-to-book": "What do you want to book?",
+      "book": "Book"
+    },
     "departure-times": {
-      "choose-departure": "Choose Departure";
-    };
-    booking: {
-      book: "BOOK";
-    };
+      "choose-departure": "Choose Departure"
+    },
+    "booking": {
+      "book": "BOOK"
+    },
     "booking-summary": {
-      "booking-summary": "Booking summary";
-    };
-    payment: {
-      "payment-method": "Payment Method";
-      cash: "Cash";
-      "payment-summary": "Payment Summary";
-      passengers: "Passengers";
-      vehicles: "Vehicles";
-      total: "Total";
-      "confirm-purchase": "Confirm Purchase";
-    };
-    footer: {
-      "main-menu": "Main Menu";
-      logout: "Logout";
-      summary: "Summary";
-      reset: "Reset";
-    };
+      "booking-summary": "Booking summary"
+    },
+    "payment": {
+      "payment-method": "Payment Method",
+      "cash": "Cash",
+      "payment-summary": "Payment Summary",
+      "passengers": "Passengers",
+      "vehicles": "Vehicles",
+      "total": "Total",
+      "confirm-purchase": "Confirm Purchase"
+    },
+    "footer": {
+      "main-menu": "Main Menu",
+      "logout": "Logout",
+      "summary": "Summary",
+      "reset": "Reset"
+    },
     "printable-receipt": {
-      user: "User: {{username}}";
-      "ticket-validation-message": "The ticket is validated with the purchase and is only valid for the subsequent journey. The terms and conditions 6 and 18 of the shipping company apply";
-      total: {
-        gross: "Total (gross): {{value}}";
-        net: "Total (net): {{value}}";
-      };
-      "thank-message": "Thank you!";
-      "vat-percentage": "{{value}}%";
-      "tse-info-divider": "-----------------TSE Information----------------";
-      ticket: {
-        "quantity-and-price": "{{quantity}} x at {{price}}";
-        "include-vat": "incl. {{value}}% VAT";
-      };
-      tse: {
-        deviceNumber: "Device Serial Number: {{value}}";
-        number: "TSE Serial Number: {{value}}";
-        signature: "Signature: {{value}}";
-        transaction: "Transaction: {{value}}";
-        startDateTime: "Start: {{value}}";
-        endDateTime: "Finish: {{value}}";
-        counterSignature: "Signature-Payer: {{value}}";
-        algorithm: "Signature-Algorithms: {{value}}";
-        timeFormat: "Time-Format: {{value}}";
-      };
-    };
-  };
+      "user": "User: {{username}}",
+      "ticket-validation-message": "The ticket is validated with the purchase and is only valid for the subsequent journey. The terms and conditions 6 and 18 of the shipping company apply",
+      "total": {
+        "gross": "Total (gross): {{value}}",
+        "net": "Total (net): {{value}}"
+      },
+      "thank-message": "Thank you!",
+      "vat-percentage": "{{value}}%",
+      "tse-info-divider": "-----------------TSE Information----------------",
+      "ticket": {
+        "quantity-and-price": "{{quantity}} x at {{price}}",
+        "include-vat": "incl. {{value}}% VAT"
+      },
+      "tse": {
+        "deviceNumber": "Device Serial Number: {{value}}",
+        "number": "TSE Serial Number: {{value}}",
+        "signature": "Signature: {{value}}",
+        "transaction": "Transaction: {{value}}",
+        "startDateTime": "Start: {{value}}",
+        "endDateTime": "Finish: {{value}}",
+        "counterSignature": "Signature-Payer: {{value}}",
+        "algorithm": "Signature-Algorithms: {{value}}",
+        "timeFormat": "Time-Format: {{value}}"
+      }
+    }
+  }
 }
 
 export default Resources;

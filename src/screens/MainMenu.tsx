@@ -13,7 +13,7 @@ import { useBookingStore } from "@hooks/useBookingStore";
 
 export function MainMenuScreen() {
   const { t } = useTranslation();
-  const { destinationCode } = useBookingStore();
+  const { destinationCode, originCode } = useBookingStore();
   const { navigate } = useNavigation<NavigationProps>();
 
   const optionButtons = [
@@ -35,15 +35,11 @@ export function MainMenuScreen() {
   ];
 
   return (
-    <ScreenLayout>
-      <VStack gap={15} alignItems="center" justifyContent="center">
-        <Typography variant="title" style={styles.title}>
-          {t("main-menu.title")}
-        </Typography>
-        <Typography size="md" color={theme.colors.text}>
-          {t("main-menu.route-number", { routeNumber: destinationCode })}
-        </Typography>
-      </VStack>
+    <ScreenLayout
+      headerProps={{
+        title: t("main-menu.title"),
+        subtitles: [t("main-menu.route", { route: `${originCode} - ${destinationCode}` })],
+      }}>
       <VStack gap={20} pt={30}>
         {optionButtons.map(({ title, onPress, icon }) => (
           <Button onPress={onPress} variant="solid" key={title} startIcon={icon} endIcon={icon}>
@@ -58,13 +54,6 @@ export function MainMenuScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    textAlign: "center",
-    maxWidth: 180,
-  },
-  button: {
-    fontSize: 30,
-  },
   buttonTitle: {
     paddingVertical: 5,
     paddingHorizontal: 12,

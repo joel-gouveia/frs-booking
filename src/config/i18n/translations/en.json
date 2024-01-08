@@ -26,7 +26,7 @@
     "booking": "Booking",
     "boarding": "Boarding",
     "cancel": "Cancel Booking",
-    "route-number": "Route {{routeNumber}}"
+    "route": "Route {{route}}"
   },
   "ticket-types": {
     "what-do-you-want-to-book": "What do you want to book?",
