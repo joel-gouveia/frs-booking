@@ -19,7 +19,7 @@
     "send-email": "Send Email"
   },
   "routes": {
-    "choose-route": "Choose Route"
+    "choose-route": "Select your route"
   },
   "main-menu": {
     "title": "What would you like to do?",
