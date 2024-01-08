@@ -13,30 +13,21 @@ import { Empty } from "@components/Footer/CustomButtons/Empty";
 import { createBooking, getReceipt } from "@api/booking.service";
 import { Printer } from "@modules/ThermalPrinter/ThermalPrinter";
 import { receiptUtils } from "@utils/receipt";
-import useItemsText from "@hooks/useItemsText";
+import { departureUtils } from "@utils/departure";
 
 export function PaymentScreen() {
   const { t } = useTranslation();
-  const { originCode, destinationCode, departureDate, departureTime, itemCounters, uuid } =
-    useBookingStore(state => ({
-      originCode: state.originCode,
-      destinationCode: state.destinationCode,
-      departureDate: state.departureDate,
-      departureTime: state.departureTime,
-      uuid: state.uuid,
-      itemCounters: state.itemCounters,
-    }));
-
-  const passengersText = useItemsText({ itemCounters });
+  const { departure, route, getTickets } = useBookingStore(state => ({
+    route: state.route,
+    departure: state.departure,
+    getTickets: state.getTickets,
+  }));
 
   const onConfirmBooking = async () => {
     try {
-      // TODO: Refactor this on the ticket #29
-      const tickets = Object.entries(itemCounters)
-        .filter(([_, val]) => val > 0)
-        .map(([key, val]) => ({ code: key, quantity: val }));
+      if (!route || !departure) return;
 
-      const booking = await createBooking(uuid, tickets);
+      const booking = await createBooking(departure.uuid, getTickets());
       const receipt = await getReceipt(booking.number);
 
       const printableReceipt = receiptUtils.generatePrintableReceipt(receipt);
@@ -50,7 +41,10 @@ export function PaymentScreen() {
     <ScreenLayout
       headerProps={{
         title: t("common.voyageleg"),
-        subtitles: [`${departureDate} ${departureTime}`, `(${originCode} - ${destinationCode})`],
+        subtitles: [
+          departureUtils.formatDateAndTime(departure?.departureTime),
+          `(${route?.origin.code} - ${route?.destination.code})`,
+        ],
       }}>
       <VStack gap={24}>
         <Typography>{t("payment.payment-method")}</Typography>
@@ -67,9 +61,7 @@ export function PaymentScreen() {
         <View>
           <Typography>{t("payment.payment-summary")}</Typography>
           <View style={styles.paymentSummaryContainer}>
-            <Typography size="sm" mb={46}>
-              {t("payment.passengers")}: {passengersText}
-            </Typography>
+            {/* TODO: Will be refactored with a different structure */}
             <Typography size="sm" mb={46}>
               {t("payment.vehicles")}:
             </Typography>

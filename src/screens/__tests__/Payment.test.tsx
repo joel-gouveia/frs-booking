@@ -4,24 +4,21 @@ import { afterEach, describe, expect, it, jest } from "@jest/globals";
 import i18n from "src/config/i18n/i18n";
 import * as BookingAPI from "@api/booking.service";
 import { PaymentScreen } from "@screens/Payment";
-import { bookingMocks, receiptMocks } from "@mocks/index";
 import { generatePrintableReceipt, receiptUtils } from "@utils/receipt";
 import { Printer } from "@modules/ThermalPrinter/ThermalPrinter";
 
-const ORIGIN_CODE = "A";
-const DESTINATION_CODE = "B";
-const TIME = "10:00";
-const DATE = "2020-01-01";
-const UUID = "71295f1e-a874-4048-bafe-f52df4a7e77f";
+import { bookingMocks, receiptMocks, routeMocks, departureMocks } from "@mocks/index";
+import { departureUtils } from "@utils/departure";
+
+const DEPARTURE_MOCK = departureMocks.departures[0];
+const ROUTE_MOCK = routeMocks.routes[0];
 
 const mockUseBooking = jest.fn().mockReturnValue({
-  originCode: ORIGIN_CODE,
-  destinationCode: DESTINATION_CODE,
-  departureDate: DATE,
-  departureTime: TIME,
-  uuid: UUID,
+  route: ROUTE_MOCK,
+  departure: DEPARTURE_MOCK,
   itemCounters: {},
 });
+
 jest.mock("@hooks/useBookingStore", () => {
   return {
     useBookingStore: () => mockUseBooking(),
@@ -45,8 +42,8 @@ describe("Payment Screen", () => {
   it("renders the screen with header and footer buttons", async () => {
     const { getByText, getAllByTestId } = render(<PaymentScreen />);
 
-    const departureDateTime = `${DATE} ${TIME}`;
-    const routeCodes = `${ORIGIN_CODE} - ${DESTINATION_CODE}`;
+    const departureDateTime = departureUtils.formatDateAndTime(DEPARTURE_MOCK.departureTime);
+    const routeCodes = `${ROUTE_MOCK.origin.code} - ${ROUTE_MOCK.destination.code}`;
 
     await waitFor(() => {
       expect(getByText(RegExp(departureDateTime))).toBeTruthy();
@@ -57,29 +54,21 @@ describe("Payment Screen", () => {
     });
   });
 
-  it("Displays the items counter, but does not show when it is zero", async () => {
-    mockUseBooking.mockReturnValue({
-      itemCounters: { adult: 2, child: 1, car: 1, bike: 0 },
-    });
-
-    const { getByText } = render(<PaymentScreen />);
-
-    await waitFor(() => {
-      expect(getByText(/adult: 2/)).toBeTruthy();
-      expect(getByText(/child: 1/)).toBeTruthy();
-      expect(getByText(/car: 1/)).toBeTruthy();
-      expect(() => getByText(/bike/)).toThrow();
-    });
-  });
-
   it("Should create booking and print receipt when confirm button is pressed", async () => {
-    mockUseBooking.mockReturnValue({
-      uuid: UUID,
-      itemCounters: { adult: 2, child: 1, car: 1, bike: 0 },
-    });
-
     const { booking, tickets } = bookingMocks;
     const { receipt } = receiptMocks;
+
+    mockUseBooking.mockReturnValue({
+      route: ROUTE_MOCK,
+      departure: DEPARTURE_MOCK,
+      getTickets: () => tickets,
+      itemCounters: {
+        Passengers: {
+          AD: { name: "Adult", quantity: 2 },
+          CH: { name: "Child", quantity: 1 },
+        },
+      },
+    });
 
     const spiedCreateBooking = jest.spyOn(BookingAPI, "createBooking").mockResolvedValue(booking);
     const spiedGetReceipt = jest.spyOn(BookingAPI, "getReceipt").mockResolvedValue(receipt);
@@ -90,7 +79,7 @@ describe("Payment Screen", () => {
 
     await waitFor(() => {
       fireEvent.press(getByTestId("confirm-payment-button"));
-      expect(spiedCreateBooking).toBeCalledWith(UUID, tickets);
+      expect(spiedCreateBooking).toBeCalledWith(DEPARTURE_MOCK.uuid, tickets);
       expect(spiedGetReceipt).toBeCalledWith(booking.number);
       expect(spiedGeneratePrintableReceipt).toBeCalledWith(receipt);
       expect(spiedPrinter).toBeCalledWith({ payload: generatePrintableReceipt(receipt) });

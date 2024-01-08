@@ -2,25 +2,28 @@ import { Button, HStack, Typography, VStack } from "@components/index";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
+import { theme } from "src/theme/theme";
+import { TicketToSell } from "src/types/models/ticket";
 
 interface IBookingItem {
-  hotkey: string;
-  text: string;
-  value: number;
+  ticketToSell: TicketToSell;
+  count: number;
   onMinusPress: () => void;
   onPlusPress: () => void;
 }
 
-export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: IBookingItem) {
+export function BookingItem({ ticketToSell, count, onMinusPress, onPlusPress }: IBookingItem) {
   return (
     <View style={styles.container}>
-      <Button style={styles.mainButton} variant="outline">
+      <Button style={styles.mainButton} variant="solid">
         <Typography style={styles.hotkeyText} size="xs">
-          {hotkey}
+          {ticketToSell.key}
         </Typography>
         <VStack justifyContent="center" alignItems="center">
-          <Typography size="sm">{text}</Typography>
-          <Typography style={styles.itemCount}>{value}</Typography>
+          <Typography size="sm" style={styles.name}>
+            {ticketToSell.name}
+          </Typography>
+          <Typography style={styles.itemCount}>{count}</Typography>
         </VStack>
       </Button>
       <HStack justifyContent="space-around">
@@ -37,7 +40,11 @@ export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: "44%",
+    borderRadius: 15,
+    marginBottom: 15,
+    paddingVertical: 10,
+    backgroundColor: theme.colors.primary.main,
   },
   mainButton: {
     paddingHorizontal: 0,
@@ -46,6 +53,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   hotkeyText: {
+    color: theme.colors.primary.contrastText,
     position: "absolute",
     right: 6,
     top: 0,
@@ -56,5 +64,10 @@ const styles = StyleSheet.create({
   },
   itemCount: {
     fontSize: 40,
+    color: theme.colors.primary.contrastText,
+  },
+  name: {
+    color: theme.colors.primary.contrastText,
+    textAlign: "center",
   },
 });

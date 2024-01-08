@@ -1,3 +1,8 @@
+export interface TransportablesRequest {
+  originCode: string;
+  destinationCode: string;
+}
+
 export interface TransportableResponse {
   key: number;
   name: string;

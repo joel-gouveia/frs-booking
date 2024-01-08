@@ -19,16 +19,23 @@ import { NavigationProps, NavigationScreens } from "src/types/navigation";
 export function TicketTypesScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode } = useBookingStore();
+  const { route } = useBookingStore();
   const { isLoaded, setTicketTypes, ticketTypes } = useTicketTypesStore();
 
   useEffect(() => {
+    if (!route) {
+      return navigate(NavigationScreens.ROUTES);
+    }
+
+    const originCode = route.origin.code;
+    const destinationCode = route.destination.code;
+
     if (!isLoaded(originCode, destinationCode)) {
-      getTransportables(originCode, destinationCode).then(res =>
+      getTransportables({ originCode, destinationCode }).then(res =>
         setTicketTypes(res, originCode, destinationCode),
       );
     }
-  }, [originCode, destinationCode, isLoaded, setTicketTypes]);
+  }, [route, isLoaded, setTicketTypes, navigate]);
 
   const separator = () => <View style={styles.ticketTypeButtonSeparator} />;
 
@@ -40,7 +47,7 @@ export function TicketTypesScreen() {
         icon: <Icon name="ticket" size={30} color={theme.colors.primary.main} />,
       }}>
       <View style={styles.ticketsContainer}>
-        {isLoaded(originCode, destinationCode) && (
+        {route && isLoaded(route.origin.code, route.destination.code) && (
           <FlatList
             data={ticketTypes}
             renderItem={({ item: { key, name } }) => (
