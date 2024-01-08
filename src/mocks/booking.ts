@@ -1,25 +1,19 @@
 import { Booking } from "src/types/models/booking";
 import { Ticket } from "src/types/models/ticket";
 
+const tickets: Ticket[] = [
+  { code: "AD", quantity: 2 },
+  { code: "CH", quantity: 1 },
+];
+
 const booking: Booking = {
   number: "RDFR2A",
-  tickets: [
-    {
-      code: "AD",
-      quantity: 2,
-    },
-  ],
+  tickets,
   totalPrice: {
     value: 123.45,
     currency: "EUR",
   },
 };
-
-const tickets: Ticket[] = [
-  { code: "adult", quantity: 2 },
-  { code: "child", quantity: 1 },
-  { code: "car", quantity: 1 },
-];
 
 export const bookingMocks = {
   booking,

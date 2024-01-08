@@ -1,10 +1,17 @@
 import React from "react";
+import i18n from "src/config/i18n/i18n";
 import { render, waitFor, fireEvent } from "@testing-library/react-native";
 import { afterEach, describe, expect, it, jest } from "@jest/globals";
 import { getDepartures } from "@api/departure.service";
-import i18n from "src/config/i18n/i18n";
 import { DepartureTimeScreen } from "@screens/DepartureTime";
 import { NavigationScreens } from "src/types/navigation";
+
+import { extractTimeFromDateTime } from "@utils/date";
+import { departureMocks, routeMocks } from "@mocks/index";
+
+const DEPARTURE_MOCK = departureMocks.departures[0];
+const ROUTE_MOCK = routeMocks.routes[0];
+const mockSetDeparture = jest.fn();
 
 const mockNavigate = jest.fn();
 jest.mock("@react-navigation/native", () => {
@@ -19,21 +26,12 @@ jest.mock("src/api/departure.service.ts", () => ({
   getDepartures: jest.fn<typeof getDepartures>().mockResolvedValue([]),
 }));
 
-const ORIGIN_CODE = "A";
-const DESTINATION_CODE = "B";
-
-const mockSetDepartureTime = jest.fn();
-const mockSetDepartureDate = jest.fn();
-const mockSetDepartureUUID = jest.fn();
-
 jest.mock("@hooks/useBookingStore", () => {
   return {
     useBookingStore: () => ({
-      originCode: ORIGIN_CODE,
-      destinationCode: DESTINATION_CODE,
-      setDepartureTime: mockSetDepartureTime,
-      setDepartureDate: mockSetDepartureDate,
-      setDepartureUUID: mockSetDepartureUUID,
+      route: ROUTE_MOCK,
+      departure: DEPARTURE_MOCK,
+      setDeparture: mockSetDeparture,
     }),
   };
 });
@@ -54,38 +52,34 @@ describe("Departure Time Screen", () => {
   });
 
   it("makes /depatures API call and displays buttons using the departure times", async () => {
-    (getDepartures as jest.Mock<typeof getDepartures>).mockResolvedValue([
-      { uuid: "1", departureTime: "2020-01-01T10:00:00" },
-      { uuid: "2", departureTime: "2020-01-01T12:00:00" },
-    ]);
+    (getDepartures as jest.Mock<typeof getDepartures>).mockResolvedValue(departureMocks.departures);
 
     const { getAllByTestId, getByText } = render(<DepartureTimeScreen />);
 
     await waitFor(() => {
       expect(getDepartures).toHaveBeenCalledWith({
-        originCode: ORIGIN_CODE,
-        destinationCode: DESTINATION_CODE,
+        originCode: ROUTE_MOCK.origin.code,
+        destinationCode: ROUTE_MOCK.destination.code,
       });
 
-      expect(getByText("10:00")).toBeTruthy();
-      expect(getByText("12:00")).toBeTruthy();
+      const firstDeparture = departureMocks.departures[0];
+      const secondDeparture = departureMocks.departures[1];
+
+      expect(getByText(extractTimeFromDateTime(firstDeparture.departureTime))).toBeTruthy();
+      expect(getByText(extractTimeFromDateTime(secondDeparture.departureTime))).toBeTruthy();
       expect(getAllByTestId("departure-btn")).toHaveLength(2);
     });
   });
 
-  it("goes to Booking screen and saves it, when pressing button with time", async () => {
-    (getDepartures as jest.Mock<typeof getDepartures>).mockResolvedValue([
-      { uuid: "1", departureTime: "2020-01-01T10:00:00" },
-    ]);
+  it("goes to Ticket Types screen and saves it, when pressing button with time", async () => {
+    (getDepartures as jest.Mock<typeof getDepartures>).mockResolvedValue(departureMocks.departures);
 
     const { getByText } = render(<DepartureTimeScreen />);
 
     await waitFor(() => {
-      fireEvent.press(getByText("10:00"));
-
-      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.BOOKING);
-      expect(mockSetDepartureTime).toHaveBeenCalledWith("10:00");
-      expect(mockSetDepartureDate).toHaveBeenCalledWith("2020-01-01");
+      fireEvent.press(getByText(extractTimeFromDateTime(DEPARTURE_MOCK.departureTime)));
+      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.TICKET_TYPES);
+      expect(mockSetDeparture).toHaveBeenCalledWith(DEPARTURE_MOCK);
     });
   });
 });

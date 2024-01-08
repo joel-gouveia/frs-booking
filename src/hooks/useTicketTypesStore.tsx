@@ -1,15 +1,15 @@
 import { create } from "zustand";
-import { TransportableResponse } from "src/types/transportables";
+import { TransportableResponse, TransportablesRequest } from "src/types/models/transportables";
 
 interface BookingState {
   ticketTypes: TransportableResponse[];
-  originCode?: string;
-  destinationCode?: string;
+  originCode?: TransportablesRequest["originCode"];
+  destinationCode?: TransportablesRequest["destinationCode"];
   isLoaded: (originCode: string, destinationCode: string) => boolean;
   setTicketTypes: (
     ticketTypes: TransportableResponse[],
-    originCode: string,
-    destinationCode: string,
+    originCode: TransportablesRequest["originCode"],
+    destinationCode: TransportablesRequest["destinationCode"],
   ) => void;
 }
 

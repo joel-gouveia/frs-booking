@@ -1,5 +1,5 @@
 import api from "@api/index";
-import { DepartureResponse } from "src/types/departure";
+import { DepartureResponse } from "src/types/models/departure";
 import { Booking } from "src/types/models/booking";
 import { Receipt } from "src/types/models/receipt";
 import { Ticket } from "src/types/models/ticket";

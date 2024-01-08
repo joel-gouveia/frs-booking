@@ -7,7 +7,7 @@ import { getRoutes } from "@api/route.service";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
-import { IRoute } from "src/types/models/route";
+import { RouteResponse } from "src/types/models/route";
 import { useBookingStore } from "@hooks/useBookingStore";
 
 import PaperAirplane from "@assets/images/paper-airplane.svg";
@@ -20,17 +20,15 @@ export function RouteSelectionScreen() {
   const { navigate } = useNavigation<NavigationProps>();
   const setRouteStore = useBookingStore(state => state.setRoute);
 
-  const [routes, setRoutes] = useState<IRoute[]>([]);
+  const [routes, setRoutes] = useState<RouteResponse[]>([]);
 
   useEffect(() => {
-    getRoutes().then(res => {
-      setRoutes(res);
-    });
+    getRoutes().then(res => setRoutes(res));
   }, []);
 
-  const handleRoutePress = (route: IRoute) => () => {
-    setRouteStore(route.origin.code, route.destination.code);
-    navigate(NavigationScreens.MAIN_MENU);
+  const handleRoutePress = (route: RouteResponse) => () => {
+    setRouteStore(route);
+    navigate(NavigationScreens.DEPARTURE_TIME);
   };
 
   const separator = () => <View style={styles.spacing} />;

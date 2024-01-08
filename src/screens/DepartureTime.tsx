@@ -8,51 +8,45 @@ import { Footer } from "@components/Footer/Footer";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { getDepartures } from "@api/departure.service";
-import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
-import { DepartureResponse } from "src/types/departure";
+import { DepartureRequest, DepartureResponse } from "src/types/models/departure";
 import { useBookingStore } from "@hooks/useBookingStore";
 import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
 import { TextButton } from "@components/Button/TextButton";
+import { extractTimeFromDateTime } from "@utils/date";
 
 export function DepartureTimeScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode, setDepartureDate, setDepartureTime, setDepartureUUID } =
-    useBookingStore(state => ({
-      originCode: state.originCode,
-      destinationCode: state.destinationCode,
-      setDepartureDate: state.setDepartureDate,
-      setDepartureTime: state.setDepartureTime,
-      setDepartureUUID: state.setDepartureUUID,
-    }));
+  const { route, setDeparture } = useBookingStore(state => ({
+    route: state.route,
+    setDeparture: state.setDeparture,
+  }));
 
   const [departures, setDepartures] = useState<DepartureResponse[]>([]);
 
   useEffect(() => {
-    if (!originCode || !destinationCode) {
-      return;
+    if (!route) {
+      return navigate(NavigationScreens.ROUTES);
     }
 
-    getDepartures({ originCode, destinationCode }).then(res => {
-      if (res.length > 0) {
-        setDepartureDate(extractDateFromDateTime(res[0].departureTime));
+    const departureRequest: DepartureRequest = {
+      originCode: route.origin.code,
+      destinationCode: route.destination.code,
+    };
+
+    getDepartures(departureRequest).then(res => {
+      if (res.length > 1) {
+        setDepartures(res);
+      } else {
+        setDeparture(res[0]);
+        navigate(NavigationScreens.MAIN_MENU);
       }
-
-      const transformedDepartures = res
-        .map(departure => ({
-          ...departure,
-          departureTime: extractTimeFromDateTime(departure.departureTime),
-        }))
-        .filter(departure => departure.departureTime !== "");
-
-      setDepartures(transformedDepartures);
     });
-  }, [originCode, destinationCode, setDepartureDate]);
+  }, [route, setDeparture, navigate]);
 
-  const onChooseDeparture = (departure: DepartureResponse) => () => {
-    setDepartureTime(departure.departureTime);
-    setDepartureUUID(departure.uuid);
-    navigate(NavigationScreens.BOOKING);
+  const onChooseDeparture = (selectedDeparture: DepartureResponse) => () => {
+    setDeparture(selectedDeparture);
+    navigate(NavigationScreens.TICKET_TYPES);
   };
 
   // TODO: Add loader in place of the departure times, while waiting for a getDepartures response
@@ -72,7 +66,7 @@ export function DepartureTimeScreen() {
               style={styles.routeBtn}
               textStyle={styles.routeBtnText}
               testID="departure-btn">
-              {departure.departureTime}
+              {extractTimeFromDateTime(departure.departureTime)}
             </TextButton>
           )}
           keyExtractor={departure => departure.uuid}
