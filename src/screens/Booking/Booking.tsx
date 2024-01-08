@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Typography, VStack } from "@components/index";
 import React, { useMemo } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
@@ -47,12 +47,11 @@ export function BookingScreen() {
   };
 
   return (
-    <ScreenLayout>
-      <View style={styles.header}>
-        <Typography size="sm" style={styles.headerText}>
-          {t("common.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
-        </Typography>
-      </View>
+    <ScreenLayout
+      headerProps={{
+        title: t("booking.book"),
+        subtitles: [`${departureDate} ${departureTime}`, `(${originCode} - ${destinationCode})`],
+      }}>
       <VStack gap={50} mb={75}>
         {itemsRows.map(row => (
           <ItemsRow key={row[0].name} row={row} />
@@ -75,16 +74,6 @@ export function BookingScreen() {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    marginBottom: 80,
-  },
-  headerText: {
-    backgroundColor: "#d9d9d9",
-    alignSelf: "flex-start",
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    borderRadius: 6,
-  },
   invisibleSeparator: {
     width: 50,
   },

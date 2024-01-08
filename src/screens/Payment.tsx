@@ -47,12 +47,11 @@ export function PaymentScreen() {
   };
 
   return (
-    <ScreenLayout>
-      <View style={styles.header}>
-        <Typography size="sm" style={styles.headerText}>
-          {t("common.voyageleg")}: {departureDate} {departureTime} {originCode} - {destinationCode}
-        </Typography>
-      </View>
+    <ScreenLayout
+      headerProps={{
+        title: t("common.voyageleg"),
+        subtitles: [`${departureDate} ${departureTime}`, `(${originCode} - ${destinationCode})`],
+      }}>
       <VStack gap={24}>
         <Typography>{t("payment.payment-method")}</Typography>
         <HStack gap={20}>

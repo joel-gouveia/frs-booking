@@ -20,7 +20,7 @@ export const sizes: Record<ISizes, StyleProp<TextStyle>> = {
   },
 };
 
-export type ITextVariants = "title";
+export type ITextVariants = "title" | "subtitle";
 
 export const variants: Record<ITextVariants, StyleProp<TextStyle>> = {
   title: {
@@ -28,5 +28,11 @@ export const variants: Record<ITextVariants, StyleProp<TextStyle>> = {
     fontWeight: "bold",
     alignSelf: "center",
     marginTop: 6,
+  },
+  subtitle: {
+    fontSize: 14,
+    fontWeight: "normal",
+    alignSelf: "center",
+    marginTop: 2,
   },
 };

@@ -1,6 +1,5 @@
-import { Typography } from "@components/index";
-import { View, StyleSheet, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
+import { View, StyleSheet, FlatList } from "react-native";
 
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { getRoutes } from "@api/route.service";
@@ -28,14 +27,11 @@ export function RouteSelectionScreen() {
 
   const handleRoutePress = (route: IRoute) => () => {
     setRouteStore(route.origin.code, route.destination.code);
-    navigate(NavigationScreens.MAIN_MENU);
+    navigate(NavigationScreens.DEPARTURE_TIME);
   };
 
   return (
-    <ScreenLayout>
-      <View style={styles.titleContainer} testID="title">
-        <Typography style={styles.title}>{t("routes.choose-route")}</Typography>
-      </View>
+    <ScreenLayout headerProps={{ title: t("routes.choose-route") }}>
       <View style={styles.routesContainer}>
         <FlatList
           data={routes}
@@ -60,18 +56,6 @@ export function RouteSelectionScreen() {
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    backgroundColor: "#d9d9d9",
-    paddingVertical: 12,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 6,
-    marginBottom: 46,
-  },
-  title: {
-    fontSize: 24,
-  },
   routesContainer: {
     margin: -10,
   },
