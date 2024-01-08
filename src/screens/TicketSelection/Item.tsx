@@ -1,8 +1,33 @@
 import { Button, HStack, Typography, VStack } from "@components/index";
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { theme } from "src/theme/theme";
+
+const getDynamicStyles = (isSmall: boolean) =>
+  ({
+    container: {
+      width: isSmall ? "31%" : "45%",
+    },
+    hotKey: { height: isSmall ? 13 : 16, width: isSmall ? 13 : 16 },
+    hotKeyText: { fontSize: isSmall ? 9 : 11, lineHeight: isSmall ? 11 : 14 },
+    titleContainer: { height: isSmall ? 27 : 38, width: isSmall ? 80 : 90 },
+    title: {
+      textAlign: isSmall ? "left" : "center",
+      fontSize: isSmall ? 11 : 15,
+      marginRight: isSmall ? 16 : 0,
+    },
+    itemCount: {
+      fontSize: isSmall ? 30 : 44,
+      lineHeight: isSmall ? 34 : 48,
+      marginBottom: isSmall ? 0 : 12,
+    },
+    countersContainer: { width: isSmall ? "77%" : "74%" },
+    counterButton: {
+      paddingHorizontal: isSmall ? 3 : 7,
+      paddingVertical: isSmall ? 1 : 3,
+    },
+  } as const);
 
 interface IBookingItem {
   hotkey: string | number;
@@ -10,30 +35,48 @@ interface IBookingItem {
   value: number;
   onMinusPress: () => void;
   onPlusPress: () => void;
+  isSmall: boolean;
 }
 
-export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: IBookingItem) {
+export function BookingItem({
+  hotkey,
+  text,
+  value,
+  onMinusPress,
+  onPlusPress,
+  isSmall,
+}: IBookingItem) {
+  const dynamicStyles = useMemo(() => getDynamicStyles(isSmall), [isSmall]);
+
   return (
-    <View style={styles.container} testID="item">
+    <View style={dynamicStyles.container} testID="item">
       <Button style={styles.mainButton} disabled={true}>
-        <View style={styles.hotKey}>
-          <Typography color={theme.colors.primary.contrastText} style={styles.hotKeyText}>
+        <View style={[styles.hotKey, dynamicStyles.hotKey]}>
+          <Typography
+            color={theme.colors.primary.contrastText}
+            style={[styles.hotKeyText, dynamicStyles.hotKeyText]}>
             {hotkey}
           </Typography>
         </View>
         <VStack justifyContent="center" alignItems="center">
-          <View style={styles.titleContainer}>
-            <Typography size="sm" style={styles.title}>
+          <View style={dynamicStyles.titleContainer}>
+            <Typography size="sm" style={[styles.title, dynamicStyles.title]}>
               {text}
             </Typography>
           </View>
-          <Typography style={styles.itemCount}>{value}</Typography>
-          <HStack justifyContent="space-between" style={styles.countersContainer}>
-            <Button onPress={onMinusPress} style={styles.counterButton} variant="outline">
-              <Icon name="minus" size={24} color={theme.colors.primary.main} />
+          <Typography style={[styles.itemCount, dynamicStyles.itemCount]}>{value}</Typography>
+          <HStack justifyContent="space-between" style={dynamicStyles.countersContainer}>
+            <Button
+              onPress={onMinusPress}
+              style={[styles.counterButton, dynamicStyles.counterButton]}
+              variant="outline">
+              <Icon name="minus" size={isSmall ? 17 : 24} color={theme.colors.primary.main} />
             </Button>
-            <Button onPress={onPlusPress} style={styles.counterButton} variant="outline">
-              <Icon name="plus" size={24} color={theme.colors.primary.main} style={{}} />
+            <Button
+              onPress={onPlusPress}
+              style={[styles.counterButton, dynamicStyles.counterButton]}
+              variant="outline">
+              <Icon name="plus" size={isSmall ? 17 : 24} color={theme.colors.primary.main} />
             </Button>
           </HStack>
         </VStack>
@@ -43,9 +86,6 @@ export function BookingItem({ hotkey, text, value, onMinusPress, onPlusPress }: 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: "45%",
-  },
   mainButton: {
     paddingHorizontal: 0,
     paddingTop: 8,
@@ -53,35 +93,16 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     position: "relative",
   },
-  hotkeyText: {
-    position: "absolute",
-    right: 6,
-    top: 0,
-  },
-  titleContainer: {
-    height: 38,
-  },
   title: {
     color: theme.colors.primary.contrastText,
     fontWeight: "bold",
-    fontSize: 15,
-    width: 90,
-    textAlign: "center",
   },
   itemCount: {
-    fontSize: 44,
-    lineHeight: 48,
     fontWeight: "bold",
     color: theme.colors.primary.contrastText,
-    marginBottom: 12,
-  },
-  countersContainer: {
-    width: "74%",
   },
   counterButton: {
     borderRadius: 5,
-    paddingHorizontal: 7,
-    paddingVertical: 3,
     fontWeight: "400",
     textAlign: "center",
   },
@@ -92,15 +113,11 @@ const styles = StyleSheet.create({
     right: 8,
     top: 8,
     borderRadius: 3,
-    height: 16,
-    width: 16,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   hotKeyText: {
     fontWeight: "600",
-    lineHeight: 14,
-    fontSize: 11,
   },
 });

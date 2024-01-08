@@ -1,6 +1,6 @@
 import { ScreenLayout } from "@layouts/ScreenLayout";
 import React, { useMemo } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Footer } from "@components/Footer/Footer";
 import { FooterButton } from "@components/Footer/FooterButton";
 import { ResetButton } from "@components/Footer/CustomButtons/ResetButton";
@@ -48,6 +48,13 @@ export function TicketSelectionScreen({ route }: Props) {
     return ticket.transportables;
   }, [route?.params.ticketType, ticketTypes]);
 
+  const emptyCols = useMemo(() => {
+    let cnt = 0;
+    return new Array(3 - (transportables.length % 3))
+      .fill(undefined)
+      .map(() => <View key={`empty-${cnt++}`} style={styles.emptyCol} />);
+  }, [transportables.length]);
+
   return (
     <ScreenLayout>
       <Typography variant="title">{route?.params.ticketType}</Typography>
@@ -69,9 +76,11 @@ export function TicketSelectionScreen({ route }: Props) {
               value={counterValue}
               onMinusPress={() => decrementItem(name)}
               onPlusPress={() => incrementItem(name)}
+              isSmall={transportables.length > 4}
             />
           );
         })}
+        {transportables.length > 4 && emptyCols}
       </HStack>
       <Button style={styles.bookButton}>
         <HStack gap={14}>
@@ -117,5 +126,8 @@ const styles = StyleSheet.create({
   bookButtonText: {
     fontWeight: "600",
     fontSize: 18,
+  },
+  emptyCol: {
+    width: "31%",
   },
 });
