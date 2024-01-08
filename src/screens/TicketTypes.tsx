@@ -19,7 +19,10 @@ import { NavigationProps, NavigationScreens } from "src/types/navigation";
 export function TicketTypesScreen() {
   const { t } = useTranslation();
   const { navigate } = useNavigation<NavigationProps>();
-  const { originCode, destinationCode } = useBookingStore();
+  const { originCode, destinationCode } = useBookingStore(state => ({
+    originCode: state.originCode,
+    destinationCode: state.destinationCode,
+  }));
   const { isLoaded, setTicketTypes, ticketTypes } = useTicketTypesStore();
 
   useEffect(() => {
@@ -42,7 +45,10 @@ export function TicketTypesScreen() {
           <FlatList
             data={ticketTypes}
             renderItem={({ item: { key, name } }) => (
-              <TextButton hotkey={key} testID="ticket-type-btn">
+              <TextButton
+                hotkey={key}
+                testID="ticket-type-btn"
+                onPress={() => navigate(NavigationScreens.TICKET_SELECTION, { ticketType: name })}>
                 {name}
               </TextButton>
             )}

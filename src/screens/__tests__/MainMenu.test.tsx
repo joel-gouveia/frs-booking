@@ -53,7 +53,7 @@ describe("Main Menu Screen", () => {
     fireEvent.press(getByText(i18n.t("main-menu.sales")));
 
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.TICKET_TYPES);
+      expect(mockNavigate).toHaveBeenCalledWith(NavigationScreens.DEPARTURE_TIME);
     });
   });
 });
