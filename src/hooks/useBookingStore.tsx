@@ -1,11 +1,11 @@
 import { create } from "zustand";
-import _ from "underscore";
+import _, { isEmpty } from "underscore";
 
 import { DepartureResponse } from "src/types/models/departure";
 import { RouteResponse } from "src/types/models/route";
 import { Ticket, TicketToSell, TicketTypeGroup } from "src/types/models/ticket";
 
-type ItemCounters = {
+export type ItemCounters = {
   [group in TicketTypeGroup["name"]]: {
     [ticketCode in TicketToSell["code"]]: {
       name: TicketToSell["name"];
@@ -14,7 +14,7 @@ type ItemCounters = {
   };
 };
 
-interface BookingState {
+export interface BookingStore {
   route?: RouteResponse;
   departure?: DepartureResponse;
   setRoute: (route: RouteResponse) => void;
@@ -30,7 +30,7 @@ interface BookingState {
   }[];
 }
 
-export const useBookingStore = create<BookingState>()((set, get) => ({
+export const useBookingStore = create<BookingStore>()((set, get) => ({
   setRoute: (route: RouteResponse) => set(() => ({ route })),
   setDeparture: (departure: DepartureResponse) => set(() => ({ departure })),
   itemCounters: {},
@@ -74,11 +74,17 @@ export const useBookingStore = create<BookingState>()((set, get) => ({
       const currentTicket = _.get(state.itemCounters, [group, ticket.code], null);
       if (!currentTicket) return { itemCounters: state.itemCounters };
 
-      const groupCounters = { ...state.itemCounters[group] };
+      const counters = { ...state.itemCounters };
 
       if (currentTicket.quantity <= 1) {
-        delete groupCounters[ticket.code];
-        return { itemCounters: { ...state.itemCounters, [group]: groupCounters } };
+        delete counters[group][ticket.code];
+
+        if (isEmpty(counters[group])) {
+          delete counters[group];
+          return { itemCounters: counters };
+        }
+
+        return { itemCounters: { ...state.itemCounters, [group]: counters[group] } };
       }
 
       return {
