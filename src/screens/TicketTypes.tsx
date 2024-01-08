@@ -49,7 +49,6 @@ export function TicketTypesScreen() {
           <FlatList
             data={ticketTypes}
             renderItem={({ item: { key, name } }) => (
-              // WARN: Remove the onPress
               <TextButton hotkey={key} testID="ticket-type-btn">
                 {name}
               </TextButton>
