@@ -7,22 +7,22 @@ interface Props {
   icon?: JSX.Element;
 }
 
-export function ScreenLayoutHeader(props: Props) {
+export function ScreenLayoutHeader({ title, subtitles, icon }: Props) {
   return (
     <VStack justifyContent="center" alignItems="center">
       <VStack>
         <Typography variant="title" testID="title">
-          {props.title}
+          {title}
         </Typography>
         <HStack mt={5} />
-        {props.subtitles?.map(subtitle => (
+        {subtitles?.map(subtitle => (
           <Typography key={subtitle} variant="subtitle">
             {subtitle}
           </Typography>
         ))}
       </VStack>
       <HStack justifyContent="center" alignItems="center" mt={20}>
-        {props.icon}
+        {icon}
       </HStack>
     </VStack>
   );
