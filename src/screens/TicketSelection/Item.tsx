@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   mainButton: {
     paddingHorizontal: 0,
     paddingTop: 8,
-    paddingBottom: 12,
+    paddingBottom: 8,
     marginBottom: 12,
     position: "relative",
   },
