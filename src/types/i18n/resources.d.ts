@@ -47,7 +47,7 @@ interface Resources {
       "booking-summary": "Booking summary";
     };
     payment: {
-      "payment-method": "Payment Method";
+      "screen-title": "Checkout";
       cash: "Cash";
       "payment-summary": "Payment Summary";
       passengers: "Passengers";

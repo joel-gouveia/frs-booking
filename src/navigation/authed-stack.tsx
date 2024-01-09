@@ -6,7 +6,7 @@ import { RouteSelectionScreen } from "@screens/RouteSelection";
 import { MainMenuScreen } from "@screens/MainMenu";
 import { DepartureTimeScreen } from "@screens/DepartureTime";
 import { BookingScreen } from "@screens/Booking/Booking";
-import { PaymentScreen } from "@screens/Payment";
+import { PaymentScreen } from "@screens/Payment/Payment";
 import { BookingSummaryScreen } from "@screens/BookingSummary";
 import { Header } from "@components/Header/Header";
 import { TicketTypesScreen } from "@screens/TicketTypes";

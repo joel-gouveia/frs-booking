@@ -1,7 +1,6 @@
+import React, { useState, useEffect } from "react";
 import { Typography, FlatList } from "@components/index";
 import { View, StyleSheet } from "react-native";
-import React, { useState, useEffect } from "react";
-
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { getRoutes } from "@api/route.service";
 import { useTranslation } from "react-i18next";

@@ -45,7 +45,7 @@ export function BookingScreen() {
     <ScreenLayout>
       <View style={styles.header}>
         <Typography size="sm" style={styles.headerText}>
-          {/* TODO: Turn this into a custom component */}
+          {/* TODO: Update this with the pr #23 */}
           {t("common.voyageleg")}:{departure && extractDateFromDateTime(departure.departureTime)}{" "}
           {departure && extractTimeFromDateTime(departure.departureTime)}
           {route?.origin.code} - {route?.destination.code}

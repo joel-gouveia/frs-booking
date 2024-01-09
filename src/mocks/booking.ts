@@ -6,6 +6,16 @@ const tickets: Ticket[] = [
   { code: "CH", quantity: 1 },
 ];
 
+const ticketGroups = [
+  {
+    group: "Passengers",
+    tickets: [
+      { name: "Adult", quantity: 2, code: "AD" },
+      { name: "Child", quantity: 1, code: "CH" },
+    ],
+  },
+];
+
 const booking: Booking = {
   number: "RDFR2A",
   tickets,
@@ -18,4 +28,5 @@ const booking: Booking = {
 export const bookingMocks = {
   booking,
   tickets,
+  ticketGroups,
 };

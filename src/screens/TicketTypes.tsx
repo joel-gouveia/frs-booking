@@ -39,6 +39,8 @@ export function TicketTypesScreen() {
 
   const separator = () => <View style={styles.ticketTypeButtonSeparator} />;
 
+  const onPressBook = () => navigate(NavigationScreens.PAYMENT);
+
   // TODO: Add loading animation
   return (
     <ScreenLayout>
@@ -58,7 +60,7 @@ export function TicketTypesScreen() {
           />
         )}
       </View>
-      <Button style={styles.bookButton}>
+      <Button style={styles.bookButton} onPress={onPressBook}>
         <HStack gap={14}>
           <EnterKey height={24} width={24} fill="white" />
           <Typography color={theme.colors.primary.contrastText} style={styles.bookButtonText}>
