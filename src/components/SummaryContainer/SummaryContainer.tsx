@@ -19,21 +19,8 @@ interface Props extends PropsWithChildren {
     title: string;
     iconElement: JSX.Element;
   };
-
-  /**
-   * The data to be rendered in the FlatList.
-   */
   flatListData?: Array<{ title: string; content: JSX.Element }> | null;
-
-  /**
-   * The renderItem function for the FlatList.
-   */
   flatListRenderItem?: ListRenderItem<{ title: string; content: JSX.Element }> | null;
-
-  /**
-   * The props of the custom FlatList.
-   * @interface CustomScrollableProps
-   */
   flatListProps?: CustomScrollableProps;
 }
 
