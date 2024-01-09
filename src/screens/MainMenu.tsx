@@ -1,51 +1,64 @@
-import { VStack } from "@components/index";
 import React from "react";
+import { StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import FontAwesome6Icon from "react-native-vector-icons/FontAwesome6";
+import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
+import { Button, Typography, VStack } from "@components/index";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { useTranslation } from "react-i18next";
-import { Footer } from "@components/Footer/Footer";
-import { useAuth } from "@hooks/useAuth";
-import { useNavigation } from "@react-navigation/native";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
-import { FooterButton } from "@components/Footer/FooterButton";
-import { StyleSheet } from "react-native";
-import { TextButton } from "@components/Button/TextButton";
+import { theme } from "src/theme/theme";
+import { useBookingStore } from "@hooks/useBookingStore";
 
 export function MainMenuScreen() {
   const { t } = useTranslation();
-  const { logout } = useAuth();
+  const { route } = useBookingStore();
   const { navigate } = useNavigation<NavigationProps>();
 
-  const handleLogout = async () => {
-    await logout();
-    navigate(NavigationScreens.LOGIN);
-  };
+  const optionButtons = [
+    {
+      title: t("main-menu.booking"),
+      onPress: () => navigate(NavigationScreens.DEPARTURE_TIME),
+      icon: <FontAwesome6Icon name="ticket" size={20} color="white" />,
+    },
+    {
+      title: t("main-menu.boarding"),
+      onPress: () => {},
+      icon: <FontAwesome6Icon name="sailboat" size={20} color="white" />,
+    },
+    {
+      title: t("main-menu.cancel"),
+      onPress: () => {},
+      icon: <FontAwesomeIcon name="remove" size={20} color="white" />,
+    },
+  ];
 
   return (
-    <ScreenLayout>
-      <VStack gap={20} pt={50}>
-        <TextButton
-          onPress={() => navigate(NavigationScreens.TICKET_TYPES)}
-          variant="outline"
-          textStyle={styles.button}>
-          {t("main-menu.sales")}
-        </TextButton>
-        <TextButton variant="outline" textStyle={styles.button}>
-          {t("main-menu.boarding")}
-        </TextButton>
-        <TextButton variant="outline" textStyle={styles.button}>
-          {t("main-menu.cancel")}
-        </TextButton>
+    <ScreenLayout
+      headerProps={{
+        title: t("main-menu.title"),
+        subtitles: [
+          t("main-menu.route", { route: `${route?.origin.code} - ${route?.destination.code}` }),
+        ],
+      }}>
+      <VStack gap={20} pt={30}>
+        {optionButtons.map(({ title, onPress, icon }) => (
+          <Button onPress={onPress} variant="solid" key={title} startIcon={icon} endIcon={icon}>
+            <Typography bold style={styles.buttonTitle} size="lg">
+              {title}
+            </Typography>
+          </Button>
+        ))}
       </VStack>
-      <Footer>
-        <FooterButton label={t("footer.logout")} onPress={handleLogout} />
-      </Footer>
     </ScreenLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    fontSize: 30,
+  buttonTitle: {
+    paddingVertical: 5,
+    paddingHorizontal: 12,
+    color: theme.colors.primary.contrastText,
   },
 });

@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { Button, HStack, Typography } from "@components/index";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { Footer } from "@components/Footer/Footer";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
@@ -10,10 +10,10 @@ import EnterKey from "@assets/images/enter-key.svg";
 import { useBookingStore } from "@hooks/useBookingStore";
 import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
 import { FooterButton } from "@components/Footer/FooterButton";
-import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
 import { useTicketTypesStore } from "@hooks/useTicketTypesStore";
 import { TicketToSell } from "src/types/models/ticket";
 import { get } from "underscore";
+import { departureUtils } from "@utils/departure";
 import { BookingItem } from "./Item";
 
 export function BookingScreen() {
@@ -42,16 +42,15 @@ export function BookingScreen() {
   const onPressBook = () => navigate(NavigationScreens.BOOKING_SUMMARY);
 
   return (
-    <ScreenLayout>
-      <View style={styles.header}>
-        <Typography size="sm" style={styles.headerText}>
-          {/* TODO: Turn this into a custom component */}
-          {t("common.voyageleg")}:{departure && extractDateFromDateTime(departure.departureTime)}{" "}
-          {departure && extractTimeFromDateTime(departure.departureTime)}
-          {route?.origin.code} - {route?.destination.code}
-        </Typography>
-      </View>
-      <HStack mb={30} style={styles.ticketsWrapper}>
+    <ScreenLayout
+      headerProps={{
+        title: t("booking.book"),
+        subtitles: [
+          departureUtils.formatDateAndTime(departure?.departureTime),
+          `(${route?.origin.code} - ${route?.destination.code})`,
+        ],
+      }}>
+      <HStack gap={50} mb={75}>
         {ticketGroup.transportables.map((ticket: TicketToSell) => (
           <BookingItem
             count={get(itemCounters, [ticketGroup.name, ticket.code, "quantity"], 0)}
@@ -79,23 +78,6 @@ export function BookingScreen() {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    marginBottom: 20,
-  },
-  ticketsWrapper: {
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
-  headerText: {
-    backgroundColor: "#d9d9d9",
-    alignSelf: "flex-start",
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    borderRadius: 6,
-  },
-  invisibleSeparator: {
-    width: 50,
-  },
   bookButton: {
     marginHorizontal: 40,
     position: "relative",

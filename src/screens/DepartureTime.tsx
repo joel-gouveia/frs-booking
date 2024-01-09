@@ -1,4 +1,3 @@
-import { Typography } from "@components/index";
 import React, { useState, useEffect } from "react";
 
 import { ScreenLayout } from "@layouts/ScreenLayout";
@@ -12,7 +11,9 @@ import { DepartureRequest, DepartureResponse } from "src/types/models/departure"
 import { useBookingStore } from "@hooks/useBookingStore";
 import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
 import { TextButton } from "@components/Button/TextButton";
-import { extractTimeFromDateTime } from "@utils/date";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { theme } from "src/theme/theme";
+import { departureUtils } from "@utils/departure";
 
 export function DepartureTimeScreen() {
   const { t } = useTranslation();
@@ -52,10 +53,11 @@ export function DepartureTimeScreen() {
   // TODO: Add loader in place of the departure times, while waiting for a getDepartures response
   // TODO: Maybe call getDepartures before this screen, so there is no need to go to it when there is only 1(since when there is only 1, we are supposed to skip it)
   return (
-    <ScreenLayout>
-      <View style={styles.titleContainer}>
-        <Typography style={styles.title}>{t("departure-times.choose-departure")}</Typography>
-      </View>
+    <ScreenLayout
+      headerProps={{
+        title: t("departure-times.choose-departure"),
+        icon: <MaterialIcons name="directions-boat" size={30} color={theme.colors.primary.main} />,
+      }}>
       <View style={styles.routesContainer}>
         <FlatList
           data={departures}
@@ -66,7 +68,7 @@ export function DepartureTimeScreen() {
               style={styles.routeBtn}
               textStyle={styles.routeBtnText}
               testID="departure-btn">
-              {extractTimeFromDateTime(departure.departureTime)}
+              {departureUtils.formatTime(departure.departureTime)}
             </TextButton>
           )}
           keyExtractor={departure => departure.uuid}
@@ -80,18 +82,6 @@ export function DepartureTimeScreen() {
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    backgroundColor: "#d9d9d9",
-    paddingVertical: 12,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 6,
-    marginBottom: 46,
-  },
-  title: {
-    fontSize: 30,
-  },
   routesContainer: {
     margin: -10,
   },

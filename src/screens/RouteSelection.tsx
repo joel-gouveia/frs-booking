@@ -1,7 +1,7 @@
-import { Typography, FlatList } from "@components/index";
-import { View, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
+import { View, StyleSheet } from "react-native";
 
+import { FlatList } from "@components/index";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { getRoutes } from "@api/route.service";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,6 @@ import { useBookingStore } from "@hooks/useBookingStore";
 
 import PaperAirplane from "@assets/images/paper-airplane.svg";
 import PaperAirplaneTrack from "@assets/images/paper-airplane-track.svg";
-import { theme } from "src/theme/theme";
 import { TextButton } from "@components/Button/TextButton";
 
 export function RouteSelectionScreen() {
@@ -35,10 +34,7 @@ export function RouteSelectionScreen() {
 
   return (
     <>
-      <ScreenLayout>
-        <Typography variant="title" color={theme.colors.text} testID="title">
-          {t("routes.choose-route")}
-        </Typography>
+      <ScreenLayout headerProps={{ title: t("routes.choose-route") }}>
         <FlatList
           data={routes}
           keyExtractor={(route, index) => `${route.name}-${index}`}
@@ -61,7 +57,7 @@ export function RouteSelectionScreen() {
 const styles = StyleSheet.create({
   flatListWrapperStyle: {
     height: 340,
-    marginTop: 60,
+    marginTop: 40,
   },
   flatList: {
     height: 340,

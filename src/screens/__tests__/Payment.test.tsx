@@ -8,6 +8,7 @@ import { generatePrintableReceipt, receiptUtils } from "@utils/receipt";
 import { Printer } from "@modules/ThermalPrinter/ThermalPrinter";
 
 import { bookingMocks, receiptMocks, routeMocks, departureMocks } from "@mocks/index";
+import { departureUtils } from "@utils/departure";
 
 const DEPARTURE_MOCK = departureMocks.departures[0];
 const ROUTE_MOCK = routeMocks.routes[0];
@@ -41,7 +42,12 @@ describe("Payment Screen", () => {
   it("renders the screen with header and footer buttons", async () => {
     const { getByText, getAllByTestId } = render(<PaymentScreen />);
 
+    const departureDateTime = departureUtils.formatDateAndTime(DEPARTURE_MOCK.departureTime);
+    const routeCodes = `${ROUTE_MOCK.origin.code} - ${ROUTE_MOCK.destination.code}`;
+
     await waitFor(() => {
+      expect(getByText(RegExp(departureDateTime))).toBeTruthy();
+      expect(getByText(RegExp(routeCodes))).toBeTruthy();
       expect(getByText(i18n.t("footer.main-menu"))).toBeTruthy();
       expect(getByText(i18n.t("footer.reset"))).toBeTruthy();
       expect(getAllByTestId("footer-btn")).toHaveLength(2);

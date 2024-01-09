@@ -22,9 +22,11 @@
     "choose-route": "Select your route"
   },
   "main-menu": {
-    "sales": "Sales",
+    "title": "What would you like to do?",
+    "booking": "Booking",
     "boarding": "Boarding",
-    "cancel": "Cancel"
+    "cancel": "Cancel Booking",
+    "route": "Route {{route}}"
   },
   "ticket-types": {
     "what-do-you-want-to-book": "What do you want to book?",

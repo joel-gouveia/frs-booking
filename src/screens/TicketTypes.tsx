@@ -41,9 +41,11 @@ export function TicketTypesScreen() {
 
   // TODO: Add loading animation
   return (
-    <ScreenLayout>
-      <Typography variant="title">{t("ticket-types.what-do-you-want-to-book")}</Typography>
-      <Icon name="ticket" size={30} color={theme.colors.primary.main} style={styles.ticketLogo} />
+    <ScreenLayout
+      headerProps={{
+        title: t("ticket-types.what-do-you-want-to-book"),
+        icon: <Icon name="ticket" size={30} color={theme.colors.primary.main} />,
+      }}>
       <View style={styles.ticketsContainer}>
         {route && isLoaded(route.origin.code, route.destination.code) && (
           <FlatList
@@ -81,13 +83,9 @@ export function TicketTypesScreen() {
 }
 
 const styles = StyleSheet.create({
-  ticketLogo: {
-    marginTop: 16,
-    marginBottom: 24,
-    alignSelf: "center",
-  },
   ticketsContainer: {
     flex: 1,
+    marginTop: 20,
   },
   ticketTypeButtonSeparator: {
     height: 12,

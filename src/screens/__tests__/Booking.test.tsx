@@ -5,6 +5,7 @@ import { describe, expect, it, jest } from "@jest/globals";
 import { BookingScreen } from "@screens/Booking/Booking";
 import { NavigationScreens } from "src/types/navigation";
 import { departureMocks, routeMocks, transportablesMock } from "@mocks/index";
+import { departureUtils } from "@utils/departure";
 
 const DEPARTURE_MOCK = departureMocks.departures[0];
 const ROUTE_MOCK = routeMocks.routes[0];
@@ -40,11 +41,12 @@ describe("Booking Screen", () => {
   it("renders the screen with header and footer buttons", async () => {
     const { getByText, getAllByTestId } = render(<BookingScreen />);
 
+    const departureDateTime = departureUtils.formatDateAndTime(DEPARTURE_MOCK.departureTime);
+    const routeCodes = `${ROUTE_MOCK.origin.code} - ${ROUTE_MOCK.destination.code}`;
+
     await waitFor(() => {
-      // TODO: This will work differently when we use a custom component for the Screen header
-      // expect(
-      //   getByText(RegExp(`${DATE} ${TIME} ${ORIGIN_CODE} - ${DESTINATION_CODE}`)),
-      // ).toBeTruthy();
+      expect(getByText(RegExp(departureDateTime))).toBeTruthy();
+      expect(getByText(RegExp(routeCodes))).toBeTruthy();
       expect(getByText(i18n.t("footer.main-menu"))).toBeTruthy();
       expect(getByText(i18n.t("footer.summary"))).toBeTruthy();
       expect(getByText(i18n.t("footer.reset"))).toBeTruthy();

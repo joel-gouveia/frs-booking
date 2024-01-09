@@ -1,12 +1,12 @@
-import { useTranslation } from "react-i18next";
-import { Button, Typography } from "@components/index";
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { Typography } from "@components/index";
 import { StyleSheet, View } from "react-native";
 import { ScreenLayout } from "src/layouts/ScreenLayout";
 import { useBookingStore } from "@hooks/useBookingStore";
 import { NavigationProps, NavigationScreens } from "src/types/navigation";
 import { useNavigation } from "@react-navigation/native";
-import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
+import { departureUtils } from "@utils/departure";
 
 export function BookingSummaryScreen() {
   const { t } = useTranslation();
@@ -16,65 +16,39 @@ export function BookingSummaryScreen() {
     departure: state.departure,
   }));
 
+  if (!route || !departure) {
+    navigate(NavigationScreens.ROUTES);
+    return null;
+  }
+
   return (
-    <ScreenLayout>
-      <Button
-        onPress={() => navigate(NavigationScreens.BOOKING)}
-        variant="outline"
-        style={styles.backButton}>
-        <Typography>{t("common.back")}</Typography>
-        <View style={styles.backButtonSymbol} />
-      </Button>
-      <View style={styles.header}>
-        <Typography size="sm" style={styles.headerText}>
-          {/* TODO: Turn this into a custom component */}
-          {t("common.voyageleg")}: :{departure && extractDateFromDateTime(departure.departureTime)}{" "}
-          {departure && extractTimeFromDateTime(departure.departureTime)}
-          {route?.origin.code} - {route?.destination.code}
+    <ScreenLayout
+      headerProps={{
+        title: t("booking-summary.booking-summary"),
+        subtitles: [
+          departureUtils.formatDateAndTime(departure.departureTime),
+          `(${route?.origin.code} - ${route?.destination.code})`,
+        ],
+      }}>
+      <View style={styles.bookingSummaryContainer}>
+        <Typography size="sm" mb={46}>
+          {/* TODO: Will be refactored with a different structure */}
         </Typography>
-        <Typography mt={12}>{t("booking-summary.booking-summary")}</Typography>
-        <View style={styles.bookingSummaryContainer}>
-          <Typography size="sm" mb={46}>
-            {/* TODO: Will be refactored with a different structure */}
-          </Typography>
-          <Typography size="sm" mb={46}>
-            {t("payment.vehicles")}:
-          </Typography>
-        </View>
-        <Typography mt={50} style={styles.price}>
-          {t("payment.total")}: 123,45 €
+        <Typography size="sm" mb={46}>
+          {t("payment.vehicles")}:
         </Typography>
       </View>
+      <Typography mt={50} style={styles.price}>
+        {t("payment.total")}: 123,45 €
+      </Typography>
+      <Typography mt={50} style={styles.price}>
+        {t("payment.total")}: 123,45 €
+      </Typography>
     </ScreenLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  backButton: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 12,
-    alignSelf: "flex-start",
-    paddingVertical: 8,
-    paddingHorizontal: 8,
-    marginBottom: 20,
-  },
-  backButtonSymbol: {
-    backgroundColor: "#d24a4a",
-    width: 15,
-    height: 10,
-  },
-  header: {
-    marginBottom: 80,
-  },
-  headerText: {
-    backgroundColor: "#d9d9d9",
-    alignSelf: "flex-start",
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    borderRadius: 6,
-  },
   bookingSummaryContainer: {
     backgroundColor: "#d9d9d9",
     padding: 8,

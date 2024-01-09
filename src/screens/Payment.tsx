@@ -13,7 +13,7 @@ import { Empty } from "@components/Footer/CustomButtons/Empty";
 import { createBooking, getReceipt } from "@api/booking.service";
 import { Printer } from "@modules/ThermalPrinter/ThermalPrinter";
 import { receiptUtils } from "@utils/receipt";
-import { extractDateFromDateTime, extractTimeFromDateTime } from "@utils/date";
+import { departureUtils } from "@utils/departure";
 
 export function PaymentScreen() {
   const { t } = useTranslation();
@@ -38,15 +38,14 @@ export function PaymentScreen() {
   };
 
   return (
-    <ScreenLayout>
-      <View style={styles.header}>
-        <Typography size="sm" style={styles.headerText}>
-          {/* TODO: Turn this into a custom component */}
-          {t("common.voyageleg")}: :{departure && extractDateFromDateTime(departure.departureTime)}{" "}
-          {departure && extractTimeFromDateTime(departure.departureTime)}
-          {route?.origin.code} - {route?.destination.code}
-        </Typography>
-      </View>
+    <ScreenLayout
+      headerProps={{
+        title: t("common.voyageleg"),
+        subtitles: [
+          departureUtils.formatDateAndTime(departure?.departureTime),
+          `(${route?.origin.code} - ${route?.destination.code})`,
+        ],
+      }}>
       <VStack gap={24}>
         <Typography>{t("payment.payment-method")}</Typography>
         <HStack gap={20}>
