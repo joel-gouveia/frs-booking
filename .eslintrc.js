@@ -20,7 +20,7 @@ module.exports = {
     "import/no-extraneous-dependencies": [
       "error",
       {
-        devDependencies: ["**/__tests__/**", "metro.config.js"],
+        devDependencies: ["**/__tests__/**", "metro.config.js", "**/__mocks__/**"],
       },
     ],
     "react/jsx-no-constructed-context-values": "off",

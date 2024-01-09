@@ -21,7 +21,7 @@ export function ScreenLayoutHeader({ title, subtitles, icon }: Props) {
           </Typography>
         ))}
       </VStack>
-      <HStack justifyContent="center" alignItems="center" mt={20}>
+      <HStack justifyContent="center" alignItems="center" mt={10}>
         {icon}
       </HStack>
     </VStack>

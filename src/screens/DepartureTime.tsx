@@ -11,7 +11,7 @@ import { DepartureRequest, DepartureResponse } from "src/types/models/departure"
 import { useBookingStore } from "@hooks/useBookingStore";
 import { MainMenuButton } from "@components/Footer/CustomButtons/MainMenuButton";
 import { TextButton } from "@components/Button/TextButton";
-import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { theme } from "src/theme/theme";
 import { departureUtils } from "@utils/departure";
 
@@ -56,7 +56,7 @@ export function DepartureTimeScreen() {
     <ScreenLayout
       headerProps={{
         title: t("departure-times.choose-departure"),
-        icon: <FontAwesome6 name="bus" size={30} color={theme.colors.primary.main} />,
+        icon: <MaterialIcons name="directions-boat" size={30} color={theme.colors.primary.main} />,
       }}>
       <View style={styles.routesContainer}>
         <FlatList
